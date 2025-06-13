@@ -6,13 +6,13 @@ import {
   BathtubIcon,
   SelectionIcon,
 } from "@phosphor-icons/react";
-import { SectionPropTypes } from "../../types";
+import { SectionPropTypes } from "@/app/types";
 import { OVERVIEW_CONST } from "./const";
 
 export const Overview = ({ CONSTANTS, FULL_ADDRESS }: SectionPropTypes) => {
   return (
     <IconContext.Provider value={{ weight: "light", size: 32 }}>
-      <div className="relative">
+      <div className="relative" id="overview">
         <div className="mask-gradient absolute bottom-0 z-10 h-1/6 w-full bg-neutral-50/50 backdrop-blur-2xl" />
         <Image
           src={CONSTANTS.FEATURED_PHOTO}

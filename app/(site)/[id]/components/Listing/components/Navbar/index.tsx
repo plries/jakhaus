@@ -5,16 +5,14 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { XIcon } from "@phosphor-icons/react";
+import { ListIcon, XIcon } from "@phosphor-icons/react";
 import { JakhausLogo } from "@/public/icons";
 import { SectionPropTypes } from "@/app/types";
 import { useWindowSize } from "@/app/hooks/";
 import { NAVBAR_CONST } from "./const";
-import { MenuIcon } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export const Navbar = ({ CONSTANTS }: SectionPropTypes) => {
   const hook = useWindowSize();
@@ -38,24 +36,32 @@ export const Navbar = ({ CONSTANTS }: SectionPropTypes) => {
           {NAVBAR_CONST.LINKS.filter((LINK) => {
             return !LINK.KEY || CONSTANTS[LINK.KEY as keyof typeof CONSTANTS];
           }).map((LINK) => (
-            <Link
+            <Button
+              asChild
+              variant="ghost"
               key={LINK.KEY}
-              href={LINK.HREF}
-              className="rounded-lg px-3 py-2 text-nowrap text-neutral-200 transition-colors duration-300 ease-in-out hover:bg-neutral-50/10 hover:text-neutral-50"
+              className="font-normal text-neutral-50 hover:bg-neutral-50/10 hover:text-neutral-50"
             >
-              {LINK.NAME}
-            </Link>
+              <Link href={LINK.HREF}>{LINK.NAME}</Link>
+            </Button>
           ))}
         </>
       )}
       {hook.isTablet && (
         <DropdownMenu>
-          <DropdownMenuTrigger className="cursor-pointer rounded-lg p-3 transition-colors duration-300 ease-in-out hover:bg-neutral-50/10">
-            <MenuIcon className="text-neutral-50" />
+          <DropdownMenuTrigger className="rounded-lg">
+            <Button
+              asChild
+              variant="default"
+              size="icon"
+              className="size-11 rounded-lg bg-transparent p-3"
+            >
+              <ListIcon className="text-neutral-50" />
+            </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent
-            align="end"
-            className="mt-5 rounded-3xl border-neutral-50/10 bg-neutral-950/75 p-3 backdrop-blur-lg"
+            align={hook.isMobile ? "end" : "center"}
+            className="mt-5 rounded-3xl border-neutral-50/10 bg-neutral-950/75 p-3 backdrop-blur-xs"
           >
             {NAVBAR_CONST.LINKS.filter((LINK) => {
               return !LINK.KEY || CONSTANTS[LINK.KEY as keyof typeof CONSTANTS];

@@ -1,4 +1,4 @@
-import { ListingPropTypes } from "../types";
+import { ListingPropTypes } from "@/app/types";
 
 export const LISTINGS_MOCK: ListingPropTypes[] = [
   {

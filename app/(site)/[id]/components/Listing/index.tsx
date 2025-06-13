@@ -5,12 +5,12 @@ import { useListing } from "./useListing";
 export const Listing = () => {
   const hook = useListing();
 
-  const fullAddress = `${hook.constants.address.street} ${hook.constants.address.unit} ${hook.constants.address.city}, ${hook.constants.address.province} ${hook.constants.address.postal}`;
+  const FULL_ADDRESS = `${hook.CONSTANTS.ADDRESS.STREET} ${hook.CONSTANTS.ADDRESS.UNIT} ${hook.CONSTANTS.ADDRESS.CITY}, ${hook.CONSTANTS.ADDRESS.PROVINCE} ${hook.CONSTANTS.ADDRESS.POSTAL_CODE}`;
 
   return (
     <>
-      <Navbar constants={hook.constants} />
-      <Overview constants={hook.constants} fullAddress={fullAddress} />
+      <Navbar CONSTANTS={hook.CONSTANTS} />
+      <Overview CONSTANTS={hook.CONSTANTS} FULL_ADDRESS={FULL_ADDRESS} />
     </>
   );
 };

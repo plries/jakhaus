@@ -1,10 +1,10 @@
 export const NAVBAR_CONST = {
   LINKS: [
-    { name: "Overview", href: "#overview", key: "overview" },
-    { name: "Photos", href: "#photos", key: "photos" },
-    { name: "Video Tour", href: "#video", key: "videoLink" },
-    { name: "Floor Plan", href: "#floorplan", key: "floorPlan" },
-    { name: "Virtual Tour", href: "#scan", key: "scanLink" },
-    { name: "Contact", href: "#contact", key: "agent" },
+    { NAME: "Overview", HREF: "#overview", KEY: "OVERVIEW" },
+    { NAME: "Photos", HREF: "#photos", KEY: "PHOTOS" },
+    { NAME: "Video Tour", HREF: "#video", KEY: "VIDEO_LINK" },
+    { NAME: "Floor Plan", HREF: "#floorplan", KEY: "FLOOR_PLAN" },
+    { NAME: "Virtual Tour", HREF: "#scan", KEY: "SCAN_LINK" },
+    { NAME: "Contact", HREF: "#contact", KEY: "AGENT" },
   ],
 };

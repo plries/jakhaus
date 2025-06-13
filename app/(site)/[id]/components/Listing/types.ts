@@ -1,29 +1,34 @@
 export type ListingPropTypes = {
-  id: string;
-  featuredPhoto: string;
-  address: {
-    street: string;
-    unit?: string;
-    city: string;
-    province: string;
-    postal: string;
+  ID: string;
+  FEATURED_PHOTO: string;
+  ADDRESS: {
+    STREET: string;
+    UNIT?: string;
+    CITY: string;
+    PROVINCE: string;
+    POSTAL_CODE: string;
   };
-  overview: {
-    description: string;
-    bedrooms: number;
-    bathrooms: number;
-    sqft: number;
+  OVERVIEW: {
+    DESCRIPTION: string;
+    BEDROOMS: number;
+    BATHROOMS: number;
+    SQUARE_FEET: number;
   };
-  photos: string[];
-  videoLink?: string;
-  floorPlan?: string;
-  scanLink?: string;
-  agent: {
-    logo: string;
-    brokerage: string;
-    name: string;
-    email: string;
-    phone: string;
-    instagram?: string;
+  PHOTOS: string[];
+  VIDEO_LINK?: string;
+  FLOOR_PLAN?: string;
+  SCAN_LINK?: string;
+  AGENT: {
+    LOGO: string;
+    BROKERAGE: string;
+    NAME: string;
+    EMAIL: string;
+    PHONE: string;
+    INSTAGRAM?: string;
   };
+};
+
+export type SectionPropTypes = {
+  CONSTANTS: ListingPropTypes;
+  FULL_ADDRESS?: string;
 };

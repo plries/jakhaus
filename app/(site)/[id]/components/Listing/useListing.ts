@@ -7,9 +7,9 @@ export const useListing = () => {
   const slug = params.id;
 
   const currentIndex =
-    LISTINGS_MOCK.findIndex((listing) => listing.id === slug) ?? null;
+    LISTINGS_MOCK.findIndex((LISTING) => LISTING.ID === slug) ?? null;
 
-  const constants = LISTINGS_MOCK[currentIndex];
+  const CONSTANTS = LISTINGS_MOCK[currentIndex];
 
-  return { constants };
+  return { CONSTANTS };
 };

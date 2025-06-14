@@ -93,6 +93,31 @@ body {
   color: var(--color-slate-700);
 }
 
+p,
+a,
+li,
+button {
+  font-size: 0.875rem;
+}
+
+@media screen and (min-width: 768px) {
+  p,
+  a,
+  li,
+  button {
+    font-size: 1rem;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  p,
+  a,
+  li,
+  button {
+    font-size: 1.125rem;
+  }
+}
+
 :root {
   --radius: 0.625rem;
   --background: oklch(1 0 0);

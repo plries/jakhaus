@@ -26,7 +26,7 @@ export const LISTINGS_MOCK: ListingPropTypes[] = [
     ],
     VIDEO_LINK: "https://www.youtube.com/embed/1hpR7jYG5zE?si=mpj7t3vbzOjZEtaL",
     FLOOR_PLAN:
-      "https://cdn.sitephotos.sierrastatic.com/3653_7473_floorplan_fp-3510-13688-100-avenue-20250407042843.jpg",
+      "/images/001-FP.jpg",
     SCAN_LINK: "https://my.matterport.com/show/?m=Z2iH7ribHis",
     AGENT: {
       LOGO: "/images/placeholderLogo.png",

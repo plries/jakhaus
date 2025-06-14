@@ -1,5 +1,4 @@
 "use client";
-
 import { useState, useEffect } from "react";
 
 export const useWindowSize = () => {
@@ -7,7 +6,6 @@ export const useWindowSize = () => {
   const [isTablet, setIsTablet] = useState(false);
 
   useEffect(() => {
-
     const checkScreenSize = () => {
       setIsMobile(window.innerWidth < 768);
       setIsTablet(window.innerWidth < 1024);

@@ -6,14 +6,17 @@ import { CaretRightIcon } from "@phosphor-icons/react";
 
 export const Photos = ({ CONSTANTS, FULL_ADDRESS }: SectionPropTypes) => {
   return (
-    <section className="contents">
+    <section
+      className="col-span-full grid scroll-m-20 grid-cols-4 gap-5 pt-5 pb-10 md:grid-cols-8 lg:grid-cols-12"
+      id="photos"
+    >
       <SectionHeading>{PHOTOS_CONST.HEADING}</SectionHeading>
       <div className="col-span-full grid grid-cols-1 gap-5 p-5">
         <div className="flex flex-col gap-5 lg:flex-row">
           {CONSTANTS.PHOTOS.slice(0, 2).map((PHOTO, index) => (
             <div
               key={index}
-              className="relative h-96 w-full cursor-pointer overflow-hidden rounded-2xl border border-neutral-300 bg-cover bg-center shadow-lg duration-300 ease-in-out hover:brightness-90 lg:first:w-3/5"
+              className="relative h-96 w-full cursor-pointer overflow-hidden rounded-2xl border border-neutral-300 bg-cover bg-center shadow-lg duration-150 ease-in-out hover:brightness-90 lg:first:w-3/5"
               style={{
                 backgroundImage: `url(${PHOTO})`,
               }}
@@ -27,7 +30,7 @@ export const Photos = ({ CONSTANTS, FULL_ADDRESS }: SectionPropTypes) => {
               className="group relative h-96 w-full cursor-pointer overflow-hidden rounded-2xl border border-neutral-300"
             >
               <div
-                className="h-full w-full bg-cover bg-center shadow-lg duration-300 ease-in-out group-hover:brightness-90"
+                className="h-full w-full bg-cover bg-center shadow-lg duration-150 ease-in-out group-hover:brightness-90"
                 style={{
                   backgroundImage: `url(${PHOTO})`,
                 }}

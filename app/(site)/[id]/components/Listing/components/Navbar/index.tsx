@@ -1,7 +1,11 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { IconContext, ListIcon, PhoneIcon, XIcon } from "@phosphor-icons/react";
+import {
+  ListIcon,
+  UserCircleIcon,
+  XIcon,
+} from "@phosphor-icons/react";
 import { JakhausLogo } from "@/public/icons";
 import { SectionPropTypes } from "@/app/types";
 import { useWindowSize } from "@/app/hooks/";
@@ -20,7 +24,6 @@ export const NavBar = ({ CONSTANTS }: SectionPropTypes) => {
   const activeSection = useActiveSection(sectionIds);
 
   return (
-    <IconContext.Provider value={{ weight: "light", size: 24 }}>
       <header className="sticky top-5 z-50 mx-auto mb-10 flex w-fit flex-row items-center justify-center gap-3 rounded-full bg-neutral-950 p-3 shadow-xl">
         <div className="ml-3 flex h-fit items-center justify-center gap-2">
           <JakhausLogo />
@@ -48,7 +51,7 @@ export const NavBar = ({ CONSTANTS }: SectionPropTypes) => {
                 key={LINK.KEY}
                 href={LINK.HREF}
               >
-                {LINK.KEY === "AGENT" && <PhoneIcon />}
+                {LINK.KEY === "AGENT" && <UserCircleIcon />}
                 {LINK.NAME}
               </Link>
             ))}
@@ -93,6 +96,5 @@ export const NavBar = ({ CONSTANTS }: SectionPropTypes) => {
           </>
         )}
       </header>
-    </IconContext.Provider>
   );
 };

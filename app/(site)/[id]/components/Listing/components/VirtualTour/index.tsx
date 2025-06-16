@@ -13,7 +13,7 @@ export const VirtualTour = ({ CONSTANTS, FULL_ADDRESS }: SectionPropTypes) => {
         <iframe
           className="aspect-video w-full overflow-hidden rounded-2xl border border-neutral-300 shadow-lg"
           src={CONSTANTS.SCAN_LINK}
-          title={VIRTUAL_TOUR_CONST.HEADING + "of" + FULL_ADDRESS}
+          title={VIRTUAL_TOUR_CONST.HEADING + " of " + FULL_ADDRESS}
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           referrerPolicy="strict-origin-when-cross-origin"
           allowFullScreen

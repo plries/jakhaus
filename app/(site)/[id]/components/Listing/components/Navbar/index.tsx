@@ -76,7 +76,11 @@ export const NavBar = ({ CONSTANTS }: SectionPropTypes) => {
                   );
                 }).map((LINK) => (
                   <Link
-                    className="rounded-full px-4 py-2 font-normal text-neutral-400 transition-colors duration-150 ease-in-out hover:bg-neutral-50/10 hover:text-neutral-50"
+                    className={`rounded-full px-4 py-2 font-normal text-neutral-400 transition-colors duration-150 ease-in-out hover:bg-neutral-50/10 hover:text-neutral-50 ${
+                      activeSection === LINK.HREF.replace("#", "")
+                        ? "bg-neutral-50/10 !text-neutral-50"
+                        : "text-neutral-400 hover:bg-neutral-50/10 hover:text-neutral-50"
+                    } `}
                     key={LINK.KEY}
                     href={LINK.HREF}
                     onClick={hook.toggleOpen}

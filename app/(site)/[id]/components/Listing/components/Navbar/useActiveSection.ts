@@ -1,7 +1,9 @@
 "use client";
 import { useEffect, useState } from "react";
+import { useWindowSize } from "@/app/hooks";
 
 export const useActiveSection = (sectionIds: string[]) => {
+  const hook = useWindowSize();
   const [activeId, setActiveId] = useState("");
 
   useEffect(() => {
@@ -13,7 +15,7 @@ export const useActiveSection = (sectionIds: string[]) => {
         }
       },
       {
-        rootMargin: "0px 0px -100px  0px",
+        rootMargin: hook.isTablet || hook.isMobile ? "0px 0px 50px 0px" : "0px 0px 200px 0px",
         threshold: 0.1,
       },
     );

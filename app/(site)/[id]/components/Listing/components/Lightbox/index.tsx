@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import { LIGHTBOX_CONST } from "./const";
 import { LightboxPropTypes } from "./types";

@@ -32,7 +32,7 @@ export const Photos = ({ CONSTANTS, FULL_ADDRESS }: SectionPropTypes) => {
             {CONSTANTS.PHOTOS.slice(2, 4).map((PHOTO, index) => (
               <div
                 key={index}
-                className="group relative h-96 w-full cursor-pointer overflow-hidden rounded-2xl border border-neutral-300"
+                className="group relative h-96 w-full cursor-pointer overflow-hidden rounded-2xl border border-neutral-300 lg:last:w-3/5"
               >
                 <div
                   className="h-full w-full bg-cover bg-center shadow-lg duration-150 ease-in-out group-hover:brightness-90"
@@ -43,7 +43,7 @@ export const Photos = ({ CONSTANTS, FULL_ADDRESS }: SectionPropTypes) => {
                 />
                 {index === 1 && (
                   <div className="pointer-events-none absolute top-0 left-0 z-10 h-full w-full bg-neutral-950/50 backdrop-blur-xs">
-                    <div className="flex h-full w-full flex-col items-center justify-center gap-2">
+                    <div className="pointer-events-auto flex h-full w-full flex-col items-center justify-center gap-2">
                       <IconButton
                         onClick={() => hook.openLightbox(index + 2)}
                         name={PHOTOS_CONST.VIEW_ALL.NAME}

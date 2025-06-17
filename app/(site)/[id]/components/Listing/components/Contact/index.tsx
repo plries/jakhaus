@@ -9,7 +9,7 @@ export const Contact = ({ CONSTANTS }: SectionPropTypes) => {
   return (
     <footer
       id="contact"
-      className="relative mx-auto mb-5 grid w-[calc(100%-1.25rem)] grid-cols-4 gap-5 rounded-4xl p-10 shadow-xl md:grid-cols-8 lg:grid-cols-12 lg:px-0"
+      className="relative mx-auto mb-5 grid w-[calc(100%-1.25rem)] grid-cols-4 gap-5 rounded-4xl border border-neutral-800/50 p-10 shadow-xl md:grid-cols-8 lg:grid-cols-12 lg:px-0"
     >
       <div className="absolute inset-0 -z-10">
         <div

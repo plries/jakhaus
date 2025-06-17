@@ -12,8 +12,6 @@ export const LISTINGS_MOCK: ListingPropTypes[] = [
       POSTAL_CODE: "V3T 0M9",
     },
     OVERVIEW: {
-      DESCRIPTION:
-        "This well-appointed 35th-floor Concord Pacific home features dazzling  floor-to-ceiling windows opening onto a generous south-facing balcony  boasting breathtaking views that stretch from Mt. Baker to Richmond. The stylish kitchen offers sleek stainless steel appliances gleaming  against modern cabinetry & crisp quartz counters while the bedroom provides a tranquil retreat w/ ample closet space & a well-appointed ensuite. Indulge in 10,000 sqft of indoor amenity space w/ a  state-of-the-art 2,400 sqft gym, yoga studio, bowling alley, sky lounge, celebration rooms, 700 sqft games room, theatre & 4,000 sqft  rooftop patio. Perfectly located, Park Place 1 is steps to King George  Skytrain, Holland Park, Central City Mall, SFU & Surrey Memorial  Hospital.",
       BEDROOMS: 1,
       BATHROOMS: 1,
       SQUARE_FEET: 529,

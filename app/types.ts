@@ -9,7 +9,6 @@ export type ListingPropTypes = {
     POSTAL_CODE: string;
   };
   OVERVIEW: {
-    DESCRIPTION: string;
     BEDROOMS: number;
     BATHROOMS: number;
     SQUARE_FEET: number;

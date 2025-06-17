@@ -12,7 +12,7 @@ import { OVERVIEW_CONST } from "./const";
 export const Overview = ({ CONSTANTS, FULL_ADDRESS }: SectionPropTypes) => {
   return (
     <IconContext.Provider value={{ weight: "thin", size: 32 }}>
-      <section className="mx-auto w-[calc(100%-1.25rem)] overflow-hidden rounded-4xl shadow-xl">
+      <section className="mx-auto w-[calc(100%-1.25rem)] overflow-hidden rounded-4xl border border-neutral-800/50 shadow-xl">
         <div className="relative" id="overview">
           <div className="mask-gradient absolute bottom-0 z-10 h-1/6 w-full bg-neutral-50/50 backdrop-blur-2xl" />
           <Image
@@ -23,7 +23,7 @@ export const Overview = ({ CONSTANTS, FULL_ADDRESS }: SectionPropTypes) => {
             height={1080}
           />
         </div>
-        <div className="relative">
+        <div className="relative border-t border-neutral-800/50">
           <div className="absolute inset-0 -z-10">
             <div
               className="absolute top-0 left-0 h-full w-full bg-cover bg-center mix-blend-multiply"
@@ -34,7 +34,7 @@ export const Overview = ({ CONSTANTS, FULL_ADDRESS }: SectionPropTypes) => {
           <div className="z-10 grid grid-cols-4 gap-5 p-5 md:grid-cols-8 md:p-10 lg:grid-cols-12 lg:gap-10 lg:px-0">
             <h1 className="col-span-full text-3xl font-medium tracking-tighter text-neutral-50 md:text-4xl lg:col-span-8 lg:col-start-2 lg:text-6xl">
               {CONSTANTS.ADDRESS.STREET} {CONSTANTS.ADDRESS.UNIT}
-              <span className="block text-xl font-normal text-neutral-400 md:text-2xl lg:text-3xl">
+              <span className="block text-xl font-normal tracking-tight text-neutral-400 md:text-2xl lg:text-3xl">
                 {CONSTANTS.ADDRESS.CITY}, {CONSTANTS.ADDRESS.PROVINCE}{" "}
                 {CONSTANTS.ADDRESS.POSTAL_CODE}
               </span>
@@ -46,9 +46,6 @@ export const Overview = ({ CONSTANTS, FULL_ADDRESS }: SectionPropTypes) => {
               height={1080}
               className="col-span-full max-h-12 max-w-32 lg:col-span-2 lg:col-start-10 lg:justify-self-end"
             />
-            <p className="col-span-full gap-5 text-neutral-400 md:[column-count:2] lg:col-span-10 lg:col-start-2">
-              {CONSTANTS.OVERVIEW.DESCRIPTION}
-            </p>
             <div className="mask-gradient-x col-span-full -mx-8 flex flex-col gap-5 overflow-x-scroll px-8 lg:col-span-10 lg:col-start-2 lg:flex-row lg:pb-5">
               {OVERVIEW_CONST.DETAILS.map((DETAIL) => (
                 <div

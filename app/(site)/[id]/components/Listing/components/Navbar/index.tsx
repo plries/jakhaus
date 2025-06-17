@@ -6,11 +6,11 @@ import { JakhausLogo } from "@/public/icons";
 import { SectionPropTypes } from "@/app/types";
 import { useWindowSize } from "@/app/hooks/";
 import { NAVBAR_CONST } from "./const";
-import { useNavBar } from "./useNavBar";
+import { useNavbar } from "./useNavbar";
 import { useActiveSection } from "./useActiveSection";
 
-export const NavBar = ({ CONSTANTS }: SectionPropTypes) => {
-  const hook = useNavBar();
+export const Navbar = ({ CONSTANTS }: SectionPropTypes) => {
+  const hook = useNavbar();
   const windowSize = useWindowSize();
 
   const sectionIds = NAVBAR_CONST.LINKS.map((link) =>

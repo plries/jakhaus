@@ -1,5 +1,5 @@
 export const CONTACT_CONST = {
   POWERED_BY: "Powered by ",
-  JAKHAUS_LINK: "https://jakhaus.ca",
+  JAKHAUS_LINK: "/",
   JAKHAUS: "Jakhaus Creative Media",
 };

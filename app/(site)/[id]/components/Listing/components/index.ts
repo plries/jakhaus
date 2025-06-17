@@ -2,7 +2,7 @@ export * from "./Contact";
 export * from "./FloorPlan";
 export * from "./IconButton";
 export * from "./Lightbox";
-export * from "./NavBar";
+export * from "./Navbar";
 export * from "./Overview";
 export * from "./Photos";
 export * from "./SectionHeading";

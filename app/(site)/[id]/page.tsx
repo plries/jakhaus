@@ -3,11 +3,11 @@ import { Listing } from "./components";
 import { LISTINGS_MOCK } from "./const";
 import { JakhausLogo } from "@/public/icons";
 
-type Props = {
+export async function generateMetadata({
+  params,
+}: {
   params: { id: string };
-};
-
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+}): Promise<Metadata> {
   const listing = LISTINGS_MOCK.find((listing) => listing.ID === params.id);
 
   if (!listing) {
@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default function ListingPage({ params }: Props) {
+export default function ListingPage({ params }: { params: { id: string } }) {
   const listing = LISTINGS_MOCK.find((listing) => listing.ID === params.id);
 
   if (!listing)

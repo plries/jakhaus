@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { useWindowSize } from "@/app/hooks";
 
-export const useNavbar = () => {
+export const useMobileMenu = () => {
   const windowSize = useWindowSize();
 
   const [isOpen, setIsOpen] = useState(false);

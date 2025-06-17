@@ -22,7 +22,7 @@ export const Contact = ({ CONSTANTS }: SectionPropTypes) => {
         <Image
           src={CONSTANTS.AGENT.LOGO}
           alt={CONSTANTS.AGENT.BROKERAGE}
-          className="h-full max-h-12 max-w-32"
+          className="h-full max-h-12 w-fit"
           width={1920}
           height={1080}
         />

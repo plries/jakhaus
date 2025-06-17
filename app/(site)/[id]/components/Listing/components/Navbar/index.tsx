@@ -27,7 +27,7 @@ export const Navbar = ({ CONSTANTS }: SectionPropTypes) => {
         <Image
           src={CONSTANTS.AGENT.LOGO}
           alt={CONSTANTS.AGENT.BROKERAGE}
-          className="h-full max-h-12 max-w-24"
+          className="h-full max-h-12 w-fit"
           width={1920}
           height={1080}
         />
@@ -39,7 +39,7 @@ export const Navbar = ({ CONSTANTS }: SectionPropTypes) => {
             return !LINK.KEY || CONSTANTS[LINK.KEY as keyof typeof CONSTANTS];
           }).map((LINK) => (
             <Link
-              className={`rounded-full px-4 py-2 font-normal transition-colors duration-150 ease-in-out ${
+              className={`rounded-full px-4 py-2 font-normal text-nowrap transition-colors duration-150 ease-in-out ${
                 activeSection === LINK.HREF.replace("#", "")
                   ? "bg-neutral-50/10 text-neutral-50"
                   : "text-neutral-400 hover:bg-neutral-50/10 hover:text-neutral-50"

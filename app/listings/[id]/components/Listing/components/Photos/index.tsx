@@ -1,8 +1,8 @@
 import { SectionPropTypes } from "@/app/types";
-import { SectionHeading } from "../SectionHeading";
+import { SectionHeading, IconButton } from "@/app/components";
 import { PHOTOS_CONST } from "./const";
 import { CaretRightIcon } from "@phosphor-icons/react";
-import { IconButton, Lightbox } from "../../components/";
+import { Lightbox } from "../";
 import { useLightbox } from "../Lightbox/useLightbox";
 
 export const Photos = ({ CONSTANTS, FULL_ADDRESS }: SectionPropTypes) => {

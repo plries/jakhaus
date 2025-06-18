@@ -1,5 +1,5 @@
 import { SectionPropTypes } from "@/app/types";
-import { SectionHeading } from "../SectionHeading";
+import { SectionHeading } from "@/app/components";
 import { VIDEO_CONST } from "./const";
 
 export const Video = ({ CONSTANTS, FULL_ADDRESS }: SectionPropTypes) => {

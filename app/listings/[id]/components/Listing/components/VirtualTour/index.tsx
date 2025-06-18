@@ -1,5 +1,5 @@
 import { SectionPropTypes } from "@/app/types";
-import { SectionHeading } from "../SectionHeading";
+import { SectionHeading } from "@/app/components";
 import { VIRTUAL_TOUR_CONST } from "./const";
 
 export const VirtualTour = ({ CONSTANTS, FULL_ADDRESS }: SectionPropTypes) => {

@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { LIGHTBOX_CONST } from "./const";
 import { LightboxPropTypes } from "./types";
-import { IconButton } from "../IconButton";
+import { IconButton } from "@/app/components";
 import { CaretLeftIcon, CaretRightIcon, XIcon } from "@phosphor-icons/react";
 
 export const Lightbox = ({

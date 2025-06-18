@@ -46,6 +46,14 @@
   scroll-behavior: smooth;
 }
 
+*:focus {
+  outline-color: color-mix(in oklab, var(--color-neutral-950) /* oklch(14.5% 0 0) = #0a0a0a */ 10%, transparent);
+}
+
+*:focus-within {
+  outline-color: color-mix(in oklab, var(--color-neutral-950) /* oklch(14.5% 0 0) = #0a0a0a */ 10%, transparent);
+}
+
 body {
   font-family: var(--font-poppins), Helvetica, sans-serif;
   letter-spacing: var(--tracking-tight);
@@ -96,7 +104,8 @@ body {
 p,
 a,
 li,
-button {
+button,
+label {
   font-size: 0.875rem;
 }
 
@@ -104,7 +113,8 @@ button {
   p,
   a,
   li,
-  button {
+  button,
+  label {
     font-size: 1rem;
   }
 }
@@ -113,7 +123,8 @@ button {
   p,
   a,
   li,
-  button {
+  button,
+  label {
     font-size: 1.125rem;
   }
 }

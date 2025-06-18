@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { SectionPropTypes } from "@/app/types";
-import { SectionHeading } from "../SectionHeading";
+import { SectionHeading } from "@/app/components";
 import { FLOOR_PLAN_CONST } from "./const";
 
 export const FloorPlan = ({ CONSTANTS, FULL_ADDRESS }: SectionPropTypes) => {

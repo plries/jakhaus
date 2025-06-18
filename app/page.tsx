@@ -10,7 +10,7 @@ import {
 export default function Home() {
   return (
     <IconContext.Provider value={{ weight: "thin", size: 24 }}>
-      <div className="mx-5 grid h-fit w-[calc(100%-1.25rem)] -rotate-1 cursor-pointer auto-rows-min grid-cols-1 overflow-hidden rounded-3xl border border-neutral-300 shadow-2xl shadow-neutral-950/10 transition-all duration-300 ease-in-out hover:scale-90 hover:rotate-0 hover:shadow-xl">
+      <div className="mx-5 grid h-fit w-[calc(100%-1.25rem)] -rotate-1 cursor-pointer auto-rows-min grid-cols-1 overflow-hidden rounded-3xl border border-neutral-300 bg-neutral-50 shadow-2xl shadow-neutral-950/10 transition-all duration-300 ease-in-out hover:scale-90 hover:rotate-0 hover:shadow-xl">
         <div className="border-b border-b-neutral-300 p-5 text-neutral-950 md:p-10">
           <JakhausLogo width={"100%"} />
         </div>

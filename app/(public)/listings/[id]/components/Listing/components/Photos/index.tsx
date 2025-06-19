@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { SectionPropTypes } from "@/app/types";
 import { SectionHeading, IconButton } from "@/app/components";
 import { PHOTOS_CONST } from "./const";
@@ -20,13 +21,20 @@ export const Photos = ({ CONSTANTS, FULL_ADDRESS }: SectionPropTypes) => {
             {CONSTANTS.PHOTOS.slice(0, 2).map((PHOTO, index) => (
               <div
                 key={index}
-                className="relative h-96 w-full overflow-hidden rounded-2xl border border-neutral-300 bg-cover bg-center shadow-lg duration-150 ease-in-out hover:brightness-90 lg:first:w-3/5"
-                style={{
-                  backgroundImage: `url(${PHOTO})`,
-                }}
+                className="group relative h-96 w-full overflow-hidden rounded-2xl border border-neutral-300 bg-cover bg-center shadow-lg lg:first:w-3/5"
               >
+                <Image
+                  className="h-full w-full object-cover object-center duration-300 ease-in-out group-hover:scale-105"
+                  style={{
+                    backgroundImage: `url(${PHOTO})`,
+                  }}
+                  src={PHOTO}
+                  alt={FULL_ADDRESS || ""}
+                  width={1920}
+                  height={1080}
+                />
                 <button
-                  className="h-full w-full cursor-pointer"
+                  className="absolute top-0 left-0 h-full w-full cursor-pointer"
                   onClick={() => hook.openLightbox(index)}
                 >
                   <span className="sr-only">{PHOTOS_CONST.BUTTON}</span>
@@ -38,13 +46,20 @@ export const Photos = ({ CONSTANTS, FULL_ADDRESS }: SectionPropTypes) => {
             {CONSTANTS.PHOTOS.slice(2, 4).map((PHOTO, index) => (
               <div
                 key={index}
-                className="relative h-96 w-full overflow-hidden rounded-2xl border border-neutral-300 bg-cover bg-center shadow-lg duration-150 ease-in-out hover:brightness-90 lg:last:w-3/5"
-                style={{
-                  backgroundImage: `url(${PHOTO})`,
-                }}
+                className="group relative h-96 w-full overflow-hidden rounded-2xl border border-neutral-300 bg-cover bg-center shadow-lg lg:last:w-3/5"
               >
+                <Image
+                  className="h-full w-full object-cover object-center duration-300 ease-in-out group-hover:scale-105"
+                  style={{
+                    backgroundImage: `url(${PHOTO})`,
+                  }}
+                  src={PHOTO}
+                  alt={FULL_ADDRESS || ""}
+                  width={1920}
+                  height={1080}
+                />
                 <button
-                  className="h-full w-full cursor-pointer"
+                  className="absolute top-0 left-0 h-full w-full cursor-pointer"
                   onClick={() => hook.openLightbox(index + 2)}
                 >
                   <span className="sr-only">{PHOTOS_CONST.BUTTON}</span>

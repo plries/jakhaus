@@ -39,7 +39,7 @@ export const Lightbox = ({
             alt={FULL_ADDRESS}
             width={1920}
             height={1080}
-            className="w-full rounded-2xl border border-neutral-300 shadow-lg"
+            className="w-full rounded-2xl border border-neutral-50/10 object-cover object-center shadow-lg"
           />
           <IconButton
             name={LIGHTBOX_CONST.BUTTONS.PREV}

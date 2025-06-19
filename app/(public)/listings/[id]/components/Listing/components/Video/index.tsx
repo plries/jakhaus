@@ -5,7 +5,7 @@ import { VIDEO_CONST } from "./const";
 export const Video = ({ CONSTANTS, FULL_ADDRESS }: SectionPropTypes) => {
   return (
     <section
-      className="col-span-full grid scroll-m-20 grid-cols-4 gap-5 pt-5 pb-10 md:grid-cols-8 lg:grid-cols-12"
+      className="col-span-full grid scroll-m-20 grid-cols-4 gap-5 md:grid-cols-8 lg:grid-cols-12"
       id="videoTour"
     >
       <SectionHeading>{VIDEO_CONST.HEADING}</SectionHeading>

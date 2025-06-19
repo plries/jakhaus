@@ -26,6 +26,32 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: FULL_ADDRESS + " | Jakhaus Creative Media",
     description:
       "View the listing for " + FULL_ADDRESS + " by Jakhaus Creative Media.",
+    keywords: [
+      "jakhaus creative media",
+      "jakhaus",
+      "creative media",
+      "jakhaus creative",
+      FULL_ADDRESS,
+      `${listing.ADDRESS.UNIT} ${listing.ADDRESS.STREET} ${listing.ADDRESS.CITY}`,
+      `${listing.ADDRESS.CITY} ${listing.ADDRESS.PROVINCE} ${listing.ADDRESS.POSTAL_CODE}`,
+      `homes in ${listing.ADDRESS.CITY}, ${listing.ADDRESS.PROVINCE}`,
+      `real estate ${listing.ADDRESS.CITY}, ${listing.ADDRESS.PROVINCE}`,
+      `real estate in ${listing.ADDRESS.CITY}, ${listing.ADDRESS.PROVINCE}`,
+      `rental homes ${listing.ADDRESS.CITY}, ${listing.ADDRESS.PROVINCE}`,
+      `rental homes in ${listing.ADDRESS.CITY}, ${listing.ADDRESS.PROVINCE}`,
+    ],
+    openGraph: {
+      title: FULL_ADDRESS + " | Jakhaus Creative Media",
+      description:
+        "View the listing for " + FULL_ADDRESS + " by Jakhaus Creative Media.",
+      images: [
+        {
+          url: listing.FEATURED_PHOTO,
+          width: 1920,
+          height: 1080,
+        },
+      ],
+    },
   };
 }
 

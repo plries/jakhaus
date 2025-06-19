@@ -10,14 +10,17 @@ export const FloorPlan = ({ CONSTANTS, FULL_ADDRESS }: SectionPropTypes) => {
       id="floorPlan"
     >
       <SectionHeading>{FLOOR_PLAN_CONST.HEADING}</SectionHeading>
-      <div className="col-span-full p-5">
-        <Image
-          className="rounded-2xl border border-neutral-300 shadow-lg"
-          src={CONSTANTS.FLOOR_PLAN || ""}
-          alt={FULL_ADDRESS + FLOOR_PLAN_CONST.ALT}
-          width={1920}
-          height={1080}
-        />
+      <div className="col-span-full grid auto-rows-min grid-cols-1 gap-5 p-5">
+        {CONSTANTS.FLOOR_PLAN?.map((floorPlan, index) => (
+          <Image
+            key={index}
+            className="rounded-2xl border border-neutral-300 shadow-lg"
+            src={floorPlan || ""}
+            alt={FLOOR_PLAN_CONST.ALT + " " + FULL_ADDRESS}
+            width={1920}
+            height={1080}
+          />
+        ))}
       </div>
     </section>
   );

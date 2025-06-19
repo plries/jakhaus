@@ -1,6 +1,6 @@
 "use client";
 import { useParams } from "next/navigation";
-import { LISTINGS_MOCK } from "./const";
+import { LISTINGS_MOCK } from "../../const";
 
 export const useListing = () => {
   const params = useParams();

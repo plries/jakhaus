@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import { Listing } from "./components";
-import { LISTINGS_MOCK } from "./components/Listing/const";
+import { LISTINGS_MOCK } from "./const";
 import { JakhausLogo } from "@/public/icons";
 
 type Props = {
@@ -15,16 +15,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (!listing) {
     return {
-      title: "Listing not found",
+      title: "Listing not found | Jakhaus Creative Media",
       description: "No listing was found for this ID",
     };
   }
 
-  const FULL_ADDRESS = `${listing.ADDRESS.STREET} ${listing.ADDRESS.UNIT} ${listing.ADDRESS.CITY}, ${listing.ADDRESS.PROVINCE} ${listing.ADDRESS.POSTAL_CODE}`;
+  const FULL_ADDRESS = ` ${listing.ADDRESS.UNIT} ${listing.ADDRESS.STREET} ${listing.ADDRESS.CITY}, ${listing.ADDRESS.PROVINCE} ${listing.ADDRESS.POSTAL_CODE}`;
 
   return {
     title: FULL_ADDRESS + " | Jakhaus Creative Media",
-    description: "View the listing for " + FULL_ADDRESS + " by Jakhaus Creative Media.",
+    description:
+      "View the listing for " + FULL_ADDRESS + " by Jakhaus Creative Media.",
   };
 }
 
@@ -40,7 +41,7 @@ export default async function ListingPage({ params }: Props) {
       </div>
     );
 
-  const FULL_ADDRESS = `${listing.ADDRESS.STREET} ${listing.ADDRESS.UNIT} ${listing.ADDRESS.CITY}, ${listing.ADDRESS.PROVINCE} ${listing.ADDRESS.POSTAL_CODE}`;
+  const FULL_ADDRESS = `${listing.ADDRESS.UNIT} ${listing.ADDRESS.STREET} ${listing.ADDRESS.CITY}, ${listing.ADDRESS.PROVINCE} ${listing.ADDRESS.POSTAL_CODE}`;
 
   return <Listing CONSTANTS={listing} FULL_ADDRESS={FULL_ADDRESS} />;
 }

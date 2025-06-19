@@ -33,19 +33,23 @@ export const Overview = ({ CONSTANTS, FULL_ADDRESS }: SectionPropTypes) => {
           </div>
           <div className="z-10 grid grid-cols-4 gap-5 p-5 md:grid-cols-8 md:p-10 lg:grid-cols-12 lg:gap-10 lg:px-0">
             <h1 className="col-span-full text-3xl font-medium tracking-tighter text-neutral-50 md:text-4xl lg:col-span-8 lg:col-start-2 lg:text-6xl">
-              {CONSTANTS.ADDRESS.STREET} {CONSTANTS.ADDRESS.UNIT}
+              {CONSTANTS.ADDRESS.UNIT} {CONSTANTS.ADDRESS.STREET}
               <span className="block text-xl font-normal tracking-tight text-neutral-400 md:text-2xl lg:text-3xl">
                 {CONSTANTS.ADDRESS.CITY}, {CONSTANTS.ADDRESS.PROVINCE}{" "}
                 {CONSTANTS.ADDRESS.POSTAL_CODE}
               </span>
             </h1>
-            <Image
-              src={CONSTANTS.AGENT.LOGO}
-              alt={CONSTANTS.AGENT.BROKERAGE}
-              width={1920}
-              height={1080}
-              className="col-span-full max-h-12 max-w-32 lg:col-span-2 lg:col-start-10 lg:justify-self-end"
-            />
+            <div
+              className={`col-span-full w-fit lg:col-span-2 lg:col-start-10 lg:justify-self-end ${CONSTANTS.AGENT.LOGO_DARK ? "rounded-4xl border border-neutral-950/10 bg-neutral-50/75 p-5 shadow-inner shadow-neutral-50/75" : ""}`}
+            >
+              <Image
+                src={CONSTANTS.AGENT.LOGO}
+                alt={CONSTANTS.AGENT.SUBTITLE}
+                width={1920}
+                height={1080}
+                className="max-w-32 object-contain drop-shadow-md"
+              />
+            </div>
             <div className="mask-gradient-x col-span-full -mx-8 flex flex-col gap-5 overflow-x-scroll px-8 lg:col-span-10 lg:col-start-2 lg:flex-row lg:pb-5">
               {OVERVIEW_CONST.DETAILS.map((DETAIL) => (
                 <div

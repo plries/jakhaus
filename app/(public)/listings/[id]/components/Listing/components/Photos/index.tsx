@@ -20,30 +20,34 @@ export const Photos = ({ CONSTANTS, FULL_ADDRESS }: SectionPropTypes) => {
             {CONSTANTS.PHOTOS.slice(0, 2).map((PHOTO, index) => (
               <div
                 key={index}
-                className="relative h-96 w-full cursor-pointer overflow-hidden rounded-2xl border border-neutral-300 bg-cover bg-center shadow-lg duration-150 ease-in-out hover:brightness-90 lg:first:w-3/5"
+                className="relative h-96 w-full overflow-hidden rounded-2xl border border-neutral-300 bg-cover bg-center shadow-lg duration-150 ease-in-out hover:brightness-90 lg:first:w-3/5"
                 style={{
                   backgroundImage: `url(${PHOTO})`,
                 }}
-                onClick={() => hook.openLightbox(index)}
-              />
+              >
+                <button
+                  className="h-full w-full cursor-pointer"
+                  onClick={() => hook.openLightbox(index)}
+                />
+              </div>
             ))}
           </div>
           <div className="flex flex-col gap-5 lg:flex-row">
             {CONSTANTS.PHOTOS.slice(2, 4).map((PHOTO, index) => (
               <div
                 key={index}
-                className="group relative h-96 w-full cursor-pointer overflow-hidden rounded-2xl border border-neutral-300 lg:last:w-3/5"
+                className="relative h-96 w-full overflow-hidden rounded-2xl border border-neutral-300 bg-cover bg-center shadow-lg duration-150 ease-in-out hover:brightness-90 lg:last:w-3/5"
+                style={{
+                  backgroundImage: `url(${PHOTO})`,
+                }}
               >
-                <div
-                  className="h-full w-full bg-cover bg-center shadow-lg duration-150 ease-in-out group-hover:brightness-90"
-                  style={{
-                    backgroundImage: `url(${PHOTO})`,
-                  }}
+                <button
+                  className="h-full w-full cursor-pointer"
                   onClick={() => hook.openLightbox(index + 2)}
                 />
                 {index === 1 && (
                   <div className="pointer-events-none absolute top-0 left-0 z-10 h-full w-full bg-neutral-950/50 backdrop-blur-xs">
-                    <div className="pointer-events-auto flex h-full w-full flex-col items-center justify-center gap-2">
+                    <div className="flex h-full w-full flex-col items-center justify-center gap-2">
                       <IconButton
                         onClick={() => hook.openLightbox(index + 2)}
                         name={PHOTOS_CONST.VIEW_ALL.NAME}

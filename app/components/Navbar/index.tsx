@@ -38,18 +38,6 @@ export const Navbar = ({
     <header className="sticky top-5 z-50 mx-auto mb-10 flex w-fit flex-row items-center justify-center gap-3 rounded-full border border-neutral-800/50 bg-neutral-950 p-3 shadow-xl">
       <div className="ml-3 flex h-fit items-center justify-center gap-2 text-neutral-50">
         <JakhausLogo />
-        {CONSTANTS && (
-          <>
-            <XIcon size={16} />
-            <Image
-              src={CONSTANTS.AGENT.LOGO}
-              alt={CONSTANTS.AGENT.BROKERAGE}
-              className="h-full max-h-12 max-w-24 lg:mr-4"
-              width={1920}
-              height={1080}
-            />
-          </>
-        )}
       </div>
       <div className="ml-3 h-8 w-[1px] bg-neutral-600" />
       {!windowSize.isTablet && (

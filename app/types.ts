@@ -15,16 +15,23 @@ export type ListingPropTypes = {
   };
   PHOTOS: string[];
   VIDEO_LINK?: string;
-  FLOOR_PLAN?: string;
+  FLOOR_PLAN?: string[];
   SCAN_LINK?: string;
   AGENT: {
     LOGO: string;
-    BROKERAGE: string;
+    LOGO_DARK?: boolean;
+    SUBTITLE: string;
     NAME: string;
     EMAIL: string;
     PHONE: string;
+    WEBSITE?: string;
     INSTAGRAM?: string;
   };
+  BROKERAGE: {
+    LOGO: string;
+    TITLE: string;
+    ADDRESS: string;
+  }
 };
 
 export type SectionPropTypes = {

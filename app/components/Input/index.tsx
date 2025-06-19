@@ -16,7 +16,7 @@ export const Input = ({
         {required && <span>*</span>}
       </label>
       <input
-        className={`w-full rounded-xl border bg-neutral-50 p-3 shadow-md outline-2 outline-transparent ${error ? "border-red-400" : "border-neutral-200"}`}
+        className={`w-full rounded-xl border bg-neutral-50 p-3 shadow-md outline-2 outline-transparent placeholder:text-neutral-400 ${error ? "border-red-400" : "border-neutral-200"}`}
         type={type}
         placeholder={placeholder}
         value={value}

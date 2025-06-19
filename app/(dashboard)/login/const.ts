@@ -12,5 +12,6 @@ export const LOGIN_CONST = {
   },
   BUTTON: {
     LOGIN: "Login",
+    CLOSE: "Close",
   }
 }

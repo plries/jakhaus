@@ -2,8 +2,13 @@
 import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase";
 import { useRouter } from "next/navigation";
+import { Navbar } from "@/app/components";
+import { NAVBAR_ADMIN_CONST } from "./const";
+import { Agents, Listings } from "./components";
+import { useTabs } from "./useTabs";
 
-export default function AdminDashboard() {
+export default function AdminDashboardPage() {
+  const hook = useTabs();
   const supabase = createClient();
   const router = useRouter();
 
@@ -41,20 +46,17 @@ export default function AdminDashboard() {
     };
   }, []);
 
-  const handleLogout = async () => {
-    await supabase.auth.signOut();
-  };
-
   return (
-    <main className="p-8">
-      <h1 className="text-2xl font-bold">Admin Dashboard</h1>
-      <p className="mt-2">Logged in as {email}</p>
-      <button
-        onClick={handleLogout}
-        className="mt-4 bg-red-500 px-4 py-2 text-white"
-      >
-        Logout
-      </button>
-    </main>
+    <>
+      <div className="col-span-full border-b border-b-neutral-300">
+        <Navbar
+          LINKS={NAVBAR_ADMIN_CONST.LINKS}
+          dashboard={false}
+          currentTab={hook.currentTab}
+          handleTabChange={hook.handleTabChange}
+        />
+      </div>
+      {hook.currentTab === "listings" ? <Listings /> : <Agents />}
+    </>
   );
 }

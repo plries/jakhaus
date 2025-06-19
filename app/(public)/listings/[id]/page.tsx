@@ -23,7 +23,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const FULL_ADDRESS = ` ${listing.ADDRESS.UNIT} ${listing.ADDRESS.STREET} ${listing.ADDRESS.CITY}, ${listing.ADDRESS.PROVINCE} ${listing.ADDRESS.POSTAL_CODE}`;
 
   return {
+    metadataBase: new URL("https://jakhaus.ca"),
+    alternates: {
+      canonical: "/listings/" + listing.ID,
+    },
     title: FULL_ADDRESS + " | Jakhaus Creative Media",
+    publisher: "Jakhaus Creative Media",
     description:
       "View the listing for " + FULL_ADDRESS + " by Jakhaus Creative Media.",
     keywords: [
@@ -49,8 +54,29 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
           url: listing.FEATURED_PHOTO,
           width: 1920,
           height: 1080,
+          alt: FULL_ADDRESS,
         },
       ],
+      siteName: "Jakhaus Creative Media",
+      url: "/listings/" + listing.ID,
+    },
+    robots: {
+      index: true,
+      follow: true,
+      nocache: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        noimageindex: true,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
+    },
+    icons: {
+      icon: "/favicon.ico",
+      shortcut: "/favicon-32x32.png",
+      apple: "/apple-touch-icon.png",
     },
   };
 }

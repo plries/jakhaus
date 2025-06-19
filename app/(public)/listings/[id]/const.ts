@@ -57,7 +57,7 @@ export const LISTINGS_MOCK: ListingPropTypes[] = [
       "/images/001-39.jpg",
       "/images/001-40.jpg",
     ],
-    VIDEO_LINK: "https://www.youtube.com/embed/1hpR7jYG5zE?si=mpj7t3vbzOjZEtaL",
+    VIDEO_LINK: "https://youtube.com/embed/uOCKta4_LlA?feature=shared",
     FLOOR_PLAN: [
       "/images/001-FP-01.png",
     ],

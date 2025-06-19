@@ -26,7 +26,7 @@ export const Lightbox = ({
         <XIcon />
       </IconButton>
       <div className="relative">
-        <div className="mb relative max-w-4xl px-5">
+        <div className="relative mx-auto w-full max-w-7xl px-5 md:w-[calc(100%-10rem)]">
           <IconButton
             name={LIGHTBOX_CONST.BUTTONS.PREV}
             onClick={prevPhoto}
@@ -49,7 +49,7 @@ export const Lightbox = ({
             <CaretRightIcon />
           </IconButton>
         </div>
-        <div className="absolute top-full w-full p-5">
+        <div className="absolute top-full left-1/2 mx-auto w-full -translate-x-1/2 p-5 md:w-[calc(100%-10rem)]">
           <div className="flex flex-row justify-between gap-5">
             <p className="text-neutral-50">{FULL_ADDRESS}</p>
             <p className="text-right text-neutral-50/75">

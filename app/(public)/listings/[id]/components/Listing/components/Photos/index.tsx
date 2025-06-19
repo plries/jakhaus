@@ -28,7 +28,9 @@ export const Photos = ({ CONSTANTS, FULL_ADDRESS }: SectionPropTypes) => {
                 <button
                   className="h-full w-full cursor-pointer"
                   onClick={() => hook.openLightbox(index)}
-                />
+                >
+                  {PHOTOS_CONST.BUTTON}
+                </button>
               </div>
             ))}
           </div>
@@ -44,7 +46,9 @@ export const Photos = ({ CONSTANTS, FULL_ADDRESS }: SectionPropTypes) => {
                 <button
                   className="h-full w-full cursor-pointer"
                   onClick={() => hook.openLightbox(index + 2)}
-                />
+                >
+                  {PHOTOS_CONST.BUTTON}
+                </button>
                 {index === 1 && (
                   <div className="pointer-events-none absolute top-0 left-0 z-10 h-full w-full bg-neutral-950/50 backdrop-blur-xs">
                     <div className="flex h-full w-full flex-col items-center justify-center gap-2">

@@ -35,14 +35,17 @@ export const Navbar = ({
   };
 
   return (
-    <header className="sticky top-5 z-50 mx-auto mb-10 flex w-fit flex-row items-center justify-center gap-3 rounded-full border border-neutral-800/50 bg-neutral-950 p-3 shadow-xl">
+    <header
+      role="banner"
+      className="sticky top-5 z-50 mx-auto mb-10 flex w-fit flex-row items-center justify-center gap-3 rounded-full border border-neutral-800/50 bg-neutral-950 p-3 shadow-xl"
+    >
       <div className="ml-3 flex h-fit items-center justify-center gap-2 text-neutral-50">
         <JakhausLogo />
       </div>
       <div className="ml-3 h-8 w-[1px] bg-neutral-600" />
       {!windowSize.isTablet && (
         <>
-          <nav className="contents">
+          <nav className="contents" role="navigation">
             {LINKS.filter((LINK) => {
               if (!dashboard) return true;
               if (CONSTANTS)
@@ -104,7 +107,7 @@ export const Navbar = ({
           <div
             className={`absolute top-full left-0 -z-10 mt-2 flex w-full flex-col gap-1 rounded-3xl border border-neutral-800/50 bg-neutral-950/80 p-3 shadow-xl backdrop-blur-md transition-[translate,opacity] duration-150 ease-in-out ${mobileMenu.isOpen ? "translate-y-0 opacity-100" : "pointer-events-none -translate-y-1 opacity-0"}`}
           >
-            <nav className="contents">
+            <nav className="contents" role="navigation">
               {LINKS.filter((LINK) => {
                 if (!dashboard) return true;
                 if (CONSTANTS)

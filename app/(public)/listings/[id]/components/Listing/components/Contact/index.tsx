@@ -14,6 +14,7 @@ export const Contact = ({ CONSTANTS }: SectionPropTypes) => {
   return (
     <footer
       id="contact"
+      role="contentinfo"
       className="relative mx-auto mb-5 grid w-[calc(100%-1.25rem)] grid-cols-4 gap-5 rounded-4xl border border-neutral-800/50 p-10 shadow-xl md:grid-cols-8 lg:grid-cols-12 lg:px-0"
     >
       <div className="absolute inset-0 -z-10">
@@ -37,9 +38,11 @@ export const Contact = ({ CONSTANTS }: SectionPropTypes) => {
         </div>
         <div className="grid grid-cols-1 gap-2">
           <div className="flex flex-row items-center gap-2 text-neutral-50">
-            <EnvelopeIcon />
+            <div>
+              <EnvelopeIcon />
+            </div>
             <Link
-              className="relative duration-150 ease-in-out after:absolute after:-bottom-0.5 after:left-0 after:h-[1px] after:w-full after:origin-left after:scale-x-0 after:bg-neutral-50 after:transition-[scale] hover:after:scale-x-100"
+              className="relative text-nowrap duration-150 ease-in-out after:absolute after:-bottom-0.5 after:left-0 after:h-[1px] after:w-full after:origin-left after:scale-x-0 after:bg-neutral-50 after:transition-[scale] hover:after:scale-x-100"
               href={`mailto:${CONSTANTS.AGENT.EMAIL}`}
               target="_blank"
             >
@@ -47,9 +50,11 @@ export const Contact = ({ CONSTANTS }: SectionPropTypes) => {
             </Link>
           </div>
           <div className="flex flex-row items-center gap-2 text-neutral-50">
-            <PhoneIcon />
+            <div>
+              <PhoneIcon />
+            </div>
             <Link
-              className="relative duration-150 ease-in-out after:absolute after:-bottom-0.5 after:left-0 after:h-[1px] after:w-full after:origin-left after:scale-x-0 after:bg-neutral-50 after:transition-[scale] hover:after:scale-x-100"
+              className="relative text-nowrap duration-150 ease-in-out after:absolute after:-bottom-0.5 after:left-0 after:h-[1px] after:w-full after:origin-left after:scale-x-0 after:bg-neutral-50 after:transition-[scale] hover:after:scale-x-100"
               href={`tel:${CONSTANTS.AGENT.PHONE}`}
               target="_blank"
             >
@@ -58,9 +63,11 @@ export const Contact = ({ CONSTANTS }: SectionPropTypes) => {
           </div>
           {CONSTANTS.AGENT.WEBSITE && (
             <div className="flex flex-row items-center gap-2 text-neutral-50">
-              <LinkIcon />
+              <div>
+                <LinkIcon />
+              </div>
               <Link
-                className="relative duration-150 ease-in-out after:absolute after:-bottom-0.5 after:left-0 after:h-[1px] after:w-full after:origin-left after:scale-x-0 after:bg-neutral-50 after:transition-[scale] hover:after:scale-x-100"
+                className="relative text-nowrap duration-150 ease-in-out after:absolute after:-bottom-0.5 after:left-0 after:h-[1px] after:w-full after:origin-left after:scale-x-0 after:bg-neutral-50 after:transition-[scale] hover:after:scale-x-100"
                 href={CONSTANTS.AGENT.WEBSITE}
                 target="_blank"
               >
@@ -70,9 +77,11 @@ export const Contact = ({ CONSTANTS }: SectionPropTypes) => {
           )}
           {CONSTANTS.AGENT.INSTAGRAM && (
             <div className="flex flex-row items-center gap-2 text-neutral-50">
-              <AtIcon />
+              <div>
+                <AtIcon />
+              </div>
               <Link
-                className="relative duration-150 ease-in-out after:absolute after:-bottom-0.5 after:left-0 after:h-[1px] after:w-full after:origin-left after:scale-x-0 after:bg-neutral-50 after:transition-[scale] hover:after:scale-x-100"
+                className="relative text-nowrap duration-150 ease-in-out after:absolute after:-bottom-0.5 after:left-0 after:h-[1px] after:w-full after:origin-left after:scale-x-0 after:bg-neutral-50 after:transition-[scale] hover:after:scale-x-100"
                 href={`https://instagram.com/${CONSTANTS.AGENT.INSTAGRAM}`}
                 target="_blank"
               >

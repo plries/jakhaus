@@ -3,6 +3,6 @@ export const PHOTOS_CONST = {
     VIEW_ALL: {
         NAME: "View all",
         PHOTOS: "photos"
-    }
-
+    },
+    BUTTON: "Open photo gallery",
 }

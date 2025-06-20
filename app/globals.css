@@ -40,6 +40,10 @@ body {
   background: transparent;
 }
 
+.table-scroll::-webkit-scrollbar-track {
+  border-top: 1px solid var(--color-neutral-300);
+}
+
 ::-webkit-scrollbar-thumb {
   background-color: var(--color-neutral-400);
   border-radius: 12px;

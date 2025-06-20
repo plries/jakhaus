@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 export const useTabs = () => {
   const [currentTab, setCurrentTab] = useState("listings");
@@ -6,6 +6,10 @@ export const useTabs = () => {
   const handleTabChange = (tab: "listings" | "agents") => {
     setCurrentTab(tab);
   };
+
+  useEffect(() => {
+    console.log("currentTab", currentTab)
+  })
 
   return {
     currentTab,

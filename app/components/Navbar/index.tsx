@@ -69,7 +69,7 @@ export const Navbar = ({
                 ) : (
                   <button
                     className={`rounded-full px-4 py-2 font-normal transition-colors duration-150 ease-in-out ${
-                      currentTab === LINK.HREF.replace("#", "")
+                      currentTab === LINK.KEY
                         ? "bg-neutral-50/10 text-neutral-50"
                         : "text-neutral-400 hover:bg-neutral-50/10 hover:text-neutral-50"
                     } ${LINK.KEY === "AGENT" ? "flex flex-row items-center gap-2 bg-neutral-50 text-neutral-950 hover:bg-neutral-50/90 hover:text-neutral-950" : ""} `}
@@ -131,8 +131,8 @@ export const Navbar = ({
                     </Link>
                   ) : (
                     <button
-                      className={`rounded-full px-4 py-2 font-normal transition-colors duration-150 ease-in-out ${
-                        currentTab === LINK.HREF.replace("#", "")
+                      className={`rounded-full px-4 py-2 text-left font-normal transition-colors duration-150 ease-in-out ${
+                        currentTab === LINK.KEY
                           ? "bg-neutral-50/10 text-neutral-50"
                           : "text-neutral-400 hover:bg-neutral-50/10 hover:text-neutral-50"
                       } ${LINK.KEY === "AGENT" ? "flex flex-row items-center gap-2 bg-neutral-50 text-neutral-950 hover:bg-neutral-50/90 hover:text-neutral-950" : ""} `}

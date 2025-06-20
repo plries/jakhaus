@@ -48,15 +48,19 @@ export default function AdminDashboardPage() {
 
   return (
     <>
-      <div className="col-span-full border-b border-b-neutral-300">
-        <Navbar
-          LINKS={NAVBAR_ADMIN_CONST.LINKS}
-          dashboard={false}
-          currentTab={hook.currentTab}
-          handleTabChange={hook.handleTabChange}
-        />
+      <Navbar
+        LINKS={NAVBAR_ADMIN_CONST.LINKS}
+        dashboard={false}
+        currentTab={hook.currentTab}
+        handleTabChange={hook.handleTabChange}
+      />
+      <div className="grid w-full grid-cols-4 gap-5 md:grid-cols-8 lg:grid-cols-12">
+        <div className="relative col-span-full grid grid-cols-4 gap-5 md:grid-cols-8 lg:col-span-10 lg:col-start-2 lg:grid-cols-10 lg:pb-10">
+          <div className="col-span-full grid w-full grid-cols-4 gap-5 px-5 pt-5 md:grid-cols-8 lg:grid-cols-12">
+            {hook.currentTab === "listings" ? <Listings /> : <Agents />}
+          </div>
+        </div>
       </div>
-      {hook.currentTab === "listings" ? <Listings /> : <Agents />}
     </>
   );
 }

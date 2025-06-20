@@ -1,7 +1,8 @@
 export type ButtonPropTypes = {
-  type: "button" | "submit" | "reset";
   children: React.ReactNode;
-  onClick: () => void;
+  onClick?: () => void;
+  type?: "button" | "submit" | "reset";
   additionalClasses?: string;
   disabled?: boolean;
+  href?: string;
 };

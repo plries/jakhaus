@@ -8,13 +8,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <main
-      className="grid w-full grid-cols-4 gap-5 md:grid-cols-8 lg:grid-cols-12"
-      role="main"
-    >
-      <div className="col-span-full grid grid-cols-4 gap-5 pt-5 md:grid-cols-8 lg:col-span-10 lg:col-start-2 lg:mx-2.5 lg:grid-cols-10 lg:border-x lg:border-x-neutral-300 lg:pb-10">
-        {children}
-      </div>
+    <main className="w-full overflow-x-hidden pb-5" role="main">
+      {children}
     </main>
   );
 }

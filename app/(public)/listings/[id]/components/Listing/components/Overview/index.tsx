@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { motion, easeInOut } from "motion/react";
+import { motion } from "motion/react";
 import {
   IconContext,
   BedIcon,
@@ -37,26 +37,19 @@ export const Overview = ({ CONSTANTS, FULL_ADDRESS }: SectionPropTypes) => {
             <h1 className="col-span-full !text-3xl font-medium tracking-tighter text-neutral-50 md:col-span-6 md:col-start-1 md:!text-4xl lg:col-span-8 lg:col-start-2 lg:!text-6xl">
               <motion.span
                 className="block"
-                initial={{
-                  opacity: 0,
-                  x: -32,
-                }}
-                whileInView={MOTION_CONFIG.DEFAULT.WHILE_IN_VIEW}
+                initial={MOTION_CONFIG.LEFT.INITIAL}
+                whileInView={MOTION_CONFIG.LEFT.WHILE_IN_VIEW}
                 transition={MOTION_CONFIG.TRANSITION}
               >
                 {CONSTANTS.ADDRESS.UNIT} {CONSTANTS.ADDRESS.STREET}
               </motion.span>
               <motion.span
                 className="mt-1 block !text-xl font-normal tracking-tight text-neutral-400 md:!text-2xl lg:!text-3xl"
-                initial={{
-                  opacity: 0,
-                  x: -32,
-                }}
-                whileInView={MOTION_CONFIG.DEFAULT.WHILE_IN_VIEW}
+                initial={MOTION_CONFIG.LEFT.INITIAL}
+                whileInView={MOTION_CONFIG.LEFT.WHILE_IN_VIEW}
                 transition={{
-                  duration: 0.6,
-                  ease: easeInOut,
-                  delay: 0.1,
+                  ...MOTION_CONFIG.TRANSITION,
+                  delay: 0.2,
                 }}
               >
                 {CONSTANTS.ADDRESS.CITY}, {CONSTANTS.ADDRESS.PROVINCE}{" "}
@@ -65,15 +58,11 @@ export const Overview = ({ CONSTANTS, FULL_ADDRESS }: SectionPropTypes) => {
             </h1>
             <motion.div
               className={`col-span-full w-fit md:col-span-2 md:col-start-7 md:justify-self-end lg:col-span-2 lg:col-start-10 ${CONSTANTS.AGENT.LOGO_DARK ? "rounded-4xl border border-neutral-950/10 bg-neutral-50 p-5 shadow-lg" : ""}`}
-              initial={{
-                opacity: 0,
-                x: 32,
-              }}
-              whileInView={MOTION_CONFIG.DEFAULT.WHILE_IN_VIEW}
+              initial={MOTION_CONFIG.RIGHT.INITIAL}
+              whileInView={MOTION_CONFIG.RIGHT.WHILE_IN_VIEW}
               transition={{
-                duration: 0.6,
-                ease: easeInOut,
-                delay: 0.2,
+                ...MOTION_CONFIG.TRANSITION,
+                delay: 0.3,
               }}
             >
               <Image

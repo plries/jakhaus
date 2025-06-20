@@ -49,11 +49,8 @@ export const Contact = ({ CONSTANTS }: SectionPropTypes) => {
             {CONSTANTS.AGENT.LINKS.map((LINK, index) => (
               <motion.div
                 key={index}
-                initial={{
-                  opacity: 0,
-                  x: -32,
-                }}
-                whileInView={MOTION_CONFIG.DEFAULT.WHILE_IN_VIEW}
+                initial={MOTION_CONFIG.LEFT.INITIAL}
+                whileInView={MOTION_CONFIG.LEFT.WHILE_IN_VIEW}
                 transition={{
                   ...MOTION_CONFIG.TRANSITION,
                   delay: 0.1 + index * 0.1,
@@ -90,11 +87,8 @@ export const Contact = ({ CONSTANTS }: SectionPropTypes) => {
         </div>
         <div className="col-span-full grid auto-rows-min grid-cols-1 gap-5 md:col-span-4 md:col-start-5 md:place-items-end lg:col-span-5 lg:col-start-7">
           <motion.div
-            initial={{
-              opacity: 0,
-              x: 32,
-            }}
-            whileInView={MOTION_CONFIG.DEFAULT.WHILE_IN_VIEW}
+            initial={MOTION_CONFIG.RIGHT.WHILE_IN_VIEW}
+            whileInView={MOTION_CONFIG.RIGHT.WHILE_IN_VIEW}
             transition={MOTION_CONFIG.TRANSITION}
           >
             <Image
@@ -107,11 +101,8 @@ export const Contact = ({ CONSTANTS }: SectionPropTypes) => {
           </motion.div>
           <motion.p
             className="text-neutral-400"
-            initial={{
-              opacity: 0,
-              x: 32,
-            }}
-            whileInView={MOTION_CONFIG.DEFAULT.WHILE_IN_VIEW}
+            initial={MOTION_CONFIG.RIGHT.INITIAL}
+            whileInView={MOTION_CONFIG.RIGHT.WHILE_IN_VIEW}
             transition={{
               ...MOTION_CONFIG.TRANSITION,
               delay: 0.2,

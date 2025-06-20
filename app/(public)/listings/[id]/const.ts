@@ -9,8 +9,27 @@ export const MOTION_CONFIG = {
     },
     WHILE_IN_VIEW: {
       opacity: 1,
-      x: 0,
       y: 0,
+    },
+  },
+  RIGHT: {
+    INITIAL: {
+      x: 32,
+      opacity: 0,
+    },
+    WHILE_IN_VIEW: {
+      x: 0,
+      opacity: 1,
+    },
+  },
+  LEFT: {
+    INITIAL: {
+      x: -32,
+      opacity: 0,
+    },
+    WHILE_IN_VIEW: {
+      x: 0,
+      opacity: 1,
     },
   },
   HEADER: {

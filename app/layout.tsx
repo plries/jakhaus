@@ -22,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${poppins.variable} mx-auto grid min-h-screen max-w-[1440px] place-items-center bg-neutral-50 bg-gradient-to-b to-neutral-200 antialiased`}
+        className={`${poppins.variable} mx-auto min-h-screen max-w-[1440px] bg-neutral-50 bg-gradient-to-b to-neutral-200 antialiased`}
       >
         <ReactLenis root options={{ lerp: 0.05 }}>
           {children}

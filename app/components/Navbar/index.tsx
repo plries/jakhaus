@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
-import Image from "next/image";
-import Link from "next/link";
+import { useLenis } from "lenis/react";
 import {
   ListIcon,
   SignOutIcon,
@@ -15,17 +14,20 @@ import { IconButton } from "../IconButton";
 import { useMobileMenu } from "./useMobileMenu";
 import { useActiveSection } from "./useActiveSection";
 import { NavbarPropTypes } from "./types";
+import { NAVBAR_CONST } from "./const";
+import { Button } from "../Button";
 
 export const Navbar = ({
   CONSTANTS,
   LINKS,
-  dashboard = true,
+  dashboard,
   currentTab,
   handleTabChange,
 }: NavbarPropTypes) => {
   const mobileMenu = useMobileMenu();
   const windowSize = useWindowSize();
   const supabase = createClient();
+  const lenis = useLenis();
 
   const sectionIds = LINKS.map((link) => link.HREF.replace("#", ""));
   const activeSection = useActiveSection(sectionIds);
@@ -37,7 +39,7 @@ export const Navbar = ({
   return (
     <header
       role="banner"
-      className="sticky top-5 z-50 mx-auto mb-10 flex w-fit flex-row items-center justify-center gap-3 rounded-full border border-neutral-800/50 bg-neutral-950 p-3 shadow-xl"
+      className="sticky top-2.5 z-50 mx-auto mb-5 flex w-fit flex-row items-center justify-center gap-3 rounded-full border border-neutral-800/50 bg-neutral-950/85 p-3 shadow-xl backdrop-blur-md"
     >
       <div className="ml-3 flex h-fit items-center justify-center gap-2 text-neutral-50">
         <JakhausLogo />
@@ -47,7 +49,7 @@ export const Navbar = ({
         <>
           <nav className="contents" role="navigation">
             {LINKS.filter((LINK) => {
-              if (!dashboard) return true;
+              if (dashboard) return true;
               if (CONSTANTS)
                 return (
                   !LINK.KEY || CONSTANTS[LINK.KEY as keyof typeof CONSTANTS]
@@ -55,37 +57,39 @@ export const Navbar = ({
             }).map((LINK) => (
               <React.Fragment key={LINK.KEY}>
                 {dashboard ? (
-                  <Link
-                    className={`rounded-full px-4 py-2 font-normal transition-colors duration-150 ease-in-out ${
-                      activeSection === LINK.HREF.replace("#", "")
-                        ? "bg-neutral-50/10 text-neutral-50"
-                        : "text-neutral-400 hover:bg-neutral-50/10 hover:text-neutral-50"
-                    } ${LINK.KEY === "AGENT" ? "flex flex-row items-center gap-2 bg-neutral-50 text-neutral-950 hover:bg-neutral-50/90 hover:text-neutral-950" : ""} `}
-                    href={LINK.HREF}
-                  >
-                    {LINK.KEY === "AGENT" && <UserCircleIcon />}
-                    {LINK.NAME}
-                  </Link>
-                ) : (
-                  <button
-                    className={`rounded-full px-4 py-2 font-normal transition-colors duration-150 ease-in-out ${
+                  <Button
+                    additionalClasses={`!rounded-full !border-transparent ${
                       currentTab === LINK.KEY
-                        ? "bg-neutral-50/10 text-neutral-50"
-                        : "text-neutral-400 hover:bg-neutral-50/10 hover:text-neutral-50"
-                    } ${LINK.KEY === "AGENT" ? "flex flex-row items-center gap-2 bg-neutral-50 text-neutral-950 hover:bg-neutral-50/90 hover:text-neutral-950" : ""} `}
+                        ? "!bg-neutral-50/10 !text-neutral-50"
+                        : "bg-transparent !text-neutral-400 hover:!bg-neutral-50/10 hover:!text-neutral-50"
+                    }`}
                     onClick={() => {
                       if (handleTabChange)
                         handleTabChange(LINK.KEY as "listings" | "agents");
                     }}
                   >
                     {LINK.NAME}
-                  </button>
+                  </Button>
+                ) : (
+                  <Button
+                    additionalClasses={`!rounded-full !border-transparent ${
+                      activeSection === LINK.HREF.replace("#", "")
+                        ? "!bg-neutral-50/10 !text-neutral-50"
+                        : "bg-transparent !text-neutral-400 hover:!bg-neutral-50/10 hover:!text-neutral-50"
+                    } ${LINK.KEY === "AGENT" ? "!bg-neutral-50 !text-neutral-950 hover:!bg-neutral-50/90 hover:!text-neutral-950" : ""} `}
+                    onClick={() => {
+                      lenis?.scrollTo(LINK.HREF);
+                    }}
+                  >
+                    {LINK.KEY === "AGENT" && <UserCircleIcon />}
+                    {LINK.NAME}
+                  </Button>
                 )}
               </React.Fragment>
             ))}
           </nav>
-          {!dashboard && (
-            <IconButton onClick={handleLogout} name={"Logout"}>
+          {dashboard && (
+            <IconButton onClick={handleLogout} name={NAVBAR_CONST.LOGOUT}>
               <SignOutIcon />
             </IconButton>
           )}
@@ -94,7 +98,7 @@ export const Navbar = ({
       {windowSize.isTablet && (
         <>
           <IconButton
-            name={mobileMenu.isOpen ? "Close menu" : "Open menu"}
+            name={mobileMenu.isOpen ? NAVBAR_CONST.CLOSE : NAVBAR_CONST.OPEN}
             additionalClasses="group cursor-pointer hover:!bg-neutral-50/10 active:scale-90 bg-transparent border-transparent"
             onClick={mobileMenu.toggleOpen}
           >
@@ -105,11 +109,11 @@ export const Navbar = ({
             )}
           </IconButton>
           <div
-            className={`absolute top-full left-0 -z-10 mt-2 flex w-full flex-col gap-1 rounded-3xl border border-neutral-800/50 bg-neutral-950/80 p-3 shadow-xl backdrop-blur-md transition-[translate,opacity] duration-150 ease-in-out ${mobileMenu.isOpen ? "translate-y-0 opacity-100" : "pointer-events-none -translate-y-1 opacity-0"}`}
+            className={`absolute top-full left-0 -z-10 mt-2 flex w-full flex-col gap-2 rounded-4xl border border-neutral-800/50 bg-neutral-950/85 p-3 shadow-xl backdrop-blur-md transition-[translate,opacity] duration-150 ease-in-out ${mobileMenu.isOpen ? "translate-y-0 opacity-100" : "pointer-events-none -translate-y-1 opacity-0"}`}
           >
             <nav className="contents" role="navigation">
               {LINKS.filter((LINK) => {
-                if (!dashboard) return true;
+                if (dashboard) return true;
                 if (CONSTANTS)
                   return (
                     !LINK.KEY || CONSTANTS[LINK.KEY as keyof typeof CONSTANTS]
@@ -117,42 +121,44 @@ export const Navbar = ({
               }).map((LINK) => (
                 <React.Fragment key={LINK.KEY}>
                   {dashboard ? (
-                    <Link
-                      className={`rounded-full px-4 py-2 font-normal text-neutral-400 transition-colors duration-150 ease-in-out hover:bg-neutral-50/10 hover:text-neutral-50 ${
-                        (activeSection && !dashboard) ===
-                        LINK.HREF.replace("#", "")
-                          ? "bg-neutral-50/10 !text-neutral-50"
-                          : "text-neutral-400 hover:bg-neutral-50/10 hover:text-neutral-50"
-                      } `}
-                      href={LINK.HREF}
-                      onClick={mobileMenu.toggleOpen}
-                    >
-                      {LINK.NAME}
-                    </Link>
-                  ) : (
-                    <button
-                      className={`rounded-full px-4 py-2 text-left font-normal transition-colors duration-150 ease-in-out ${
+                    <Button
+                      additionalClasses={`!rounded-full bg-transparent !border-transparent !justify-start ${
                         currentTab === LINK.KEY
-                          ? "bg-neutral-50/10 text-neutral-50"
-                          : "text-neutral-400 hover:bg-neutral-50/10 hover:text-neutral-50"
-                      } ${LINK.KEY === "AGENT" ? "flex flex-row items-center gap-2 bg-neutral-50 text-neutral-950 hover:bg-neutral-50/90 hover:text-neutral-950" : ""} `}
+                          ? "!bg-neutral-50/10 !text-neutral-50"
+                          : "!text-neutral-400 hover:!bg-neutral-50/10 hover:text-neutral-50"
+                      } `}
                       onClick={() => {
                         if (handleTabChange)
                           handleTabChange(LINK.KEY as "listings" | "agents");
                       }}
                     >
                       {LINK.NAME}
-                    </button>
+                    </Button>
+                  ) : (
+                    <Button
+                      additionalClasses={`!rounded-full bg-transparent !border-transparent !justify-start ${
+                        activeSection === LINK.HREF.replace("#", "")
+                          ? "!bg-neutral-50/10 !text-neutral-50"
+                          : "!text-neutral-400 hover:!bg-neutral-50/10 hover:text-neutral-50"
+                      } ${LINK.KEY === "AGENT" ? "!bg-neutral-50 !text-neutral-950 hover:!bg-neutral-50/90 hover:!text-neutral-950" : ""} `}
+                      onClick={() => {
+                        lenis?.scrollTo(LINK.HREF);
+                        mobileMenu.toggleOpen();
+                      }}
+                    >
+                      {LINK.KEY === "AGENT" && <UserCircleIcon />}
+                      {LINK.NAME}
+                    </Button>
                   )}
                 </React.Fragment>
               ))}
             </nav>
-            {!dashboard && (
+            {dashboard && (
               <button
                 onClick={handleLogout}
                 className="flex cursor-pointer flex-row items-center gap-2 rounded-full px-4 py-2 font-normal text-neutral-400 transition-colors duration-150 ease-in-out hover:bg-neutral-50/10 hover:text-neutral-50"
               >
-                Logout
+                {NAVBAR_CONST.LOGOUT}
                 <SignOutIcon weight="bold" />
               </button>
             )}

@@ -50,7 +50,7 @@ export default function AdminDashboardPage() {
     <>
       <Navbar
         LINKS={NAVBAR_ADMIN_CONST.LINKS}
-        dashboard={false}
+        dashboard={true}
         currentTab={hook.currentTab}
         handleTabChange={hook.handleTabChange}
       />

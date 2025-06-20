@@ -1,4 +1,5 @@
 import { Poppins } from "next/font/google";
+import { ReactLenis } from "lenis/react";
 import "./globals.css";
 
 const poppins = Poppins({
@@ -17,7 +18,9 @@ export default function RootLayout({
       <body
         className={`${poppins.variable} mx-auto grid min-h-screen max-w-[1440px] place-items-center bg-neutral-50 bg-gradient-to-b to-neutral-200 antialiased`}
       >
-        {children}
+        <ReactLenis root options={{ lerp: 0.05 }}>
+          {children}
+        </ReactLenis>
       </body>
     </html>
   );

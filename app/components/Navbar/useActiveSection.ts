@@ -15,8 +15,10 @@ export const useActiveSection = (sectionIds: string[]) => {
         }
       },
       {
-        rootMargin: hook.isTablet || hook.isMobile ? "0px 0px 50px 0px" : "0px 0px 200px 0px",
-        threshold: 0.1,
+      rootMargin: (hook.isTablet || hook.isMobile) 
+        ? "10% 0px -55% 0px" 
+        : "0px 0px 0px 0px",
+          threshold: 0.1,
       },
     );
 
@@ -31,7 +33,8 @@ export const useActiveSection = (sectionIds: string[]) => {
         if (el) observer.unobserve(el);
       });
     };
-  }, [sectionIds]);
+
+  }, [sectionIds, hook]);
 
   return activeId;
 };

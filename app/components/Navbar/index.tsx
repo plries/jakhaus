@@ -44,7 +44,7 @@ export const Navbar = ({
       animate={MOTION_CONFIG.HEADER.ANIMATE}
       transition={MOTION_CONFIG.TRANSITION}
       role="banner"
-      className="sticky top-2.5 z-50 mx-auto mb-5 flex w-fit flex-row items-center justify-center gap-3 rounded-full border border-neutral-800/50 bg-neutral-950/85 p-3 shadow-xl backdrop-blur-md"
+      className="sticky top-2.5 z-50 mx-auto mb-5 flex w-fit flex-row items-center justify-center gap-3 rounded-full border border-neutral-800/50 bg-neutral-950 p-3 shadow-xl"
     >
       <div className="ml-3 flex h-fit items-center justify-center gap-2 text-neutral-50">
         <button className="cursor-pointer" onClick={() => lenis?.scrollTo(0)}>
@@ -68,7 +68,7 @@ export const Navbar = ({
                     additionalClasses={`!rounded-full !border-transparent ${
                       currentTab === LINK.KEY
                         ? "!bg-neutral-50/10 !text-neutral-50"
-                        : "bg-transparent !text-neutral-400 hover:!bg-neutral-50/10 hover:!text-neutral-50"
+                        : "bg-transparent !text-neutral-400 hover:!bg-neutral-50/10 hover:!text-neutral-50 !shadow-none"
                     }`}
                     onClick={() => {
                       if (handleTabChange)
@@ -82,7 +82,7 @@ export const Navbar = ({
                     additionalClasses={`!rounded-full !border-transparent ${
                       activeSection === LINK.HREF.replace("#", "")
                         ? "!bg-neutral-50/10 !text-neutral-50"
-                        : "bg-transparent !text-neutral-400 hover:!bg-neutral-50/10 hover:!text-neutral-50"
+                        : "bg-transparent !text-neutral-400 hover:!bg-neutral-50/10 hover:!text-neutral-50 !shadow-none"
                     } ${LINK.KEY === "AGENT" ? "!bg-neutral-50 !text-neutral-950 hover:!bg-neutral-50/90 hover:!text-neutral-950" : ""} `}
                     onClick={() => {
                       lenis?.scrollTo(LINK.HREF);
@@ -132,7 +132,7 @@ export const Navbar = ({
                       additionalClasses={`!rounded-full bg-transparent !border-transparent !justify-start ${
                         currentTab === LINK.KEY
                           ? "!bg-neutral-50/10 !text-neutral-50"
-                          : "!text-neutral-400 hover:!bg-neutral-50/10 hover:text-neutral-50"
+                          : "!text-neutral-400 hover:!bg-neutral-50/10 hover:text-neutral-50 !shadow-none"
                       } `}
                       onClick={() => {
                         if (handleTabChange)
@@ -146,7 +146,7 @@ export const Navbar = ({
                       additionalClasses={`!rounded-full bg-transparent !border-transparent !justify-start ${
                         activeSection === LINK.HREF.replace("#", "")
                           ? "!bg-neutral-50/10 !text-neutral-50"
-                          : "!text-neutral-400 hover:!bg-neutral-50/10 hover:text-neutral-50"
+                          : "!text-neutral-400 hover:!bg-neutral-50/10 hover:text-neutral-50 !shadow-none"
                       } ${LINK.KEY === "AGENT" ? "!bg-neutral-50 !text-neutral-950 hover:!bg-neutral-50/90 hover:!text-neutral-950" : ""} `}
                       onClick={() => {
                         lenis?.scrollTo(LINK.HREF);

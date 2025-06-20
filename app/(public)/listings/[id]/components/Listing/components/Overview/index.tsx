@@ -34,7 +34,7 @@ export const Overview = ({ CONSTANTS, FULL_ADDRESS }: SectionPropTypes) => {
             <div className="h-full w-full bg-gradient-to-b from-neutral-700 to-neutral-950" />
           </div>
           <div className="z-10 grid grid-cols-4 gap-5 p-5 md:grid-cols-8 md:p-10 lg:grid-cols-12 lg:gap-10 lg:px-0">
-            <h1 className="col-span-full !text-3xl font-medium tracking-tighter text-neutral-50 md:!text-4xl lg:col-span-8 lg:col-start-2 lg:!text-6xl">
+            <h1 className="col-span-full !text-3xl font-medium tracking-tighter text-neutral-50 md:col-span-6 md:col-start-1 md:!text-4xl lg:col-span-8 lg:col-start-2 lg:!text-6xl">
               <motion.span
                 className="block"
                 initial={{
@@ -64,7 +64,7 @@ export const Overview = ({ CONSTANTS, FULL_ADDRESS }: SectionPropTypes) => {
               </motion.span>
             </h1>
             <motion.div
-              className={`col-span-full w-fit lg:col-span-2 lg:col-start-10 lg:justify-self-end ${CONSTANTS.AGENT.LOGO_DARK ? "rounded-4xl border border-neutral-950/10 bg-neutral-50 p-5 shadow-lg" : ""}`}
+              className={`col-span-full w-fit md:col-span-2 md:col-start-7 md:justify-self-end lg:col-span-2 lg:col-start-10 ${CONSTANTS.AGENT.LOGO_DARK ? "rounded-4xl border border-neutral-950/10 bg-neutral-50 p-5 shadow-lg" : ""}`}
               initial={{
                 opacity: 0,
                 x: 32,
@@ -84,7 +84,7 @@ export const Overview = ({ CONSTANTS, FULL_ADDRESS }: SectionPropTypes) => {
                 className="max-w-32 object-contain drop-shadow-md"
               />
             </motion.div>
-            <div className="mask-gradient-x col-span-full -mx-8 flex flex-col gap-5 overflow-x-scroll px-8 lg:col-span-10 lg:col-start-2 lg:flex-row lg:pb-5">
+            <div className="mask-gradient-x col-span-full -mx-8 flex flex-col gap-5 overflow-y-hidden px-8 md:flex-row md:overflow-x-scroll md:pb-5 lg:col-span-10 lg:col-start-2">
               {OVERVIEW_CONST.DETAILS.map((DETAIL, index) => (
                 <motion.div
                   initial={MOTION_CONFIG.DEFAULT.INITIAL}

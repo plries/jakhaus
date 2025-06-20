@@ -24,7 +24,7 @@ export const MOTION_CONFIG = {
     },
   },
   TRANSITION: {
-    duration: 0.6,
+    duration: 0.3,
     easeInOut,
     delay: 0.1,
   }

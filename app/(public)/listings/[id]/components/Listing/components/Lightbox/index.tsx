@@ -21,7 +21,7 @@ export const Lightbox = ({
       <IconButton
         name={LIGHTBOX_CONST.BUTTONS.CLOSE}
         onClick={closeLightbox}
-        additionalClasses="absolute top-5 right-5 bg-transparent hover:!bg-neutral-50/75 hover:!text-neutral-950 !text-neutral-50 border-0"
+        additionalClasses="absolute top-5 right-5 bg-transparent hover:!bg-neutral-50/75 hover:!text-neutral-950 !text-neutral-50 border-0 !shadow-none"
       >
         <XIcon />
       </IconButton>
@@ -30,7 +30,7 @@ export const Lightbox = ({
           <IconButton
             name={LIGHTBOX_CONST.BUTTONS.PREV}
             onClick={prevPhoto}
-            additionalClasses="absolute top-1/2 -translate-y-1/2 left-10 lg:left-0 lg:-translate-x-full "
+            additionalClasses="absolute top-1/2 -translate-y-1/2 left-10 lg:left-0 lg:-translate-x-full !bg-neutral-50/75 backdrop-blur-md !border-neutral-950/10"
           >
             <CaretLeftIcon />
           </IconButton>
@@ -44,7 +44,7 @@ export const Lightbox = ({
           <IconButton
             name={LIGHTBOX_CONST.BUTTONS.PREV}
             onClick={nextPhoto}
-            additionalClasses="absolute top-1/2 -translate-y-1/2 right-10 lg:right-0 lg:translate-x-full"
+            additionalClasses="absolute top-1/2 -translate-y-1/2 right-10 lg:right-0 lg:translate-x-full !bg-neutral-50/75 backdrop-blur-md !border-neutral-950/10"
           >
             <CaretRightIcon />
           </IconButton>

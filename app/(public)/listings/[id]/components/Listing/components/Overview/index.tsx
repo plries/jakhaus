@@ -10,6 +10,7 @@ import {
 import { SectionPropTypes } from "@/app/types";
 import { OVERVIEW_CONST } from "./const";
 import { MOTION_CONFIG } from "@/app/(public)/listings/[id]/const";
+import { Carousel } from "../Carousel";
 
 export const Overview = ({ CONSTANTS, FULL_ADDRESS }: SectionPropTypes) => {
   return (
@@ -52,7 +53,7 @@ export const Overview = ({ CONSTANTS, FULL_ADDRESS }: SectionPropTypes) => {
                   delay: 0.2,
                 }}
               >
-                {CONSTANTS.ADDRESS.CITY}, {CONSTANTS.ADDRESS.PROVINCE}{" "}
+                {CONSTANTS.ADDRESS.CITY}, {CONSTANTS.ADDRESS.PROVINCE},{" "}
                 {CONSTANTS.ADDRESS.POSTAL_CODE}
               </motion.span>
             </h1>
@@ -73,7 +74,7 @@ export const Overview = ({ CONSTANTS, FULL_ADDRESS }: SectionPropTypes) => {
                 className="max-w-32 object-contain drop-shadow-md"
               />
             </motion.div>
-            <div className="mask-gradient-x col-span-full -mx-8 flex flex-col gap-5 overflow-y-hidden px-8 md:flex-row md:overflow-x-scroll md:pb-5 lg:col-span-10 lg:col-start-2">
+            <Carousel>
               {OVERVIEW_CONST.DETAILS.map((DETAIL, index) => (
                 <motion.div
                   initial={MOTION_CONFIG.DEFAULT.INITIAL}
@@ -118,7 +119,7 @@ export const Overview = ({ CONSTANTS, FULL_ADDRESS }: SectionPropTypes) => {
                   </div>
                 </motion.div>
               ))}
-            </div>
+            </Carousel>
           </div>
         </div>
       </section>

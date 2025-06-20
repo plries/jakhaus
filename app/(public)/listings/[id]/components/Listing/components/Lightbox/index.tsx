@@ -30,21 +30,42 @@ export const Lightbox = ({
           <IconButton
             name={LIGHTBOX_CONST.BUTTONS.PREV}
             onClick={prevPhoto}
-            additionalClasses="absolute top-1/2 -translate-y-1/2 left-10 lg:left-0 lg:-translate-x-full !bg-neutral-50/75 backdrop-blur-md !border-neutral-950/10"
+            additionalClasses="absolute top-1/2 -translate-y-1/2 left-10 lg:left-0 lg:-translate-x-full !bg-neutral-50/75 backdrop-blur-md !border-neutral-950/10 z-50"
           >
             <CaretLeftIcon />
           </IconButton>
-          <Image
-            src={CONSTANTS.PHOTOS[photoIndex]}
-            alt={FULL_ADDRESS}
-            width={1920}
-            height={1080}
-            className="w-full rounded-2xl border border-neutral-50/10 object-cover object-center shadow-lg"
-          />
+          <div className="relative">
+            <Image
+              src={CONSTANTS.PHOTOS[(photoIndex + 1) % CONSTANTS.PHOTOS.length]}
+              alt={FULL_ADDRESS}
+              width={1920}
+              height={1080}
+              className="pointer-events-none absolute top-1/2 right-full mx-10 w-full origin-right -translate-y-1/2 scale-90 rounded-2xl border border-neutral-50/10 object-cover object-center shadow-lg blur-sm"
+            />
+            <Image
+              src={CONSTANTS.PHOTOS[photoIndex]}
+              alt={FULL_ADDRESS}
+              width={1920}
+              height={1080}
+              className="w-full rounded-2xl border border-neutral-50/10 object-cover object-center shadow-lg"
+            />
+            <Image
+              src={
+                CONSTANTS.PHOTOS[
+                  (photoIndex - 1 + CONSTANTS.PHOTOS.length) %
+                    CONSTANTS.PHOTOS.length
+                ]
+              }
+              alt={FULL_ADDRESS}
+              width={1920}
+              height={1080}
+              className="pointer-events-none absolute top-1/2 left-full mx-10 w-full origin-left -translate-y-1/2 scale-90 rounded-2xl border border-neutral-50/10 object-cover object-center shadow-lg blur-sm"
+            />
+          </div>
           <IconButton
             name={LIGHTBOX_CONST.BUTTONS.PREV}
             onClick={nextPhoto}
-            additionalClasses="absolute top-1/2 -translate-y-1/2 right-10 lg:right-0 lg:translate-x-full !bg-neutral-50/75 backdrop-blur-md !border-neutral-950/10"
+            additionalClasses="absolute top-1/2 -translate-y-1/2 right-10 lg:right-0 lg:translate-x-full !bg-neutral-50/75 backdrop-blur-md !border-neutral-950/10 z-50"
           >
             <CaretRightIcon />
           </IconButton>

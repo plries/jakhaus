@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
   }
 
-  const FULL_ADDRESS = ` ${listing.ADDRESS.UNIT} ${listing.ADDRESS.STREET} ${listing.ADDRESS.CITY}, ${listing.ADDRESS.PROVINCE} ${listing.ADDRESS.POSTAL_CODE}`;
+  const FULL_ADDRESS = ` ${listing.ADDRESS.UNIT} ${listing.ADDRESS.STREET} ${listing.ADDRESS.CITY}, ${listing.ADDRESS.PROVINCE}, ${listing.ADDRESS.POSTAL_CODE}`;
 
   return {
     metadataBase: new URL("https://jakhaus.ca"),
@@ -93,7 +93,7 @@ export default async function ListingPage({ params }: Props) {
       </div>
     );
 
-  const FULL_ADDRESS = `${listing.ADDRESS.UNIT} ${listing.ADDRESS.STREET} ${listing.ADDRESS.CITY}, ${listing.ADDRESS.PROVINCE} ${listing.ADDRESS.POSTAL_CODE}`;
+  const FULL_ADDRESS = `${listing.ADDRESS.UNIT} ${listing.ADDRESS.STREET} ${listing.ADDRESS.CITY}, ${listing.ADDRESS.PROVINCE}, ${listing.ADDRESS.POSTAL_CODE}`;
 
   return <Listing CONSTANTS={listing} FULL_ADDRESS={FULL_ADDRESS} />;
 }

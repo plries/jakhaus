@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import { useLenis } from "lenis/react";
+import { motion } from "framer-motion";
 import {
   ListIcon,
   SignOutIcon,
@@ -16,6 +17,7 @@ import { useActiveSection } from "./useActiveSection";
 import { NavbarPropTypes } from "./types";
 import { NAVBAR_CONST } from "./const";
 import { Button } from "../Button";
+import { MOTION_CONFIG } from "@/app/(public)/listings/[id]/const";
 
 export const Navbar = ({
   CONSTANTS,
@@ -37,12 +39,20 @@ export const Navbar = ({
   };
 
   return (
-    <header
+    <motion.header
+      initial={MOTION_CONFIG.HEADER.INITIAL}
+      animate={MOTION_CONFIG.HEADER.ANIMATE}
+      transition={MOTION_CONFIG.TRANSITION}
       role="banner"
       className="sticky top-2.5 z-50 mx-auto mb-5 flex w-fit flex-row items-center justify-center gap-3 rounded-full border border-neutral-800/50 bg-neutral-950/85 p-3 shadow-xl backdrop-blur-md"
     >
       <div className="ml-3 flex h-fit items-center justify-center gap-2 text-neutral-50">
-        <JakhausLogo />
+        <button
+          className="cursor-pointer"
+          onClick={() => lenis?.scrollTo(0)}
+        >
+          <JakhausLogo />
+        </button>
       </div>
       <div className="ml-3 h-8 w-[1px] bg-neutral-600" />
       {!windowSize.isTablet && (
@@ -165,6 +175,6 @@ export const Navbar = ({
           </div>
         </>
       )}
-    </header>
+    </motion.header>
   );
 };

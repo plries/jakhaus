@@ -1,4 +1,34 @@
 import { ListingPropTypes } from "@/app/types";
+import { easeInOut } from "framer-motion";
+
+export const MOTION_CONFIG = {
+  DEFAULT: {
+    INITIAL: {
+      opacity: 0,
+      y: 32,
+    },
+    WHILE_IN_VIEW: {
+      opacity: 1,
+      x: 0,
+      y: 0,
+    },
+  },
+  HEADER: {
+    INITIAL: {
+      y: -32,
+      opacity: 0,
+    },
+    ANIMATE: {
+      y: 0,
+      opacity: 1,
+    },
+  },
+  TRANSITION: {
+    duration: 0.6,
+    easeInOut,
+    delay: 0.1,
+  }
+}
 
 export const LISTINGS_MOCK: ListingPropTypes[] = [
   {
@@ -66,9 +96,20 @@ export const LISTINGS_MOCK: ListingPropTypes[] = [
       LOGO_DARK: true,
       SUBTITLE: "Coastal Edge Real Estate Group ",
       NAME: "Adrian Cabanos",
-      PHONE: "604-612-7416",
-      EMAIL: "AdrianCabanos@remax.net",
-      WEBSITE: "https://coastaledgereg.com",
+      LINKS: [
+        {
+          TYPE: "email",
+          LINK: "AdrianCabanos@remax.net",
+        },
+        {
+          TYPE: "phone",
+          LINK: "604-612-7416"
+        },
+        {
+          TYPE: "website",
+          LINK: "https://coastaledgereg.com",
+        }
+      ]
     },
     BROKERAGE: {
       LOGO: "/images/REMAX-Logo.png",

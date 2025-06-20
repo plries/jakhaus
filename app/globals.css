@@ -52,8 +52,8 @@ body {
 }
 
 ::selection {
-  background-color: var(--color-slate-100);
-  color: var(--color-slate-700);
+  background-color: var(--color-neutral-100);
+  color: var(--color-neutral-700);
 }
 
 p,

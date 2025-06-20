@@ -1,6 +1,8 @@
+import { motion } from "framer-motion";
 import { SectionPropTypes } from "@/app/types";
 import { SectionHeading } from "@/app/components";
 import { VIDEO_CONST } from "./const";
+import { MOTION_CONFIG } from "@/app/(public)/listings/[id]/const";
 
 export const Video = ({ CONSTANTS, FULL_ADDRESS }: SectionPropTypes) => {
   return (
@@ -9,7 +11,12 @@ export const Video = ({ CONSTANTS, FULL_ADDRESS }: SectionPropTypes) => {
       id="videoTour"
     >
       <SectionHeading>{VIDEO_CONST.HEADING}</SectionHeading>
-      <div className="col-span-full p-5">
+      <motion.div
+        initial={MOTION_CONFIG.DEFAULT.INITIAL}
+        whileInView={MOTION_CONFIG.DEFAULT.WHILE_IN_VIEW}
+        transition={MOTION_CONFIG.TRANSITION}
+        className="col-span-full p-5"
+      >
         <iframe
           className="aspect-video w-full overflow-hidden rounded-2xl border border-neutral-300 shadow-lg"
           src={CONSTANTS.VIDEO_LINK}
@@ -18,7 +25,7 @@ export const Video = ({ CONSTANTS, FULL_ADDRESS }: SectionPropTypes) => {
           referrerPolicy="strict-origin-when-cross-origin"
           allowFullScreen
         />
-      </div>
+      </motion.div>
     </section>
   );
 };

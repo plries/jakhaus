@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion";
 import { SectionPropTypes } from "@/app/types";
 import {
   AtIcon,
@@ -9,6 +10,7 @@ import {
   PhoneIcon,
 } from "@phosphor-icons/react";
 import { CONTACT_CONST } from "./const";
+import { MOTION_CONFIG } from "@/app/(public)/listings/[id]/const";
 
 export const Contact = ({ CONSTANTS }: SectionPropTypes) => {
   return (
@@ -26,7 +28,13 @@ export const Contact = ({ CONSTANTS }: SectionPropTypes) => {
       </div>
       <div className="col-span-full grid auto-rows-min grid-cols-4 gap-5 md:grid-cols-8 lg:grid-cols-12">
         <div className="col-span-ful grid auto-rows-min grid-cols-1 gap-5 md:col-span-4 lg:col-span-5 lg:col-start-2">
-          <div
+          <motion.div
+            initial={{
+              opacity: 0,
+              x: -32,
+            }}
+            whileInView={MOTION_CONFIG.DEFAULT.WHILE_IN_VIEW}
+            transition={MOTION_CONFIG.TRANSITION}
             className={`w-fit ${CONSTANTS.AGENT.LOGO_DARK ? "rounded-4xl border border-neutral-950/10 bg-neutral-50/75 p-5 shadow-inner shadow-neutral-50/75" : ""}`}
           >
             <Image
@@ -36,71 +44,81 @@ export const Contact = ({ CONSTANTS }: SectionPropTypes) => {
               width={1920}
               height={1080}
             />
-          </div>
+          </motion.div>
           <div className="grid grid-cols-1 gap-2">
-            <div className="flex flex-row items-center gap-2 text-neutral-400 transition-colors duration-150 ease-in-out hover:text-neutral-50">
-              <div>
-                <EnvelopeIcon />
-              </div>
-              <Link
-                className="relative text-nowrap duration-150 ease-in-out after:absolute after:-bottom-0.5 after:left-0 after:h-[1px] after:w-full after:origin-left after:scale-x-0 after:bg-neutral-50 after:transition-[scale] hover:after:scale-x-100"
-                href={`mailto:${CONSTANTS.AGENT.EMAIL}`}
-                target="_blank"
+            {CONSTANTS.AGENT.LINKS.map((LINK, index) => (
+              <motion.div
+                key={index}
+                initial={{
+                  opacity: 0,
+                  x: -32,
+                }}
+                whileInView={MOTION_CONFIG.DEFAULT.WHILE_IN_VIEW}
+                transition={{
+                  ...MOTION_CONFIG.TRANSITION,
+                  delay: 0.1 + index * 0.1,
+                }}
+                className="flex w-fit flex-row items-center gap-2 text-neutral-400 transition-colors duration-150 ease-in-out hover:text-neutral-50"
               >
-                {CONSTANTS.AGENT.EMAIL}
-              </Link>
-            </div>
-            <div className="flex flex-row items-center gap-2 text-neutral-400 transition-colors duration-150 ease-in-out hover:text-neutral-50">
-              <div>
-                <PhoneIcon />
-              </div>
-              <Link
-                className="relative text-nowrap duration-150 ease-in-out after:absolute after:-bottom-0.5 after:left-0 after:h-[1px] after:w-full after:origin-left after:scale-x-0 after:bg-neutral-50 after:transition-[scale] hover:after:scale-x-100"
-                href={`tel:${CONSTANTS.AGENT.PHONE}`}
-                target="_blank"
-              >
-                {CONSTANTS.AGENT.PHONE.replaceAll("-", ".")}
-              </Link>
-            </div>
-            {CONSTANTS.AGENT.WEBSITE && (
-              <div className="flex flex-row items-center gap-2 text-neutral-400 transition-colors duration-150 ease-in-out hover:text-neutral-50">
                 <div>
-                  <LinkIcon />
+                  {LINK.TYPE === "email" ? (
+                    <EnvelopeIcon />
+                  ) : LINK.TYPE === "phone" ? (
+                    <PhoneIcon />
+                  ) : LINK.TYPE === "website" ? (
+                    <LinkIcon />
+                  ) : (
+                    <AtIcon />
+                  )}
                 </div>
                 <Link
                   className="relative text-nowrap duration-150 ease-in-out after:absolute after:-bottom-0.5 after:left-0 after:h-[1px] after:w-full after:origin-left after:scale-x-0 after:bg-neutral-50 after:transition-[scale] hover:after:scale-x-100"
-                  href={CONSTANTS.AGENT.WEBSITE}
+                  href={
+                    LINK.TYPE === "email"
+                      ? `mailto:${LINK.LINK}`
+                      : LINK.TYPE === "phone"
+                        ? `tel:${LINK.LINK.replaceAll("-", "")}`
+                        : LINK.LINK
+                  }
                   target="_blank"
                 >
-                  {CONSTANTS.AGENT.WEBSITE.replace("https://", "")}
+                  {LINK.LINK.replace("https://", "")}
                 </Link>
-              </div>
-            )}
-            {CONSTANTS.AGENT.INSTAGRAM && (
-              <div className="flex flex-row items-center gap-2 text-neutral-400 transition-colors duration-150 ease-in-out hover:text-neutral-50">
-                <div>
-                  <AtIcon />
-                </div>
-                <Link
-                  className="relative text-nowrap duration-150 ease-in-out after:absolute after:-bottom-0.5 after:left-0 after:h-[1px] after:w-full after:origin-left after:scale-x-0 after:bg-neutral-50 after:transition-[scale] hover:after:scale-x-100"
-                  href={`https://instagram.com/${CONSTANTS.AGENT.INSTAGRAM}`}
-                  target="_blank"
-                >
-                  {CONSTANTS.AGENT.INSTAGRAM}
-                </Link>
-              </div>
-            )}
+              </motion.div>
+            ))}
           </div>
         </div>
         <div className="col-span-full grid auto-rows-min grid-cols-1 gap-5 md:col-span-4 md:col-start-5 md:place-items-end lg:col-span-5 lg:col-start-7">
-          <Image
-            src={CONSTANTS.BROKERAGE.LOGO}
-            alt={CONSTANTS.BROKERAGE.TITLE}
-            className="max-w-32 object-contain drop-shadow-md"
-            width={1920}
-            height={1080}
-          />
-          <p className="text-neutral-400">{CONSTANTS.BROKERAGE.ADDRESS}</p>
+          <motion.div
+            initial={{
+              opacity: 0,
+              x: 32,
+            }}
+            whileInView={MOTION_CONFIG.DEFAULT.WHILE_IN_VIEW}
+            transition={MOTION_CONFIG.TRANSITION}
+          >
+            <Image
+              src={CONSTANTS.BROKERAGE.LOGO}
+              alt={CONSTANTS.BROKERAGE.TITLE}
+              className="max-w-32 object-contain drop-shadow-md"
+              width={1920}
+              height={1080}
+            />
+          </motion.div>
+          <motion.p
+            className="text-neutral-400"
+            initial={{
+              opacity: 0,
+              x: 32,
+            }}
+            whileInView={MOTION_CONFIG.DEFAULT.WHILE_IN_VIEW}
+            transition={{
+              ...MOTION_CONFIG.TRANSITION,
+              delay: 0.2,
+            }}
+          >
+            {CONSTANTS.BROKERAGE.ADDRESS}
+          </motion.p>
         </div>
       </div>
       <div className="col-span-full flex flex-row items-center justify-end gap-1 lg:col-span-10 lg:col-start-2">

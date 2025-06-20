@@ -1,10 +1,12 @@
 import Image from "next/image";
+import { motion, easeInOut } from "framer-motion";
 import { SectionPropTypes } from "@/app/types";
 import { SectionHeading, IconButton } from "@/app/components";
 import { PHOTOS_CONST } from "./const";
 import { CaretRightIcon } from "@phosphor-icons/react";
 import { Lightbox } from "../";
 import { useLightbox } from "../Lightbox/useLightbox";
+import { MOTION_CONFIG } from "@/app/(public)/listings/[id]/const";
 
 export const Photos = ({ CONSTANTS, FULL_ADDRESS }: SectionPropTypes) => {
   const hook = useLightbox({ CONSTANTS });
@@ -19,8 +21,11 @@ export const Photos = ({ CONSTANTS, FULL_ADDRESS }: SectionPropTypes) => {
         <div className="col-span-full grid grid-cols-1 gap-5 p-5">
           <div className="flex flex-col gap-5 lg:flex-row">
             {CONSTANTS.PHOTOS.slice(0, 2).map((PHOTO, index) => (
-              <div
+              <motion.div
                 key={index}
+                initial={MOTION_CONFIG.DEFAULT.INITIAL}
+                whileInView={MOTION_CONFIG.DEFAULT.WHILE_IN_VIEW}
+                transition={MOTION_CONFIG.TRANSITION}
                 className="group relative h-96 w-full overflow-hidden rounded-2xl border border-neutral-300 bg-cover bg-center shadow-lg lg:first:w-3/5"
               >
                 <Image
@@ -39,13 +44,16 @@ export const Photos = ({ CONSTANTS, FULL_ADDRESS }: SectionPropTypes) => {
                 >
                   <span className="sr-only">{PHOTOS_CONST.BUTTON}</span>
                 </button>
-              </div>
+              </motion.div>
             ))}
           </div>
           <div className="flex flex-col gap-5 lg:flex-row">
             {CONSTANTS.PHOTOS.slice(2, 4).map((PHOTO, index) => (
-              <div
+              <motion.div
                 key={index}
+                initial={MOTION_CONFIG.DEFAULT.INITIAL}
+                whileInView={MOTION_CONFIG.DEFAULT.WHILE_IN_VIEW}
+                transition={MOTION_CONFIG.TRANSITION}
                 className="group relative h-96 w-full overflow-hidden rounded-2xl border border-neutral-300 bg-cover bg-center shadow-lg lg:last:w-3/5"
               >
                 <Image
@@ -84,7 +92,7 @@ export const Photos = ({ CONSTANTS, FULL_ADDRESS }: SectionPropTypes) => {
                     </div>
                   </div>
                 )}
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>

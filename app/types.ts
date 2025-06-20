@@ -22,10 +22,10 @@ export type ListingPropTypes = {
     LOGO_DARK?: boolean;
     SUBTITLE: string;
     NAME: string;
-    EMAIL: string;
-    PHONE: string;
-    WEBSITE?: string;
-    INSTAGRAM?: string;
+    LINKS: {
+      TYPE: "phone" | "email" | "website" | "instagram",
+      LINK: string
+    }[]
   };
   BROKERAGE: {
     LOGO: string;

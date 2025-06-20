@@ -19,7 +19,7 @@ export const Carousel = ({ children }: { children: React.ReactNode }) => {
           onClick={() => {
             hook.scrollTo("left");
           }}
-          additionalClasses={`absolute top-1/2 -translate-y-1/2 left-5 !bg-neutral-50/75 backdrop-blur-md !border-neutral-950/10 ${!hook.showLeftButton ? "pointer-events-none opacity-0" : "pointer-events-auto"}`}
+          additionalClasses={`absolute top-1/2 -translate-y-1/2 left-5 !text-neutral-50 !bg-neutral-900/85 backdrop-blur-md !border-neutral-50/10 ${!hook.showLeftButton ? "pointer-events-none opacity-0" : "pointer-events-auto"}`}
         >
           <CaretLeftIcon />
         </IconButton>
@@ -35,7 +35,7 @@ export const Carousel = ({ children }: { children: React.ReactNode }) => {
           onClick={() => {
             hook.scrollTo("right");
           }}
-          additionalClasses={`absolute top-1/2 -translate-y-1/2 right-5 !bg-neutral-50/75 backdrop-blur-md !border-neutral-950/10 pointer-events-auto ${!hook.showRightButton ? "pointer-events-none opacity-0" : "pointer-events-auto"}`}
+          additionalClasses={`absolute top-1/2 -translate-y-1/2 right-5 !text-neutral-50 !bg-neutral-900/85 backdrop-blur-md !border-neutral-50/10 pointer-events-auto ${!hook.showRightButton ? "pointer-events-none opacity-0" : "pointer-events-auto"}`}
         >
           <CaretRightIcon />
         </IconButton>

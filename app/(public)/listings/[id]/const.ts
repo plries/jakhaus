@@ -1,5 +1,5 @@
 import { ListingPropTypes } from "@/app/types";
-import { easeInOut } from "framer-motion";
+import { easeInOut } from "motion/react";
 
 export const MOTION_CONFIG = {
   DEFAULT: {

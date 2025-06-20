@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { motion, easeInOut } from "framer-motion";
+import { motion, easeInOut } from "motion/react";
 import {
   IconContext,
   BedIcon,
@@ -64,7 +64,7 @@ export const Overview = ({ CONSTANTS, FULL_ADDRESS }: SectionPropTypes) => {
               </motion.span>
             </h1>
             <motion.div
-              className={`col-span-full w-fit lg:col-span-2 lg:col-start-10 lg:justify-self-end ${CONSTANTS.AGENT.LOGO_DARK ? "rounded-4xl border border-neutral-950/10 bg-neutral-50/75 p-5 shadow-inner shadow-neutral-50/75" : ""}`}
+              className={`col-span-full w-fit lg:col-span-2 lg:col-start-10 lg:justify-self-end ${CONSTANTS.AGENT.LOGO_DARK ? "rounded-4xl border border-neutral-950/10 bg-neutral-50 p-5 shadow-lg" : ""}`}
               initial={{
                 opacity: 0,
                 x: 32,

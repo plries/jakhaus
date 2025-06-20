@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { motion, easeInOut } from "framer-motion";
+import { motion, easeInOut } from "motion/react";
 import { SectionPropTypes } from "@/app/types";
 import { SectionHeading, IconButton } from "@/app/components";
 import { PHOTOS_CONST } from "./const";

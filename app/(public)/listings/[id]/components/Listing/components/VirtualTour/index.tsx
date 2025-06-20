@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { SectionPropTypes } from "@/app/types";
 import { SectionHeading } from "@/app/components";
 import { VIRTUAL_TOUR_CONST } from "./const";

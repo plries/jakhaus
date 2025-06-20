@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { SectionPropTypes } from "@/app/types";
 import { SectionHeading } from "@/app/components";
 import { FLOOR_PLAN_CONST } from "./const";

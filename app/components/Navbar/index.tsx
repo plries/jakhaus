@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { useLenis } from "lenis/react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import {
   ListIcon,
   SignOutIcon,
@@ -47,10 +47,7 @@ export const Navbar = ({
       className="sticky top-2.5 z-50 mx-auto mb-5 flex w-fit flex-row items-center justify-center gap-3 rounded-full border border-neutral-800/50 bg-neutral-950/85 p-3 shadow-xl backdrop-blur-md"
     >
       <div className="ml-3 flex h-fit items-center justify-center gap-2 text-neutral-50">
-        <button
-          className="cursor-pointer"
-          onClick={() => lenis?.scrollTo(0)}
-        >
+        <button className="cursor-pointer" onClick={() => lenis?.scrollTo(0)}>
           <JakhausLogo />
         </button>
       </div>

@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { SectionPropTypes } from "@/app/types";
 import {
   AtIcon,
@@ -35,7 +35,7 @@ export const Contact = ({ CONSTANTS }: SectionPropTypes) => {
             }}
             whileInView={MOTION_CONFIG.DEFAULT.WHILE_IN_VIEW}
             transition={MOTION_CONFIG.TRANSITION}
-            className={`w-fit ${CONSTANTS.AGENT.LOGO_DARK ? "rounded-4xl border border-neutral-950/10 bg-neutral-50/75 p-5 shadow-inner shadow-neutral-50/75" : ""}`}
+            className={`w-fit ${CONSTANTS.AGENT.LOGO_DARK ? "rounded-4xl border border-neutral-950/10 bg-neutral-50 p-5 shadow-lg" : ""}`}
           >
             <Image
               src={CONSTANTS.AGENT.LOGO}

@@ -29,10 +29,7 @@ export const Contact = ({ CONSTANTS }: SectionPropTypes) => {
       <div className="col-span-full grid auto-rows-min grid-cols-4 gap-5 md:grid-cols-8 lg:grid-cols-12">
         <div className="col-span-ful grid auto-rows-min grid-cols-1 gap-5 md:col-span-4 lg:col-span-5 lg:col-start-2">
           <motion.div
-            initial={{
-              opacity: 0,
-              x: -32,
-            }}
+            initial={MOTION_CONFIG.LEFT.INITIAL}
             whileInView={MOTION_CONFIG.LEFT.WHILE_IN_VIEW}
             transition={MOTION_CONFIG.TRANSITION}
             className={`w-fit ${CONSTANTS.AGENT.LOGO_DARK ? "rounded-4xl border border-neutral-950/10 bg-neutral-50 p-5 shadow-lg" : ""}`}
@@ -87,7 +84,7 @@ export const Contact = ({ CONSTANTS }: SectionPropTypes) => {
         </div>
         <div className="col-span-full grid auto-rows-min grid-cols-1 gap-5 md:col-span-4 md:col-start-5 md:place-items-end lg:col-span-5 lg:col-start-7">
           <motion.div
-            initial={MOTION_CONFIG.RIGHT.WHILE_IN_VIEW}
+            initial={MOTION_CONFIG.RIGHT.INITIAL}
             whileInView={MOTION_CONFIG.RIGHT.WHILE_IN_VIEW}
             transition={MOTION_CONFIG.TRANSITION}
           >

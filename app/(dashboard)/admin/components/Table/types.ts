@@ -5,4 +5,5 @@ export type TablePropTypes = {
   }[]
   children: React.ReactNode;
   tableName: string
+  tableCount: number
 }

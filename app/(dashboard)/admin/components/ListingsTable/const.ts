@@ -1,11 +1,14 @@
-export const LISTINGS_CONST = {
+export const LISTINGS_TABLE_CONST = {
   HEADING: "Listings",
   INPUTS: {
     SEARCH: "Search listings...",
   },
   BUTTONS: {
-    CREATE: "Create listing",
-    EDIT: "Edit listing",
+    CREATE: {
+      TEXT: "Create listing",
+      HREF: "/admin/listings/create",
+    },
+    MANAGE: "Manage listing",
   },
   TABLE: {
     NAME: "listings",
@@ -14,10 +17,17 @@ export const LISTINGS_CONST = {
       WIDTHS: ["w-1/4", "w-1/4", "w-1/4", "w-1/4"],
     }
   },
+  DROPDOWNS: {
+    MANAGE: {
+      EDIT: "Edit",
+      DEACTIVATE: "Deactivate",
+      REACTIVATE: "Reactivate",
+    }
+  }
 }
 
 export const LISTINGS_TABLE_MOCK = {
-  COLUMNS: [
+  ROWS: [
     {
       LISTING_ADDRESS: "13688 100 Avenue #3510",
       CITY: "Surrey",

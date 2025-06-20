@@ -26,7 +26,7 @@ export const Input = ({
           <MagnifyingGlassIcon size={20} className="text-neutral-400" />
         )}
         <input
-          className="placeholder:text-neutral-400 focus:outline-none"
+          className="w-full placeholder:text-neutral-400 focus:outline-none"
           type={type}
           placeholder={placeholder}
           value={value}

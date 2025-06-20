@@ -9,7 +9,7 @@ import {
   XIcon,
 } from "@phosphor-icons/react";
 import { JakhausLogo } from "@/public/icons";
-import { useWindowSize } from "@/app/hooks/";
+import { useWindowSize } from "@/app/hooks";
 import { createClient } from "@/lib/supabase";
 import { IconButton } from "../IconButton";
 import { useMobileMenu } from "./useMobileMenu";

@@ -4,7 +4,7 @@ import { createClient } from "@/lib/supabase";
 import { useRouter } from "next/navigation";
 import { Navbar } from "@/app/components";
 import { NAVBAR_ADMIN_CONST } from "./const";
-import { Agents, Listings } from "./components";
+import { AgentsTable, ListingsTable } from "./components";
 import { useTabs } from "./useTabs";
 
 export default function AdminDashboardPage() {
@@ -57,7 +57,11 @@ export default function AdminDashboardPage() {
       <div className="grid w-full grid-cols-4 gap-5 md:grid-cols-8 lg:grid-cols-12">
         <div className="relative col-span-full grid grid-cols-4 gap-5 md:grid-cols-8 lg:col-span-10 lg:col-start-2 lg:grid-cols-10 lg:pb-10">
           <div className="col-span-full grid w-full grid-cols-4 gap-5 px-5 pt-5 md:grid-cols-8 lg:grid-cols-12">
-            {hook.currentTab === "listings" ? <Listings /> : <Agents />}
+            {hook.currentTab === "listings" ? (
+              <ListingsTable />
+            ) : (
+              <AgentsTable />
+            )}
           </div>
         </div>
       </div>

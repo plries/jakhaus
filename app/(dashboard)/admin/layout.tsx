@@ -8,7 +8,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <main className="w-full overflow-x-hidden pb-5" role="main">
+    <main className="w-full pb-5" role="main">
       {children}
     </main>
   );

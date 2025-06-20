@@ -1,2 +1,2 @@
-export * from "./Listings";
-export * from "./Agents";
+export * from "./ListingsTable";
+export * from "./AgentsTable";

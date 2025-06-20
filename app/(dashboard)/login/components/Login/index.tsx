@@ -39,7 +39,7 @@ export const Login = () => {
         <Button
           type="submit"
           onClick={() => {}}
-          additionalClasses="bg-neutral-950 !text-neutral-50 hover:!bg-neutral-800 mt-4"
+          additionalClasses="bg-neutral-950 !text-neutral-50 !border-neutral-900 hover:!bg-neutral-800 mt-4"
         >
           {LOGIN_CONST.BUTTON.LOGIN}
           <SignInIcon weight="bold" />

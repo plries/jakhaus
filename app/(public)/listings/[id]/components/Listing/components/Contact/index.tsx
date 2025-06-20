@@ -33,7 +33,7 @@ export const Contact = ({ CONSTANTS }: SectionPropTypes) => {
               opacity: 0,
               x: -32,
             }}
-            whileInView={MOTION_CONFIG.DEFAULT.WHILE_IN_VIEW}
+            whileInView={MOTION_CONFIG.LEFT.WHILE_IN_VIEW}
             transition={MOTION_CONFIG.TRANSITION}
             className={`w-fit ${CONSTANTS.AGENT.LOGO_DARK ? "rounded-4xl border border-neutral-950/10 bg-neutral-50 p-5 shadow-lg" : ""}`}
           >

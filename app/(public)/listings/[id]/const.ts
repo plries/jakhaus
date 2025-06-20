@@ -14,22 +14,22 @@ export const MOTION_CONFIG = {
   },
   RIGHT: {
     INITIAL: {
-      x: 32,
       opacity: 0,
+      x: 32,
     },
     WHILE_IN_VIEW: {
-      x: 0,
       opacity: 1,
+      x: 0,
     },
   },
   LEFT: {
     INITIAL: {
-      x: -32,
       opacity: 0,
+      x: -32,
     },
     WHILE_IN_VIEW: {
-      x: 0,
       opacity: 1,
+      x: 0,
     },
   },
   HEADER: {

@@ -62,7 +62,7 @@ export const Navbar = ({ CONSTANTS, LINKS, dashboard }: NavbarPropTypes) => {
                 {dashboard ? (
                   <Button
                     additionalClasses={`!rounded-full !border-transparent ${
-                      pathname === LINK.HREF
+                      pathname.includes(LINK.HREF)
                         ? "!bg-neutral-50/10 !text-neutral-50"
                         : "bg-transparent !text-neutral-400 hover:!bg-neutral-50/10 hover:!text-neutral-50 !shadow-none"
                     }`}
@@ -123,7 +123,7 @@ export const Navbar = ({ CONSTANTS, LINKS, dashboard }: NavbarPropTypes) => {
                   {dashboard ? (
                     <Button
                       additionalClasses={`!rounded-full bg-transparent !border-transparent !justify-start ${
-                        pathname === LINK.HREF
+                        pathname.includes(LINK.HREF)
                           ? "!bg-neutral-50/10 !text-neutral-50"
                           : "!text-neutral-400 hover:!bg-neutral-50/10 hover:text-neutral-50 !shadow-none"
                       } `}

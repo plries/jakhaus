@@ -3,7 +3,7 @@ import { MagnifyingGlassIcon } from "@phosphor-icons/react";
 import { InputPropTypes } from "./types";
 
 export const Input = ({
-  type,
+  type = "text",
   placeholder,
   label,
   value,
@@ -14,7 +14,7 @@ export const Input = ({
   return (
     <div>
       {label && (
-        <label className="font-medium text-neutral-700">
+        <label className="font-medium text-neutral-700 mb-1">
           {label}
           {required && <span>*</span>}
         </label>

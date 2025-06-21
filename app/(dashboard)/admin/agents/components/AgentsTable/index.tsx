@@ -1,16 +1,20 @@
 "use client";
 import { DotsThreeIcon, PlusIcon } from "@phosphor-icons/react";
-import { Button, Checkbox, Input, Dropdown } from "@/app/components";
-import { Table } from "../../../../../components/Table";
+import {
+  Button,
+  Checkbox,
+  Input,
+  Dropdown,
+  Table,
+  PageHeading,
+} from "@/app/components";
 import { AGENTS_TABLE_CONST, AGENTS_TABLE_MOCK } from "./const";
 
 export const AgentsTable = () => {
   return (
     <>
-      <h1 className="col-span-full !text-3xl font-medium tracking-tighter text-neutral-950 md:!text-4xl lg:!text-6xl">
-        {AGENTS_TABLE_CONST.HEADING}
-      </h1>
-      <div className="col-span-full flex flex-row items-end justify-between">
+      <PageHeading>{AGENTS_TABLE_CONST.HEADING}</PageHeading>
+      <div className="col-span-full flex flex-row items-end justify-between px-5">
         <Input type="search" placeholder={AGENTS_TABLE_CONST.INPUTS.SEARCH} />
         <Button
           additionalClasses="!text-neutral-50 !bg-neutral-950 !hover:bg-neutral-800 !border-neutral-900"

@@ -4,5 +4,7 @@ export * from "./Dropdown";
 export * from "./IconButton";
 export * from "./Input";
 export * from "./Navbar";
+export * from "./PageHeading";
 export * from "./SectionHeading";
 export * from "./Table";
+export * from "./UploadButton";

@@ -111,7 +111,12 @@ body {
 p,
 a,
 li,
-button {
+button,
+label,
+input,
+th,
+td,
+span {
   font-size: 0.875rem;
 }
 
@@ -119,7 +124,12 @@ button {
   p,
   a,
   li,
-  button {
+  button,
+  label,
+  input,
+  th,
+  td,
+  span {
     font-size: 1rem;
   }
 }
@@ -128,7 +138,12 @@ button {
   p,
   a,
   li,
-  button {
+  button,
+  label,
+  input,
+  th,
+  td,
+  span {
     font-size: 1.125rem;
   }
 }

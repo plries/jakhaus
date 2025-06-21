@@ -132,7 +132,7 @@ export const LISTINGS_MOCK: ListingPropTypes[] = [
     },
     BROKERAGE: {
       LOGO: "/images/REMAX-Logo.png",
-      TITLE: "Coastal Edge Real Estate Group",
+      TITLE: "REMAX 2000 Realty",
       ADDRESS: "#103 - 15127 100 Avenue Surrey, BC, V3R 0N9"
     }
   },

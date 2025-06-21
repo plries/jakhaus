@@ -24,7 +24,7 @@ export const useLogin = () => {
     if (error) {
       setError(error.message);
     } else {
-      router.push("/admin");
+      router.push("/admin/listings");
     }
   };
 

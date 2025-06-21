@@ -1,5 +1,5 @@
 export type InputPropTypes = {
-  type: "text" | "email" | "password" | "search";
+  type?: "text" | "email" | "password" | "search" | "tel";
   placeholder: string;
   label?: string;
   value?: string;

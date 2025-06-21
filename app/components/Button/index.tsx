@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ButtonPropTypes } from "./types";
 
 export const Button = ({
-  type,
+  type = "button",
   children,
   additionalClasses,
   onClick,

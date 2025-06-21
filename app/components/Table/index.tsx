@@ -1,3 +1,4 @@
+"use client";
 import { Checkbox, Dropdown, IconButton } from "@/app/components";
 import { TablePropTypes } from "./types";
 import { TABLE_CONST } from "./const";
@@ -15,7 +16,7 @@ export const Table = ({
 }: TablePropTypes) => {
   return (
     <>
-      <div className="table-scroll col-span-full overflow-hidden overflow-x-scroll rounded-xl border border-neutral-200 bg-neutral-50 shadow-md">
+      <div className="table-scroll col-span-full mx-5 overflow-hidden overflow-x-scroll rounded-xl border border-neutral-200 bg-neutral-50 shadow-md">
         <table className="w-full">
           <thead>
             <tr className="h-15 border-b border-neutral-200">
@@ -55,7 +56,7 @@ export const Table = ({
           <tbody>{children}</tbody>
         </table>
       </div>
-      <div className="col-span-full flex flex-row items-center justify-between">
+      <div className="col-span-full mx-5 flex flex-row items-center justify-between">
         <p className="!text-sm text-neutral-400">
           {TABLE_CONST.SHOWING} {tableCount < 10 ? tableCount : 10}{" "}
           {TABLE_CONST.OF} {tableCount} {tableName}

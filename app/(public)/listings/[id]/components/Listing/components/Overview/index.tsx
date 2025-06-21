@@ -17,7 +17,7 @@ export const Overview = ({ CONSTANTS, FULL_ADDRESS }: SectionPropTypes) => {
     <IconContext.Provider value={{ weight: "thin", size: 32 }}>
       <section className="mx-auto w-[calc(100%-1.25rem)] overflow-hidden rounded-4xl border border-neutral-800/50 shadow-xl">
         <div className="relative" id="overview">
-          <div className="mask-gradient absolute bottom-0 z-10 h-1/6 w-full bg-neutral-50/50 backdrop-blur-2xl" />
+          <div className="mask-gradient-t absolute bottom-0 z-10 h-1/6 w-full bg-neutral-50/50 backdrop-blur-2xl" />
           <Image
             src={CONSTANTS.FEATURED_PHOTO}
             alt={FULL_ADDRESS || ""}

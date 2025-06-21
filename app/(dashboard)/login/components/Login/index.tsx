@@ -12,7 +12,7 @@ export const Login = () => {
     <main className="flex min-h-screen w-full flex-col place-items-center justify-center gap-5 p-5">
       <form
         onSubmit={hook.handleLogin}
-        className="grid w-full max-w-xl grid-cols-1 gap-4 rounded-3xl border border-neutral-300 bg-neutral-50 p-5 shadow-2xl shadow-neutral-950/10"
+        className="grid w-full max-w-xl grid-cols-1 gap-4 rounded-3xl border border-neutral-300 bg-neutral-50 p-5 shadow-xl"
       >
         <JakhausLogo width={"100%"} />
 

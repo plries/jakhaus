@@ -18,14 +18,10 @@ import { NavbarPropTypes } from "./types";
 import { NAVBAR_CONST } from "./const";
 import { Button } from "../Button";
 import { MOTION_CONFIG } from "@/app/(public)/listings/[id]/const";
+import { usePathname } from "next/navigation";
 
-export const Navbar = ({
-  CONSTANTS,
-  LINKS,
-  dashboard,
-  currentTab,
-  handleTabChange,
-}: NavbarPropTypes) => {
+export const Navbar = ({ CONSTANTS, LINKS, dashboard }: NavbarPropTypes) => {
+  const pathname = usePathname();
   const mobileMenu = useMobileMenu();
   const windowSize = useWindowSize();
   const supabase = createClient();
@@ -44,7 +40,7 @@ export const Navbar = ({
       animate={MOTION_CONFIG.HEADER.ANIMATE}
       transition={MOTION_CONFIG.TRANSITION}
       role="banner"
-      className="sticky top-2.5 z-50 mx-auto mb-5 flex w-fit flex-row items-center justify-center gap-3 rounded-full border border-neutral-800/50 bg-neutral-950 p-3 shadow-xl"
+      className={`sticky top-2.5 z-50 col-span-full mx-auto flex w-fit flex-row items-center justify-center gap-3 rounded-full border border-neutral-800/50 bg-neutral-950 p-3 shadow-xl ${dashboard ? "" : "mb-5"}`}
     >
       <div className="ml-3 flex h-fit items-center justify-center gap-2 text-neutral-50">
         <button className="cursor-pointer" onClick={() => lenis?.scrollTo(0)}>
@@ -66,14 +62,11 @@ export const Navbar = ({
                 {dashboard ? (
                   <Button
                     additionalClasses={`!rounded-full !border-transparent ${
-                      currentTab === LINK.KEY
+                      pathname === LINK.HREF
                         ? "!bg-neutral-50/10 !text-neutral-50"
                         : "bg-transparent !text-neutral-400 hover:!bg-neutral-50/10 hover:!text-neutral-50 !shadow-none"
                     }`}
-                    onClick={() => {
-                      if (handleTabChange)
-                        handleTabChange(LINK.KEY as "listings" | "agents");
-                    }}
+                    href={LINK.HREF}
                   >
                     {LINK.NAME}
                   </Button>
@@ -130,14 +123,11 @@ export const Navbar = ({
                   {dashboard ? (
                     <Button
                       additionalClasses={`!rounded-full bg-transparent !border-transparent !justify-start ${
-                        currentTab === LINK.KEY
+                        pathname === LINK.HREF
                           ? "!bg-neutral-50/10 !text-neutral-50"
                           : "!text-neutral-400 hover:!bg-neutral-50/10 hover:text-neutral-50 !shadow-none"
                       } `}
-                      onClick={() => {
-                        if (handleTabChange)
-                          handleTabChange(LINK.KEY as "listings" | "agents");
-                      }}
+                      href={LINK.HREF}
                     >
                       {LINK.NAME}
                     </Button>

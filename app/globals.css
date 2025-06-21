@@ -10,7 +10,7 @@ body {
   letter-spacing: var(--tracking-tight);
 }
 
-.mask-gradient {
+.mask-gradient-t {
   -webkit-mask-image: linear-gradient(transparent, black);
   mask-image: linear-gradient(transparent, black);
 }
@@ -25,6 +25,23 @@ body {
   );
   mask-image: linear-gradient(
     to right,
+    transparent,
+    black 5%,
+    black 95%,
+    transparent 100%
+  );
+}
+
+.mask-gradient-y {
+  -webkit-mask-image: linear-gradient(
+    to top,
+    transparent,
+    black 5%,
+    black 95%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to top,
     transparent,
     black 5%,
     black 95%,

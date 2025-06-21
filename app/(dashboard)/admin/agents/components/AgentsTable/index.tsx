@@ -1,7 +1,7 @@
 "use client";
 import { DotsThreeIcon, PlusIcon } from "@phosphor-icons/react";
 import { Button, Checkbox, Input, Dropdown } from "@/app/components";
-import { Table } from "../Table";
+import { Table } from "../../../../../components/Table";
 import { AGENTS_TABLE_CONST, AGENTS_TABLE_MOCK } from "./const";
 
 export const AgentsTable = () => {

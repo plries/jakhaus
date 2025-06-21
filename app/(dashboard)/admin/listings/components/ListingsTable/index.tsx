@@ -1,7 +1,6 @@
 "use client";
 import { DotsThreeIcon, PlusIcon } from "@phosphor-icons/react";
-import { Button, Checkbox, Input, Dropdown } from "@/app/components";
-import { Table } from "../Table";
+import { Button, Checkbox, Input, Dropdown, Table } from "@/app/components";
 import { LISTINGS_TABLE_CONST, LISTINGS_TABLE_MOCK } from "./const";
 
 export const ListingsTable = () => {
@@ -39,6 +38,9 @@ export const ListingsTable = () => {
               <Checkbox />
             </td>
             <td className="border-r border-neutral-200 px-4 py-2 text-nowrap">
+              {listing.ID}
+            </td>
+            <td className="border-r border-neutral-200 px-4 py-2 text-nowrap">
               {listing.LISTING_ADDRESS}
             </td>
             <td className="border-r border-neutral-200 px-4 py-2">
@@ -69,6 +71,18 @@ export const ListingsTable = () => {
                     {
                       label: LISTINGS_TABLE_CONST.DROPDOWNS.MANAGE.EDIT,
                       onClick: () => {},
+                    },
+                    {
+                      label: LISTINGS_TABLE_CONST.DROPDOWNS.MANAGE.VIEW,
+                      href: `/listings/${listing.ID}`,
+                    },
+                    {
+                      label: LISTINGS_TABLE_CONST.DROPDOWNS.MANAGE.COPY,
+                      onClick: () => {
+                        navigator.clipboard.writeText(
+                          window.location.origin + `/listings/${listing.ID}`,
+                        );
+                      },
                     },
                     {
                       label: listing.ACTIVE

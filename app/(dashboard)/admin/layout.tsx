@@ -1,14 +1,59 @@
-export const metadata = {
-  title: "Admin | Jakhaus Creative Media",
-};
+"use client";
+import { useEffect, useState } from "react";
+import { createClient } from "@/lib/supabase";
+import { useRouter } from "next/navigation";
+import { Navbar } from "@/app/components";
+import { NAVBAR_ADMIN_CONST } from "./const";
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const supabase = createClient();
+  const router = useRouter();
+
+  const [email, setEmail] = useState<string | null>();
+
+  useEffect(() => {
+    const getCurrentUser = async () => {
+      const {
+        data: { user },
+        error,
+      } = await supabase.auth.getUser();
+
+      if (!user || error) {
+        router.replace("/admin/login");
+      } else {
+        setEmail(user.email);
+      }
+    };
+
+    getCurrentUser();
+
+    const { data: listener } = supabase.auth.onAuthStateChange(
+      async (event, session) => {
+        if (event === "SIGNED_IN" && session?.user) {
+          setEmail(session.user.email);
+        } else if (event === "SIGNED_OUT") {
+          setEmail(null);
+          router.replace("/admin/login");
+        }
+      },
+    );
+
+    return () => {
+      listener.subscription.unsubscribe();
+    };
+  }, []);
+
   return (
-    <main className="w-full pb-5" role="main">
+    <main
+      role="main"
+      className="grid w-full grid-cols-4 gap-5 border-x border-neutral-300 px-5 pb-5 md:grid-cols-8 lg:grid-cols-12"
+    >
+      <Navbar LINKS={NAVBAR_ADMIN_CONST.LINKS} dashboard={true} />
+      <div className="col-span-full -mx-5 w-[calc(100%+2.5rem)] border-b border-b-neutral-300" />
       {children}
     </main>
   );

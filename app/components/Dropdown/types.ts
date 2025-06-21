@@ -3,7 +3,8 @@ import React from "react";
 export type DropdownPropTypes = {
   options: {
     label: string;
-    onClick: () => void;
+    onClick?: () => void;
+    href?: string;
   }[]
   button: {
     name: string

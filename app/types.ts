@@ -1,6 +1,5 @@
 export type ListingPropTypes = {
   ID: string;
-  FEATURED_PHOTO: string;
   ADDRESS: {
     STREET: string;
     UNIT?: string;
@@ -13,10 +12,20 @@ export type ListingPropTypes = {
     BATHROOMS: number;
     SQUARE_FEET: number;
   };
-  PHOTOS: string[];
-  VIDEO_LINK?: string;
-  FLOOR_PLAN?: string[];
-  SCAN_LINK?: string;
+  PHOTOS: {
+    FEATURED_PHOTO: string;
+    PHOTOS_GALLERY: string[];
+  };
+  OTHER_ATTACHMENTS?: {
+    VIDEO_LINK?: string;
+    FLOOR_PLAN?: string[];
+    SCAN_LINK?: string;
+  };
+  BROKERAGE: {
+    LOGO: string;
+    TITLE: string;
+    ADDRESS: string;
+  };
   AGENT: {
     LOGO: string;
     LOGO_DARK?: boolean;
@@ -27,11 +36,6 @@ export type ListingPropTypes = {
       LINK: string
     }[]
   };
-  BROKERAGE: {
-    LOGO: string;
-    TITLE: string;
-    ADDRESS: string;
-  }
 };
 
 export type SectionPropTypes = {

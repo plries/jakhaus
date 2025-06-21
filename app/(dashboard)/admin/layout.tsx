@@ -50,7 +50,7 @@ export default function RootLayout({
   return (
     <main
       role="main"
-      className="mb-5 grid w-full grid-cols-4 gap-5 rounded-b-3xl border-x border-b border-neutral-300 pb-5 md:grid-cols-8 lg:grid-cols-12"
+      className="mb-5 grid w-full grid-cols-4 gap-5 rounded-b-4xl border-x border-b border-neutral-300 pb-5 md:grid-cols-8 lg:grid-cols-12"
     >
       <Navbar LINKS={NAVBAR_ADMIN_CONST.LINKS} dashboard={true} />
       <div className="col-span-full w-full border-b border-b-neutral-300" />

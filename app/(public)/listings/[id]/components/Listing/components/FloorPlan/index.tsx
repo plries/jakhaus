@@ -13,7 +13,7 @@ export const FloorPlan = ({ CONSTANTS, FULL_ADDRESS }: SectionPropTypes) => {
     >
       <SectionHeading>{FLOOR_PLAN_CONST.HEADING}</SectionHeading>
       <div className="col-span-full grid auto-rows-min grid-cols-1 gap-5 p-5">
-        {CONSTANTS.FLOOR_PLAN?.map((floorPlan, index) => (
+        {CONSTANTS.OTHER_ATTACHMENTS?.FLOOR_PLAN?.map((floorPlan, index) => (
           <motion.div
             key={index}
             initial={MOTION_CONFIG.DEFAULT.INITIAL}

@@ -9,6 +9,7 @@ export const UploadButton = ({
   label,
   text,
   required,
+  htmlFor,
 }: UploadButtonPropTypes) => {
   const hook = useUploadButton();
 
@@ -19,14 +20,14 @@ export const UploadButton = ({
         {required && <span>*</span>}
       </p>
       <label
-        htmlFor={label}
+        htmlFor={htmlFor}
         className="flex h-11 w-fit cursor-pointer flex-row items-center justify-center gap-2 rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-2 text-nowrap text-neutral-950 shadow-md transition-all duration-150 ease-in-out hover:bg-neutral-100 active:scale-98"
       >
         <UploadSimpleIcon />
         {text}
       </label>
       <input
-        id={label}
+        id={htmlFor}
         type="file"
         className="hidden"
         onChange={hook.handleFileUpload}

@@ -10,11 +10,12 @@ export const Input = ({
   onChange,
   required,
   error,
+  htmlFor,
 }: InputPropTypes) => {
   return (
     <div>
       {label && (
-        <label className="font-medium text-neutral-700 mb-1">
+        <label htmlFor={htmlFor} className="font-medium text-neutral-700 mb-1">
           {label}
           {required && <span>*</span>}
         </label>
@@ -26,6 +27,7 @@ export const Input = ({
           <MagnifyingGlassIcon size={20} className="text-neutral-400" />
         )}
         <input
+          id={htmlFor}
           className="w-full placeholder:text-neutral-400 focus:outline-none"
           type={type}
           placeholder={placeholder}

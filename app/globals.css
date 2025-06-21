@@ -108,6 +108,10 @@ body {
   color: var(--color-neutral-700);
 }
 
+.capitalize-first-letter::first-letter {
+  text-transform: uppercase;
+}
+
 p,
 a,
 li,

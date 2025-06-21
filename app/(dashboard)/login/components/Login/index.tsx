@@ -48,7 +48,7 @@ export const Login = () => {
       <div
         className={`fixed mx-auto flex w-[calc(100%-2.5rem)] max-w-xl flex-row items-center justify-between rounded-lg border border-red-500/25 bg-red-50 p-2 text-red-600 shadow-sm transition-all duration-300 ease-in-out ${hook.showError ? "bottom-5 opacity-100" : "bottom-0 opacity-0"}`}
       >
-        <p className="ml-2 !text-sm">{hook.error}</p>
+        <p className="capitalize-first-letter ml-2 !text-sm">{hook.error}</p>
         <IconButton
           name={LOGIN_CONST.BUTTON.CLOSE}
           onClick={() => hook.setShowError(false)}

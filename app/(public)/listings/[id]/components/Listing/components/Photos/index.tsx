@@ -20,7 +20,7 @@ export const Photos = ({ CONSTANTS, FULL_ADDRESS }: SectionPropTypes) => {
         <SectionHeading>{PHOTOS_CONST.HEADING}</SectionHeading>
         <div className="col-span-full grid grid-cols-1 gap-5 p-5">
           <div className="flex flex-col gap-5 lg:flex-row">
-            {CONSTANTS.PHOTOS.slice(0, 2).map((PHOTO, index) => (
+            {CONSTANTS.PHOTOS.PHOTOS_GALLERY.slice(0, 2).map((PHOTO, index) => (
               <motion.div
                 key={index}
                 initial={MOTION_CONFIG.DEFAULT.INITIAL}
@@ -48,7 +48,7 @@ export const Photos = ({ CONSTANTS, FULL_ADDRESS }: SectionPropTypes) => {
             ))}
           </div>
           <div className="flex flex-col gap-5 lg:flex-row">
-            {CONSTANTS.PHOTOS.slice(2, 4).map((PHOTO, index) => (
+            {CONSTANTS.PHOTOS.PHOTOS_GALLERY.slice(2, 4).map((PHOTO, index) => (
               <motion.div
                 key={index}
                 initial={MOTION_CONFIG.DEFAULT.INITIAL}
@@ -85,7 +85,7 @@ export const Photos = ({ CONSTANTS, FULL_ADDRESS }: SectionPropTypes) => {
                         {PHOTOS_CONST.VIEW_ALL.NAME}
                         <span className="font-medium text-neutral-50">
                           {" "}
-                          {CONSTANTS.PHOTOS.length}{" "}
+                          {CONSTANTS.PHOTOS.PHOTOS_GALLERY.length}{" "}
                         </span>
                         {PHOTOS_CONST.VIEW_ALL.PHOTOS}
                       </p>

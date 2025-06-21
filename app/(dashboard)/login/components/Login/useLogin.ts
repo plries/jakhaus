@@ -35,6 +35,10 @@ export const useLogin = () => {
         setShowError(false);
       }, 5000);
     }
+
+    return () => {
+      setShowError(false);
+    };
   }, [error]);
 
   return {

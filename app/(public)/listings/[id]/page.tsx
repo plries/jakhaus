@@ -51,7 +51,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         "View the listing for " + FULL_ADDRESS + " by Jakhaus Creative Media.",
       images: [
         {
-          url: listing.FEATURED_PHOTO,
+          url: listing.PHOTOS.FEATURED_PHOTO,
           width: 1920,
           height: 1080,
           alt: FULL_ADDRESS,

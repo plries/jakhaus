@@ -23,6 +23,7 @@ export const Login = () => {
           value={hook.email}
           onChange={(e) => hook.setEmail(e.target.value)}
           error={hook.error}
+          htmlFor={LOGIN_CONST.INPUTS.EMAIL.HTML_FOR}
           required
         />
 
@@ -33,6 +34,7 @@ export const Login = () => {
           value={hook.password}
           error={hook.error}
           onChange={(e) => hook.setPassword(e.target.value)}
+          htmlFor={LOGIN_CONST.INPUTS.PASSWORD.HTML_FOR}
           required
         />
 

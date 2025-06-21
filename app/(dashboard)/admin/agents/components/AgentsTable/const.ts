@@ -2,6 +2,7 @@ export const AGENTS_TABLE_CONST = {
   HEADING: "Agents",
   INPUTS: {
     SEARCH: "Search agents...",
+    HTML_FOR: "search_agents",
   },
   BUTTONS: {
     CREATE: {

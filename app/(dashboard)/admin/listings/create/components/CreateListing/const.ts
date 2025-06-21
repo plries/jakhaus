@@ -19,7 +19,7 @@ export const CREATE_LISTING_CONST = {
       },
       UNIT: {
         LABEL: "Apartment, unit, suite, or floor #",
-        PLACEHOLDER: "A1",
+        PLACEHOLDER: "#101",
         HTML_FOR: "unit"
       },
       CITY: {

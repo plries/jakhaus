@@ -2,6 +2,7 @@ export const LISTINGS_TABLE_CONST = {
   HEADING: "Listings",
   INPUTS: {
     SEARCH: "Search listings...",
+    HTML_FOR: "search_listings",
   },
   BUTTONS: {
     CREATE: {

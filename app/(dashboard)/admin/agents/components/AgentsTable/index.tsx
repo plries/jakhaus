@@ -15,7 +15,7 @@ export const AgentsTable = () => {
     <>
       <PageHeading>{AGENTS_TABLE_CONST.HEADING}</PageHeading>
       <div className="col-span-full flex flex-row items-end justify-between px-5">
-        <Input type="search" placeholder={AGENTS_TABLE_CONST.INPUTS.SEARCH} />
+        <Input type="search" placeholder={AGENTS_TABLE_CONST.INPUTS.SEARCH} htmlFor={AGENTS_TABLE_CONST.INPUTS.HTML_FOR} />
         <Button
           additionalClasses="!text-neutral-50 !bg-neutral-950 !hover:bg-neutral-800 !border-neutral-900"
           href={AGENTS_TABLE_CONST.BUTTONS.CREATE.HREF}

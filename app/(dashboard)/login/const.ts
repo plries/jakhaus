@@ -4,10 +4,12 @@ export const LOGIN_CONST = {
     EMAIL: {
       LABEL: "Email",
       PLACEHOLDER: "Enter your email",
+      HTML_FOR: "email",
     },
     PASSWORD: {
       LABEL: "Password",
       PLACEHOLDER: "Enter your password",
+      HTML_FOR: "password",
     }
   },
   BUTTON: {

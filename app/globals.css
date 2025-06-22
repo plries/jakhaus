@@ -10,7 +10,7 @@ body {
   letter-spacing: var(--tracking-tight);
 }
 
-.mask-gradient {
+.mask-gradient-t {
   -webkit-mask-image: linear-gradient(transparent, black);
   mask-image: linear-gradient(transparent, black);
 }
@@ -32,12 +32,68 @@ body {
   );
 }
 
+.mask-gradient-y {
+  -webkit-mask-image: linear-gradient(
+    to top,
+    transparent,
+    black 5%,
+    black 95%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to top,
+    transparent,
+    black 5%,
+    black 95%,
+    transparent 100%
+  );
+}
+
+.mask-gradient-r {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    black 95%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    black 95%,
+    transparent 100%
+  );
+}
+
+.mask-gradient-l {
+  -webkit-mask-image: linear-gradient(
+    to left,
+    black 95%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to left,
+    black 95%,
+    transparent 100%
+  );
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 ::-webkit-scrollbar {
   width: 16px;
 }
 
 ::-webkit-scrollbar-track {
   background: transparent;
+}
+
+.table-scroll::-webkit-scrollbar-track {
+  border-top: 1px solid var(--color-neutral-300);
 }
 
 ::-webkit-scrollbar-thumb {
@@ -48,14 +104,23 @@ body {
 }
 
 ::selection {
-  background-color: var(--color-slate-100);
-  color: var(--color-slate-700);
+  background-color: var(--color-neutral-100);
+  color: var(--color-neutral-700);
+}
+
+.capitalize-first-letter::first-letter {
+  text-transform: uppercase;
 }
 
 p,
 a,
 li,
-button {
+button,
+label,
+input,
+th,
+td,
+span {
   font-size: 0.875rem;
 }
 
@@ -63,7 +128,12 @@ button {
   p,
   a,
   li,
-  button {
+  button,
+  label,
+  input,
+  th,
+  td,
+  span {
     font-size: 1rem;
   }
 }
@@ -72,7 +142,12 @@ button {
   p,
   a,
   li,
-  button {
+  button,
+  label,
+  input,
+  th,
+  td,
+  span {
     font-size: 1.125rem;
   }
 }

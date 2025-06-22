@@ -35,9 +35,9 @@ export const Overview = ({ CONSTANTS, FULL_ADDRESS }: SectionPropTypes) => {
             <div className="h-full w-full bg-gradient-to-b from-neutral-700 to-neutral-950" />
           </div>
           <div className="z-10 grid grid-cols-4 gap-5 p-5 md:grid-cols-8 md:p-10 lg:grid-cols-12 lg:gap-10 lg:px-0">
-            <h1 className="col-span-full !text-3xl font-medium tracking-tighter text-neutral-50 md:col-span-6 md:col-start-1 md:!text-4xl lg:col-span-8 lg:col-start-2 lg:!text-6xl">
+            <h1 className="col-span-full md:col-span-6 md:col-start-1 lg:col-span-8 lg:col-start-2">
               <motion.span
-                className="block"
+                className="block !text-3xl font-medium tracking-tighter text-neutral-50 md:!text-4xl lg:!text-6xl"
                 initial={MOTION_CONFIG.LEFT.INITIAL}
                 whileInView={MOTION_CONFIG.LEFT.WHILE_IN_VIEW}
                 transition={MOTION_CONFIG.TRANSITION}

@@ -114,7 +114,7 @@ export const LISTINGS_MOCK: ListingPropTypes[] = [
         "/images/001-FP-01.png",
       ],
     },
-    AGENT: {
+    ASSIGNED_AGENT: {
       ID: "A001",
       AGENT: {
         LOGO: "/images/CE-Logo.png",

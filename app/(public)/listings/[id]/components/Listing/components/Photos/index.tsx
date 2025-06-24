@@ -58,9 +58,6 @@ export const Photos = ({ CONSTANTS, FULL_ADDRESS }: SectionPropTypes) => {
               >
                 <Image
                   className="h-full w-full object-cover object-center duration-300 ease-in-out group-hover:scale-105"
-                  style={{
-                    backgroundImage: `url(${PHOTO})`,
-                  }}
                   src={PHOTO}
                   alt={FULL_ADDRESS || ""}
                   width={1920}

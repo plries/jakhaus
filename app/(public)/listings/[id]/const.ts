@@ -114,30 +114,33 @@ export const LISTINGS_MOCK: ListingPropTypes[] = [
         "/images/001-FP-01.png",
       ],
     },
-    BROKERAGE: {
+    AGENT: {
+      ID: "A001",
+      AGENT: {
+        LOGO: "/images/CE-Logo.png",
+        LOGO_DARK: true,
+        SUBTITLE: "Coastal Edge Real Estate Group ",
+        NAME: "Adrian Cabanos",
+        LINKS: [
+          {
+            TYPE: "email",
+            LINK: "AdrianCabanos@remax.net",
+          },
+          {
+            TYPE: "phone",
+            LINK: "604-612-7416"
+          },
+          {
+            TYPE: "website",
+            LINK: "https://coastaledgereg.com",
+          }
+        ]
+      },
+      BROKERAGE: {
       LOGO: "/images/REMAX-Logo.png",
       TITLE: "REMAX 2000 Realty",
       ADDRESS: "#103 - 15127 100 Avenue Surrey, BC, V3R 0N9"
     },
-    AGENT: {
-      LOGO: "/images/CE-Logo.png",
-      LOGO_DARK: true,
-      SUBTITLE: "Coastal Edge Real Estate Group ",
-      NAME: "Adrian Cabanos",
-      LINKS: [
-        {
-          TYPE: "email",
-          LINK: "AdrianCabanos@remax.net",
-        },
-        {
-          TYPE: "phone",
-          LINK: "604-612-7416"
-        },
-        {
-          TYPE: "website",
-          LINK: "https://coastaledgereg.com",
-        }
-      ]
     },
   },
 ];

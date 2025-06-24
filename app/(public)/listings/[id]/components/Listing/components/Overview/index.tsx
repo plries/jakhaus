@@ -58,7 +58,7 @@ export const Overview = ({ CONSTANTS, FULL_ADDRESS }: SectionPropTypes) => {
               </motion.span>
             </h1>
             <motion.div
-              className={`col-span-full w-fit md:col-span-2 md:col-start-7 md:justify-self-end lg:col-span-2 lg:col-start-10 ${CONSTANTS.AGENT.LOGO_DARK ? "rounded-4xl border border-neutral-950/10 bg-neutral-50 p-5 shadow-lg" : ""}`}
+              className={`col-span-full w-fit md:col-span-2 md:col-start-7 md:justify-self-end lg:col-span-2 lg:col-start-10 ${CONSTANTS.AGENT.AGENT.LOGO_DARK ? "rounded-4xl border border-neutral-950/10 bg-neutral-50 p-5 shadow-lg" : ""}`}
               initial={MOTION_CONFIG.RIGHT.INITIAL}
               whileInView={MOTION_CONFIG.RIGHT.WHILE_IN_VIEW}
               transition={{
@@ -67,8 +67,8 @@ export const Overview = ({ CONSTANTS, FULL_ADDRESS }: SectionPropTypes) => {
               }}
             >
               <Image
-                src={CONSTANTS.AGENT.LOGO}
-                alt={CONSTANTS.AGENT.SUBTITLE}
+                src={CONSTANTS.AGENT.AGENT.LOGO}
+                alt={CONSTANTS.AGENT.AGENT.SUBTITLE}
                 width={1920}
                 height={1080}
                 className="max-w-32 object-contain drop-shadow-md"

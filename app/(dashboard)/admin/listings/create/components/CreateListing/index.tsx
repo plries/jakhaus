@@ -389,7 +389,7 @@ export const CreateListing = () => {
               <div className="flex flex-row items-center gap-2 text-neutral-50">
                 <HouseIcon />
                 {hook.address && (
-                  <p>
+                  <p className="leading-none">
                     {hook.address.unit} {hook.address.street}{" "}
                     {hook.address.city ? hook.address.city + ", " : ""}{" "}
                     {hook.address.province ? hook.address.province + ", " : ""}
@@ -399,11 +399,15 @@ export const CreateListing = () => {
               </div>
               <div className="flex flex-row items-center gap-2 text-neutral-50">
                 <BuildingOfficeIcon />
-                {hook.brokerage && <p>{hook.brokerage.title}</p>}
+                {hook.brokerage && (
+                  <p className="leading-none">{hook.brokerage.title}</p>
+                )}
               </div>
               <div className="flex flex-row items-center gap-2 text-neutral-50">
                 <UserIcon />
-                {hook.agent && <p>{hook.agent.name}</p>}
+                {hook.agent && (
+                  <p className="leading-none">{hook.agent.name}</p>
+                )}
               </div>
             </IconContext.Provider>
           </div>

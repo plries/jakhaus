@@ -21,11 +21,11 @@ export type ListingPropTypes = {
     FLOOR_PLAN?: string[];
     SCAN_LINK?: string;
   };
-  BROKERAGE: {
-    LOGO: string;
-    TITLE: string;
-    ADDRESS: string;
-  };
+  AGENT: AgentPropTypes;
+};
+
+export type AgentPropTypes = {
+  ID: string;
   AGENT: {
     LOGO: string;
     LOGO_DARK?: boolean;
@@ -36,7 +36,12 @@ export type ListingPropTypes = {
       LINK: string
     }[]
   };
-};
+  BROKERAGE: {
+    LOGO: string;
+    TITLE: string;
+    ADDRESS: string;
+  };
+}
 
 export type SectionPropTypes = {
   CONSTANTS: ListingPropTypes;

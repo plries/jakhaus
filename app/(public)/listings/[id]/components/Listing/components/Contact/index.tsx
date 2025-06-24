@@ -32,18 +32,18 @@ export const Contact = ({ CONSTANTS }: SectionPropTypes) => {
             initial={MOTION_CONFIG.LEFT.INITIAL}
             whileInView={MOTION_CONFIG.LEFT.WHILE_IN_VIEW}
             transition={MOTION_CONFIG.TRANSITION}
-            className={`w-fit ${CONSTANTS.AGENT.LOGO_DARK ? "rounded-4xl border border-neutral-950/10 bg-neutral-50 p-5 shadow-lg" : ""}`}
+            className={`w-fit ${CONSTANTS.AGENT.AGENT.LOGO_DARK ? "rounded-4xl border border-neutral-950/10 bg-neutral-50 p-5 shadow-lg" : ""}`}
           >
             <Image
-              src={CONSTANTS.AGENT.LOGO}
-              alt={CONSTANTS.AGENT.SUBTITLE}
+              src={CONSTANTS.AGENT.AGENT.LOGO}
+              alt={CONSTANTS.AGENT.AGENT.SUBTITLE}
               className="max-w-32 object-contain drop-shadow-md"
               width={1920}
               height={1080}
             />
           </motion.div>
           <div className="grid grid-cols-1 gap-2">
-            {CONSTANTS.AGENT.LINKS.map((LINK, index) => (
+            {CONSTANTS.AGENT.AGENT.LINKS.map((LINK, index) => (
               <motion.div
                 key={index}
                 initial={MOTION_CONFIG.LEFT.INITIAL}
@@ -89,8 +89,8 @@ export const Contact = ({ CONSTANTS }: SectionPropTypes) => {
             transition={MOTION_CONFIG.TRANSITION}
           >
             <Image
-              src={CONSTANTS.BROKERAGE.LOGO}
-              alt={CONSTANTS.BROKERAGE.TITLE}
+              src={CONSTANTS.AGENT.BROKERAGE.LOGO}
+              alt={CONSTANTS.AGENT.BROKERAGE.TITLE}
               className="max-w-32 object-contain drop-shadow-md"
               width={1920}
               height={1080}
@@ -105,7 +105,7 @@ export const Contact = ({ CONSTANTS }: SectionPropTypes) => {
               delay: 0.2,
             }}
           >
-            {CONSTANTS.BROKERAGE.ADDRESS}
+            {CONSTANTS.AGENT.BROKERAGE.ADDRESS}
           </motion.p>
         </div>
       </div>

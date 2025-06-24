@@ -22,8 +22,8 @@ export const InputSelector = ({ input, options }: InputSelectorPropTypes) => {
         htmlFor={input.htmlFor}
         value={hook.inputValue}
         onChange={(e) => {
+          if (input.onChange) input.onChange(e);
           hook.setInputValue(e.target.value);
-          input.onChange?.(e);
         }}
         required={input.required}
         error={input.error}
@@ -77,10 +77,21 @@ export const InputSelector = ({ input, options }: InputSelectorPropTypes) => {
               <Button
                 key={index}
                 onClick={() => {
-                  option.onClick?.();
                   hook.setInputValue(option.label);
                   hook.setSelectedOption(option.label);
                   hook.setIsOpen(false);
+
+                  if (input.onChange && hook.inputRef.current) {
+                    const syntheticEvent = {
+                      target: {
+                        value: option.label,
+                      },
+                    } as React.ChangeEvent<HTMLInputElement>;
+
+                    input.onChange(syntheticEvent);
+                  }
+
+                  option.onClick?.();
                 }}
                 additionalClasses={`!w-full font-normal !justify-start bg-transparent hover:!bg-neutral-100 !shadow-none !border-none !text-neutral-600 ${
                   hook.highlightedIndex === index ? "!bg-neutral-100" : ""

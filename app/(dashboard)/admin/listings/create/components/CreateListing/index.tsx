@@ -17,12 +17,10 @@ import {
   UploadButton,
   UploadDropzone,
 } from "@/app/components";
-import { CREATE_LISTING_CONST } from "./const";
-import { useWindowSize } from "@/app/hooks";
+import { CREATE_LISTING_CONST, CREATE_LISTING_MOCK } from "./const";
 import { useCreateListing } from "./useCreateListing";
 
 export const CreateListing = () => {
-  const windowSize = useWindowSize();
   const hook = useCreateListing();
 
   return (
@@ -110,7 +108,6 @@ export const CreateListing = () => {
             }
             label={CREATE_LISTING_CONST.FORM.OVERVIEW.BEDROOMS.LABEL}
             htmlFor={CREATE_LISTING_CONST.FORM.OVERVIEW.BEDROOMS.HTML_FOR}
-            defaultValue="1"
             type="number"
             required
           />
@@ -120,7 +117,6 @@ export const CreateListing = () => {
             }
             label={CREATE_LISTING_CONST.FORM.OVERVIEW.BATHROOMS.LABEL}
             htmlFor={CREATE_LISTING_CONST.FORM.OVERVIEW.BATHROOMS.HTML_FOR}
-            defaultValue="1"
             type="number"
             required
           />
@@ -130,7 +126,6 @@ export const CreateListing = () => {
             }
             label={CREATE_LISTING_CONST.FORM.OVERVIEW.SQUARE_FEET.LABEL}
             htmlFor={CREATE_LISTING_CONST.FORM.OVERVIEW.SQUARE_FEET.HTML_FOR}
-            defaultValue="1"
             type="number"
             required
           />
@@ -141,7 +136,7 @@ export const CreateListing = () => {
             label={CREATE_LISTING_CONST.FORM.PHOTOS.FEATURED_IMAGE.LABEL}
             text={CREATE_LISTING_CONST.FORM.PHOTOS.FEATURED_IMAGE.TEXT}
             htmlFor={CREATE_LISTING_CONST.FORM.PHOTOS.FEATURED_IMAGE.HTML_FOR}
-            onChange={(file, url) => hook.setFeaturedImage({ file, url })}
+            onChange={(url) => hook.setFeaturedImage({ url })}
             onClear={() => hook.setFeaturedImage(null)}
             required
           />
@@ -166,8 +161,32 @@ export const CreateListing = () => {
               htmlFor: CREATE_LISTING_CONST.FORM.AGENT.SELECT_AGENT.HTML_FOR,
               placeholder: CREATE_LISTING_CONST.FORM.AGENT.SELECT_AGENT.TEXT,
               label: CREATE_LISTING_CONST.FORM.AGENT.SELECT_AGENT.LABEL,
+              onChange: (option) => {
+                const selected = CREATE_LISTING_MOCK.AGENTS.find(
+                  (a) => a.AGENT.NAME === option.target.value,
+                );
+                if (!selected) return;
+                hook.setAgent({
+                  id: selected.ID,
+                  logo: selected.AGENT.LOGO,
+                  darkLogo: selected.AGENT.DARK_LOGO,
+                  name: selected.AGENT.NAME,
+                  email: selected.AGENT.EMAIL,
+                  phone: selected.AGENT.PHONE,
+                  website: selected.AGENT.WEBSITE || "",
+                  instagram: selected.AGENT.INSTAGRAM || "",
+                });
+                if (!selected.AGENT.LOGO) return;
+                hook.setBrokerage({
+                  id: selected.ID,
+                  title: selected.BROKERAGE.TITLE,
+                  address: selected.BROKERAGE.ADDRESS,
+                });
+              },
             }}
-            options={[{ label: "Option 1" }, { label: "Option 2" }]}
+            options={CREATE_LISTING_MOCK.AGENTS.map((agent) => ({
+              label: agent.AGENT.NAME,
+            }))}
           />
           <button
             className="relative w-fit cursor-pointer place-self-end !text-sm text-neutral-600 duration-150 ease-in-out after:absolute after:-bottom-0.5 after:left-0 after:h-[1px] after:w-full after:origin-left after:scale-x-0 after:bg-neutral-950 after:transition-[scale] hover:text-neutral-950 hover:after:scale-x-100"
@@ -185,18 +204,30 @@ export const CreateListing = () => {
               label={CREATE_LISTING_CONST.FORM.AGENT.LOGO.LABEL}
               text={CREATE_LISTING_CONST.FORM.AGENT.LOGO.TEXT}
               htmlFor={CREATE_LISTING_CONST.FORM.AGENT.LOGO.HTML_FOR}
-              onClear={() => hook.setAgentLogo(null)}
-              onChange={(name) => hook.setAgentLogo(name)}
-              isDarkLogo={hook.darkLogo}
+              onClear={() =>
+                hook.setAgent((prev) => ({
+                  ...prev,
+                  logo: "",
+                }))
+              }
+              onChange={(file) =>
+                hook.setAgent((prev) => ({ ...prev, logo: file }))
+              }
+              isDarkLogo={hook.agent.darkLogo}
+              preview={hook.agent.logo}
               required
             />
-            {hook.agentLogo && (
+            {hook.agent.logo && (
               <>
                 <Checkbox
                   label={CREATE_LISTING_CONST.FORM.AGENT.LOGO_DARK.LABEL}
                   htmlFor={CREATE_LISTING_CONST.FORM.AGENT.LOGO_DARK.HTML_FOR}
+                  value={hook.agent.darkLogo}
                   onChange={(event) => {
-                    hook.setDarkLogo(event.target.checked);
+                    hook.setAgent((prev) => ({
+                      ...prev,
+                      darkLogo: event.target.checked,
+                    }));
                   }}
                 />
                 <p className="-mt-2 !text-sm text-neutral-700">
@@ -208,8 +239,12 @@ export const CreateListing = () => {
               placeholder={CREATE_LISTING_CONST.FORM.AGENT.NAME.PLACEHOLDER}
               label={CREATE_LISTING_CONST.FORM.AGENT.NAME.LABEL}
               htmlFor={CREATE_LISTING_CONST.FORM.AGENT.NAME.HTML_FOR}
+              value={hook.agent.name}
               onChange={(event) => {
-                hook.setAgent({ name: event.target.value });
+                hook.setAgent((prev) => ({
+                  ...prev,
+                  name: event.target.value,
+                }));
               }}
               required
             />
@@ -217,18 +252,39 @@ export const CreateListing = () => {
               placeholder={CREATE_LISTING_CONST.FORM.AGENT.EMAIL.PLACEHOLDER}
               label={CREATE_LISTING_CONST.FORM.AGENT.EMAIL.LABEL}
               htmlFor={CREATE_LISTING_CONST.FORM.AGENT.EMAIL.HTML_FOR}
+              value={hook.agent.email}
+              onChange={(event) => {
+                hook.setAgent((prev) => ({
+                  ...prev,
+                  email: event.target.value,
+                }));
+              }}
               required
             />
             <Input
               placeholder={CREATE_LISTING_CONST.FORM.AGENT.PHONE.PLACEHOLDER}
               label={CREATE_LISTING_CONST.FORM.AGENT.PHONE.LABEL}
               htmlFor={CREATE_LISTING_CONST.FORM.AGENT.PHONE.HTML_FOR}
+              value={hook.agent.phone}
+              onChange={(event) => {
+                hook.setAgent((prev) => ({
+                  ...prev,
+                  phone: event.target.value,
+                }));
+              }}
               required
             />
             <Input
               placeholder={CREATE_LISTING_CONST.FORM.AGENT.WEBSITE.PLACEHOLDER}
               label={CREATE_LISTING_CONST.FORM.AGENT.WEBSITE.LABEL}
               htmlFor={CREATE_LISTING_CONST.FORM.AGENT.WEBSITE.HTML_FOR}
+              value={hook.agent.website}
+              onChange={(event) => {
+                hook.setAgent((prev) => ({
+                  ...prev,
+                  website: event.target.value,
+                }));
+              }}
             />
             <Input
               placeholder={
@@ -236,6 +292,13 @@ export const CreateListing = () => {
               }
               label={CREATE_LISTING_CONST.FORM.AGENT.INSTAGRAM.LABEL}
               htmlFor={CREATE_LISTING_CONST.FORM.AGENT.INSTAGRAM.HTML_FOR}
+              value={hook.agent.instagram}
+              onChange={(event) => {
+                hook.setAgent((prev) => ({
+                  ...prev,
+                  instagram: event.target.value,
+                }));
+              }}
             />
           </div>
         </div>
@@ -248,6 +311,15 @@ export const CreateListing = () => {
               label={CREATE_LISTING_CONST.FORM.BROKERAGE.LOGO.LABEL}
               text={CREATE_LISTING_CONST.FORM.BROKERAGE.LOGO.TEXT}
               htmlFor={CREATE_LISTING_CONST.FORM.BROKERAGE.LOGO.HTML_FOR}
+              onClear={() =>
+                hook.setBrokerage((prev) => ({
+                  ...prev,
+                  logo: "",
+                }))
+              }
+              onChange={(file) =>
+                hook.setBrokerage((prev) => ({ ...prev, logo: file }))
+              }
               required
             />
             <p className="-mt-2 !text-sm text-neutral-700">
@@ -259,8 +331,12 @@ export const CreateListing = () => {
               }
               label={CREATE_LISTING_CONST.FORM.BROKERAGE.TITLE.LABEL}
               htmlFor={CREATE_LISTING_CONST.FORM.BROKERAGE.TITLE.HTML_FOR}
+              value={hook.brokerage.title}
               onChange={(event) => {
-                hook.setBrokerage({ name: event.target.value });
+                hook.setBrokerage((prev) => ({
+                  ...prev,
+                  title: event.target.value,
+                }));
               }}
               required
             />
@@ -270,6 +346,13 @@ export const CreateListing = () => {
               }
               label={CREATE_LISTING_CONST.FORM.BROKERAGE.ADDRESS.LABEL}
               htmlFor={CREATE_LISTING_CONST.FORM.BROKERAGE.ADDRESS.HTML_FOR}
+              value={hook.brokerage.address}
+              onChange={(event) => {
+                hook.setBrokerage((prev) => ({
+                  ...prev,
+                  address: event.target.value,
+                }));
+              }}
               required
             />
             <Checkbox
@@ -282,54 +365,50 @@ export const CreateListing = () => {
           </div>
         </div>
       </div>
-      {(!windowSize.isMobile || !windowSize.isTablet) && (
-        <div className="relative col-span-4 col-start-9 h-full pr-5">
-          <div className="sticky top-2.5 grid auto-rows-min grid-cols-1 gap-5 rounded-2xl bg-neutral-950 p-2 shadow-lg">
-            <div className="grid aspect-video w-full place-items-center overflow-hidden rounded-xl bg-neutral-100 shadow-md">
-              {hook.featuredImage ? (
-                <Image
-                  src={hook.featuredImage.url}
-                  alt="Featured"
-                  width={1920}
-                  height={1080}
-                  className="h-full w-full object-cover"
-                />
-              ) : (
-                <CameraIcon
-                  className="text-neutral-400"
-                  size={48}
-                  weight="light"
-                />
-              )}
-            </div>
-            <div className="grid grid-cols-1 gap-1 px-1">
-              <IconContext.Provider value={{ size: 24, weight: "light" }}>
-                <div className="flex flex-row items-center gap-2 text-neutral-50">
-                  <HouseIcon />
-                  {hook.address && (
-                    <p>
-                      {hook.address.unit} {hook.address.street}{" "}
-                      {hook.address.city ? hook.address.city + ", " : ""}{" "}
-                      {hook.address.province
-                        ? hook.address.province + ", "
-                        : ""}
-                      {hook.address.postal}
-                    </p>
-                  )}
-                </div>
-                <div className="flex flex-row items-center gap-2 text-neutral-50">
-                  <BuildingOfficeIcon />
-                  {hook.brokerage && <p>{hook.brokerage.name}</p>}
-                </div>
-                <div className="flex flex-row items-center gap-2 text-neutral-50">
-                  <UserIcon />
-                  {hook.agent && <p>{hook.agent.name}</p>}
-                </div>
-              </IconContext.Provider>
-            </div>
+      <div className="relative col-span-4 col-start-9 hidden h-full pr-5 lg:block">
+        <div className="sticky top-2.5 grid auto-rows-min grid-cols-1 gap-5 rounded-2xl bg-neutral-950 p-2 shadow-lg">
+          <div className="grid aspect-video w-full place-items-center overflow-hidden rounded-xl bg-neutral-100 shadow-md">
+            {hook.featuredImage ? (
+              <Image
+                src={hook.featuredImage.url}
+                alt="Featured"
+                width={1920}
+                height={1080}
+                className="h-full w-full object-cover"
+              />
+            ) : (
+              <CameraIcon
+                className="text-neutral-400"
+                size={48}
+                weight="light"
+              />
+            )}
+          </div>
+          <div className="grid grid-cols-1 gap-1 px-1">
+            <IconContext.Provider value={{ size: 24, weight: "light" }}>
+              <div className="flex flex-row items-center gap-2 text-neutral-50">
+                <HouseIcon />
+                {hook.address && (
+                  <p>
+                    {hook.address.unit} {hook.address.street}{" "}
+                    {hook.address.city ? hook.address.city + ", " : ""}{" "}
+                    {hook.address.province ? hook.address.province + ", " : ""}
+                    {hook.address.postal}
+                  </p>
+                )}
+              </div>
+              <div className="flex flex-row items-center gap-2 text-neutral-50">
+                <BuildingOfficeIcon />
+                {hook.brokerage && <p>{hook.brokerage.title}</p>}
+              </div>
+              <div className="flex flex-row items-center gap-2 text-neutral-50">
+                <UserIcon />
+                {hook.agent && <p>{hook.agent.name}</p>}
+              </div>
+            </IconContext.Provider>
           </div>
         </div>
-      )}
+      </div>
       <div className="col-span-full flex flex-row flex-wrap justify-end gap-5 border-t border-t-neutral-300 px-10 pt-10 pb-5">
         <Button
           onClick={() => {

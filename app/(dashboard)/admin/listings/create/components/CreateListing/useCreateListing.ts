@@ -3,16 +3,46 @@ import { useState, useEffect } from "react";
 
 export const useCreateListing = () => {
   const [showCreateAgent, setShowCreateAgent] = useState<boolean>(false);
-  const [showCreateBrokerage, setShowCreateBrokerage] = useState<boolean>(false);
-  const [featuredImage, setFeaturedImage] = useState<{ file: File; url: string } | null>(null);
-  const [address, setAddress] = useState<{ street?: string; unit?: string; city?: string; province?: string; postal?: string } | null>(null);
-  const [brokerage, setBrokerage] = useState<{ name: string; } | null>(null);
-  const [agentLogo, setAgentLogo] = useState<{ name: string; } | null>(null);
-  const [agent, setAgent] = useState<{ name: string; } | null>(null);
-  const [darkLogo, setDarkLogo] = useState<boolean>(false);
+  const [featuredImage, setFeaturedImage] = useState<{ url: string } | null>(null);
+  const [address, setAddress] = useState<{
+    street?: string;
+    unit?: string;
+    city?: string;
+    province?: string;
+    postal?: string }
+  | null>(null);
+  const [agent, setAgent] = useState<{
+    id?: string;
+    logo?: string;
+    darkLogo?: boolean;
+    name?: string;
+    email?: string;
+    phone?: string;
+    website?: string;
+    instagram?: string;
+  }>({
+    id: "",
+    logo: "",
+    darkLogo: false,
+    name: "",
+    email: "",
+    phone: "",
+    website: "",
+    instagram: "",
+  });
+  const [brokerage, setBrokerage] = useState<{
+    id?: string;
+    title?: string;
+    address?: string;
+    logo?: string
+  }>({
+    id: "",
+    title: "",
+    address: "",
+    logo: "",
+  });
 
   const toggleShowCreateAgent = () => setShowCreateAgent(!showCreateAgent);
-  const toggleShowCreateBrokerage = () => setShowCreateBrokerage(!showCreateBrokerage);
 
   useEffect(() => {
     return () => {
@@ -25,8 +55,6 @@ export const useCreateListing = () => {
   return {
     showCreateAgent,
     toggleShowCreateAgent,
-    showCreateBrokerage,
-    toggleShowCreateBrokerage,
     featuredImage,
     setFeaturedImage,
     address,
@@ -35,9 +63,5 @@ export const useCreateListing = () => {
     setBrokerage,
     agent,
     setAgent,
-    agentLogo,
-    setAgentLogo,
-    darkLogo,
-    setDarkLogo,
   };
 }

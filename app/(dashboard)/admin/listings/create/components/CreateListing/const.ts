@@ -176,21 +176,37 @@ export const CREATE_LISTING_MOCK = {
   AGENTS: [
     {
       ID: "A001",
-      NAME: "John Doe",
-      SUBTITLE: "Personal Real Estate Corporation",
-      PHONE: "604-123-4567",
-      EMAIL: "johndoe@email.com",
-      WEBSITE: "https://johndoe.com",
-      INSTAGRAM: "@johndoe"
+      AGENT: {
+        NAME: "John Doe",
+        LOGO: "/images/CE-Logo.png",
+        DARK_LOGO: true,
+        SUBTITLE: "Personal Real Estate Corporation",
+        PHONE: "604-123-4567",
+        EMAIL: "johndoe@email.com",
+        INSTAGRAM: "@johndoe"
+      },
+      BROKERAGE: {
+        LOGO: "/images/REMAX-Logo.png",
+        TITLE: "REMAX 2000 Realty",
+        ADDRESS: "#103 - 15127 100 Avenue Surrey, BC, V3R 0N9"
+      }
     },
     {
       ID: "A002",
-      NAME: "Jane Doe",
-      SUBTITLE: "Personal Real Estate Corporation",
-      PHONE: "604-123-4567",
-      EMAIL: "johndoe@email.com",
-      WEBSITE: "https://johndoe.com",
-      INSTAGRAM: "@johndoe"
+      AGENT: {
+        NAME: "Samantha Li",
+        LOGO: "/images/CE-Logo.png",
+        DARK_LOGO: true,
+        SUBTITLE: "Personal Real Estate Corporation",
+        PHONE: "604-123-4567",
+        EMAIL: "samanthali@email.com",
+        WEBSITE: "https://samanthali.com",
+      },
+      BROKERAGE: {
+        LOGO: "/images/REMAX-Logo.png",
+        TITLE: "REMAX 300040 Realty",
+        ADDRESS: "#103 - 15127 100 Avenue Surrey, BC, V3R 0N9"
+      }
     }
   ]
 }

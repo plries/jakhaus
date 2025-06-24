@@ -128,6 +128,7 @@ export const Navbar = ({ CONSTANTS, LINKS, dashboard }: NavbarPropTypes) => {
                           : "!text-neutral-400 hover:!bg-neutral-50/10 hover:text-neutral-50 !shadow-none"
                       } `}
                       href={LINK.HREF}
+                      onClick={() => mobileMenu.toggleOpen()}
                     >
                       {LINK.NAME}
                     </Button>

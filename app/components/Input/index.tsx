@@ -13,7 +13,6 @@ export const Input = ({
   htmlFor,
   selector,
   onFocus,
-  defaultValue,
   inputRef,
   onKeyDown,
   disabled,
@@ -39,10 +38,11 @@ export const Input = ({
           type={type}
           placeholder={placeholder}
           value={value}
-          onChange={onChange}
+          onChange={(e) => {
+            if (onChange) onChange(e);
+          }}
           required={required}
           onFocus={onFocus}
-          defaultValue={defaultValue}
           min={type === "number" ? 0 : undefined}
           onKeyDown={onKeyDown}
           disabled={disabled}

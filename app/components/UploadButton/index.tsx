@@ -14,6 +14,7 @@ export const UploadButton = ({
   onChange,
   onClear,
   isDarkLogo,
+  preview,
 }: UploadButtonPropTypes) => {
   const hook = useUploadButton();
 
@@ -40,12 +41,12 @@ export const UploadButton = ({
           if (file) {
             const previewUrl = URL.createObjectURL(file);
             hook.handleFileUpload(e);
-            if (onChange) onChange(file, previewUrl);
+            if (onChange) onChange(previewUrl);
           }
         }}
         disabled={disabled}
       />
-      {hook.uploadedFile && hook.previewUrl && (
+      {(hook.previewUrl || preview) && (
         <div className="relative mt-5 w-fit">
           <IconButton
             additionalClasses="absolute -right-4 -top-4 place-self-end"
@@ -58,15 +59,15 @@ export const UploadButton = ({
             <XIcon />
           </IconButton>
           <Image
-            src={hook.previewUrl}
-            alt={hook.uploadedFile.name}
+            src={hook.previewUrl || preview!}
+            alt={hook.uploadedFile?.name || "Preview"}
             width={1920}
             height={1080}
             className={`mt-2 w-auto max-w-64 rounded-md border border-neutral-950/10 shadow-sm transition-colors duration-150 ease-in-out ${isDarkLogo ? "bg-neutral-50" : "bg-neutral-950"}`}
           />
           <div className="flex justify-center">
             <p className="-mt-2 w-fit rounded-full border border-neutral-950/10 bg-neutral-50 px-2 py-1 text-center !text-sm !text-neutral-600 shadow-sm">
-              {hook.uploadedFile.name}
+              {hook.uploadedFile?.name || "Preview"}
             </p>
           </div>
         </div>

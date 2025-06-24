@@ -1,14 +1,5 @@
 "use client";
-
-import {
-  Input,
-  InputSelector,
-  PageHeading,
-  SectionHeading,
-  UploadButton,
-} from "@/app/components";
-import { CREATE_LISTING_CONST } from "./const";
-import { useWindowSize } from "@/app/hooks";
+import Image from "next/image";
 import {
   BuildingOfficeIcon,
   CameraIcon,
@@ -16,9 +7,23 @@ import {
   IconContext,
   UserIcon,
 } from "@phosphor-icons/react";
+import {
+  Button,
+  Checkbox,
+  Input,
+  InputSelector,
+  PageHeading,
+  SectionHeading,
+  UploadButton,
+  UploadDropzone,
+} from "@/app/components";
+import { CREATE_LISTING_CONST } from "./const";
+import { useWindowSize } from "@/app/hooks";
+import { useCreateListing } from "./useCreateListing";
 
 export const CreateListing = () => {
-  const hook = useWindowSize();
+  const windowSize = useWindowSize();
+  const hook = useCreateListing();
 
   return (
     <form className="contents">
@@ -33,17 +38,35 @@ export const CreateListing = () => {
             }
             label={CREATE_LISTING_CONST.FORM.ADDRESS.STREET_ADDRESS.LABEL}
             htmlFor={CREATE_LISTING_CONST.FORM.ADDRESS.STREET_ADDRESS.HTML_FOR}
+            onChange={(event) => {
+              hook.setAddress((prev) => ({
+                ...prev,
+                street: event.target.value,
+              }));
+            }}
             required
           />
           <Input
             placeholder={CREATE_LISTING_CONST.FORM.ADDRESS.UNIT.PLACEHOLDER}
             label={CREATE_LISTING_CONST.FORM.ADDRESS.UNIT.LABEL}
             htmlFor={CREATE_LISTING_CONST.FORM.ADDRESS.UNIT.HTML_FOR}
+            onChange={(event) => {
+              hook.setAddress((prev) => ({
+                ...prev,
+                unit: event.target.value,
+              }));
+            }}
           />
           <Input
             placeholder={CREATE_LISTING_CONST.FORM.ADDRESS.CITY.PLACEHOLDER}
             label={CREATE_LISTING_CONST.FORM.ADDRESS.CITY.LABEL}
             htmlFor={CREATE_LISTING_CONST.FORM.ADDRESS.CITY.HTML_FOR}
+            onChange={(event) => {
+              hook.setAddress((prev) => ({
+                ...prev,
+                city: event.target.value,
+              }));
+            }}
             required
           />
           <div className="grid grid-cols-2 gap-5">
@@ -53,6 +76,12 @@ export const CreateListing = () => {
               }
               label={CREATE_LISTING_CONST.FORM.ADDRESS.PROVINCE.LABEL}
               htmlFor={CREATE_LISTING_CONST.FORM.ADDRESS.PROVINCE.HTML_FOR}
+              onChange={(event) => {
+                hook.setAddress((prev) => ({
+                  ...prev,
+                  province: event.target.value,
+                }));
+              }}
               required
             />
             <Input
@@ -61,6 +90,12 @@ export const CreateListing = () => {
               }
               label={CREATE_LISTING_CONST.FORM.ADDRESS.POSTAL_CODE.LABEL}
               htmlFor={CREATE_LISTING_CONST.FORM.ADDRESS.POSTAL_CODE.HTML_FOR}
+              onChange={(event) => {
+                hook.setAddress((prev) => ({
+                  ...prev,
+                  postal: event.target.value,
+                }));
+              }}
               required
             />
           </div>
@@ -68,70 +103,248 @@ export const CreateListing = () => {
         <SectionHeading>
           {CREATE_LISTING_CONST.SECTIONS.OVERVIEW}
         </SectionHeading>
-        <div className="grid grid-cols-1 gap-4 px-10">number inputs</div>
+        <div className="grid grid-cols-1 gap-4 px-10 md:grid lg:grid-cols-3">
+          <Input
+            placeholder={
+              CREATE_LISTING_CONST.FORM.OVERVIEW.BEDROOMS.PLACEHOLDER
+            }
+            label={CREATE_LISTING_CONST.FORM.OVERVIEW.BEDROOMS.LABEL}
+            htmlFor={CREATE_LISTING_CONST.FORM.OVERVIEW.BEDROOMS.HTML_FOR}
+            defaultValue="1"
+            type="number"
+            required
+          />
+          <Input
+            placeholder={
+              CREATE_LISTING_CONST.FORM.OVERVIEW.BATHROOMS.PLACEHOLDER
+            }
+            label={CREATE_LISTING_CONST.FORM.OVERVIEW.BATHROOMS.LABEL}
+            htmlFor={CREATE_LISTING_CONST.FORM.OVERVIEW.BATHROOMS.HTML_FOR}
+            defaultValue="1"
+            type="number"
+            required
+          />
+          <Input
+            placeholder={
+              CREATE_LISTING_CONST.FORM.OVERVIEW.SQUARE_FEET.PLACEHOLDER
+            }
+            label={CREATE_LISTING_CONST.FORM.OVERVIEW.SQUARE_FEET.LABEL}
+            htmlFor={CREATE_LISTING_CONST.FORM.OVERVIEW.SQUARE_FEET.HTML_FOR}
+            defaultValue="1"
+            type="number"
+            required
+          />
+        </div>
         <SectionHeading>{CREATE_LISTING_CONST.SECTIONS.PHOTOS}</SectionHeading>
         <div className="grid grid-cols-1 gap-4 px-10">
           <UploadButton
             label={CREATE_LISTING_CONST.FORM.PHOTOS.FEATURED_IMAGE.LABEL}
             text={CREATE_LISTING_CONST.FORM.PHOTOS.FEATURED_IMAGE.TEXT}
             htmlFor={CREATE_LISTING_CONST.FORM.PHOTOS.FEATURED_IMAGE.HTML_FOR}
+            onChange={(file, url) => hook.setFeaturedImage({ file, url })}
+            onClear={() => hook.setFeaturedImage(null)}
             required
           />
           <p className="-mt-2 !text-sm text-neutral-700">
             {CREATE_LISTING_CONST.FORM.PHOTOS.FEATURED_IMAGE.DESCRIPTION}
           </p>
-          file dropzone
+          <UploadDropzone
+            label={CREATE_LISTING_CONST.FORM.PHOTOS.PHOTO_GALLERY.LABEL}
+            text={CREATE_LISTING_CONST.FORM.PHOTOS.PHOTO_GALLERY.TEXT}
+            caption={CREATE_LISTING_CONST.FORM.PHOTOS.PHOTO_GALLERY.CAPTION}
+            htmlFor={CREATE_LISTING_CONST.FORM.PHOTOS.PHOTO_GALLERY.HTML_FOR}
+            required
+          />
         </div>
         <SectionHeading>
-          {CREATE_LISTING_CONST.SECTIONS.BROKERAGE_INFO}
+          {CREATE_LISTING_CONST.SECTIONS.AGENT_INFO}
         </SectionHeading>
         <div className="grid grid-cols-1 gap-4 px-10">
           <InputSelector
             input={{
               type: "text",
-              htmlFor:
-                CREATE_LISTING_CONST.FORM.BROKERAGE.SELECT_BROKERAGE.HTML_FOR,
-              placeholder:
-                CREATE_LISTING_CONST.FORM.BROKERAGE.SELECT_BROKERAGE.TEXT,
-              label: CREATE_LISTING_CONST.FORM.BROKERAGE.SELECT_BROKERAGE.LABEL,
-              required: true,
+              htmlFor: CREATE_LISTING_CONST.FORM.AGENT.SELECT_AGENT.HTML_FOR,
+              placeholder: CREATE_LISTING_CONST.FORM.AGENT.SELECT_AGENT.TEXT,
+              label: CREATE_LISTING_CONST.FORM.AGENT.SELECT_AGENT.LABEL,
             }}
-            options={[
-              { label: "Option 1", onClick: () => {} },
-              { label: "Option 2", onClick: () => {} },
-            ]}
+            options={[{ label: "Option 1" }, { label: "Option 2" }]}
           />
+          <button
+            className="relative w-fit cursor-pointer place-self-end !text-sm text-neutral-600 duration-150 ease-in-out after:absolute after:-bottom-0.5 after:left-0 after:h-[1px] after:w-full after:origin-left after:scale-x-0 after:bg-neutral-950 after:transition-[scale] hover:text-neutral-950 hover:after:scale-x-100"
+            type="button"
+            onClick={hook.toggleShowCreateAgent}
+          >
+            {hook.showCreateAgent
+              ? CREATE_LISTING_CONST.FORM.AGENT.HIDE
+              : CREATE_LISTING_CONST.FORM.AGENT.OR}
+          </button>
+          <div
+            className={`${hook.showCreateAgent ? "grid grid-cols-1 gap-4" : "hidden"}`}
+          >
+            <UploadButton
+              label={CREATE_LISTING_CONST.FORM.AGENT.LOGO.LABEL}
+              text={CREATE_LISTING_CONST.FORM.AGENT.LOGO.TEXT}
+              htmlFor={CREATE_LISTING_CONST.FORM.AGENT.LOGO.HTML_FOR}
+              onClear={() => hook.setAgentLogo(null)}
+              onChange={(name) => hook.setAgentLogo(name)}
+              isDarkLogo={hook.darkLogo}
+              required
+            />
+            {hook.agentLogo && (
+              <>
+                <Checkbox
+                  label={CREATE_LISTING_CONST.FORM.AGENT.LOGO_DARK.LABEL}
+                  htmlFor={CREATE_LISTING_CONST.FORM.AGENT.LOGO_DARK.HTML_FOR}
+                  onChange={(event) => {
+                    hook.setDarkLogo(event.target.checked);
+                  }}
+                />
+                <p className="-mt-2 !text-sm text-neutral-700">
+                  {CREATE_LISTING_CONST.FORM.AGENT.LOGO_DARK.DESCRIPTION}
+                </p>
+              </>
+            )}
+            <Input
+              placeholder={CREATE_LISTING_CONST.FORM.AGENT.NAME.PLACEHOLDER}
+              label={CREATE_LISTING_CONST.FORM.AGENT.NAME.LABEL}
+              htmlFor={CREATE_LISTING_CONST.FORM.AGENT.NAME.HTML_FOR}
+              onChange={(event) => {
+                hook.setAgent({ name: event.target.value });
+              }}
+              required
+            />
+            <Input
+              placeholder={CREATE_LISTING_CONST.FORM.AGENT.EMAIL.PLACEHOLDER}
+              label={CREATE_LISTING_CONST.FORM.AGENT.EMAIL.LABEL}
+              htmlFor={CREATE_LISTING_CONST.FORM.AGENT.EMAIL.HTML_FOR}
+              required
+            />
+            <Input
+              placeholder={CREATE_LISTING_CONST.FORM.AGENT.PHONE.PLACEHOLDER}
+              label={CREATE_LISTING_CONST.FORM.AGENT.PHONE.LABEL}
+              htmlFor={CREATE_LISTING_CONST.FORM.AGENT.PHONE.HTML_FOR}
+              required
+            />
+            <Input
+              placeholder={CREATE_LISTING_CONST.FORM.AGENT.WEBSITE.PLACEHOLDER}
+              label={CREATE_LISTING_CONST.FORM.AGENT.WEBSITE.LABEL}
+              htmlFor={CREATE_LISTING_CONST.FORM.AGENT.WEBSITE.HTML_FOR}
+            />
+            <Input
+              placeholder={
+                CREATE_LISTING_CONST.FORM.AGENT.INSTAGRAM.PLACEHOLDER
+              }
+              label={CREATE_LISTING_CONST.FORM.AGENT.INSTAGRAM.LABEL}
+              htmlFor={CREATE_LISTING_CONST.FORM.AGENT.INSTAGRAM.HTML_FOR}
+            />
+          </div>
+        </div>
+        <div className={`${hook.showCreateAgent ? "contents" : "hidden"}`}>
+          <SectionHeading>
+            {CREATE_LISTING_CONST.SECTIONS.BROKERAGE_INFO}
+          </SectionHeading>
+          <div className="grid grid-cols-1 gap-4 px-10">
+            <UploadButton
+              label={CREATE_LISTING_CONST.FORM.BROKERAGE.LOGO.LABEL}
+              text={CREATE_LISTING_CONST.FORM.BROKERAGE.LOGO.TEXT}
+              htmlFor={CREATE_LISTING_CONST.FORM.BROKERAGE.LOGO.HTML_FOR}
+              required
+            />
+            <p className="-mt-2 !text-sm text-neutral-700">
+              {CREATE_LISTING_CONST.FORM.BROKERAGE.LOGO.DESCRIPTION}
+            </p>
+            <Input
+              placeholder={
+                CREATE_LISTING_CONST.FORM.BROKERAGE.TITLE.PLACEHOLDER
+              }
+              label={CREATE_LISTING_CONST.FORM.BROKERAGE.TITLE.LABEL}
+              htmlFor={CREATE_LISTING_CONST.FORM.BROKERAGE.TITLE.HTML_FOR}
+              onChange={(event) => {
+                hook.setBrokerage({ name: event.target.value });
+              }}
+              required
+            />
+            <Input
+              placeholder={
+                CREATE_LISTING_CONST.FORM.BROKERAGE.ADDRESS.PLACEHOLDER
+              }
+              label={CREATE_LISTING_CONST.FORM.BROKERAGE.ADDRESS.LABEL}
+              htmlFor={CREATE_LISTING_CONST.FORM.BROKERAGE.ADDRESS.HTML_FOR}
+              required
+            />
+            <Checkbox
+              label={CREATE_LISTING_CONST.FORM.AGENT.SAVE_AGENT.LABEL}
+              htmlFor={CREATE_LISTING_CONST.FORM.AGENT.SAVE_AGENT.HTML_FOR}
+            />
+            <p className="-mt-2 !text-sm text-neutral-700">
+              {CREATE_LISTING_CONST.FORM.AGENT.SAVE_AGENT.DESCRIPTION}
+            </p>
+          </div>
         </div>
       </div>
-      {(!hook.isMobile || hook.isTablet) && (
+      {(!windowSize.isMobile || !windowSize.isTablet) && (
         <div className="relative col-span-4 col-start-9 h-full pr-5">
-          <div className="sticky top-5 grid auto-rows-min grid-cols-1 gap-5 rounded-2xl bg-neutral-950 p-2 shadow-lg">
-            <div className="grid aspect-video w-full place-items-center rounded-xl bg-neutral-100 shadow-md">
-              <CameraIcon
-                className="text-neutral-400"
-                size={48}
-                weight="light"
-              />
+          <div className="sticky top-2.5 grid auto-rows-min grid-cols-1 gap-5 rounded-2xl bg-neutral-950 p-2 shadow-lg">
+            <div className="grid aspect-video w-full place-items-center overflow-hidden rounded-xl bg-neutral-100 shadow-md">
+              {hook.featuredImage ? (
+                <Image
+                  src={hook.featuredImage.url}
+                  alt="Featured"
+                  width={1920}
+                  height={1080}
+                  className="h-full w-full object-cover"
+                />
+              ) : (
+                <CameraIcon
+                  className="text-neutral-400"
+                  size={48}
+                  weight="light"
+                />
+              )}
             </div>
             <div className="grid grid-cols-1 gap-1 px-1">
               <IconContext.Provider value={{ size: 24, weight: "light" }}>
                 <div className="flex flex-row items-center gap-2 text-neutral-50">
                   <HouseIcon />
-                  <p></p>
+                  {hook.address && (
+                    <p>
+                      {hook.address.unit} {hook.address.street}{" "}
+                      {hook.address.city ? hook.address.city + ", " : ""}{" "}
+                      {hook.address.province
+                        ? hook.address.province + ", "
+                        : ""}
+                      {hook.address.postal}
+                    </p>
+                  )}
                 </div>
                 <div className="flex flex-row items-center gap-2 text-neutral-50">
                   <BuildingOfficeIcon />
-                  <p></p>
+                  {hook.brokerage && <p>{hook.brokerage.name}</p>}
                 </div>
                 <div className="flex flex-row items-center gap-2 text-neutral-50">
                   <UserIcon />
-                  <p></p>
+                  {hook.agent && <p>{hook.agent.name}</p>}
                 </div>
               </IconContext.Provider>
             </div>
           </div>
         </div>
       )}
+      <div className="col-span-full flex flex-row flex-wrap justify-end gap-5 border-t border-t-neutral-300 px-10 pt-10 pb-5">
+        <Button
+          onClick={() => {
+            history.back();
+          }}
+        >
+          {CREATE_LISTING_CONST.BUTTONS.CANCEL}
+        </Button>
+        <Button
+          type="submit"
+          additionalClasses="!text-neutral-50 !bg-neutral-950 !hover:bg-neutral-800 !border-neutral-900"
+        >
+          {CREATE_LISTING_CONST.BUTTONS.CREATE}
+        </Button>
+      </div>
     </form>
   );
 };

@@ -9,34 +9,16 @@ export const CREATE_AGENT_CONST = {
     CANCEL: "Cancel"
   },
   FORM: {
-    BROKERAGE: {
-      SELECT_BROKERAGE: {
-        LABEL: "Select a brokerage",
-        TEXT: "Remax 2000 Realty",
-        HTML_FOR: "select_brokerage"
-      },
-      OR: "or",
-      LOGO: {
-        LABEL: "Logo",
-        TEXT: "Choose file",
-        HTML_FOR: "brokerage-logo"
-      },
-      TITLE: {
-        LABEL: "Title",
-        PLACEHOLDER: "Remax 2000 Realty",
-        HTML_FOR: "brokerage_title"
-      },
-      ADDRESS: {
-        LABEL: "Address",
-        PLACEHOLDER: "123 Main St, Vancouver, BC, V1A 2B3",
-        HTML_FOR: "brokerage_address"
-      }
-    },
     AGENT: {
       LOGO: {
         LABEL: "Logo",
-        TEXT: "Choose file",
+        TEXT: "Upload file",
         HTML_FOR: "agent_logo"
+      },
+      LOGO_DARK: {
+        LABEL: "Use light background",
+        HTML_FOR: "agent_logo_dark",
+        DESCRIPTION: "Use a light version of the agent's logo if possible, otherwise check this option to use the light background."
       },
       NAME: {
         LABEL: "Name",
@@ -68,6 +50,25 @@ export const CREATE_AGENT_CONST = {
         PLACEHOLDER: "@johndoe",
         HTML_FOR: "agent_instagram"
       }
-    }
+    },
+    BROKERAGE: {
+      OR: "or",
+      LOGO: {
+        LABEL: "Logo",
+        TEXT: "Upload file",
+        HTML_FOR: "brokerage-logo",
+        DESCRIPTION: "Use a light version of the brokerage's logo for best results."
+      },
+      TITLE: {
+        LABEL: "Title",
+        PLACEHOLDER: "Remax 2000 Realty",
+        HTML_FOR: "brokerage_title"
+      },
+      ADDRESS: {
+        LABEL: "Address",
+        PLACEHOLDER: "123 Main St, Vancouver, BC, V1A 2B3",
+        HTML_FOR: "brokerage_address"
+      }
+    },
   }
 }

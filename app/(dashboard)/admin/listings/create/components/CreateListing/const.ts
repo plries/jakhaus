@@ -1,5 +1,3 @@
-import { p } from "motion/react-client";
-
 export const CREATE_LISTING_CONST = {
   HEADING: "Create listing",
   SECTIONS: {
@@ -9,6 +7,10 @@ export const CREATE_LISTING_CONST = {
     OTHER_ATTACHMENTS: "Other Attachments",
     BROKERAGE_INFO: "Brokerage Info",
     AGENT_INFO: "Agent Info",
+  },
+  BUTTONS: {
+    CREATE: "Confirm and create listing",
+    CANCEL: "Cancel"
   },
   FORM: {
     ADDRESS: {
@@ -58,7 +60,7 @@ export const CREATE_LISTING_CONST = {
     PHOTOS: {
       FEATURED_IMAGE: {
         LABEL: "Featured image",
-        TEXT: "Choose file",
+        TEXT: "Upload file",
         HTML_FOR: "featured_image",
         DESCRIPTION: "The featured image is the large image shown at the top of the page."
       },
@@ -88,45 +90,23 @@ export const CREATE_LISTING_CONST = {
         CAPTION: "Click here or drag and drop."
       }
     },
-    BROKERAGE: {
-      SELECT_BROKERAGE: {
-        LABEL: "Select a brokerage",
-        TEXT: "Remax 2000 Realty",
-        HTML_FOR: "select_brokerage"
-      },
-      OR: "or",
-      LOGO: {
-        LABEL: "Logo",
-        TEXT: "Choose file",
-        HTML_FOR: "brokerage-logo"
-      },
-      TITLE: {
-        LABEL: "Title",
-        PLACEHOLDER: "Remax 2000 Realty",
-        HTML_FOR: "brokerage_title"
-      },
-      ADDRESS: {
-        LABEL: "Address",
-        PLACEHOLDER: "123 Main St, Vancouver, BC, V1A 2B3",
-        HTML_FOR: "brokerage_address"
-      },
-      SAVE_BROKERAGE: {
-        LABEL: "Save brokerage information?",
-        HTML_FOR: "save_brokerage",
-        DESCRIPTION: "By saving a brokerage, you can reuse the brokerage’s information in future listings."
-      }
-    },
     AGENT: {
       SELECT_AGENT: {
-        LABEL: "Select an agent",
+        LABEL: "Select a saved agent",
         TEXT: "John Doe",
         HTML_FOR: "select_agent"
       },
-      OR: "or",
+      LOGO_DARK: {
+        LABEL: "Use light background",
+        HTML_FOR: "agent_logo_dark",
+        DESCRIPTION: "Use a light version of the agent's logo if possible, otherwise check this option to use the light background."
+      },
+      OR: "Or create a new agent",
+      HIDE: "Hide",
       LOGO: {
         LABEL: "Logo",
-        TEXT: "Choose file",
-        HTML_FOR: "agent_logo"
+        TEXT: "Upload file",
+        HTML_FOR: "agent_logo",
       },
       NAME: {
         LABEL: "Name",
@@ -159,10 +139,58 @@ export const CREATE_LISTING_CONST = {
         HTML_FOR: "agent_instagram"
       },
       SAVE_AGENT: {
-        LABEL: "Save agent information?",
+        LABEL: "Save as new agent",
         HTML_FOR: "save_agent",
-        DESCRIPTION: "By saving an agent, you can reuse the agent’s information in future listings."
-      }
-    }
+        DESCRIPTION: "By saving an agent, you can reuse this agent’s information in future listings."
+      },
+    },
+    BROKERAGE: {
+      SELECT_BROKERAGE: {
+        LABEL: "Select a saved brokerage",
+        TEXT: "Remax 2000 Realty",
+        HTML_FOR: "select_brokerage"
+      },
+      OR: "Or create a new brokerage",
+      HIDE: "Hide",
+      LOGO: {
+        LABEL: "Logo",
+        TEXT: "Upload file",
+        HTML_FOR: "brokerage-logo",
+        DESCRIPTION: "Use a light version of the brokerage's logo for best results."
+      },
+      TITLE: {
+        LABEL: "Title",
+        PLACEHOLDER: "Remax 2000 Realty",
+        HTML_FOR: "brokerage_title"
+      },
+      ADDRESS: {
+        LABEL: "Address",
+        PLACEHOLDER: "123 Main St, Vancouver, BC, V1A 2B3",
+        HTML_FOR: "brokerage_address"
+      },
+    },
   }
+}
+
+export const CREATE_LISTING_MOCK = {
+  AGENTS: [
+    {
+      ID: "A001",
+      NAME: "John Doe",
+      SUBTITLE: "Personal Real Estate Corporation",
+      PHONE: "604-123-4567",
+      EMAIL: "johndoe@email.com",
+      WEBSITE: "https://johndoe.com",
+      INSTAGRAM: "@johndoe"
+    },
+    {
+      ID: "A002",
+      NAME: "Jane Doe",
+      SUBTITLE: "Personal Real Estate Corporation",
+      PHONE: "604-123-4567",
+      EMAIL: "johndoe@email.com",
+      WEBSITE: "https://johndoe.com",
+      INSTAGRAM: "@johndoe"
+    }
+  ]
 }

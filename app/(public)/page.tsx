@@ -24,7 +24,7 @@ export default function Home() {
               <HouseLineIcon />
             </div>
             <div className="hidden h-full w-full border-r border-r-neutral-300 md:block" />
-            <div className="flex h-full w-full grid-rows-3 flex-col">
+            <div className="grid h-full w-full grid-rows-2 md:grid-rows-3">
               <div className="h-full border-b border-b-neutral-300 p-5 md:p-10" />
               <div className="hidden h-full border-b border-b-neutral-300 p-5 md:block md:p-10" />
               <div className="h-full p-5 md:p-10">

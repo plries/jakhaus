@@ -104,7 +104,7 @@ body {
 }
 
 ::selection {
-  background-color: var(--color-neutral-100);
+  background-color: #fff;
   color: var(--color-neutral-700);
 }
 

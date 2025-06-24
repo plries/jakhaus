@@ -1,14 +1,7 @@
+import { InputPropTypes } from "../Input/types";
+
 export type InputSelectorPropTypes = {
-  input: {
-    type?: "text" | "email" | "password" | "search" | "tel";
-    placeholder: string;
-    label?: string;
-    htmlFor: string;
-    value?: string;
-    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    error?: string | null;
-    required?: boolean;
-  }
+  input: InputPropTypes
   options: {
     label: string;
     onClick?: () => void;

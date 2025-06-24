@@ -13,10 +13,13 @@ export const Input = ({
   htmlFor,
   selector,
   onFocus,
+  defaultValue,
   inputRef,
+  onKeyDown,
+  disabled,
 }: InputPropTypes) => {
   return (
-    <div>
+    <div className={`${disabled ? "pointer-events-none opacity-50" : ""}`}>
       {label && (
         <label htmlFor={htmlFor} className="mb-1 font-medium text-neutral-700">
           {label}
@@ -39,6 +42,10 @@ export const Input = ({
           onChange={onChange}
           required={required}
           onFocus={onFocus}
+          defaultValue={defaultValue}
+          min={type === "number" ? 0 : undefined}
+          onKeyDown={onKeyDown}
+          disabled={disabled}
         />
         {selector && <CaretDownIcon size={20} className="text-neutral-400" />}
       </div>

@@ -21,34 +21,34 @@ export const InputSelector = ({ input, options }: InputSelectorPropTypes) => {
         label={input.label}
         htmlFor={input.htmlFor}
         value={hook.inputValue}
-        onChange={(e) => {
-          if (input.onChange) input.onChange(e);
-          hook.setInputValue(e.target.value);
+        onChange={(event) => {
+          if (input.onChange) input.onChange(event);
+          hook.setInputValue(event.target.value);
         }}
         required={input.required}
         error={input.error}
         onFocus={() => hook.toggleOpen()}
         inputRef={hook.inputRef}
-        onKeyDown={(e) => {
+        onKeyDown={(event) => {
           if (!hook.isOpen) return;
-          if (e.key === "ArrowDown") {
-            e.preventDefault();
+          if (event.key === "ArrowDown") {
+            event.preventDefault();
             hook.setHighlightedIndex((prev) =>
               prev < filteredOptions.length - 1 ? prev + 1 : 0,
             );
           }
 
-          if (e.key === "ArrowUp") {
-            e.preventDefault();
+          if (event.key === "ArrowUp") {
+            event.preventDefault();
             hook.setHighlightedIndex((prev) =>
               prev > 0 ? prev - 1 : filteredOptions.length - 1,
             );
           }
 
-          if (e.key === "Enter" && hook.highlightedIndex >= 0) {
+          if (event.key === "Enter" && hook.highlightedIndex >= 0) {
             const option = filteredOptions[hook.highlightedIndex];
             if (option) {
-              e.preventDefault();
+              event.preventDefault();
               option.onClick?.();
               hook.setInputValue(option.label);
               hook.setSelectedOption(option.label);
@@ -56,7 +56,7 @@ export const InputSelector = ({ input, options }: InputSelectorPropTypes) => {
             }
           }
 
-          if (e.key === "Escape") {
+          if (event.key === "Escape") {
             hook.setIsOpen(false);
           }
         }}

@@ -8,7 +8,7 @@ import {
   Checkbox,
 } from "@/app/components";
 import { CREATE_AGENT_CONST } from "./const";
-import { useCreateAgent } from "../useCreateAgent";
+import { useCreateAgent } from "./useCreateAgent";
 
 export const CreateAgent = () => {
   const hook = useCreateAgent();

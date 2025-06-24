@@ -21,7 +21,7 @@ export const Login = () => {
           placeholder={LOGIN_CONST.INPUTS.EMAIL.PLACEHOLDER}
           label={LOGIN_CONST.INPUTS.EMAIL.LABEL}
           value={hook.email}
-          onChange={(e) => hook.setEmail(e.target.value)}
+          onChange={(event) => hook.setEmail(event.target.value)}
           error={hook.error}
           htmlFor={LOGIN_CONST.INPUTS.EMAIL.HTML_FOR}
           required
@@ -33,7 +33,7 @@ export const Login = () => {
           label={LOGIN_CONST.INPUTS.PASSWORD.LABEL}
           value={hook.password}
           error={hook.error}
-          onChange={(e) => hook.setPassword(e.target.value)}
+          onChange={(event) => hook.setPassword(event.target.value)}
           htmlFor={LOGIN_CONST.INPUTS.PASSWORD.HTML_FOR}
           required
         />

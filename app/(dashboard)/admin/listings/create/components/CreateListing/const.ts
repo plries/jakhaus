@@ -75,13 +75,13 @@ export const CREATE_LISTING_CONST = {
       VIDEO_LINK: {
         LABEL: "Video link",
         HTML_FOR: "video_link",
-        PLACEHOLDER: "link to video",
+        PLACEHOLDER: "Link to video",
         DESCRIPTION: "Ensure your link is a youtube.com/embed link."
       },
       SCAN_LINK: {
         LABEL: "3D scan link",
         HTML_FOR: "scan_link",
-        PLACEHOLDER: "link to 3D scan",
+        PLACEHOLDER: "Link to 3D scan",
       },
       FLOOR_PLAN: {
         LABEL: "Floor plan",

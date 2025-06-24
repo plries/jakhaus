@@ -21,26 +21,30 @@ export type ListingPropTypes = {
     FLOOR_PLAN?: string[];
     SCAN_LINK?: string;
   };
-  AGENT: AgentPropTypes;
+  ASSIGNED_AGENT: AssignedAgentPropTypes;
 };
 
 export type AgentPropTypes = {
+  LOGO: string;
+  LOGO_DARK?: boolean;
+  SUBTITLE: string;
+  NAME: string;
+  LINKS: {
+    TYPE: "phone" | "email" | "website" | "instagram",
+    LINK: string
+  }[]
+}
+
+export type BrokeragePropTypes = {
+  LOGO: string;
+  TITLE: string;
+  ADDRESS: string;
+}
+
+export type AssignedAgentPropTypes = {
   ID: string;
-  AGENT: {
-    LOGO: string;
-    LOGO_DARK?: boolean;
-    SUBTITLE: string;
-    NAME: string;
-    LINKS: {
-      TYPE: "phone" | "email" | "website" | "instagram",
-      LINK: string
-    }[]
-  };
-  BROKERAGE: {
-    LOGO: string;
-    TITLE: string;
-    ADDRESS: string;
-  };
+  AGENT: AgentPropTypes;
+  BROKERAGE: BrokeragePropTypes;
 }
 
 export type SectionPropTypes = {

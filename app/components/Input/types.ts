@@ -3,7 +3,7 @@ export type InputPropTypes = {
   placeholder: string;
   label?: string;
   htmlFor: string;
-  value?: string;
+  value?: string | number;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   error?: string | null;
   required?: boolean;

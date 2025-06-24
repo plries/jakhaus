@@ -24,7 +24,7 @@ export const CreateListing = () => {
   const hook = useCreateListing();
 
   return (
-    <form className="contents">
+    <form className="contents" onSubmit={hook.handleSubmit}>
       <div className="relative col-span-full grid auto-rows-min grid-cols-1 gap-4 lg:col-span-8">
         <div className="pointer-events-none absolute -top-5 left-0 h-[calc(100%+2.5rem)] w-full lg:border-r lg:border-r-neutral-300" />
         <PageHeading>{CREATE_LISTING_CONST.HEADING}</PageHeading>
@@ -36,6 +36,7 @@ export const CreateListing = () => {
             }
             label={CREATE_LISTING_CONST.FORM.ADDRESS.STREET_ADDRESS.LABEL}
             htmlFor={CREATE_LISTING_CONST.FORM.ADDRESS.STREET_ADDRESS.HTML_FOR}
+            value={hook.address?.street}
             onChange={(event) => {
               hook.setAddress((prev) => ({
                 ...prev,
@@ -48,6 +49,7 @@ export const CreateListing = () => {
             placeholder={CREATE_LISTING_CONST.FORM.ADDRESS.UNIT.PLACEHOLDER}
             label={CREATE_LISTING_CONST.FORM.ADDRESS.UNIT.LABEL}
             htmlFor={CREATE_LISTING_CONST.FORM.ADDRESS.UNIT.HTML_FOR}
+            value={hook.address?.unit}
             onChange={(event) => {
               hook.setAddress((prev) => ({
                 ...prev,
@@ -59,6 +61,7 @@ export const CreateListing = () => {
             placeholder={CREATE_LISTING_CONST.FORM.ADDRESS.CITY.PLACEHOLDER}
             label={CREATE_LISTING_CONST.FORM.ADDRESS.CITY.LABEL}
             htmlFor={CREATE_LISTING_CONST.FORM.ADDRESS.CITY.HTML_FOR}
+            value={hook.address?.city}
             onChange={(event) => {
               hook.setAddress((prev) => ({
                 ...prev,
@@ -74,6 +77,7 @@ export const CreateListing = () => {
               }
               label={CREATE_LISTING_CONST.FORM.ADDRESS.PROVINCE.LABEL}
               htmlFor={CREATE_LISTING_CONST.FORM.ADDRESS.PROVINCE.HTML_FOR}
+              value={hook.address?.province}
               onChange={(event) => {
                 hook.setAddress((prev) => ({
                   ...prev,
@@ -88,6 +92,7 @@ export const CreateListing = () => {
               }
               label={CREATE_LISTING_CONST.FORM.ADDRESS.POSTAL_CODE.LABEL}
               htmlFor={CREATE_LISTING_CONST.FORM.ADDRESS.POSTAL_CODE.HTML_FOR}
+              value={hook.address?.postal}
               onChange={(event) => {
                 hook.setAddress((prev) => ({
                   ...prev,
@@ -109,6 +114,11 @@ export const CreateListing = () => {
             label={CREATE_LISTING_CONST.FORM.OVERVIEW.BEDROOMS.LABEL}
             htmlFor={CREATE_LISTING_CONST.FORM.OVERVIEW.BEDROOMS.HTML_FOR}
             type="number"
+            value={hook.bedrooms}
+            onChange={(event) => {
+              const value = event.target.value.replace(/[^0-9]/g, "");
+              hook.setBedrooms(parseInt(value, 10));
+            }}
             required
           />
           <Input
@@ -118,6 +128,11 @@ export const CreateListing = () => {
             label={CREATE_LISTING_CONST.FORM.OVERVIEW.BATHROOMS.LABEL}
             htmlFor={CREATE_LISTING_CONST.FORM.OVERVIEW.BATHROOMS.HTML_FOR}
             type="number"
+            value={hook.bathrooms}
+            onChange={(event) => {
+              const value = event.target.value.replace(/[^0-9]/g, "");
+              hook.setBathrooms(parseInt(value, 10));
+            }}
             required
           />
           <Input
@@ -127,6 +142,11 @@ export const CreateListing = () => {
             label={CREATE_LISTING_CONST.FORM.OVERVIEW.SQUARE_FEET.LABEL}
             htmlFor={CREATE_LISTING_CONST.FORM.OVERVIEW.SQUARE_FEET.HTML_FOR}
             type="number"
+            value={hook.squareFeet}
+            onChange={(event) => {
+              const value = event.target.value.replace(/[^0-9]/g, "");
+              hook.setSquareFeet(parseInt(value, 10));
+            }}
             required
           />
         </div>
@@ -136,8 +156,8 @@ export const CreateListing = () => {
             label={CREATE_LISTING_CONST.FORM.PHOTOS.FEATURED_IMAGE.LABEL}
             text={CREATE_LISTING_CONST.FORM.PHOTOS.FEATURED_IMAGE.TEXT}
             htmlFor={CREATE_LISTING_CONST.FORM.PHOTOS.FEATURED_IMAGE.HTML_FOR}
-            onChange={(url) => hook.setFeaturedImage({ url })}
-            onClear={() => hook.setFeaturedImage(null)}
+            onChange={(url) => hook.setFeaturedPhoto({ url })}
+            onClear={() => hook.setFeaturedPhoto(null)}
             required
           />
           <p className="-mt-2 !text-sm text-neutral-700">
@@ -148,7 +168,49 @@ export const CreateListing = () => {
             text={CREATE_LISTING_CONST.FORM.PHOTOS.PHOTO_GALLERY.TEXT}
             caption={CREATE_LISTING_CONST.FORM.PHOTOS.PHOTO_GALLERY.CAPTION}
             htmlFor={CREATE_LISTING_CONST.FORM.PHOTOS.PHOTO_GALLERY.HTML_FOR}
+            onChange={(urls) => hook.setPhotoGallery([urls])}
             required
+          />
+        </div>
+        <SectionHeading>
+          {CREATE_LISTING_CONST.SECTIONS.OTHER_ATTACHMENTS}
+        </SectionHeading>
+        <div className="grid grid-cols-1 gap-4 px-10">
+          <Input
+            placeholder={
+              CREATE_LISTING_CONST.FORM.OTHER_ATTACHMENTS.VIDEO_LINK.PLACEHOLDER
+            }
+            label={CREATE_LISTING_CONST.FORM.OTHER_ATTACHMENTS.VIDEO_LINK.LABEL}
+            htmlFor={
+              CREATE_LISTING_CONST.FORM.OTHER_ATTACHMENTS.VIDEO_LINK.HTML_FOR
+            }
+            value={hook.videoLink}
+            onChange={(event) => hook.setVideoLink(event.target.value)}
+          />
+          <p className="-mt-2 !text-sm text-neutral-700">
+            {CREATE_LISTING_CONST.FORM.OTHER_ATTACHMENTS.VIDEO_LINK.DESCRIPTION}
+          </p>
+          <Input
+            placeholder={
+              CREATE_LISTING_CONST.FORM.OTHER_ATTACHMENTS.SCAN_LINK.PLACEHOLDER
+            }
+            label={CREATE_LISTING_CONST.FORM.OTHER_ATTACHMENTS.SCAN_LINK.LABEL}
+            htmlFor={
+              CREATE_LISTING_CONST.FORM.OTHER_ATTACHMENTS.SCAN_LINK.HTML_FOR
+            }
+            value={hook.scanLink}
+            onChange={(event) => hook.setScanLink(event.target.value)}
+          />
+          <UploadDropzone
+            label={CREATE_LISTING_CONST.FORM.OTHER_ATTACHMENTS.FLOOR_PLAN.LABEL}
+            text={CREATE_LISTING_CONST.FORM.OTHER_ATTACHMENTS.FLOOR_PLAN.TEXT}
+            caption={
+              CREATE_LISTING_CONST.FORM.OTHER_ATTACHMENTS.FLOOR_PLAN.CAPTION
+            }
+            htmlFor={
+              CREATE_LISTING_CONST.FORM.OTHER_ATTACHMENTS.FLOOR_PLAN.HTML_FOR
+            }
+            onChange={(urls) => hook.setFloorPlans([urls])}
           />
         </div>
         <SectionHeading>
@@ -161,6 +223,7 @@ export const CreateListing = () => {
               htmlFor: CREATE_LISTING_CONST.FORM.AGENT.SELECT_AGENT.HTML_FOR,
               placeholder: CREATE_LISTING_CONST.FORM.AGENT.SELECT_AGENT.TEXT,
               label: CREATE_LISTING_CONST.FORM.AGENT.SELECT_AGENT.LABEL,
+              value: hook.agent?.name,
               onChange: (option) => {
                 const selected = CREATE_LISTING_MOCK.AGENTS.find(
                   (a) => a.AGENT.NAME === option.target.value,
@@ -178,7 +241,7 @@ export const CreateListing = () => {
                 });
                 if (!selected.AGENT.LOGO) return;
                 hook.setBrokerage({
-                  id: selected.ID,
+                  logo: selected.BROKERAGE.LOGO,
                   title: selected.BROKERAGE.TITLE,
                   address: selected.BROKERAGE.ADDRESS,
                 });
@@ -368,9 +431,9 @@ export const CreateListing = () => {
       <div className="relative col-span-4 col-start-9 hidden h-full pr-5 lg:block">
         <div className="sticky top-2.5 grid auto-rows-min grid-cols-1 gap-5 rounded-2xl bg-neutral-950 p-2 shadow-lg">
           <div className="grid aspect-video w-full place-items-center overflow-hidden rounded-xl bg-neutral-100 shadow-md">
-            {hook.featuredImage ? (
+            {hook.featuredPhoto ? (
               <Image
-                src={hook.featuredImage.url}
+                src={hook.featuredPhoto.url}
                 alt="Featured"
                 width={1920}
                 height={1080}

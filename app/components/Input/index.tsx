@@ -38,8 +38,8 @@ export const Input = ({
           type={type}
           placeholder={placeholder}
           value={value}
-          onChange={(e) => {
-            if (onChange) onChange(e);
+          onChange={(event) => {
+            if (onChange) onChange(event);
           }}
           required={required}
           onFocus={onFocus}

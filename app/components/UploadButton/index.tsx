@@ -36,18 +36,18 @@ export const UploadButton = ({
         type="file"
         className="peer hidden"
         accept="image/*"
-        onChange={(e) => {
-          const file = e.target.files?.[0];
+        onChange={(event) => {
+          const file = event.target.files?.[0];
           if (file) {
             const previewUrl = URL.createObjectURL(file);
-            hook.handleFileUpload(e);
+            hook.handleFileUpload(event);
             if (onChange) onChange(previewUrl);
           }
         }}
         disabled={disabled}
       />
       {(hook.previewUrl || preview) && (
-        <div className="relative mt-5 w-fit">
+        <div className="relative mt-5 max-w-64">
           <IconButton
             additionalClasses="absolute -right-4 -top-4 place-self-end"
             name={UPLOAD_BUTTON_CONST.DELETE}
@@ -65,8 +65,8 @@ export const UploadButton = ({
             height={1080}
             className={`mt-2 w-auto max-w-64 rounded-md border border-neutral-950/10 shadow-sm transition-colors duration-150 ease-in-out ${isDarkLogo ? "bg-neutral-50" : "bg-neutral-950"}`}
           />
-          <div className="flex justify-center">
-            <p className="-mt-2 w-fit rounded-full border border-neutral-950/10 bg-neutral-50 px-2 py-1 text-center !text-sm !text-neutral-600 shadow-sm">
+          <div className="flex justify-center px-2">
+            <p className="-mt-2 w-fit overflow-hidden rounded-full border border-neutral-950/10 bg-neutral-50 px-2 py-1 text-center !text-sm text-nowrap text-ellipsis !text-neutral-600 shadow-sm">
               {hook.uploadedFile?.name || "Preview"}
             </p>
           </div>

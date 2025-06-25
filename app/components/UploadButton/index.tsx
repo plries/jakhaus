@@ -25,6 +25,7 @@ export const UploadButton = ({
         {required && <span>*</span>}
       </p>
       <label
+        ref={hook.labelRef}
         htmlFor={htmlFor}
         className="flex h-11 w-fit cursor-pointer flex-row items-center justify-center gap-2 rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-2 text-nowrap text-neutral-600 shadow-md transition-all duration-150 ease-in-out hover:bg-neutral-100 active:scale-98"
       >
@@ -39,9 +40,8 @@ export const UploadButton = ({
         onChange={(event) => {
           const file = event.target.files?.[0];
           if (file) {
-            const previewUrl = URL.createObjectURL(file);
             hook.handleFileUpload(event);
-            if (onChange) onChange(previewUrl);
+            if (onChange) onChange(file);
           }
         }}
         disabled={disabled}
@@ -67,7 +67,7 @@ export const UploadButton = ({
           />
           <div className="flex justify-center px-2">
             <p className="-mt-2 w-fit overflow-hidden rounded-full border border-neutral-950/10 bg-neutral-50 px-2 py-1 text-center !text-sm text-nowrap text-ellipsis !text-neutral-600 shadow-sm">
-              {hook.uploadedFile?.name || "Preview"}
+              {hook.uploadedFile?.name}
             </p>
           </div>
         </div>

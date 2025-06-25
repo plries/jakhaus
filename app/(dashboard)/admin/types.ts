@@ -24,17 +24,19 @@ export type CreateBrokeragePropTypes = {
   logo?: string;
 }
 
-export type CreateFeaturedPhotoPropTypes = {
-  url: string;
-}
-
 export type CreateListingPropTypes = {
   address: CreateAddressPropTypes;
   bedrooms: number;
   bathrooms: number;
   squareFeet: number;
-  featuredPhoto: CreateFeaturedPhotoPropTypes | null;
+  featuredPhoto: string;
   photoGallery: string[];
   agent: CreateAgentPropTypes;
   brokerage: CreateBrokeragePropTypes;
+}
+
+export type UploadableImageTypes = {
+  file: File | null;
+  previewUrl: string | null;
+  uploadedUrl: string | null;
 }

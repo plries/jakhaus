@@ -10,7 +10,7 @@ import {
 } from "@phosphor-icons/react";
 import { JakhausLogo } from "@/public/icons";
 import { useWindowSize } from "@/app/hooks";
-import { createClient } from "@/lib/supabase";
+import { createClient } from "@/utils/supabase/client";
 import { IconButton } from "../IconButton";
 import { useMobileMenu } from "./useMobileMenu";
 import { useActiveSection } from "./useActiveSection";

@@ -23,7 +23,7 @@ export const CreateAgent = () => {
           text={CREATE_AGENT_CONST.FORM.AGENT.LOGO.TEXT}
           htmlFor={CREATE_AGENT_CONST.FORM.AGENT.LOGO.HTML_FOR}
           onClear={() => hook.setAgentLogo(null)}
-          onChange={(name) => hook.setAgentLogo({ name })}
+          // onChange={(name) => hook.setAgentLogo({ name: })}
           isDarkLogo={hook.darkLogo}
           required
         />

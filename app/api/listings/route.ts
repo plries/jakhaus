@@ -1,27 +1,20 @@
 import { NextResponse } from "next/server";
-import { createClient } from "@supabase/supabase-js";
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-);
+import { createClient } from "@/utils/supabase/server";
+import { createFullListing, createOrUpdateAgent } from "@/lib/createListing";
 
 export async function POST(req: Request) {
+  const body = await req.json();
+  const supabase = createClient();
+
   try {
-    const body = await req.json();
+    const { agent, brokerage, dataToSubmit, galleryUrls, floorPlanUrls } = body;
 
-    const { data, error } = await supabase
-      .from("listings")
-      .insert([body]);
+    const agentId = await createOrUpdateAgent(agent, brokerage);
+    await createFullListing({ ...dataToSubmit, agent_id: agentId }, galleryUrls, floorPlanUrls);
 
-    if (error) {
-      console.error("Insert error:", error);
-      return NextResponse.json({ error: "Failed to insert listing" }, { status: 500 });
-    }
-
-    return NextResponse.json({ success: true, data }, { status: 201 });
-  } catch (err) {
-    console.error("Unexpected error:", err);
-    return NextResponse.json({ error: "Unexpected server error" }, { status: 500 });
+    return NextResponse.json({ success: true });
+  } catch (error) {
+    console.error("Error creating listing:", error);
+    return NextResponse.json({ error: "Failed to create listing" }, { status: 500 });
   }
 }

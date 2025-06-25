@@ -4,7 +4,7 @@ export type UploadButtonPropTypes = {
   htmlFor: string
   required?: boolean
   disabled?: boolean
-  onChange?: (previewUrl: string) => void;
+  onChange?: (file: File) => void;
   onClear?: () => void
   isDarkLogo?: boolean
   preview?: string

@@ -116,7 +116,7 @@ export const CreateListing = () => {
             type="number"
             value={hook.bedrooms}
             onChange={(event) => {
-              const value = event.target.value.replace(/[^0-9]/g, "");
+              const value = event.target.value.replace(/[^0-9]/g, "") || "0";
               hook.setBedrooms(parseInt(value, 10));
             }}
             required
@@ -130,7 +130,7 @@ export const CreateListing = () => {
             type="number"
             value={hook.bathrooms}
             onChange={(event) => {
-              const value = event.target.value.replace(/[^0-9]/g, "");
+              const value = event.target.value.replace(/[^0-9]/g, "") || "0";
               hook.setBathrooms(parseInt(value, 10));
             }}
             required
@@ -144,7 +144,7 @@ export const CreateListing = () => {
             type="number"
             value={hook.squareFeet}
             onChange={(event) => {
-              const value = event.target.value.replace(/[^0-9]/g, "");
+              const value = event.target.value.replace(/[^0-9]/g, "") || "0";
               hook.setSquareFeet(parseInt(value, 10));
             }}
             required
@@ -153,22 +153,34 @@ export const CreateListing = () => {
         <SectionHeading>{CREATE_LISTING_CONST.SECTIONS.PHOTOS}</SectionHeading>
         <div className="grid grid-cols-1 gap-4 px-10">
           <UploadButton
-            label={CREATE_LISTING_CONST.FORM.PHOTOS.FEATURED_IMAGE.LABEL}
-            text={CREATE_LISTING_CONST.FORM.PHOTOS.FEATURED_IMAGE.TEXT}
-            htmlFor={CREATE_LISTING_CONST.FORM.PHOTOS.FEATURED_IMAGE.HTML_FOR}
-            onChange={(url) => hook.setFeaturedPhoto({ url })}
-            onClear={() => hook.setFeaturedPhoto(null)}
+            label={CREATE_LISTING_CONST.FORM.PHOTOS.FEATURED_PHOTO.LABEL}
+            text={CREATE_LISTING_CONST.FORM.PHOTOS.FEATURED_PHOTO.TEXT}
+            htmlFor={CREATE_LISTING_CONST.FORM.PHOTOS.FEATURED_PHOTO.HTML_FOR}
+            onChange={(file) => {
+              const previewUrl = URL.createObjectURL(file);
+              hook.setFeaturedPhoto({
+                file,
+                previewUrl,
+                uploadedUrl: null,
+              });
+            }}
+            onClear={() =>
+              hook.setFeaturedPhoto({
+                file: null,
+                previewUrl: null,
+                uploadedUrl: null,
+              })
+            }
             required
           />
           <p className="-mt-2 !text-sm text-neutral-700">
-            {CREATE_LISTING_CONST.FORM.PHOTOS.FEATURED_IMAGE.DESCRIPTION}
+            {CREATE_LISTING_CONST.FORM.PHOTOS.FEATURED_PHOTO.DESCRIPTION}
           </p>
           <UploadDropzone
             label={CREATE_LISTING_CONST.FORM.PHOTOS.PHOTO_GALLERY.LABEL}
             text={CREATE_LISTING_CONST.FORM.PHOTOS.PHOTO_GALLERY.TEXT}
             caption={CREATE_LISTING_CONST.FORM.PHOTOS.PHOTO_GALLERY.CAPTION}
             htmlFor={CREATE_LISTING_CONST.FORM.PHOTOS.PHOTO_GALLERY.HTML_FOR}
-            onChange={(urls) => hook.setPhotoGallery([urls])}
             required
           />
         </div>
@@ -210,7 +222,6 @@ export const CreateListing = () => {
             htmlFor={
               CREATE_LISTING_CONST.FORM.OTHER_ATTACHMENTS.FLOOR_PLAN.HTML_FOR
             }
-            onChange={(urls) => hook.setFloorPlans([urls])}
           />
         </div>
         <SectionHeading>
@@ -267,15 +278,20 @@ export const CreateListing = () => {
               label={CREATE_LISTING_CONST.FORM.AGENT.LOGO.LABEL}
               text={CREATE_LISTING_CONST.FORM.AGENT.LOGO.TEXT}
               htmlFor={CREATE_LISTING_CONST.FORM.AGENT.LOGO.HTML_FOR}
-              onClear={() =>
-                hook.setAgent((prev) => ({
-                  ...prev,
-                  logo: "",
-                }))
-              }
-              onChange={(file) =>
-                hook.setAgent((prev) => ({ ...prev, logo: file }))
-              }
+              onClear={() => {
+                hook.setAgentLogo({
+                  file: null,
+                  previewUrl: "",
+                  uploadedUrl: null,
+                });
+              }}
+              onChange={(file: File) => {
+                hook.setAgentLogo({
+                  file,
+                  previewUrl: URL.createObjectURL(file),
+                  uploadedUrl: null,
+                });
+              }}
               isDarkLogo={hook.agent.darkLogo}
               preview={hook.agent.logo}
               required
@@ -375,14 +391,20 @@ export const CreateListing = () => {
               text={CREATE_LISTING_CONST.FORM.BROKERAGE.LOGO.TEXT}
               htmlFor={CREATE_LISTING_CONST.FORM.BROKERAGE.LOGO.HTML_FOR}
               onClear={() =>
-                hook.setBrokerage((prev) => ({
-                  ...prev,
-                  logo: "",
-                }))
+                hook.setBrokerageLogo({
+                  file: null,
+                  previewUrl: "",
+                  uploadedUrl: null,
+                })
               }
-              onChange={(file) =>
-                hook.setBrokerage((prev) => ({ ...prev, logo: file }))
-              }
+              onChange={(file: File) => {
+                hook.setBrokerageLogo({
+                  file,
+                  previewUrl: URL.createObjectURL(file),
+                  uploadedUrl: null,
+                });
+              }}
+              preview={hook.brokerage.logo}
               required
             />
             <p className="-mt-2 !text-sm text-neutral-700">
@@ -431,10 +453,10 @@ export const CreateListing = () => {
       <div className="relative col-span-4 col-start-9 hidden h-full pr-5 lg:block">
         <div className="sticky top-2.5 grid auto-rows-min grid-cols-1 gap-5 rounded-2xl bg-neutral-950 p-2 shadow-lg">
           <div className="grid aspect-video w-full place-items-center overflow-hidden rounded-xl bg-neutral-100 shadow-md">
-            {hook.featuredPhoto ? (
+            {hook.featuredPhoto.file && hook.featuredPhoto.previewUrl ? (
               <Image
-                src={hook.featuredPhoto.url}
-                alt="Featured"
+                src={hook.featuredPhoto.previewUrl}
+                alt={hook.featuredPhoto.file?.name}
                 width={1920}
                 height={1080}
                 className="h-full w-full object-cover"
@@ -450,7 +472,7 @@ export const CreateListing = () => {
           <div className="grid grid-cols-1 gap-1 px-1">
             <IconContext.Provider value={{ size: 24, weight: "light" }}>
               <div className="flex flex-row items-center gap-2 text-neutral-50">
-                <HouseIcon />
+                <HouseIcon className="min-w-6" />
                 {hook.address && (
                   <p className="leading-none">
                     {hook.address.unit} {hook.address.street}{" "}
@@ -461,13 +483,13 @@ export const CreateListing = () => {
                 )}
               </div>
               <div className="flex flex-row items-center gap-2 text-neutral-50">
-                <BuildingOfficeIcon />
+                <BuildingOfficeIcon className="min-w-6" />
                 {hook.brokerage && (
                   <p className="leading-none">{hook.brokerage.title}</p>
                 )}
               </div>
               <div className="flex flex-row items-center gap-2 text-neutral-50">
-                <UserIcon />
+                <UserIcon className="min-w-6" />
                 {hook.agent && (
                   <p className="leading-none">{hook.agent.name}</p>
                 )}

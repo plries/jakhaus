@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { createClient } from "@/lib/supabase";
+import { createClient } from "@/utils/supabase/client";
 import { useRouter } from "next/navigation";
 import { Navbar } from "@/app/components";
 import { NAVBAR_ADMIN_CONST } from "./const";
@@ -32,7 +32,7 @@ export default function RootLayout({
     getCurrentUser();
 
     const { data: listener } = supabase.auth.onAuthStateChange(
-      async (event, session) => {
+      async (event: string, session: any) => {
         if (event === "SIGNED_IN" && session?.user) {
           setEmail(session.user.email);
         } else if (event === "SIGNED_OUT") {

@@ -4,5 +4,5 @@ export type UploadDropzonePropTypes = {
   htmlFor: string
   caption: string
   required?: boolean
-  onChange?: (previewUrl: string) => void
+  onChange?: (file: File) => void
 };

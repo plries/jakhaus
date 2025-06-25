@@ -19,37 +19,37 @@ export const useUploadDropzone = () => {
   };
 
   useEffect(() => {
-    const objectUrls = uploadedFiles.map(file => URL.createObjectURL(file));
+    const objectUrls = uploadedFiles.map((file) => URL.createObjectURL(file));
     setPreviewUrls(objectUrls);
 
     return () => objectUrls.forEach(URL.revokeObjectURL);
   }, [uploadedFiles]);
 
-  useEffect(() => {
-    const dropzone = dropzoneRef.current;
-    if (!dropzone) return;
+  // useEffect(() => {
+  //   const dropzone = dropzoneRef.current;
+  //   if (!dropzone) return;
 
-    const handleDrop = (event: DragEvent) => {
-      event.preventDefault();
-      if (!event.dataTransfer) return;
-      const files = event.dataTransfer.files;
-      if (files) {
-        setUploadedFiles((prev) => [...prev, ...Array.from(files)]);
-      }
-    };
+  //   const handleDrop = (event: DragEvent) => {
+  //     event.preventDefault();
+  //     if (!event.dataTransfer) return;
+  //     const files = event.dataTransfer.files;
+  //     if (files) {
+  //       setUploadedFiles((prev) => [...prev, ...Array.from(files)]);
+  //     }
+  //   };
 
-    const handleDragOver = (event: DragEvent) => {
-      event.preventDefault();
-    };
+  //   const handleDragOver = (event: DragEvent) => {
+  //     event.preventDefault();
+  //   };
 
-    dropzone.addEventListener("drop", handleDrop);
-    dropzone.addEventListener("dragover", handleDragOver);
+  //   dropzone.addEventListener("drop", handleDrop);
+  //   dropzone.addEventListener("dragover", handleDragOver);
 
-    return () => {
-      dropzone.removeEventListener("drop", handleDrop);
-      dropzone.removeEventListener("dragover", handleDragOver);
-    };
-  }, []);
+  //   return () => {
+  //     dropzone.removeEventListener("drop", handleDrop);
+  //     dropzone.removeEventListener("dragover", handleDragOver);
+  //   };
+  // }, []);
 
   return {
     dropzoneRef,

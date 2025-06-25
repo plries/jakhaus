@@ -68,7 +68,7 @@ export const UploadDropzone = ({
         accept="image/*"
         onChange={(event) => {
           hook.handleFileUpload(event);
-          if (onChange) onChange(event.target.value);
+          if (onChange) onChange(event.target.files![0]);
         }}
         multiple
       />

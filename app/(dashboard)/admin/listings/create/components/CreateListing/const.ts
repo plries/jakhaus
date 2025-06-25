@@ -58,17 +58,19 @@ export const CREATE_LISTING_CONST = {
       }, 
     },
     PHOTOS: {
-      FEATURED_IMAGE: {
-        LABEL: "Featured image",
+      FEATURED_PHOTO: {
+        LABEL: "Featured photo",
         TEXT: "Upload file",
-        HTML_FOR: "featured_image",
-        DESCRIPTION: "The featured image is the large image shown at the top of the page."
+        HTML_FOR: "featured_photo",
+        DESCRIPTION: "The featured photo is the large image shown at the top of the page.",
+        PATH: "featured-photos"
       },
       PHOTO_GALLERY: {
         LABEL: "Photo gallery",
         HTML_FOR: "photo_gallery",
         TEXT: "Upload photos",
-        CAPTION: "Click here or drag and drop."
+        CAPTION: "Click here to upload.",
+        PATH: "photo-gallery"
       }
     },
     OTHER_ATTACHMENTS: {
@@ -87,7 +89,8 @@ export const CREATE_LISTING_CONST = {
         LABEL: "Floor plan",
         HTML_FOR: "floor_plan",
         TEXT: "Upload floor plan(s)",
-        CAPTION: "Click here or drag and drop."
+        CAPTION: "Click here to upload.",
+        PATH: "floor-plans"
       }
     },
     AGENT: {
@@ -107,6 +110,7 @@ export const CREATE_LISTING_CONST = {
         LABEL: "Logo",
         TEXT: "Upload file",
         HTML_FOR: "agent_logo",
+        PATH: "logos/agents",
       },
       NAME: {
         LABEL: "Name",
@@ -156,7 +160,8 @@ export const CREATE_LISTING_CONST = {
         LABEL: "Logo",
         TEXT: "Upload file",
         HTML_FOR: "brokerage-logo",
-        DESCRIPTION: "Use a light version of the brokerage's logo for best results."
+        DESCRIPTION: "Use a light version of the brokerage's logo for best results.",
+        PATH: "logos/brokerages",
       },
       TITLE: {
         LABEL: "Title",
@@ -175,7 +180,7 @@ export const CREATE_LISTING_CONST = {
 export const CREATE_LISTING_MOCK = {
   AGENTS: [
     {
-      ID: "A001",
+      ID: "ec3880f7-6ffa-4fdc-b3da-8d80200225bf",
       AGENT: {
         NAME: "John Doe",
         LOGO: "/images/CE-Logo.png",
@@ -192,7 +197,7 @@ export const CREATE_LISTING_MOCK = {
       }
     },
     {
-      ID: "A002",
+      ID: "32256911-0403-464d-94a4-101fd8aa5352",
       AGENT: {
         NAME: "Samantha Li",
         LOGO: "/images/CE-Logo.png",

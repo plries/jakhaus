@@ -6,7 +6,7 @@ import {
   CreateBrokeragePropTypes,
   UploadableImageTypes,
 } from "@/app/(dashboard)/admin/types";
-import { uploadFileToSupabase } from "@/lib/createListing";
+import { uploadFileToSupabase } from "@/lib/uploadFileToSupabase";
 
 export const useCreateListing = () => {
   const [showCreateAgent, setShowCreateAgent] = useState<boolean>(false);
@@ -107,7 +107,7 @@ export const useCreateListing = () => {
     };
 
     // 3. send to server
-    const res = await fetch("/api/create-listing", {
+    const res = await fetch("/api/listings/", {
       method: "POST",
       body: JSON.stringify(payload),
       headers: {

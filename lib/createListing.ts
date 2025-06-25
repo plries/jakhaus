@@ -60,24 +60,3 @@ export async function createFullListing(listingData: any, photos: string[], floo
 
   return listingId;
 }
-
-export const uploadFileToSupabase = async (file: File, path: string) => {
-  const supabase = await createClient();
-
-  const cleanName = file.name.replace(/\s+/g, "_").toLowerCase();
-  const filePath = `${path}/${Date.now()}_${cleanName}`;
-  const { data, error } = await supabase.storage.from("media").upload(filePath, file, {
-    upsert: true,
-  });
-
-  if (error) {
-    console.error("Upload failed:", error);
-    return null;
-  }
-
-  const { data: { publicUrl } } = supabase.storage
-  .from("media")
-  .getPublicUrl(filePath);
-
-  return { data, publicUrl };
-};

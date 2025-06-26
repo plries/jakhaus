@@ -7,8 +7,6 @@ export const useLogin = () => {
   const supabase = createClient();
   const router = useRouter();
 
-  console.log("supabase", supabase);
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);

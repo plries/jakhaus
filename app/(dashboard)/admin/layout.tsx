@@ -1,51 +1,21 @@
-"use client";
-import { useEffect, useState } from "react";
-import { createClient } from "@/utils/supabase/client";
-import { useRouter } from "next/navigation";
+import { createClient } from "@/utils/supabase/server";
 import { Navbar } from "@/app/components";
 import { NAVBAR_ADMIN_CONST } from "./const";
+import { redirect } from "next/navigation";
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
-  const supabase = createClient();
-  const router = useRouter();
+}) {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
-  const [email, setEmail] = useState<string | null>();
-
-  useEffect(() => {
-    const getCurrentUser = async () => {
-      const {
-        data: { user },
-        error,
-      } = await supabase.auth.getUser();
-
-      if (!user || error) {
-        router.replace("/admin/login");
-      } else {
-        setEmail(user.email);
-      }
-    };
-
-    getCurrentUser();
-
-    const { data: listener } = supabase.auth.onAuthStateChange(
-      async (event: string, session: any) => {
-        if (event === "SIGNED_IN" && session?.user) {
-          setEmail(session.user.email);
-        } else if (event === "SIGNED_OUT") {
-          setEmail(null);
-          router.replace("/admin/login");
-        }
-      },
-    );
-
-    return () => {
-      listener.subscription.unsubscribe();
-    };
-  }, []);
+  if (!user) {
+    redirect("/admin/login");
+  }
 
   return (
     <main

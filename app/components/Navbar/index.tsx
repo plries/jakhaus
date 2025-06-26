@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import { useRouter } from "next/navigation";
 import { useLenis } from "lenis/react";
 import { motion } from "motion/react";
 import {
@@ -22,6 +23,7 @@ import { usePathname } from "next/navigation";
 import { ListingPropTypes } from "@/app/types";
 
 export const Navbar = ({ CONSTANTS, LINKS, dashboard }: NavbarPropTypes) => {
+  const router = useRouter();
   const pathname = usePathname();
   const mobileMenu = useMobileMenu();
   const windowSize = useWindowSize();
@@ -33,6 +35,7 @@ export const Navbar = ({ CONSTANTS, LINKS, dashboard }: NavbarPropTypes) => {
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
+    router.replace("/login");
   };
 
   const shouldRenderLink = (

@@ -4,7 +4,7 @@ import { JakhausLogo } from "@/public/icons";
 import { createClient } from "@/utils/supabase/server";
 
 type Props = {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -111,6 +111,10 @@ export default async function ListingPage({ params }: Props) {
   }
 
   const FULL_ADDRESS = `${LISTING.UNIT} ${LISTING.STREET} ${LISTING.CITY}, ${LISTING.PROVINCE}, ${LISTING.POSTAL_CODE}`;
+
+  LISTING.PHOTO_GALLERY = LISTING.PHOTO_GALLERY?.sort((a: any, b: any) =>
+    a.URL.localeCompare(b.URL),
+  );
 
   return <Listing CONSTANTS={LISTING} FULL_ADDRESS={FULL_ADDRESS} />;
 }

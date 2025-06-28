@@ -38,7 +38,8 @@ export const Lightbox = ({
             <Image
               src={
                 CONSTANTS.PHOTO_GALLERY[
-                  (photoIndex + 1) % CONSTANTS.PHOTO_GALLERY.length
+                  (photoIndex - 1 + CONSTANTS.PHOTO_GALLERY.length) %
+                    CONSTANTS.PHOTO_GALLERY.length
                 ].URL
               }
               alt={FULL_ADDRESS}
@@ -56,7 +57,7 @@ export const Lightbox = ({
             <Image
               src={
                 CONSTANTS.PHOTO_GALLERY[
-                  (photoIndex - 1 + CONSTANTS.PHOTO_GALLERY.length) %
+                  (photoIndex + 1 + CONSTANTS.PHOTO_GALLERY.length) %
                     CONSTANTS.PHOTO_GALLERY.length
                 ].URL
               }

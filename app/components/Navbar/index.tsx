@@ -11,7 +11,7 @@ import {
 } from "@phosphor-icons/react";
 import { JakhausLogo } from "@/public/icons";
 import { useWindowSize } from "@/app/hooks";
-import { createClient } from "@/utils/supabase/client";
+import { supabase } from "@/utils/supabase/client";
 import { IconButton } from "../IconButton";
 import { useMobileMenu } from "./useMobileMenu";
 import { useActiveSection } from "./useActiveSection";
@@ -26,7 +26,6 @@ export const Navbar = ({ CONSTANTS, LINKS, dashboard }: NavbarPropTypes) => {
   const pathname = usePathname();
   const mobileMenu = useMobileMenu();
   const windowSize = useWindowSize();
-  const supabase = createClient();
   const lenis = useLenis();
 
   const sectionIds = LINKS.map((link) => link.HREF.replace("#", ""));

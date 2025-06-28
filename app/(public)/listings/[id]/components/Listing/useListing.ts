@@ -1,11 +1,10 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import { createClient } from "@/utils/supabase/client";
+import { supabase } from "@/utils/supabase/client";
 import { ListingPropTypes } from "@/app/types";
 
 export const useListing = () => {
-  const supabase = createClient();
   const params = useParams();
   const slug = params.id;
 

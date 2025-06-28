@@ -36,11 +36,11 @@ export const CreateListing = () => {
             }
             label={CREATE_LISTING_CONST.FORM.ADDRESS.STREET_ADDRESS.LABEL}
             htmlFor={CREATE_LISTING_CONST.FORM.ADDRESS.STREET_ADDRESS.HTML_FOR}
-            value={hook.address?.street}
+            value={hook.address?.STREET}
             onChange={(event) => {
               hook.setAddress((prev) => ({
                 ...prev,
-                street: event.target.value,
+                STREET: event.target.value,
               }));
             }}
             required
@@ -49,11 +49,11 @@ export const CreateListing = () => {
             placeholder={CREATE_LISTING_CONST.FORM.ADDRESS.UNIT.PLACEHOLDER}
             label={CREATE_LISTING_CONST.FORM.ADDRESS.UNIT.LABEL}
             htmlFor={CREATE_LISTING_CONST.FORM.ADDRESS.UNIT.HTML_FOR}
-            value={hook.address?.unit}
+            value={hook.address?.UNIT}
             onChange={(event) => {
               hook.setAddress((prev) => ({
                 ...prev,
-                unit: event.target.value,
+                UNIT: event.target.value,
               }));
             }}
           />
@@ -61,11 +61,11 @@ export const CreateListing = () => {
             placeholder={CREATE_LISTING_CONST.FORM.ADDRESS.CITY.PLACEHOLDER}
             label={CREATE_LISTING_CONST.FORM.ADDRESS.CITY.LABEL}
             htmlFor={CREATE_LISTING_CONST.FORM.ADDRESS.CITY.HTML_FOR}
-            value={hook.address?.city}
+            value={hook.address?.CITY}
             onChange={(event) => {
               hook.setAddress((prev) => ({
                 ...prev,
-                city: event.target.value,
+                CITY: event.target.value,
               }));
             }}
             required
@@ -77,11 +77,11 @@ export const CreateListing = () => {
               }
               label={CREATE_LISTING_CONST.FORM.ADDRESS.PROVINCE.LABEL}
               htmlFor={CREATE_LISTING_CONST.FORM.ADDRESS.PROVINCE.HTML_FOR}
-              value={hook.address?.province}
+              value={hook.address?.PROVINCE}
               onChange={(event) => {
                 hook.setAddress((prev) => ({
                   ...prev,
-                  province: event.target.value,
+                  PROVINCE: event.target.value,
                 }));
               }}
               required
@@ -92,11 +92,11 @@ export const CreateListing = () => {
               }
               label={CREATE_LISTING_CONST.FORM.ADDRESS.POSTAL_CODE.LABEL}
               htmlFor={CREATE_LISTING_CONST.FORM.ADDRESS.POSTAL_CODE.HTML_FOR}
-              value={hook.address?.postal}
+              value={hook.address?.POSTAL_CODE}
               onChange={(event) => {
                 hook.setAddress((prev) => ({
                   ...prev,
-                  postal: event.target.value,
+                  POSTAL_CODE: event.target.value,
                 }));
               }}
               required
@@ -183,6 +183,9 @@ export const CreateListing = () => {
             htmlFor={CREATE_LISTING_CONST.FORM.PHOTOS.PHOTO_GALLERY.HTML_FOR}
             required
           />
+          <p className="-mt-2 !text-sm text-neutral-700">
+            {CREATE_LISTING_CONST.FORM.PHOTOS.PHOTO_GALLERY.DESCRIPTION}
+          </p>
         </div>
         <SectionHeading>
           {CREATE_LISTING_CONST.SECTIONS.OTHER_ATTACHMENTS}
@@ -214,7 +217,9 @@ export const CreateListing = () => {
             onChange={(event) => hook.setScanLink(event.target.value)}
           />
           <UploadDropzone
-            label={CREATE_LISTING_CONST.FORM.OTHER_ATTACHMENTS.FLOOR_PLANS.LABEL}
+            label={
+              CREATE_LISTING_CONST.FORM.OTHER_ATTACHMENTS.FLOOR_PLANS.LABEL
+            }
             text={CREATE_LISTING_CONST.FORM.OTHER_ATTACHMENTS.FLOOR_PLANS.TEXT}
             caption={
               CREATE_LISTING_CONST.FORM.OTHER_ATTACHMENTS.FLOOR_PLANS.CAPTION
@@ -234,7 +239,7 @@ export const CreateListing = () => {
               htmlFor: CREATE_LISTING_CONST.FORM.AGENT.SELECT_AGENT.HTML_FOR,
               placeholder: CREATE_LISTING_CONST.FORM.AGENT.SELECT_AGENT.TEXT,
               label: CREATE_LISTING_CONST.FORM.AGENT.SELECT_AGENT.LABEL,
-              value: hook.agent?.name,
+              value: hook.agent?.NAME,
               onChange: (option) => {
                 const selected = CREATE_LISTING_MOCK.AGENTS.find(
                   (a) => a.AGENT.NAME === option.target.value,
@@ -242,19 +247,19 @@ export const CreateListing = () => {
                 if (!selected) return;
                 hook.setAgent({
                   id: selected.ID,
-                  logo: selected.AGENT.LOGO,
-                  darkLogo: selected.AGENT.DARK_LOGO,
-                  name: selected.AGENT.NAME,
-                  email: selected.AGENT.EMAIL,
-                  phone: selected.AGENT.PHONE,
-                  website: selected.AGENT.WEBSITE || "",
-                  instagram: selected.AGENT.INSTAGRAM || "",
+                  LOGO_URL: selected.AGENT.LOGO,
+                  DARK_LOGO: selected.AGENT.DARK_LOGO,
+                  NAME: selected.AGENT.NAME,
+                  EMAIL: selected.AGENT.EMAIL,
+                  PHONE: selected.AGENT.PHONE,
+                  WEBSITE: selected.AGENT.WEBSITE || "",
+                  INSTAGRAM: selected.AGENT.INSTAGRAM || "",
                 });
                 if (!selected.AGENT.LOGO) return;
                 hook.setBrokerage({
-                  logo: selected.BROKERAGE.LOGO,
-                  title: selected.BROKERAGE.TITLE,
-                  address: selected.BROKERAGE.ADDRESS,
+                  LOGO: selected.BROKERAGE.LOGO,
+                  TITLE: selected.BROKERAGE.TITLE,
+                  ADDRESS: selected.BROKERAGE.ADDRESS,
                 });
               },
             }}
@@ -292,20 +297,20 @@ export const CreateListing = () => {
                   uploadedUrl: null,
                 });
               }}
-              isDarkLogo={hook.agent.darkLogo}
-              preview={hook.agent.logo}
+              isDarkLogo={hook.agent.DARK_LOGO}
+              preview={hook.agent.LOGO_URL}
               required
             />
-            {hook.agent.logo && (
+            {hook.agent.LOGO_URL && (
               <>
                 <Checkbox
                   label={CREATE_LISTING_CONST.FORM.AGENT.LOGO_DARK.LABEL}
                   htmlFor={CREATE_LISTING_CONST.FORM.AGENT.LOGO_DARK.HTML_FOR}
-                  value={hook.agent.darkLogo}
+                  value={hook.agent.DARK_LOGO}
                   onChange={(event) => {
                     hook.setAgent((prev) => ({
                       ...prev,
-                      darkLogo: event.target.checked,
+                      DARK_LOGO: event.target.checked,
                     }));
                   }}
                 />
@@ -318,11 +323,24 @@ export const CreateListing = () => {
               placeholder={CREATE_LISTING_CONST.FORM.AGENT.NAME.PLACEHOLDER}
               label={CREATE_LISTING_CONST.FORM.AGENT.NAME.LABEL}
               htmlFor={CREATE_LISTING_CONST.FORM.AGENT.NAME.HTML_FOR}
-              value={hook.agent.name}
+              value={hook.agent.NAME}
               onChange={(event) => {
                 hook.setAgent((prev) => ({
                   ...prev,
-                  name: event.target.value,
+                  NAME: event.target.value,
+                }));
+              }}
+              required
+            />
+            <Input
+              placeholder={CREATE_LISTING_CONST.FORM.AGENT.SUBTITLE.PLACEHOLDER}
+              label={CREATE_LISTING_CONST.FORM.AGENT.SUBTITLE.LABEL}
+              htmlFor={CREATE_LISTING_CONST.FORM.AGENT.SUBTITLE.HTML_FOR}
+              value={hook.agent.SUBTITLE}
+              onChange={(event) => {
+                hook.setAgent((prev) => ({
+                  ...prev,
+                  SUBTITLE: event.target.value,
                 }));
               }}
               required
@@ -331,11 +349,11 @@ export const CreateListing = () => {
               placeholder={CREATE_LISTING_CONST.FORM.AGENT.EMAIL.PLACEHOLDER}
               label={CREATE_LISTING_CONST.FORM.AGENT.EMAIL.LABEL}
               htmlFor={CREATE_LISTING_CONST.FORM.AGENT.EMAIL.HTML_FOR}
-              value={hook.agent.email}
+              value={hook.agent.EMAIL}
               onChange={(event) => {
                 hook.setAgent((prev) => ({
                   ...prev,
-                  email: event.target.value,
+                  EMAIL: event.target.value,
                 }));
               }}
               required
@@ -344,11 +362,11 @@ export const CreateListing = () => {
               placeholder={CREATE_LISTING_CONST.FORM.AGENT.PHONE.PLACEHOLDER}
               label={CREATE_LISTING_CONST.FORM.AGENT.PHONE.LABEL}
               htmlFor={CREATE_LISTING_CONST.FORM.AGENT.PHONE.HTML_FOR}
-              value={hook.agent.phone}
+              value={hook.agent.PHONE}
               onChange={(event) => {
                 hook.setAgent((prev) => ({
                   ...prev,
-                  phone: event.target.value,
+                  PHONE: event.target.value,
                 }));
               }}
               required
@@ -357,11 +375,11 @@ export const CreateListing = () => {
               placeholder={CREATE_LISTING_CONST.FORM.AGENT.WEBSITE.PLACEHOLDER}
               label={CREATE_LISTING_CONST.FORM.AGENT.WEBSITE.LABEL}
               htmlFor={CREATE_LISTING_CONST.FORM.AGENT.WEBSITE.HTML_FOR}
-              value={hook.agent.website}
+              value={hook.agent.WEBSITE}
               onChange={(event) => {
                 hook.setAgent((prev) => ({
                   ...prev,
-                  website: event.target.value,
+                  WEBSITE: event.target.value,
                 }));
               }}
             />
@@ -371,11 +389,11 @@ export const CreateListing = () => {
               }
               label={CREATE_LISTING_CONST.FORM.AGENT.INSTAGRAM.LABEL}
               htmlFor={CREATE_LISTING_CONST.FORM.AGENT.INSTAGRAM.HTML_FOR}
-              value={hook.agent.instagram}
+              value={hook.agent.INSTAGRAM}
               onChange={(event) => {
                 hook.setAgent((prev) => ({
                   ...prev,
-                  instagram: event.target.value,
+                  INSTAGRAM: event.target.value,
                 }));
               }}
             />
@@ -404,7 +422,7 @@ export const CreateListing = () => {
                   uploadedUrl: null,
                 });
               }}
-              preview={hook.brokerage.logo}
+              preview={hook.brokerage.LOGO}
               required
             />
             <p className="-mt-2 !text-sm text-neutral-700">
@@ -416,11 +434,11 @@ export const CreateListing = () => {
               }
               label={CREATE_LISTING_CONST.FORM.BROKERAGE.TITLE.LABEL}
               htmlFor={CREATE_LISTING_CONST.FORM.BROKERAGE.TITLE.HTML_FOR}
-              value={hook.brokerage.title}
+              value={hook.brokerage.TITLE}
               onChange={(event) => {
                 hook.setBrokerage((prev) => ({
                   ...prev,
-                  title: event.target.value,
+                  TITLE: event.target.value,
                 }));
               }}
               required
@@ -431,11 +449,11 @@ export const CreateListing = () => {
               }
               label={CREATE_LISTING_CONST.FORM.BROKERAGE.ADDRESS.LABEL}
               htmlFor={CREATE_LISTING_CONST.FORM.BROKERAGE.ADDRESS.HTML_FOR}
-              value={hook.brokerage.address}
+              value={hook.brokerage.ADDRESS}
               onChange={(event) => {
                 hook.setBrokerage((prev) => ({
                   ...prev,
-                  address: event.target.value,
+                  ADDRESS: event.target.value,
                 }));
               }}
               required
@@ -451,7 +469,7 @@ export const CreateListing = () => {
         </div>
       </div>
       <div className="relative col-span-4 col-start-9 hidden h-full pr-5 lg:block">
-        <div className="sticky top-2.5 grid auto-rows-min grid-cols-1 gap-5 rounded-2xl bg-neutral-950 p-2 shadow-lg">
+        <div className="sticky top-1/2 grid -translate-y-1/2 auto-rows-min grid-cols-1 gap-5 rounded-2xl bg-neutral-950 p-2 shadow-lg">
           <div className="grid aspect-video w-full place-items-center overflow-hidden rounded-xl bg-neutral-100 shadow-md">
             {hook.featuredPhoto.file && hook.featuredPhoto.previewUrl ? (
               <Image
@@ -475,23 +493,23 @@ export const CreateListing = () => {
                 <HouseIcon className="min-w-6" />
                 {hook.address && (
                   <p className="leading-none">
-                    {hook.address.unit} {hook.address.street}{" "}
-                    {hook.address.city ? hook.address.city + ", " : ""}{" "}
-                    {hook.address.province ? hook.address.province + ", " : ""}
-                    {hook.address.postal}
+                    {hook.address.UNIT} {hook.address.STREET}{" "}
+                    {hook.address.CITY ? hook.address.CITY + ", " : ""}{" "}
+                    {hook.address.PROVINCE ? hook.address.PROVINCE + ", " : ""}
+                    {hook.address.POSTAL_CODE}
                   </p>
                 )}
               </div>
               <div className="flex flex-row items-center gap-2 text-neutral-50">
                 <BuildingOfficeIcon className="min-w-6" />
                 {hook.brokerage && (
-                  <p className="leading-none">{hook.brokerage.title}</p>
+                  <p className="leading-none">{hook.brokerage.TITLE}</p>
                 )}
               </div>
               <div className="flex flex-row items-center gap-2 text-neutral-50">
                 <UserIcon className="min-w-6" />
                 {hook.agent && (
-                  <p className="leading-none">{hook.agent.name}</p>
+                  <p className="leading-none">{hook.agent.NAME}</p>
                 )}
               </div>
             </IconContext.Provider>

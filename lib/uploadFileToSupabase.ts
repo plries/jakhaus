@@ -1,12 +1,11 @@
-import { createClient } from "@/utils/supabase/client"
+"use client";
+import { supabase } from "@/utils/supabase/client"
 
 export const uploadFileToSupabase = async (file: File, bucketPath: string, id: string) => {
-  const supabase = createClient()
-  const fileName = `${Date.now()}-${file.name}`
 
   const { data, error } = await supabase.storage
     .from("media")
-    .upload(`${bucketPath}/${id}/${fileName}`, file)
+    .upload(`${bucketPath}/${id}/${file.name}`, file)
 
   if (error) {
     console.error("Error uploading file:", error)
@@ -15,7 +14,7 @@ export const uploadFileToSupabase = async (file: File, bucketPath: string, id: s
 
   const { data: publicUrlData } = supabase.storage
     .from("media")
-    .getPublicUrl(`${bucketPath}/${id}/${fileName}`)
+    .getPublicUrl(`${bucketPath}/${id}/${file.name}`)
 
   return publicUrlData
 }

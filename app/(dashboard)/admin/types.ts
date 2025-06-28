@@ -1,39 +1,38 @@
 export type CreateAddressPropTypes = {
-  street?: string;
-  unit?: string;
-  city?: string;
-  province?: string;
-  postal?: string;
+  STREET?: string;
+  UNIT?: string;
+  CITY?: string;
+  PROVINCE?: string;
+  POSTAL_CODE?: string;
 }
 
 export type CreateAgentPropTypes ={
   id?: string;
-  logo?: string;
-  darkLogo?: boolean;
-  sub?: string;
-  name?: string;
-  email?: string;
-  phone?: string;
-  website?: string;
-  instagram?: string;
+  LOGO_URL?: string;
+  DARK_LOGO?: boolean;
+  SUBTITLE?: string;
+  NAME?: string;
+  EMAIL?: string;
+  PHONE?: string;
+  WEBSITE?: string;
+  INSTAGRAM?: string;
 }
 
 export type CreateBrokeragePropTypes = {
-  id?: string;
-  title?: string;
-  address?: string;
-  logo?: string;
+  TITLE?: string;
+  ADDRESS?: string;
+  LOGO?: string;
 }
 
 export type CreateListingPropTypes = {
-  address: CreateAddressPropTypes;
-  bedrooms: number;
-  bathrooms: number;
-  squareFeet: number;
-  featuredPhoto: string;
-  photoGallery: string[];
-  agent: CreateAgentPropTypes;
-  brokerage: CreateBrokeragePropTypes;
+  ADDRESS: CreateAddressPropTypes;
+  BEDROOMS: number;
+  BATHROOMS: number;
+  SQUARE_FEET: number;
+  FEATURED_PHOTO: string;
+  PHOTO_GALLERY: string[];
+  AGENT: CreateAgentPropTypes;
+  BROKERAGE: CreateBrokeragePropTypes;
 }
 
 export type UploadableImageTypes = {

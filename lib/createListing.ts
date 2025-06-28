@@ -1,7 +1,7 @@
 import { createClient } from "@/utils/supabase/server";
 
 // 1. upsert the agent with brokerage info
-export async function createOrUpdateAgent(agent: any) {
+export async function createAgent(agent: any) {
   const supabase = await createClient();
 
   const agentData = {
@@ -21,7 +21,7 @@ export async function createOrUpdateAgent(agent: any) {
 
   const { data, error } = await supabase
     .from("agents")
-    .upsert(agentData, { onConflict: "id" })
+    .insert(agentData)
     .select("id")
     .single();
 
@@ -46,32 +46,28 @@ export async function createFullListing(listingData: any, photos: string[], floo
   const listingId = data.id;
 
   // 2b. insert photos
-  if (photos?.length) {
-    const photoEntries = photos.map((url) => ({
-      listing_id: listingId,
-      url
-    }));
+  const { error: photoError } = await supabase
+    .from("photos")
+    .insert([
+      ...photos.map((URL) => ({
+        listing_id: listingId,
+        URL
+      }))
+    ]);
 
-    const { error: photoError } = await supabase
-      .from("photos")
-      .insert(photoEntries);
-
-    if (photoError) throw photoError;
-  }
+  if (photoError) throw photoError;
 
   // 2c. insert floor plans
-  if (floor_plans?.length) {
-    const floorPlanEntries = floor_plans.map((url) => ({
-      listing_id: listingId,
-      url
-    }));
-
-    const { error: floorPlanError } = await supabase
-      .from("floor_plans")
-      .insert(floorPlanEntries);
-      
-    if (floorPlanError) throw floorPlanError;
-  }
+  const { error: floorPlanError } = await supabase
+    .from("floor_plans")
+    .insert([
+      ...floor_plans.map((URL) => ({
+        listing_id: listingId,
+        URL
+      }))
+    ]);
+    
+  if (floorPlanError) throw floorPlanError;
 
   return listingId;
 }

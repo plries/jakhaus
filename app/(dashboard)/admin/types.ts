@@ -38,5 +38,4 @@ export type CreateListingPropTypes = {
 export type UploadableImageTypes = {
   file: File | null;
   previewUrl: string | null;
-  uploadedUrl: string | null;
 }

@@ -12,4 +12,5 @@ export type InputPropTypes = {
   inputRef?: React.RefObject<HTMLInputElement | null>
   onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void
   disabled?: boolean
+  maxLength?: number
 }

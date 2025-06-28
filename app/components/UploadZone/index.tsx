@@ -1,20 +1,41 @@
 "use client";
 import Image from "next/image";
 import { UploadSimpleIcon, XIcon } from "@phosphor-icons/react";
-import { UploadDropzonePropTypes } from "./types";
-import { useUploadDropzone } from "./useUploadDropzone";
+import { UploadZonePropTypes } from "./types";
+import { useUploadZone } from "./useUploadZone";
 import { IconButton } from "../IconButton";
 import { UPLOAD_BUTTON_CONST } from "./const";
 
-export const UploadDropzone = ({
+export const UploadZone = ({
   label,
   text,
   required,
   caption,
   htmlFor,
   onChange,
-}: UploadDropzonePropTypes) => {
-  const hook = useUploadDropzone();
+  files,
+  onClear,
+}: UploadZonePropTypes) => {
+  const uploadedFiles = files
+    .map((f: { file: File | null; previewUrl: string | null }) => f.file)
+    .filter((file): file is File => file !== null);
+
+  const handleChange = (newFiles: File[]) => {
+    const unique = newFiles.filter(
+      (file, i, arr) =>
+        arr.findIndex((f) => f.name === file.name && f.size === file.size) ===
+        i,
+    );
+
+    const withPreviews = unique.map((file) => ({
+      file,
+      previewUrl: URL.createObjectURL(file),
+    }));
+
+    withPreviews;
+  };
+
+  const hook = useUploadZone(uploadedFiles, handleChange);
 
   return (
     <div ref={hook.dropzoneRef}>
@@ -26,31 +47,30 @@ export const UploadDropzone = ({
         htmlFor={htmlFor}
         className="flex h-fit w-full cursor-pointer flex-col items-center justify-center rounded-xl border border-neutral-300 px-5 pb-10 text-nowrap shadow-inner transition-all duration-150 ease-in-out hover:bg-neutral-100 active:scale-98"
       >
-        {hook.uploadedFiles && hook.previewUrls && (
+        {files && (
           <span className="grid w-full grid-cols-1 gap-x-5 md:grid-cols-2 lg:grid-cols-3">
-            {hook.uploadedFiles.map((file, index) => {
-              const previewUrl = hook.previewUrls[index];
-              if (!previewUrl) return null;
-
+            {files.map((file, index) => {
               return (
                 <span key={index} className="relative mt-7.5 w-full">
                   <IconButton
                     additionalClasses="absolute -right-4 -top-4 place-self-end"
                     name={UPLOAD_BUTTON_CONST.DELETE}
-                    onClick={() => hook.clearFile(index)}
+                    onClick={() => {
+                      onClear?.(index);
+                    }}
                   >
                     <XIcon />
                   </IconButton>
                   <Image
-                    src={previewUrl}
-                    alt={file.name}
+                    src={file.previewUrl ?? ""}
+                    alt={file.file?.name ?? ""}
                     width={1920}
                     height={1080}
                     className="mt-2 rounded-md border border-neutral-950/10 shadow-sm"
                   />
                   <span className="flex justify-center px-2">
                     <p className="-mt-2 w-fit overflow-hidden rounded-full border border-neutral-950/10 bg-neutral-50 px-2 py-1 text-center !text-sm text-nowrap text-ellipsis !text-neutral-600 shadow-sm">
-                      {file.name}
+                      {file.file?.name ?? ""}
                     </p>
                   </span>
                 </span>
@@ -68,8 +88,11 @@ export const UploadDropzone = ({
         className="hidden"
         accept="image/*"
         onChange={(event) => {
-          hook.handleFileUpload(event);
-          if (onChange) onChange(event.target.files![0]);
+          const files = event.target.files;
+          if (files) {
+            hook.handleFileUpload(event);
+            if (onChange) onChange(Array.from(files));
+          }
         }}
         multiple
       />

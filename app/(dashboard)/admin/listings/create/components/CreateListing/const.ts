@@ -43,17 +43,17 @@ export const CREATE_LISTING_CONST = {
     OVERVIEW: {
       BEDROOMS: {
         LABEL: "Bedrooms",
-        PLACEHOLDER: "1",
+        PLACEHOLDER: "0",
         HTML_FOR: "BEDROOMS"
       },
       BATHROOMS: {
         LABEL: "Bathrooms",
-        PLACEHOLDER: "1",
+        PLACEHOLDER: "0",
         HTML_FOR: "BATHROOMS"
       },
       SQUARE_FEET: {
         LABEL: "Square feet",
-        PLACEHOLDER: "1",
+        PLACEHOLDER: "0",
         HTML_FOR: "SQUARE_FEET"
       }, 
     },

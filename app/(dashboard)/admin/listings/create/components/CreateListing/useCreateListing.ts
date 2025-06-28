@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   CreateAddressPropTypes,
   CreateAgentPropTypes,
@@ -10,13 +10,15 @@ import { uploadFileToSupabase } from "@/lib/uploadFileToSupabase";
 import {v4 as uuidv4} from 'uuid';
 
 export const useCreateListing = () => {
+  const phoneRef = useRef<HTMLInputElement>(null);
+
   const [showCreateAgent, setShowCreateAgent] = useState<boolean>(false);
 
   const [address, setAddress] = useState<CreateAddressPropTypes>({
     STREET: "",
     UNIT: "",
     CITY: "",
-    PROVINCE: "",
+    PROVINCE: "BC",
     POSTAL_CODE: "",
   });
 
@@ -27,7 +29,6 @@ export const useCreateListing = () => {
   const [featuredPhoto, setFeaturedPhoto] = useState<UploadableImageTypes>({
     file: null,
     previewUrl: null,
-    uploadedUrl: null,
   });
   const [photoGallery, setPhotoGallery] = useState<UploadableImageTypes[]>([]);
 
@@ -51,7 +52,6 @@ export const useCreateListing = () => {
   const [agentLogo, setAgentLogo] = useState<UploadableImageTypes>({
     file: null,
     previewUrl: null,
-    uploadedUrl: null,
   });
 
   const [brokerage, setBrokerage] = useState<CreateBrokeragePropTypes>({
@@ -63,7 +63,6 @@ export const useCreateListing = () => {
   const [brokerageLogo, setBrokerageLogo] = useState<UploadableImageTypes>({
     file: null,
     previewUrl: null,
-    uploadedUrl: null,
   });
 
   const listingId = uuidv4();
@@ -71,31 +70,39 @@ export const useCreateListing = () => {
 
   const toggleShowCreateAgent = () => setShowCreateAgent(!showCreateAgent);
 
+  const formatPhone = (value: string) => {
+    const cleaned = value.replace(/\D/g, '');
+    const match = cleaned.match(/^(\d{0,3})(\d{0,3})(\d{0,4})$/);
+
+    if (!match) return value;
+
+    return [match[1], match[2], match[3]]
+      .filter(Boolean)
+      .join('-');
+  };
+
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     
     try {
       // 1. upload all the images to Supabase storage (still using client-side supabase client)
       const uploadedFeaturedPhoto = await uploadFileToSupabase(featuredPhoto.file!, "featured-photos", listingId);
-      setFeaturedPhoto({ ...featuredPhoto, uploadedUrl: uploadedFeaturedPhoto?.publicUrl || "" });
 
       const uploadedAgentLogo = await uploadFileToSupabase(agentLogo.file!, "logos/agents", listingId);
-      setAgentLogo({ ...agentLogo, uploadedUrl: uploadedAgentLogo?.publicUrl || "" });
 
       const uploadedBrokerageLogo = await uploadFileToSupabase(brokerageLogo.file!, "logos/brokerages", listingId);
-      setBrokerageLogo({ ...brokerageLogo, uploadedUrl: uploadedBrokerageLogo?.publicUrl || "" });
 
-      const uploadedGallery = await Promise.all(photoGallery.map(async (photo) => {
+      const uploadedGallery = (await Promise.all(photoGallery.map(async (photo) => {
         if (!photo.file) return null;
         const result = await uploadFileToSupabase(photo.file, "photo-gallery", listingId);
-        return result?.publicUrl || "";
-      }));
+        return result?.publicUrl || null;
+      }))).filter(Boolean);
 
-      const uploadedFloorPlans = await Promise.all(floorPlans.map(async (plan) => {
+      const uploadedFloorPlans = (await Promise.all(floorPlans.map(async (plan) => {
         if (!plan.file) return null;
         const result = await uploadFileToSupabase(plan.file, "floor-plans", listingId);
-        return result?.publicUrl || "";
-      }));
+        return result?.publicUrl || null;
+      }))).filter(Boolean);
 
     // 2. prepare final data to send to the server
     const payload = {
@@ -189,7 +196,33 @@ export const useCreateListing = () => {
     };
   }, [floorPlans]);
 
+  useEffect(() => {
+    const phone = phoneRef.current;
+
+    if (!phone) return;
+
+    const handlePhoneInput = (event: KeyboardEvent) => {
+      const input = event.target as HTMLInputElement;
+
+      if (
+        event.key !== 'Backspace' &&
+        (input.value.length === 3 || input.value.length === 7)
+      ) {
+        input.value += '-';
+      }
+    };
+
+    phone.addEventListener('keydown', handlePhoneInput);
+
+    return () => {
+      phone.removeEventListener('keydown', handlePhoneInput);
+    };
+  }, []);
+
   return {
+    phoneRef,
+    formatPhone,
+    
     showCreateAgent,
     toggleShowCreateAgent,
 

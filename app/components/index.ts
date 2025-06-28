@@ -9,4 +9,4 @@ export * from "./PageHeading";
 export * from "./SectionHeading";
 export * from "./Table";
 export * from "./UploadButton";
-export * from "./UploadDropzone";
+export * from "./UploadZone";

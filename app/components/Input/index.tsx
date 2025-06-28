@@ -16,6 +16,7 @@ export const Input = ({
   inputRef,
   onKeyDown,
   disabled,
+  maxLength,
 }: InputPropTypes) => {
   return (
     <div className={`${disabled ? "pointer-events-none opacity-50" : ""}`}>
@@ -46,6 +47,7 @@ export const Input = ({
           min={type === "number" ? 0 : undefined}
           onKeyDown={onKeyDown}
           disabled={disabled}
+          maxLength={maxLength}
         />
         {selector && <CaretDownIcon size={20} className="text-neutral-400" />}
       </div>

@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { createFullListing, createOrUpdateAgent } from "@/lib/createListing";
+import { createFullListing, createAgent } from "@/lib/createListing";
 
 export async function POST(req: Request) {
   const body = await req.json();
@@ -10,12 +10,15 @@ export async function POST(req: Request) {
   try {
     const { agent, dataToSubmit, photos, floor_plans } = body;
 
-    const agentId = await createOrUpdateAgent(agent);
-    await createFullListing({ 
-      ...dataToSubmit,
-      agent_id: agentId
-    },
-      photos, floor_plans);
+    const agentId = await createAgent(agent);
+    await createFullListing(
+      { 
+        ...dataToSubmit,
+        agent_id: agentId
+      },
+      photos,
+      floor_plans
+    );
 
     return NextResponse.json({ success: true });
     

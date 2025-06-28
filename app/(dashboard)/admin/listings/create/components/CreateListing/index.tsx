@@ -15,7 +15,7 @@ import {
   PageHeading,
   SectionHeading,
   UploadButton,
-  UploadDropzone,
+  UploadZone,
 } from "@/app/components";
 import { CREATE_LISTING_CONST, CREATE_LISTING_MOCK } from "./const";
 import { useCreateListing } from "./useCreateListing";
@@ -84,6 +84,7 @@ export const CreateListing = () => {
                   PROVINCE: event.target.value,
                 }));
               }}
+              maxLength={2}
               required
             />
             <Input
@@ -157,18 +158,15 @@ export const CreateListing = () => {
             text={CREATE_LISTING_CONST.FORM.PHOTOS.FEATURED_PHOTO.TEXT}
             htmlFor={CREATE_LISTING_CONST.FORM.PHOTOS.FEATURED_PHOTO.HTML_FOR}
             onChange={(file) => {
-              const previewUrl = URL.createObjectURL(file);
               hook.setFeaturedPhoto({
                 file,
-                previewUrl,
-                uploadedUrl: null,
+                previewUrl: URL.createObjectURL(file),
               });
             }}
             onClear={() =>
               hook.setFeaturedPhoto({
                 file: null,
                 previewUrl: null,
-                uploadedUrl: null,
               })
             }
             required
@@ -176,11 +174,23 @@ export const CreateListing = () => {
           <p className="-mt-2 !text-sm text-neutral-700">
             {CREATE_LISTING_CONST.FORM.PHOTOS.FEATURED_PHOTO.DESCRIPTION}
           </p>
-          <UploadDropzone
+          <UploadZone
             label={CREATE_LISTING_CONST.FORM.PHOTOS.PHOTO_GALLERY.LABEL}
             text={CREATE_LISTING_CONST.FORM.PHOTOS.PHOTO_GALLERY.TEXT}
             caption={CREATE_LISTING_CONST.FORM.PHOTOS.PHOTO_GALLERY.CAPTION}
             htmlFor={CREATE_LISTING_CONST.FORM.PHOTOS.PHOTO_GALLERY.HTML_FOR}
+            onChange={(uploadedFiles) => {
+              hook.setPhotoGallery(
+                uploadedFiles.map((file) => ({
+                  file,
+                  previewUrl: URL.createObjectURL(file),
+                })),
+              );
+            }}
+            onClear={(index) =>
+              hook.setPhotoGallery((prev) => prev.filter((_, i) => i !== index))
+            }
+            files={hook.photoGallery}
             required
           />
           <p className="-mt-2 !text-sm text-neutral-700">
@@ -216,7 +226,7 @@ export const CreateListing = () => {
             value={hook.scanLink}
             onChange={(event) => hook.setScanLink(event.target.value)}
           />
-          <UploadDropzone
+          <UploadZone
             label={
               CREATE_LISTING_CONST.FORM.OTHER_ATTACHMENTS.FLOOR_PLANS.LABEL
             }
@@ -227,6 +237,19 @@ export const CreateListing = () => {
             htmlFor={
               CREATE_LISTING_CONST.FORM.OTHER_ATTACHMENTS.FLOOR_PLANS.HTML_FOR
             }
+            onChange={(uploadedFiles) => {
+              hook.setFloorPlans(
+                uploadedFiles.map((file) => ({
+                  file,
+                  previewUrl: URL.createObjectURL(file),
+                })),
+              );
+            }}
+            onClear={(index) =>
+              hook.setFloorPlans((prev) => prev.filter((_, i) => i !== index))
+            }
+            files={hook.floorPlans}
+            required
           />
         </div>
         <SectionHeading>
@@ -239,7 +262,7 @@ export const CreateListing = () => {
               htmlFor: CREATE_LISTING_CONST.FORM.AGENT.SELECT_AGENT.HTML_FOR,
               placeholder: CREATE_LISTING_CONST.FORM.AGENT.SELECT_AGENT.TEXT,
               label: CREATE_LISTING_CONST.FORM.AGENT.SELECT_AGENT.LABEL,
-              value: hook.agent?.NAME,
+              value: hook.agent.NAME,
               onChange: (option) => {
                 const selected = CREATE_LISTING_MOCK.AGENTS.find(
                   (a) => a.AGENT.NAME === option.target.value,
@@ -287,14 +310,12 @@ export const CreateListing = () => {
                 hook.setAgentLogo({
                   file: null,
                   previewUrl: "",
-                  uploadedUrl: null,
                 });
               }}
               onChange={(file: File) => {
                 hook.setAgentLogo({
                   file,
                   previewUrl: URL.createObjectURL(file),
-                  uploadedUrl: null,
                 });
               }}
               isDarkLogo={hook.agent.DARK_LOGO}
@@ -359,6 +380,7 @@ export const CreateListing = () => {
               required
             />
             <Input
+              inputRef={hook.phoneRef}
               placeholder={CREATE_LISTING_CONST.FORM.AGENT.PHONE.PLACEHOLDER}
               label={CREATE_LISTING_CONST.FORM.AGENT.PHONE.LABEL}
               htmlFor={CREATE_LISTING_CONST.FORM.AGENT.PHONE.HTML_FOR}
@@ -366,9 +388,10 @@ export const CreateListing = () => {
               onChange={(event) => {
                 hook.setAgent((prev) => ({
                   ...prev,
-                  PHONE: event.target.value,
+                  PHONE: hook.formatPhone(event.target.value),
                 }));
               }}
+              maxLength={12}
               required
             />
             <Input
@@ -412,14 +435,12 @@ export const CreateListing = () => {
                 hook.setBrokerageLogo({
                   file: null,
                   previewUrl: "",
-                  uploadedUrl: null,
                 })
               }
               onChange={(file: File) => {
                 hook.setBrokerageLogo({
                   file,
                   previewUrl: URL.createObjectURL(file),
-                  uploadedUrl: null,
                 });
               }}
               preview={hook.brokerage.LOGO}

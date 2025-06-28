@@ -6,6 +6,7 @@ import { SectionPropTypes } from "@/app/types";
 import {
   AtIcon,
   EnvelopeIcon,
+  InstagramLogoIcon,
   LinkIcon,
   PhoneIcon,
 } from "@phosphor-icons/react";
@@ -80,7 +81,7 @@ export const Contact = ({ CONSTANTS }: SectionPropTypes) => {
                     href={"tel:" + CONSTANTS.ASSIGNED_AGENT.PHONE}
                     target="_blank"
                   >
-                    {CONSTANTS.ASSIGNED_AGENT.PHONE.replaceAll("-", "")}
+                    {CONSTANTS.ASSIGNED_AGENT.PHONE.replaceAll("-", ".")}
                   </Link>
                 </motion.div>
               </div>
@@ -115,14 +116,14 @@ export const Contact = ({ CONSTANTS }: SectionPropTypes) => {
                   className="flex w-fit flex-row items-center gap-2 text-neutral-400 transition-colors duration-150 ease-in-out hover:text-neutral-50"
                 >
                   <div>
-                    <LinkIcon />
+                    <InstagramLogoIcon />
                   </div>
                   <Link
                     className="relative text-nowrap duration-150 ease-in-out after:absolute after:-bottom-0.5 after:left-0 after:h-[1px] after:w-full after:origin-left after:scale-x-0 after:bg-neutral-50 after:transition-[scale] hover:after:scale-x-100"
                     href={CONSTANTS.ASSIGNED_AGENT.INSTAGRAM}
                     target="_blank"
                   >
-                    {CONSTANTS.ASSIGNED_AGENT.INSTAGRAM.replace("https://", "")}
+                    {CONSTANTS.ASSIGNED_AGENT.INSTAGRAM}
                   </Link>
                 </motion.div>
               </div>

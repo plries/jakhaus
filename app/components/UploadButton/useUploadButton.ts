@@ -27,32 +27,32 @@ export const useUploadButton = () => {
     return () => URL.revokeObjectURL(objectUrl);
   }, [uploadedFile]);
 
-  // useEffect(() => {
-  //   const label = labelRef.current;
-  //   if (!label) return;
+  useEffect(() => {
+    const label = labelRef.current;
+    if (!label) return;
 
-  //   const handleDrop = (event: DragEvent) => {
-  //     if (!event.dataTransfer) return;
+    const handleDrop = (event: DragEvent) => {
+      if (!event.dataTransfer) return;
 
-  //     event.preventDefault();
-  //     const file = event.dataTransfer.files[0];
-  //     if (file) {
-  //       setUploadedFile(file);
-  //     }
-  //   };
+      event.preventDefault();
+      const file = event.dataTransfer.files[0];
+      if (file) {
+        setUploadedFile(file);
+      }
+    };
 
-  //   const handleDragOver = (event: DragEvent) => {
-  //     event.preventDefault();
-  //   };
+    const handleDragOver = (event: DragEvent) => {
+      event.preventDefault();
+    };
 
-  //   label.addEventListener("drop", handleDrop);
-  //   label.addEventListener("dragover", handleDragOver);
+    label.addEventListener("drop", handleDrop);
+    label.addEventListener("dragover", handleDragOver);
 
-  //   return () => {
-  //     label.removeEventListener("drop", handleDrop);
-  //     label.removeEventListener("dragover", handleDragOver);
-  //   }
-  // })
+    return () => {
+      label.removeEventListener("drop", handleDrop);
+      label.removeEventListener("dragover", handleDragOver);
+    }
+  })
 
   return {
     uploadedFile,

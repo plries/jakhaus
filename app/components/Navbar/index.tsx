@@ -20,7 +20,6 @@ import { NAVBAR_CONST } from "./const";
 import { Button } from "../Button";
 import { MOTION_CONFIG } from "@/app/(public)/listings/[id]/const";
 import { usePathname } from "next/navigation";
-import { ListingPropTypes } from "@/app/types";
 
 export const Navbar = ({ CONSTANTS, LINKS, dashboard }: NavbarPropTypes) => {
   const router = useRouter();
@@ -36,21 +35,6 @@ export const Navbar = ({ CONSTANTS, LINKS, dashboard }: NavbarPropTypes) => {
   const handleLogout = async () => {
     await supabase.auth.signOut();
     router.replace("/login");
-  };
-
-  const shouldRenderLink = (
-    linkKey: string | undefined,
-    constants: ListingPropTypes,
-  ): boolean => {
-    if (!linkKey) return true;
-
-    const topLevel = constants[linkKey as keyof ListingPropTypes];
-    const nested =
-      constants.OTHER_ATTACHMENTS?.[
-        linkKey as keyof NonNullable<ListingPropTypes["OTHER_ATTACHMENTS"]>
-      ];
-
-    return Boolean(topLevel ?? nested);
   };
 
   return (
@@ -72,7 +56,10 @@ export const Navbar = ({ CONSTANTS, LINKS, dashboard }: NavbarPropTypes) => {
           <nav className="contents" role="navigation">
             {LINKS.filter((LINK) => {
               if (dashboard) return true;
-              return CONSTANTS && shouldRenderLink(LINK.KEY, CONSTANTS);
+              if (CONSTANTS)
+                return (
+                  !LINK.KEY || CONSTANTS[LINK.KEY as keyof typeof CONSTANTS]
+                );
             })
 
               .map((LINK) => (
@@ -94,12 +81,12 @@ export const Navbar = ({ CONSTANTS, LINKS, dashboard }: NavbarPropTypes) => {
                         activeSection === LINK.HREF.replace("#", "")
                           ? "!bg-neutral-50/10 !text-neutral-50"
                           : "bg-transparent !text-neutral-400 hover:!bg-neutral-50/10 hover:!text-neutral-50 !shadow-none"
-                      } ${LINK.KEY === "AGENT" ? "!bg-neutral-50 !text-neutral-950 hover:!bg-neutral-50/90 hover:!text-neutral-950" : ""} `}
+                      } ${LINK.KEY === "ASSIGNED_AGENT" ? "!bg-neutral-50 !text-neutral-950 hover:!bg-neutral-50/90 hover:!text-neutral-950" : ""} `}
                       onClick={() => {
                         lenis?.scrollTo(LINK.HREF);
                       }}
                     >
-                      {LINK.KEY === "AGENT" && <UserCircleIcon />}
+                      {LINK.KEY === "ASSIGNED_AGENT" && <UserCircleIcon />}
                       {LINK.NAME}
                     </Button>
                   )}
@@ -132,41 +119,42 @@ export const Navbar = ({ CONSTANTS, LINKS, dashboard }: NavbarPropTypes) => {
             <nav className="contents" role="navigation">
               {LINKS.filter((LINK) => {
                 if (dashboard) return true;
-                return CONSTANTS && shouldRenderLink(LINK.KEY, CONSTANTS);
-              })
-
-                .map((LINK) => (
-                  <React.Fragment key={LINK.KEY}>
-                    {dashboard ? (
-                      <Button
-                        additionalClasses={`!rounded-full bg-transparent !border-transparent !justify-start ${
-                          pathname.includes(LINK.HREF)
-                            ? "!bg-neutral-50/10 !text-neutral-50"
-                            : "!text-neutral-400 hover:!bg-neutral-50/10 hover:text-neutral-50 !shadow-none"
-                        } `}
-                        href={LINK.HREF}
-                        onClick={() => mobileMenu.toggleOpen()}
-                      >
-                        {LINK.NAME}
-                      </Button>
-                    ) : (
-                      <Button
-                        additionalClasses={`!rounded-full bg-transparent !border-transparent !justify-start ${
-                          activeSection === LINK.HREF.replace("#", "")
-                            ? "!bg-neutral-50/10 !text-neutral-50"
-                            : "!text-neutral-400 hover:!bg-neutral-50/10 hover:text-neutral-50 !shadow-none"
-                        } ${LINK.KEY === "AGENT" ? "!bg-neutral-50 !text-neutral-950 hover:!bg-neutral-50/90 hover:!text-neutral-950" : ""} `}
-                        onClick={() => {
-                          lenis?.scrollTo(LINK.HREF);
-                          mobileMenu.toggleOpen();
-                        }}
-                      >
-                        {LINK.KEY === "AGENT" && <UserCircleIcon />}
-                        {LINK.NAME}
-                      </Button>
-                    )}
-                  </React.Fragment>
-                ))}
+                if (CONSTANTS)
+                  return (
+                    !LINK.KEY || CONSTANTS[LINK.KEY as keyof typeof CONSTANTS]
+                  );
+              }).map((LINK) => (
+                <React.Fragment key={LINK.KEY}>
+                  {dashboard ? (
+                    <Button
+                      additionalClasses={`!rounded-full bg-transparent !border-transparent !justify-start ${
+                        pathname.includes(LINK.HREF)
+                          ? "!bg-neutral-50/10 !text-neutral-50"
+                          : "!text-neutral-400 hover:!bg-neutral-50/10 hover:text-neutral-50 !shadow-none"
+                      } `}
+                      href={LINK.HREF}
+                      onClick={() => mobileMenu.toggleOpen()}
+                    >
+                      {LINK.NAME}
+                    </Button>
+                  ) : (
+                    <Button
+                      additionalClasses={`!rounded-full bg-transparent !border-transparent !justify-start ${
+                        activeSection === LINK.HREF.replace("#", "")
+                          ? "!bg-neutral-50/10 !text-neutral-50"
+                          : "!text-neutral-400 hover:!bg-neutral-50/10 hover:text-neutral-50 !shadow-none"
+                      } ${LINK.KEY === "AGENT" ? "!bg-neutral-50 !text-neutral-950 hover:!bg-neutral-50/90 hover:!text-neutral-950" : ""} `}
+                      onClick={() => {
+                        lenis?.scrollTo(LINK.HREF);
+                        mobileMenu.toggleOpen();
+                      }}
+                    >
+                      {LINK.KEY === "AGENT" && <UserCircleIcon />}
+                      {LINK.NAME}
+                    </Button>
+                  )}
+                </React.Fragment>
+              ))}
             </nav>
             {dashboard && (
               <button

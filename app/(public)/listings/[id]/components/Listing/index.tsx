@@ -24,13 +24,13 @@ export const Listing = ({ CONSTANTS, FULL_ADDRESS }: SectionPropTypes) => {
       <div className="grid grid-cols-4 gap-5 md:grid-cols-8 lg:grid-cols-12">
         <div className="col-span-full grid grid-cols-4 gap-5 py-5 md:grid-cols-8 lg:col-span-10 lg:col-start-2 lg:mx-2.5 lg:grid-cols-10 lg:border-x lg:border-x-neutral-300 lg:py-10">
           <Photos CONSTANTS={CONSTANTS} FULL_ADDRESS={FULL_ADDRESS} />
-          {CONSTANTS.OTHER_ATTACHMENTS?.VIDEO_LINK && (
+          {CONSTANTS.VIDEO_LINK && (
             <Video CONSTANTS={CONSTANTS} FULL_ADDRESS={FULL_ADDRESS} />
           )}
-          {CONSTANTS.OTHER_ATTACHMENTS?.FLOOR_PLAN && (
+          {CONSTANTS.FLOOR_PLANS && (
             <FloorPlan CONSTANTS={CONSTANTS} FULL_ADDRESS={FULL_ADDRESS} />
           )}
-          {CONSTANTS.OTHER_ATTACHMENTS?.SCAN_LINK && (
+          {CONSTANTS.SCAN_LINK && (
             <VirtualTour CONSTANTS={CONSTANTS} FULL_ADDRESS={FULL_ADDRESS} />
           )}
         </div>

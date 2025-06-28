@@ -13,7 +13,7 @@ export const FloorPlan = ({ CONSTANTS, FULL_ADDRESS }: SectionPropTypes) => {
     >
       <SectionHeading>{FLOOR_PLAN_CONST.HEADING}</SectionHeading>
       <div className="col-span-full grid auto-rows-min grid-cols-1 gap-5 p-5">
-        {CONSTANTS.OTHER_ATTACHMENTS?.FLOOR_PLAN?.map((floorPlan, index) => (
+        {CONSTANTS.FLOOR_PLANS?.map((floorPlan, index) => (
           <motion.div
             key={index}
             initial={MOTION_CONFIG.DEFAULT.INITIAL}
@@ -22,7 +22,7 @@ export const FloorPlan = ({ CONSTANTS, FULL_ADDRESS }: SectionPropTypes) => {
           >
             <Image
               className="rounded-2xl border border-neutral-300 shadow-lg"
-              src={floorPlan || ""}
+              src={floorPlan.URL || ""}
               alt={FLOOR_PLAN_CONST.ALT + " " + FULL_ADDRESS}
               width={1920}
               height={1080}

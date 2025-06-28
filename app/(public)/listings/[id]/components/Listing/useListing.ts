@@ -1,15 +1,40 @@
 "use client";
+import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import { LISTINGS_MOCK } from "../../const";
+import { createClient } from "@/utils/supabase/client";
+import { ListingPropTypes } from "@/app/types";
 
 export const useListing = () => {
+  const supabase = createClient();
   const params = useParams();
   const slug = params.id;
 
-  const currentIndex =
-    LISTINGS_MOCK.findIndex((LISTING) => LISTING.ID === slug) ?? null;
+  const [listing, setListing] = useState<ListingPropTypes>();
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  const CONSTANTS = LISTINGS_MOCK[currentIndex];
+  useEffect(() => {
+    if (!slug) return;
 
-  return { CONSTANTS };
+    const fetchListing = async () => {
+      setLoading(true);
+      const { data, error } = await supabase
+        .from("listings")
+        .select("*")
+        .eq("id", slug)
+        .single();
+
+      if (error) {
+        setError(error.message);
+      } else {
+        setListing(data);
+      }
+
+      setLoading(false);
+    };
+
+    fetchListing();
+  }, [slug]);
+
+  return { listing, loading, error };
 };

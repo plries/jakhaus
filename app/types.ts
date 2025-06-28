@@ -1,50 +1,37 @@
 export type ListingPropTypes = {
   ID: string;
-  ADDRESS: {
-    STREET: string;
-    UNIT?: string;
-    CITY: string;
-    PROVINCE: string;
-    POSTAL_CODE: string;
-  };
-  OVERVIEW: {
-    BEDROOMS: number;
-    BATHROOMS: number;
-    SQUARE_FEET: number;
-  };
-  PHOTOS: {
-    FEATURED_PHOTO: string;
-    PHOTOS_GALLERY: string[];
-  };
-  OTHER_ATTACHMENTS?: {
-    VIDEO_LINK?: string;
-    FLOOR_PLAN?: string[];
-    SCAN_LINK?: string;
-  };
-  ASSIGNED_AGENT: AssignedAgentPropTypes;
+  STREET: string;
+  UNIT?: string;
+  CITY: string;
+  PROVINCE: string;
+  POSTAL_CODE: string;
+  BEDROOMS: number;
+  BATHROOMS: number;
+  SQUARE_FEET: number;
+  FEATURED_PHOTO: string;
+  PHOTO_GALLERY: PhotoPropTypes[];
+  VIDEO_LINK?: string;
+  FLOOR_PLANS?: PhotoPropTypes[];
+  SCAN_LINK?: string;
+  ASSIGNED_AGENT: AgentPropTypes;
 };
 
-export type AgentPropTypes = {
-  LOGO: string;
+type AgentPropTypes = {
+  LOGO_URL: string;
   LOGO_DARK?: boolean;
   SUBTITLE: string;
   NAME: string;
-  LINKS: {
-    TYPE: "phone" | "email" | "website" | "instagram",
-    LINK: string
-  }[]
+  EMAIL: string;
+  PHONE: string;
+  WEBSITE?: string;
+  INSTAGRAM?: string;
+  BROKERAGE_NAME: string;
+  BROKERAGE_LOGO: string;
+  BROKERAGE_ADDRESS: string;
 }
 
-export type BrokeragePropTypes = {
-  LOGO: string;
-  TITLE: string;
-  ADDRESS: string;
-}
-
-export type AssignedAgentPropTypes = {
-  ID: string;
-  AGENT: AgentPropTypes;
-  BROKERAGE: BrokeragePropTypes;
+type PhotoPropTypes = {
+  URL: string;
 }
 
 export type SectionPropTypes = {

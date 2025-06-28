@@ -85,9 +85,9 @@ export const CREATE_LISTING_CONST = {
         HTML_FOR: "scan_link",
         PLACEHOLDER: "Link to 3D scan",
       },
-      FLOOR_PLAN: {
-        LABEL: "Floor plan",
-        HTML_FOR: "floor_plan",
+      FLOOR_PLANS: {
+        LABEL: "Floor plans",
+        HTML_FOR: "floor_plans",
         TEXT: "Upload floor plan(s)",
         CAPTION: "Click here to upload.",
         PATH: "floor-plans"

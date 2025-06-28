@@ -2,7 +2,9 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   /* config options here */
-  matcher: ["/((?!_next/static|_next/image|favicon.ico).*)"]
+  images: {
+    remotePatterns: [new URL ('https://xfkksjjzeketzqkgiikg.supabase.co/**')]
+  }
 };
 
 export default nextConfig;

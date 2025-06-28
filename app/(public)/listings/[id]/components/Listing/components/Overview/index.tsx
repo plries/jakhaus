@@ -19,7 +19,7 @@ export const Overview = ({ CONSTANTS, FULL_ADDRESS }: SectionPropTypes) => {
         <div className="relative" id="overview">
           <div className="mask-gradient-t absolute bottom-0 z-10 h-1/6 w-full bg-neutral-50/50 backdrop-blur-2xl" />
           <Image
-            src={CONSTANTS.PHOTOS.FEATURED_PHOTO}
+            src={CONSTANTS.FEATURED_PHOTO}
             alt={FULL_ADDRESS || ""}
             className="aspect-video w-full"
             width={1920}
@@ -42,7 +42,7 @@ export const Overview = ({ CONSTANTS, FULL_ADDRESS }: SectionPropTypes) => {
                 whileInView={MOTION_CONFIG.LEFT.WHILE_IN_VIEW}
                 transition={MOTION_CONFIG.TRANSITION}
               >
-                {CONSTANTS.ADDRESS.UNIT} {CONSTANTS.ADDRESS.STREET}
+                {CONSTANTS.UNIT} {CONSTANTS.STREET}
               </motion.span>
               <motion.span
                 className="mt-1 block !text-xl font-normal tracking-tight text-neutral-400 md:!text-2xl lg:!text-3xl"
@@ -53,12 +53,11 @@ export const Overview = ({ CONSTANTS, FULL_ADDRESS }: SectionPropTypes) => {
                   delay: 0.2,
                 }}
               >
-                {CONSTANTS.ADDRESS.CITY}, {CONSTANTS.ADDRESS.PROVINCE},{" "}
-                {CONSTANTS.ADDRESS.POSTAL_CODE}
+                {CONSTANTS.CITY}, {CONSTANTS.PROVINCE}, {CONSTANTS.POSTAL_CODE}
               </motion.span>
             </h1>
             <motion.div
-              className={`col-span-full w-fit md:col-span-2 md:col-start-7 md:justify-self-end lg:col-span-2 lg:col-start-10 ${CONSTANTS.ASSIGNED_AGENT.AGENT.LOGO_DARK ? "rounded-4xl border border-neutral-950/10 bg-neutral-50 p-5 shadow-lg" : ""}`}
+              className={`col-span-full w-fit md:col-span-2 md:col-start-7 md:justify-self-end lg:col-span-2 lg:col-start-10 ${CONSTANTS.ASSIGNED_AGENT.LOGO_DARK ? "rounded-4xl border border-neutral-950/10 bg-neutral-50 p-5 shadow-lg" : ""}`}
               initial={MOTION_CONFIG.RIGHT.INITIAL}
               whileInView={MOTION_CONFIG.RIGHT.WHILE_IN_VIEW}
               transition={{
@@ -67,8 +66,8 @@ export const Overview = ({ CONSTANTS, FULL_ADDRESS }: SectionPropTypes) => {
               }}
             >
               <Image
-                src={CONSTANTS.ASSIGNED_AGENT.AGENT.LOGO}
-                alt={CONSTANTS.ASSIGNED_AGENT.AGENT.SUBTITLE}
+                src={CONSTANTS.ASSIGNED_AGENT.LOGO_URL}
+                alt={CONSTANTS.ASSIGNED_AGENT.SUBTITLE}
                 width={1920}
                 height={1080}
                 className="max-w-32 object-contain drop-shadow-md"
@@ -98,18 +97,18 @@ export const Overview = ({ CONSTANTS, FULL_ADDRESS }: SectionPropTypes) => {
                   <div className="grid w-full items-center px-8 md:px-12 lg:px-16">
                     <p className="!text-2xl font-medium tracking-tighter text-nowrap text-neutral-50 md:!text-3xl">
                       {DETAIL.NAME === "Bedroom"
-                        ? CONSTANTS.OVERVIEW.BEDROOMS
+                        ? CONSTANTS.BEDROOMS
                         : DETAIL.NAME === "Bathroom"
-                          ? CONSTANTS.OVERVIEW.BATHROOMS
-                          : CONSTANTS.OVERVIEW.SQUARE_FEET}
+                          ? CONSTANTS.BATHROOMS
+                          : CONSTANTS.SQUARE_FEET}
                       <span className="block text-sm font-normal tracking-tight text-neutral-400">
                         {DETAIL.NAME === "Bedroom"
-                          ? CONSTANTS.OVERVIEW.BEDROOMS > 1
+                          ? CONSTANTS.BEDROOMS > 1
                             ? DETAIL.NAME + "s"
                             : DETAIL.NAME
                           : ""}
                         {DETAIL.NAME === "Bathroom"
-                          ? CONSTANTS.OVERVIEW.BATHROOMS > 1
+                          ? CONSTANTS.BATHROOMS > 1
                             ? DETAIL.NAME + "s"
                             : DETAIL.NAME
                           : ""}

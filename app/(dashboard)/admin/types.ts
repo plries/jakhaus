@@ -10,6 +10,7 @@ export type CreateAgentPropTypes ={
   id?: string;
   logo?: string;
   darkLogo?: boolean;
+  sub?: string;
   name?: string;
   email?: string;
   phone?: string;

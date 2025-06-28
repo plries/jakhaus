@@ -32,54 +32,101 @@ export const Contact = ({ CONSTANTS }: SectionPropTypes) => {
             initial={MOTION_CONFIG.LEFT.INITIAL}
             whileInView={MOTION_CONFIG.LEFT.WHILE_IN_VIEW}
             transition={MOTION_CONFIG.TRANSITION}
-            className={`w-fit ${CONSTANTS.ASSIGNED_AGENT.AGENT.LOGO_DARK ? "rounded-4xl border border-neutral-950/10 bg-neutral-50 p-5 shadow-lg" : ""}`}
+            className={`w-fit ${CONSTANTS.ASSIGNED_AGENT.LOGO_DARK ? "rounded-4xl border border-neutral-950/10 bg-neutral-50 p-5 shadow-lg" : ""}`}
           >
             <Image
-              src={CONSTANTS.ASSIGNED_AGENT.AGENT.LOGO}
-              alt={CONSTANTS.ASSIGNED_AGENT.AGENT.SUBTITLE}
+              src={CONSTANTS.ASSIGNED_AGENT.LOGO_URL}
+              alt={CONSTANTS.ASSIGNED_AGENT.SUBTITLE}
               className="max-w-32 object-contain drop-shadow-md"
               width={1920}
               height={1080}
             />
           </motion.div>
-          <div className="grid grid-cols-1 gap-2">
-            {CONSTANTS.ASSIGNED_AGENT.AGENT.LINKS.map((LINK, index) => (
-              <motion.div
-                key={index}
-                initial={MOTION_CONFIG.LEFT.INITIAL}
-                whileInView={MOTION_CONFIG.LEFT.WHILE_IN_VIEW}
-                transition={{
-                  ...MOTION_CONFIG.TRANSITION,
-                  delay: 0.1 + index * 0.1,
-                }}
-                className="flex w-fit flex-row items-center gap-2 text-neutral-400 transition-colors duration-150 ease-in-out hover:text-neutral-50"
-              >
-                <div>
-                  {LINK.TYPE === "email" ? (
-                    <EnvelopeIcon />
-                  ) : LINK.TYPE === "phone" ? (
-                    <PhoneIcon />
-                  ) : LINK.TYPE === "website" ? (
-                    <LinkIcon />
-                  ) : (
-                    <AtIcon />
-                  )}
-                </div>
-                <Link
-                  className="relative text-nowrap duration-150 ease-in-out after:absolute after:-bottom-0.5 after:left-0 after:h-[1px] after:w-full after:origin-left after:scale-x-0 after:bg-neutral-50 after:transition-[scale] hover:after:scale-x-100"
-                  href={
-                    LINK.TYPE === "email"
-                      ? `mailto:${LINK.LINK}`
-                      : LINK.TYPE === "phone"
-                        ? `tel:${LINK.LINK.replaceAll("-", "")}`
-                        : LINK.LINK
-                  }
-                  target="_blank"
+          <div className="grid grid-cols-1 gap-1">
+            {CONSTANTS.ASSIGNED_AGENT.EMAIL && (
+              <div className="grid grid-cols-1 gap-2">
+                <motion.div
+                  initial={MOTION_CONFIG.LEFT.INITIAL}
+                  whileInView={MOTION_CONFIG.LEFT.WHILE_IN_VIEW}
+                  transition={MOTION_CONFIG.TRANSITION}
+                  className="flex w-fit flex-row items-center gap-2 text-neutral-400 transition-colors duration-150 ease-in-out hover:text-neutral-50"
                 >
-                  {LINK.LINK.replace("https://", "")}
-                </Link>
-              </motion.div>
-            ))}
+                  <div>
+                    <EnvelopeIcon />
+                  </div>
+                  <Link
+                    className="relative text-nowrap duration-150 ease-in-out after:absolute after:-bottom-0.5 after:left-0 after:h-[1px] after:w-full after:origin-left after:scale-x-0 after:bg-neutral-50 after:transition-[scale] hover:after:scale-x-100"
+                    href={"mailto:" + CONSTANTS.ASSIGNED_AGENT.EMAIL}
+                    target="_blank"
+                  >
+                    {CONSTANTS.ASSIGNED_AGENT.EMAIL}
+                  </Link>
+                </motion.div>
+              </div>
+            )}
+            {CONSTANTS.ASSIGNED_AGENT.PHONE && (
+              <div className="grid grid-cols-1 gap-2">
+                <motion.div
+                  initial={MOTION_CONFIG.LEFT.INITIAL}
+                  whileInView={MOTION_CONFIG.LEFT.WHILE_IN_VIEW}
+                  transition={MOTION_CONFIG.TRANSITION}
+                  className="flex w-fit flex-row items-center gap-2 text-neutral-400 transition-colors duration-150 ease-in-out hover:text-neutral-50"
+                >
+                  <div>
+                    <PhoneIcon />
+                  </div>
+                  <Link
+                    className="relative text-nowrap duration-150 ease-in-out after:absolute after:-bottom-0.5 after:left-0 after:h-[1px] after:w-full after:origin-left after:scale-x-0 after:bg-neutral-50 after:transition-[scale] hover:after:scale-x-100"
+                    href={"tel:" + CONSTANTS.ASSIGNED_AGENT.PHONE}
+                    target="_blank"
+                  >
+                    {CONSTANTS.ASSIGNED_AGENT.PHONE.replaceAll("-", "")}
+                  </Link>
+                </motion.div>
+              </div>
+            )}
+            {CONSTANTS.ASSIGNED_AGENT.WEBSITE && (
+              <div className="grid grid-cols-1 gap-2">
+                <motion.div
+                  initial={MOTION_CONFIG.LEFT.INITIAL}
+                  whileInView={MOTION_CONFIG.LEFT.WHILE_IN_VIEW}
+                  transition={MOTION_CONFIG.TRANSITION}
+                  className="flex w-fit flex-row items-center gap-2 text-neutral-400 transition-colors duration-150 ease-in-out hover:text-neutral-50"
+                >
+                  <div>
+                    <LinkIcon />
+                  </div>
+                  <Link
+                    className="relative text-nowrap duration-150 ease-in-out after:absolute after:-bottom-0.5 after:left-0 after:h-[1px] after:w-full after:origin-left after:scale-x-0 after:bg-neutral-50 after:transition-[scale] hover:after:scale-x-100"
+                    href={CONSTANTS.ASSIGNED_AGENT.WEBSITE}
+                    target="_blank"
+                  >
+                    {CONSTANTS.ASSIGNED_AGENT.WEBSITE.replace("https://", "")}
+                  </Link>
+                </motion.div>
+              </div>
+            )}
+            {CONSTANTS.ASSIGNED_AGENT.INSTAGRAM && (
+              <div className="grid grid-cols-1 gap-2">
+                <motion.div
+                  initial={MOTION_CONFIG.LEFT.INITIAL}
+                  whileInView={MOTION_CONFIG.LEFT.WHILE_IN_VIEW}
+                  transition={MOTION_CONFIG.TRANSITION}
+                  className="flex w-fit flex-row items-center gap-2 text-neutral-400 transition-colors duration-150 ease-in-out hover:text-neutral-50"
+                >
+                  <div>
+                    <LinkIcon />
+                  </div>
+                  <Link
+                    className="relative text-nowrap duration-150 ease-in-out after:absolute after:-bottom-0.5 after:left-0 after:h-[1px] after:w-full after:origin-left after:scale-x-0 after:bg-neutral-50 after:transition-[scale] hover:after:scale-x-100"
+                    href={CONSTANTS.ASSIGNED_AGENT.INSTAGRAM}
+                    target="_blank"
+                  >
+                    {CONSTANTS.ASSIGNED_AGENT.INSTAGRAM.replace("https://", "")}
+                  </Link>
+                </motion.div>
+              </div>
+            )}
           </div>
         </div>
         <div className="col-span-full grid auto-rows-min grid-cols-1 gap-5 md:col-span-4 md:col-start-5 md:place-items-end lg:col-span-5 lg:col-start-7">
@@ -89,8 +136,8 @@ export const Contact = ({ CONSTANTS }: SectionPropTypes) => {
             transition={MOTION_CONFIG.TRANSITION}
           >
             <Image
-              src={CONSTANTS.ASSIGNED_AGENT.BROKERAGE.LOGO}
-              alt={CONSTANTS.ASSIGNED_AGENT.BROKERAGE.TITLE}
+              src={CONSTANTS.ASSIGNED_AGENT.BROKERAGE_LOGO}
+              alt={CONSTANTS.ASSIGNED_AGENT.BROKERAGE_NAME}
               className="max-w-32 object-contain drop-shadow-md"
               width={1920}
               height={1080}
@@ -105,7 +152,7 @@ export const Contact = ({ CONSTANTS }: SectionPropTypes) => {
               delay: 0.2,
             }}
           >
-            {CONSTANTS.ASSIGNED_AGENT.BROKERAGE.ADDRESS}
+            {CONSTANTS.ASSIGNED_AGENT.BROKERAGE_ADDRESS}
           </motion.p>
         </div>
       </div>

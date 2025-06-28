@@ -36,14 +36,18 @@ export const Lightbox = ({
           </IconButton>
           <div className="relative">
             <Image
-              src={CONSTANTS.PHOTOS.PHOTOS_GALLERY[(photoIndex + 1) % CONSTANTS.PHOTOS.PHOTOS_GALLERY.length]}
+              src={
+                CONSTANTS.PHOTO_GALLERY[
+                  (photoIndex + 1) % CONSTANTS.PHOTO_GALLERY.length
+                ].URL
+              }
               alt={FULL_ADDRESS}
               width={1920}
               height={1080}
               className="pointer-events-none absolute top-1/2 right-full mx-10 w-full origin-right -translate-y-1/2 scale-90 rounded-2xl border border-neutral-50/10 object-cover object-center shadow-lg blur-sm"
             />
             <Image
-              src={CONSTANTS.PHOTOS.PHOTOS_GALLERY[photoIndex]}
+              src={CONSTANTS.PHOTO_GALLERY[photoIndex].URL}
               alt={FULL_ADDRESS}
               width={1920}
               height={1080}
@@ -51,10 +55,10 @@ export const Lightbox = ({
             />
             <Image
               src={
-                CONSTANTS.PHOTOS.PHOTOS_GALLERY[
-                  (photoIndex - 1 + CONSTANTS.PHOTOS.PHOTOS_GALLERY.length) %
-                    CONSTANTS.PHOTOS.PHOTOS_GALLERY.length
-                ]
+                CONSTANTS.PHOTO_GALLERY[
+                  (photoIndex - 1 + CONSTANTS.PHOTO_GALLERY.length) %
+                    CONSTANTS.PHOTO_GALLERY.length
+                ].URL
               }
               alt={FULL_ADDRESS}
               width={1920}
@@ -75,7 +79,7 @@ export const Lightbox = ({
             <p className="text-neutral-50">{FULL_ADDRESS}</p>
             <p className="text-right text-neutral-50/75">
               {LIGHTBOX_CONST.SHOWING} {photoIndex + 1}/
-              {CONSTANTS.PHOTOS.PHOTOS_GALLERY.length}
+              {CONSTANTS.PHOTO_GALLERY.length}
             </p>
           </div>
         </div>

@@ -214,13 +214,13 @@ export const CreateListing = () => {
             onChange={(event) => hook.setScanLink(event.target.value)}
           />
           <UploadDropzone
-            label={CREATE_LISTING_CONST.FORM.OTHER_ATTACHMENTS.FLOOR_PLAN.LABEL}
-            text={CREATE_LISTING_CONST.FORM.OTHER_ATTACHMENTS.FLOOR_PLAN.TEXT}
+            label={CREATE_LISTING_CONST.FORM.OTHER_ATTACHMENTS.FLOOR_PLANS.LABEL}
+            text={CREATE_LISTING_CONST.FORM.OTHER_ATTACHMENTS.FLOOR_PLANS.TEXT}
             caption={
-              CREATE_LISTING_CONST.FORM.OTHER_ATTACHMENTS.FLOOR_PLAN.CAPTION
+              CREATE_LISTING_CONST.FORM.OTHER_ATTACHMENTS.FLOOR_PLANS.CAPTION
             }
             htmlFor={
-              CREATE_LISTING_CONST.FORM.OTHER_ATTACHMENTS.FLOOR_PLAN.HTML_FOR
+              CREATE_LISTING_CONST.FORM.OTHER_ATTACHMENTS.FLOOR_PLANS.HTML_FOR
             }
           />
         </div>

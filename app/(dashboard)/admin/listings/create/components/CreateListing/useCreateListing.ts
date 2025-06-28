@@ -7,6 +7,7 @@ import {
   UploadableImageTypes,
 } from "@/app/(dashboard)/admin/types";
 import { uploadFileToSupabase } from "@/lib/uploadFileToSupabase";
+import {v4 as uuidv4} from 'uuid';
 
 export const useCreateListing = () => {
   const [showCreateAgent, setShowCreateAgent] = useState<boolean>(false);
@@ -39,6 +40,7 @@ export const useCreateListing = () => {
     id: "",
     logo: "",
     darkLogo: false,
+    sub: "",
     name: "",
     email: "",
     phone: "",
@@ -64,65 +66,77 @@ export const useCreateListing = () => {
     uploadedUrl: null,
   });
 
+  const id = uuidv4();
+
   const toggleShowCreateAgent = () => setShowCreateAgent(!showCreateAgent);
 
   const handleSubmit = async (event: React.FormEvent) => {
-  event.preventDefault();
+    event.preventDefault();
 
-  try {
-    // 1. upload all the images to Supabase storage (still using client-side supabase client)
-    const uploadedGallery = await Promise.all(photoGallery.map(async (photo) => {
-      if (!photo.file) return null;
-      const result = await uploadFileToSupabase(photo.file, "photo-gallery");
-      return result?.publicUrl || "";
-    }));
+    try {
+      // 1. upload all the images to Supabase storage (still using client-side supabase client)
+      const uploadedFeaturedPhoto = await uploadFileToSupabase(featuredPhoto.file!, "featured-photos", id);
+      setFeaturedPhoto({ ...featuredPhoto, uploadedUrl: uploadedFeaturedPhoto?.publicUrl || "" });
 
-    const uploadedFloorPlans = await Promise.all(floorPlans.map(async (plan) => {
-      if (!plan.file) return null;
-      const result = await uploadFileToSupabase(plan.file, "floor-plans");
-      return result?.publicUrl || "";
-    }));
+      const uploadedAgentLogo = await uploadFileToSupabase(agentLogo.file!, "logos/agents", id);
+      setAgentLogo({ ...agentLogo, uploadedUrl: uploadedAgentLogo?.publicUrl || "" });
 
-    // 2. prepare final data to send to the server
-    const payload = {
-      agent: {
-        ...agent,
-        logo_url: agentLogo.uploadedUrl || "", // or upload if needed
-      },
-      brokerage: {
-        ...brokerage,
-        brokerage_logo: brokerageLogo.uploadedUrl || "", // or upload if needed
-      },
-      dataToSubmit: {
-        ...address,
-        bedrooms,
-        bathrooms,
-        square_feet: squareFeet,
-        video_link: videoLink,
-        scan_link: scanLink,
-        featured_photo: featuredPhoto.uploadedUrl || "",
-      },
-      galleryUrls: uploadedGallery.filter(Boolean),
-      floorPlanUrls: uploadedFloorPlans.filter(Boolean),
-    };
+      const uploadedBrokerageLogo = await uploadFileToSupabase(brokerageLogo.file!, "logos/brokerages", id);
+      setBrokerageLogo({ ...brokerageLogo, uploadedUrl: uploadedBrokerageLogo?.publicUrl || "" });
 
-    // 3. send to server
-    const res = await fetch("/api/listings/", {
-      method: "POST",
-      body: JSON.stringify(payload),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+      const uploadedGallery = await Promise.all(photoGallery.map(async (photo) => {
+        if (!photo.file) return null;
+        const result = await uploadFileToSupabase(photo.file, "photo-gallery", id);
+        return result?.publicUrl || "";
+      }));
 
-    if (!res.ok) throw new Error("Failed to create listing");
+      const uploadedFloorPlans = await Promise.all(floorPlans.map(async (plan) => {
+        if (!plan.file) return null;
+        const result = await uploadFileToSupabase(plan.file, "floor-plans", id);
+        return result?.publicUrl || "";
+      }));
 
-    alert("Listing created successfully!");
-  } catch (error) {
-    console.error(error);
-    alert("Something went wrong!");
-  }
-};
+      // 2. prepare final data to send to the server
+      const payload = {
+        id,
+        agent: {
+          ...agent,
+          logo_url: uploadedAgentLogo?.publicUrl || "", // or upload if needed
+        },
+        brokerage: {
+          ...brokerage,
+          brokerage_logo: uploadedBrokerageLogo?.publicUrl || "", // or upload if needed
+        },
+        dataToSubmit: {
+          ...address,
+          bedrooms,
+          bathrooms,
+          square_feet: squareFeet,
+          video_link: videoLink,
+          scan_link: scanLink,
+          featured_photo: uploadedFeaturedPhoto?.publicUrl || "",
+        },
+        galleryUrls: uploadedGallery.filter(Boolean),
+        floorPlanUrls: uploadedFloorPlans.filter(Boolean),
+      };
+
+      // 3. send to server
+      const res = await fetch("/api/listings/", {
+        method: "POST",
+        body: JSON.stringify(payload),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!res.ok) throw new Error("Failed to create listing");
+
+      alert("Listing created successfully!");
+    } catch (error) {
+      console.error(error);
+      alert("Something went wrong!");
+    }
+  };
 
 
   useEffect(() => {

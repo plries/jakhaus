@@ -3,14 +3,16 @@ import { useState, useEffect, useRef } from "react";
 import {
   CreateAddressPropTypes,
   CreateAgentPropTypes,
-  CreateBrokeragePropTypes,
   UploadableImageTypes,
 } from "@/app/(dashboard)/admin/types";
 import { uploadFileToSupabase } from "@/lib/uploadFileToSupabase";
+import { supabase } from "@/utils/supabase/client";
 import {v4 as uuidv4} from 'uuid';
 
 export const useCreateListing = () => {
   const phoneRef = useRef<HTMLInputElement>(null);
+
+  const [existingAgents, setExistingAgents] = useState<CreateAgentPropTypes[]>([]);
 
   const [showCreateAgent, setShowCreateAgent] = useState<boolean>(false);
 
@@ -40,24 +42,21 @@ export const useCreateListing = () => {
   const [agent, setAgent] = useState<CreateAgentPropTypes>({
     id: "",
     LOGO_URL: "",
-    DARK_LOGO: false,
+    LOGO_DARK: false,
     SUBTITLE: "",
     NAME: "",
     EMAIL: "",
     PHONE: "",
     WEBSITE: "",
     INSTAGRAM: "",
+    BROKERAGE_NAME: "",
+    BROKERAGE_ADDRESS: "",
+    BROKERAGE_LOGO: "",
   });
 
   const [agentLogo, setAgentLogo] = useState<UploadableImageTypes>({
     file: null,
     previewUrl: null,
-  });
-
-  const [brokerage, setBrokerage] = useState<CreateBrokeragePropTypes>({
-    TITLE: "",
-    ADDRESS: "",
-    LOGO: "",
   });
 
   const [brokerageLogo, setBrokerageLogo] = useState<UploadableImageTypes>({
@@ -111,15 +110,14 @@ export const useCreateListing = () => {
         id: agentId, 
         NAME: agent.NAME,
         LOGO_URL: uploadedAgentLogo?.publicUrl || "",
-        DARK_LOGO: agent.DARK_LOGO,
+        LOGO_DARK: agent.LOGO_DARK,
         SUBTITLE: agent.SUBTITLE,
         EMAIL: agent.EMAIL,
         PHONE: agent.PHONE,
         WEBSITE: agent.WEBSITE,
         INSTAGRAM: agent.INSTAGRAM,
-        BROKERAGE_NAME: brokerage.TITLE,
-        BROKERAGE_ADDRESS: brokerage.ADDRESS,
-        BROKERAGE_TITLE: brokerage.TITLE,
+        BROKERAGE_NAME: agent.BROKERAGE_NAME,
+        BROKERAGE_ADDRESS: agent.BROKERAGE_ADDRESS,
         BROKERAGE_LOGO: uploadedBrokerageLogo?.publicUrl || "",
       },
       dataToSubmit: {
@@ -163,6 +161,20 @@ export const useCreateListing = () => {
     }
   };
 
+  useEffect(() => {
+    const fetchExistingAgents = async () => {
+      const {data, error} = await supabase
+      .from("agents")
+      .select("*");
+      if (error) {
+      console.error("Error fetching agents:", error);
+    } else {
+      setExistingAgents(data);
+    }
+  };
+
+    fetchExistingAgents();
+  }, []);
 
   useEffect(() => {
     return () => {
@@ -220,6 +232,8 @@ export const useCreateListing = () => {
   }, []);
 
   return {
+    existingAgents,
+    
     phoneRef,
     formatPhone,
     
@@ -256,9 +270,6 @@ export const useCreateListing = () => {
 
     agentLogo,
     setAgentLogo,
-
-    brokerage,
-    setBrokerage,
 
     brokerageLogo,
     setBrokerageLogo,

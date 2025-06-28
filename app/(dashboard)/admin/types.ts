@@ -9,30 +9,32 @@ export type CreateAddressPropTypes = {
 export type CreateAgentPropTypes ={
   id?: string;
   LOGO_URL?: string;
-  DARK_LOGO?: boolean;
+  LOGO_DARK?: boolean;
   SUBTITLE?: string;
   NAME?: string;
   EMAIL?: string;
   PHONE?: string;
   WEBSITE?: string;
   INSTAGRAM?: string;
-}
-
-export type CreateBrokeragePropTypes = {
-  TITLE?: string;
-  ADDRESS?: string;
-  LOGO?: string;
+  BROKERAGE_NAME?: string;
+  BROKERAGE_LOGO?: string;
+  BROKERAGE_ADDRESS?: string;
 }
 
 export type CreateListingPropTypes = {
-  ADDRESS: CreateAddressPropTypes;
-  BEDROOMS: number;
-  BATHROOMS: number;
-  SQUARE_FEET: number;
-  FEATURED_PHOTO: string;
-  PHOTO_GALLERY: string[];
-  AGENT: CreateAgentPropTypes;
-  BROKERAGE: CreateBrokeragePropTypes;
+  id?: string;
+  STREET?: string;
+  UNIT?: string;
+  CITY?: string;
+  PROVINCE?: string;
+  POSTAL_CODE?: string;
+  BEDROOMS?: number;
+  BATHROOMS?: number;
+  SQUARE_FEET?: number;
+  FEATURED_PHOTO?: string;
+  VIDEO_LINK?: string;
+  SCAN_LINK?: string;
+  agent_id?: string;
 }
 
 export type UploadableImageTypes = {

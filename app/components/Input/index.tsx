@@ -35,7 +35,7 @@ export const Input = ({
         )}
         <input
           id={htmlFor}
-          className="w-full placeholder:text-neutral-400 focus:outline-none"
+          className="w-full placeholder:text-neutral-950/25 focus:outline-none"
           type={type}
           placeholder={placeholder}
           value={value}

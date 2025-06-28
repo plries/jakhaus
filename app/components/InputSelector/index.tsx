@@ -10,7 +10,7 @@ export const InputSelector = ({ input, options }: InputSelectorPropTypes) => {
   const hook = useInputSelector();
 
   const filteredOptions = options.filter((option) =>
-    option.label.toLowerCase().includes(hook.inputValue.toLowerCase()),
+    option.label?.toLowerCase().includes(hook.inputValue.toLowerCase()),
   );
 
   return (
@@ -50,8 +50,8 @@ export const InputSelector = ({ input, options }: InputSelectorPropTypes) => {
             if (option) {
               event.preventDefault();
               option.onClick?.();
-              hook.setInputValue(option.label);
-              hook.setSelectedOption(option.label);
+              hook.setInputValue(option.label!);
+              hook.setSelectedOption(option.label!);
               hook.setIsOpen(false);
             }
           }
@@ -77,8 +77,8 @@ export const InputSelector = ({ input, options }: InputSelectorPropTypes) => {
               <Button
                 key={index}
                 onClick={() => {
-                  hook.setInputValue(option.label);
-                  hook.setSelectedOption(option.label);
+                  hook.setInputValue(option.label!);
+                  hook.setSelectedOption(option.label!);
                   hook.setIsOpen(false);
 
                   if (input.onChange && hook.inputRef.current) {
@@ -101,8 +101,10 @@ export const InputSelector = ({ input, options }: InputSelectorPropTypes) => {
               </Button>
             ))}
             {filteredOptions.length === 0 && (
-              <div className="px-4 py-2 text-neutral-500">
-                {INPUT_SELECTOR_CONST.NO_OPTIONS}
+              <div className="px-4 py-2">
+                <p className="text-neutral-500">
+                  {INPUT_SELECTOR_CONST.NO_OPTIONS}
+                </p>
               </div>
             )}
           </div>,

@@ -140,9 +140,7 @@ export const CREATE_LISTING_CONST = {
         HTML_FOR: "INSTAGRAM"
       },
       SAVE_AGENT: {
-        LABEL: "Save as new agent",
-        HTML_FOR: "SAVE_AGENT",
-        DESCRIPTION: "By saving an agent, you can reuse this agent’s information in future listings."
+        DESCRIPTION: "By creating an agent, you can reuse this agent’s information in future listings."
       },
     },
     BROKERAGE: {
@@ -159,8 +157,8 @@ export const CREATE_LISTING_CONST = {
         HTML_FOR: "BROKERAGE_LOGO",
         DESCRIPTION: "Use a light version of the brokerage's logo for best results.",
       },
-      TITLE: {
-        LABEL: "Title",
+      NAME: {
+        LABEL: "Name",
         PLACEHOLDER: "Remax 2000 Realty",
         HTML_FOR: "BROKERAGE_NAME"
       },
@@ -171,43 +169,4 @@ export const CREATE_LISTING_CONST = {
       },
     },
   }
-}
-
-export const CREATE_LISTING_MOCK = {
-  AGENTS: [
-    {
-      ID: "ec3880f7-6ffa-4fdc-b3da-8d80200225bf",
-      AGENT: {
-        NAME: "John Doe",
-        LOGO: "/images/CE-Logo.png",
-        DARK_LOGO: true,
-        SUBTITLE: "Personal Real Estate Corporation",
-        PHONE: "604-123-4567",
-        EMAIL: "johndoe@email.com",
-        INSTAGRAM: "@johndoe"
-      },
-      BROKERAGE: {
-        LOGO: "/images/REMAX-Logo.png",
-        TITLE: "REMAX 2000 Realty",
-        ADDRESS: "#103 - 15127 100 Avenue Surrey, BC, V3R 0N9"
-      }
-    },
-    {
-      ID: "32256911-0403-464d-94a4-101fd8aa5352",
-      AGENT: {
-        NAME: "Samantha Li",
-        LOGO: "/images/CE-Logo.png",
-        DARK_LOGO: true,
-        SUBTITLE: "Personal Real Estate Corporation",
-        PHONE: "604-123-4567",
-        EMAIL: "samanthali@email.com",
-        WEBSITE: "https://samanthali.com",
-      },
-      BROKERAGE: {
-        LOGO: "/images/REMAX-Logo.png",
-        TITLE: "REMAX 300040 Realty",
-        ADDRESS: "#103 - 15127 100 Avenue Surrey, BC, V3R 0N9"
-      }
-    }
-  ]
 }

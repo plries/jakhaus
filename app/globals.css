@@ -104,8 +104,8 @@ body {
 }
 
 ::selection {
-  background-color: #fff;
-  color: var(--color-neutral-700);
+  background-color: var(--color-slate-200);
+  color: var(--color-slate-700);
 }
 
 .capitalize-first-letter::first-letter {

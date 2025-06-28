@@ -17,7 +17,7 @@ import {
   UploadButton,
   UploadZone,
 } from "@/app/components";
-import { CREATE_LISTING_CONST, CREATE_LISTING_MOCK } from "./const";
+import { CREATE_LISTING_CONST } from "./const";
 import { useCreateListing } from "./useCreateListing";
 
 export const CreateListing = () => {
@@ -28,6 +28,7 @@ export const CreateListing = () => {
       <div className="relative col-span-full grid auto-rows-min grid-cols-1 gap-4 lg:col-span-8">
         <div className="pointer-events-none absolute -top-5 left-0 h-[calc(100%+2.5rem)] w-full lg:border-r lg:border-r-neutral-300" />
         <PageHeading>{CREATE_LISTING_CONST.HEADING}</PageHeading>
+
         <SectionHeading>{CREATE_LISTING_CONST.SECTIONS.ADDRESS}</SectionHeading>
         <div className="grid grid-cols-1 gap-4 px-10">
           <Input
@@ -104,6 +105,7 @@ export const CreateListing = () => {
             />
           </div>
         </div>
+
         <SectionHeading>
           {CREATE_LISTING_CONST.SECTIONS.OVERVIEW}
         </SectionHeading>
@@ -151,6 +153,7 @@ export const CreateListing = () => {
             required
           />
         </div>
+
         <SectionHeading>{CREATE_LISTING_CONST.SECTIONS.PHOTOS}</SectionHeading>
         <div className="grid grid-cols-1 gap-4 px-10">
           <UploadButton
@@ -197,6 +200,7 @@ export const CreateListing = () => {
             {CREATE_LISTING_CONST.FORM.PHOTOS.PHOTO_GALLERY.DESCRIPTION}
           </p>
         </div>
+
         <SectionHeading>
           {CREATE_LISTING_CONST.SECTIONS.OTHER_ATTACHMENTS}
         </SectionHeading>
@@ -252,6 +256,7 @@ export const CreateListing = () => {
             required
           />
         </div>
+
         <SectionHeading>
           {CREATE_LISTING_CONST.SECTIONS.AGENT_INFO}
         </SectionHeading>
@@ -264,30 +269,27 @@ export const CreateListing = () => {
               label: CREATE_LISTING_CONST.FORM.AGENT.SELECT_AGENT.LABEL,
               value: hook.agent.NAME,
               onChange: (option) => {
-                const selected = CREATE_LISTING_MOCK.AGENTS.find(
-                  (a) => a.AGENT.NAME === option.target.value,
+                const selected = hook.existingAgents.find(
+                  (agent) => agent.NAME === option.target.value,
                 );
                 if (!selected) return;
                 hook.setAgent({
-                  id: selected.ID,
-                  LOGO_URL: selected.AGENT.LOGO,
-                  DARK_LOGO: selected.AGENT.DARK_LOGO,
-                  NAME: selected.AGENT.NAME,
-                  EMAIL: selected.AGENT.EMAIL,
-                  PHONE: selected.AGENT.PHONE,
-                  WEBSITE: selected.AGENT.WEBSITE || "",
-                  INSTAGRAM: selected.AGENT.INSTAGRAM || "",
-                });
-                if (!selected.AGENT.LOGO) return;
-                hook.setBrokerage({
-                  LOGO: selected.BROKERAGE.LOGO,
-                  TITLE: selected.BROKERAGE.TITLE,
-                  ADDRESS: selected.BROKERAGE.ADDRESS,
+                  id: selected.id,
+                  LOGO_URL: selected.LOGO_URL,
+                  LOGO_DARK: selected.LOGO_DARK,
+                  NAME: selected.NAME,
+                  EMAIL: selected.EMAIL,
+                  PHONE: selected.PHONE,
+                  WEBSITE: selected.WEBSITE || "",
+                  INSTAGRAM: selected.INSTAGRAM || "",
+                  BROKERAGE_LOGO: selected.BROKERAGE_LOGO || "",
+                  BROKERAGE_NAME: selected.BROKERAGE_NAME || "",
+                  BROKERAGE_ADDRESS: selected.BROKERAGE_ADDRESS || "",
                 });
               },
             }}
-            options={CREATE_LISTING_MOCK.AGENTS.map((agent) => ({
-              label: agent.AGENT.NAME,
+            options={hook.existingAgents.map((agent) => ({
+              label: agent.NAME,
             }))}
           />
           <button
@@ -318,7 +320,7 @@ export const CreateListing = () => {
                   previewUrl: URL.createObjectURL(file),
                 });
               }}
-              isDarkLogo={hook.agent.DARK_LOGO}
+              isDarkLogo={hook.agent.LOGO_DARK}
               preview={hook.agent.LOGO_URL}
               required
             />
@@ -327,11 +329,11 @@ export const CreateListing = () => {
                 <Checkbox
                   label={CREATE_LISTING_CONST.FORM.AGENT.LOGO_DARK.LABEL}
                   htmlFor={CREATE_LISTING_CONST.FORM.AGENT.LOGO_DARK.HTML_FOR}
-                  value={hook.agent.DARK_LOGO}
+                  value={hook.agent.LOGO_DARK}
                   onChange={(event) => {
                     hook.setAgent((prev) => ({
                       ...prev,
-                      DARK_LOGO: event.target.checked,
+                      LOGO_DARK: event.target.checked,
                     }));
                   }}
                 />
@@ -422,6 +424,7 @@ export const CreateListing = () => {
             />
           </div>
         </div>
+
         <div className={`${hook.showCreateAgent ? "contents" : "hidden"}`}>
           <SectionHeading>
             {CREATE_LISTING_CONST.SECTIONS.BROKERAGE_INFO}
@@ -443,23 +446,21 @@ export const CreateListing = () => {
                   previewUrl: URL.createObjectURL(file),
                 });
               }}
-              preview={hook.brokerage.LOGO}
+              preview={hook.agent.BROKERAGE_LOGO}
               required
             />
             <p className="-mt-2 !text-sm text-neutral-700">
               {CREATE_LISTING_CONST.FORM.BROKERAGE.LOGO.DESCRIPTION}
             </p>
             <Input
-              placeholder={
-                CREATE_LISTING_CONST.FORM.BROKERAGE.TITLE.PLACEHOLDER
-              }
-              label={CREATE_LISTING_CONST.FORM.BROKERAGE.TITLE.LABEL}
-              htmlFor={CREATE_LISTING_CONST.FORM.BROKERAGE.TITLE.HTML_FOR}
-              value={hook.brokerage.TITLE}
+              placeholder={CREATE_LISTING_CONST.FORM.BROKERAGE.NAME.PLACEHOLDER}
+              label={CREATE_LISTING_CONST.FORM.BROKERAGE.NAME.LABEL}
+              htmlFor={CREATE_LISTING_CONST.FORM.BROKERAGE.NAME.HTML_FOR}
+              value={hook.agent.BROKERAGE_NAME}
               onChange={(event) => {
-                hook.setBrokerage((prev) => ({
+                hook.setAgent((prev) => ({
                   ...prev,
-                  TITLE: event.target.value,
+                  BROKERAGE_NAME: event.target.value,
                 }));
               }}
               required
@@ -470,18 +471,14 @@ export const CreateListing = () => {
               }
               label={CREATE_LISTING_CONST.FORM.BROKERAGE.ADDRESS.LABEL}
               htmlFor={CREATE_LISTING_CONST.FORM.BROKERAGE.ADDRESS.HTML_FOR}
-              value={hook.brokerage.ADDRESS}
+              value={hook.agent.BROKERAGE_ADDRESS}
               onChange={(event) => {
-                hook.setBrokerage((prev) => ({
+                hook.setAgent((prev) => ({
                   ...prev,
-                  ADDRESS: event.target.value,
+                  BROKERAGE_ADDRESS: event.target.value,
                 }));
               }}
               required
-            />
-            <Checkbox
-              label={CREATE_LISTING_CONST.FORM.AGENT.SAVE_AGENT.LABEL}
-              htmlFor={CREATE_LISTING_CONST.FORM.AGENT.SAVE_AGENT.HTML_FOR}
             />
             <p className="-mt-2 !text-sm text-neutral-700">
               {CREATE_LISTING_CONST.FORM.AGENT.SAVE_AGENT.DESCRIPTION}
@@ -489,6 +486,7 @@ export const CreateListing = () => {
           </div>
         </div>
       </div>
+
       <div className="relative col-span-4 col-start-9 hidden h-full pr-5 lg:block">
         <div className="sticky top-1/2 grid -translate-y-1/2 auto-rows-min grid-cols-1 gap-5 rounded-2xl bg-neutral-950 p-2 shadow-lg">
           <div className="grid aspect-video w-full place-items-center overflow-hidden rounded-xl bg-neutral-100 shadow-md">
@@ -523,13 +521,13 @@ export const CreateListing = () => {
               </div>
               <div className="flex flex-row items-center gap-2 text-neutral-50">
                 <BuildingOfficeIcon className="min-w-6" />
-                {hook.brokerage && (
-                  <p className="leading-none">{hook.brokerage.TITLE}</p>
+                {hook.agent.BROKERAGE_NAME && (
+                  <p className="leading-none">{hook.agent.BROKERAGE_NAME}</p>
                 )}
               </div>
               <div className="flex flex-row items-center gap-2 text-neutral-50">
                 <UserIcon className="min-w-6" />
-                {hook.agent && (
+                {hook.agent.NAME && (
                   <p className="leading-none">{hook.agent.NAME}</p>
                 )}
               </div>
@@ -537,6 +535,7 @@ export const CreateListing = () => {
           </div>
         </div>
       </div>
+
       <div className="col-span-full flex flex-row flex-wrap justify-end gap-5 border-t border-t-neutral-300 px-10 pt-10 pb-5">
         <Button
           onClick={() => {

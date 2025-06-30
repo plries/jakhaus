@@ -13,4 +13,5 @@ export type InputPropTypes = {
   onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void
   disabled?: boolean
   maxLength?: number
+  password?: boolean
 }

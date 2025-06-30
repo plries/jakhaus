@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
+import { v4 as uuidv4 } from 'uuid';
 import {
   CreateAddressPropTypes,
   CreateAgentPropTypes,
@@ -7,7 +8,6 @@ import {
 } from "@/app/(dashboard)/admin/types";
 import { uploadFileToSupabase } from "@/lib/uploadFileToSupabase";
 import { supabase } from "@/utils/supabase/client";
-import {v4 as uuidv4} from 'uuid';
 
 export const useCreateListing = () => {
   const phoneRef = useRef<HTMLInputElement>(null);
@@ -87,9 +87,9 @@ export const useCreateListing = () => {
       // 1. upload all the images to Supabase storage (still using client-side supabase client)
       const uploadedFeaturedPhoto = await uploadFileToSupabase(featuredPhoto.file!, "featured-photos", listingId);
 
-      const uploadedAgentLogo = await uploadFileToSupabase(agentLogo.file!, "logos/agents", listingId);
+      const uploadedAgentLogo = await uploadFileToSupabase(agentLogo.file!, "logos/agents", agentId);
 
-      const uploadedBrokerageLogo = await uploadFileToSupabase(brokerageLogo.file!, "logos/brokerages", listingId);
+      const uploadedBrokerageLogo = await uploadFileToSupabase(brokerageLogo.file!, "logos/brokerages", agentId);
 
       const uploadedGallery = (await Promise.all(photoGallery.map(async (photo) => {
         if (!photo.file) return null;

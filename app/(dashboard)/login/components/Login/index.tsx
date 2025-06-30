@@ -35,6 +35,7 @@ export const Login = () => {
           error={hook.error}
           onChange={(event) => hook.setPassword(event.target.value)}
           htmlFor={LOGIN_CONST.INPUTS.PASSWORD.HTML_FOR}
+          password
           required
         />
 

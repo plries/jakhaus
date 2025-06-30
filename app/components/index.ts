@@ -7,6 +7,7 @@ export * from "./InputSelector";
 export * from "./Navbar";
 export * from "./PageHeading";
 export * from "./SectionHeading";
+export * from "./StatusModal";
 export * from "./Table";
 export * from "./UploadButton";
 export * from "./UploadZone";

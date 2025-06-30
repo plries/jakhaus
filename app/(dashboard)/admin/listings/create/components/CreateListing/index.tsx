@@ -313,6 +313,10 @@ export const CreateListing = () => {
                   file: null,
                   previewUrl: "",
                 });
+                hook.setAgent({
+                  ...hook.agent,
+                  LOGO_URL: "",
+                });
               }}
               onChange={(file: File) => {
                 hook.setAgentLogo({
@@ -324,24 +328,20 @@ export const CreateListing = () => {
               preview={hook.agent.LOGO_URL}
               required
             />
-            {hook.agent.LOGO_URL && (
-              <>
-                <Checkbox
-                  label={CREATE_LISTING_CONST.FORM.AGENT.LOGO_DARK.LABEL}
-                  htmlFor={CREATE_LISTING_CONST.FORM.AGENT.LOGO_DARK.HTML_FOR}
-                  value={hook.agent.LOGO_DARK}
-                  onChange={(event) => {
-                    hook.setAgent((prev) => ({
-                      ...prev,
-                      LOGO_DARK: event.target.checked,
-                    }));
-                  }}
-                />
-                <p className="-mt-2 !text-sm text-neutral-700">
-                  {CREATE_LISTING_CONST.FORM.AGENT.LOGO_DARK.DESCRIPTION}
-                </p>
-              </>
-            )}
+            <Checkbox
+              label={CREATE_LISTING_CONST.FORM.AGENT.LOGO_DARK.LABEL}
+              htmlFor={CREATE_LISTING_CONST.FORM.AGENT.LOGO_DARK.HTML_FOR}
+              value={hook.agent.LOGO_DARK}
+              onChange={(event) => {
+                hook.setAgent((prev) => ({
+                  ...prev,
+                  LOGO_DARK: event.target.checked,
+                }));
+              }}
+            />
+            <p className="-mt-2 !text-sm text-neutral-700">
+              {CREATE_LISTING_CONST.FORM.AGENT.LOGO_DARK.DESCRIPTION}
+            </p>
             <Input
               placeholder={CREATE_LISTING_CONST.FORM.AGENT.NAME.PLACEHOLDER}
               label={CREATE_LISTING_CONST.FORM.AGENT.NAME.LABEL}
@@ -434,12 +434,16 @@ export const CreateListing = () => {
               label={CREATE_LISTING_CONST.FORM.BROKERAGE.LOGO.LABEL}
               text={CREATE_LISTING_CONST.FORM.BROKERAGE.LOGO.TEXT}
               htmlFor={CREATE_LISTING_CONST.FORM.BROKERAGE.LOGO.HTML_FOR}
-              onClear={() =>
+              onClear={() => {
                 hook.setBrokerageLogo({
                   file: null,
                   previewUrl: "",
-                })
-              }
+                });
+                hook.setAgent({
+                  ...hook.agent,
+                  BROKERAGE_LOGO: "",
+                });
+              }}
               onChange={(file: File) => {
                 hook.setBrokerageLogo({
                   file,

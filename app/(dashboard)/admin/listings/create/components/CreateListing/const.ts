@@ -107,7 +107,7 @@ export const CREATE_LISTING_CONST = {
       LOGO_DARK: {
         LABEL: "Use light background",
         HTML_FOR: "LOGO_DARK",
-        DESCRIPTION: "Use a light version of the agent's logo if possible, otherwise check this option to use the light background."
+        DESCRIPTION: "Use a light version of the agent's logo if possible, otherwise check this option to use a light background."
       },
       NAME: {
         LABEL: "Name",

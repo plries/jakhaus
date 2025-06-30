@@ -168,5 +168,19 @@ export const CREATE_LISTING_CONST = {
         HTML_FOR: "BROKERAGE_ADDRESS"
       },
     },
+  },
+  MODAL: {
+    SUCCESS: {
+      HEADING: "Success!",
+      DESCRIPTION: "You can now view and share this listing.",
+    },
+    ERROR: {
+      HEADING: "Oops!",
+      DESCRIPTION: "Something went wrong. Please try again later.",
+    },
+    BUTTONS: {
+      CLOSE: "Home",
+      CREATE: "Create another",
+    }
   }
 }

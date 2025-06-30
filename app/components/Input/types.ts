@@ -8,7 +8,7 @@ export type InputPropTypes = {
   error?: string | null;
   required?: boolean;
   selector?: boolean
-  onFocus?: () => void
+  onFocus?: (() => void) | ((event: React.FocusEvent<HTMLInputElement>) => void)
   inputRef?: React.RefObject<HTMLInputElement | null>
   onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void
   disabled?: boolean

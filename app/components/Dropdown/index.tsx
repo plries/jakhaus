@@ -46,6 +46,7 @@ export const Dropdown = ({ options, button }: DropdownPropTypes) => {
                   }}
                   additionalClasses={`!w-full font-normal !justify-start bg-transparent hover:!bg-neutral-100 !shadow-none !border-none ${option.label === "Delete" || option.label === "Deactivate" ? "!text-red-700 hover:!bg-red-50" : option.label === "Reactivate" ? "!text-sky-700 hover:!bg-sky-50" : "!text-neutral-600"}`}
                   href={option.href}
+                  target="_blank"
                 >
                   {option.label === "Edit" && <NotePencilIcon />}
                   {option.label === "View listing" && <ArrowUpRightIcon />}

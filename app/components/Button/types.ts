@@ -5,4 +5,5 @@ export type ButtonPropTypes = {
   additionalClasses?: string;
   disabled?: boolean;
   href?: string;
+  target?: string;
 };

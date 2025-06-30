@@ -66,11 +66,13 @@ export const UploadButton = ({
             height={1080}
             className={`mt-2 w-auto max-w-64 rounded-md border border-neutral-950/10 shadow-sm transition-colors duration-150 ease-in-out ${isDarkLogo ? "bg-neutral-50" : "bg-neutral-950"}`}
           />
-          <div className="flex justify-center px-2">
-            <p className="-mt-2 w-fit overflow-hidden rounded-full border border-neutral-950/10 bg-neutral-50 px-2 py-1 text-center !text-sm text-nowrap text-ellipsis !text-neutral-600 shadow-sm">
-              {hook.uploadedFile?.name}
-            </p>
-          </div>
+          {hook.uploadedFile?.name && (
+            <div className="flex justify-center px-2">
+              <p className="-mt-2 w-fit overflow-hidden rounded-full border border-neutral-950/10 bg-neutral-50 px-2 py-1 text-center !text-sm text-nowrap text-ellipsis !text-neutral-600 shadow-sm">
+                {hook.uploadedFile.name}
+              </p>
+            </div>
+          )}
         </div>
       )}
     </div>

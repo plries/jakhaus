@@ -11,7 +11,11 @@ import { supabase } from "@/utils/supabase/client";
 
 export const useCreateListing = () => {
   const phoneRef = useRef<HTMLInputElement>(null);
+  const postalRef = useRef<HTMLInputElement>(null);
 
+  const [success, setSuccess] = useState<boolean | null>(null);
+  const [showModal, setShowModal] = useState<boolean>(false);
+  
   const [existingAgents, setExistingAgents] = useState<CreateAgentPropTypes[]>([]);
 
   const [showCreateAgent, setShowCreateAgent] = useState<boolean>(false);
@@ -65,8 +69,8 @@ export const useCreateListing = () => {
   });
 
   const listingId = uuidv4();
-  const agentId = uuidv4();
-
+  const agentId = showCreateAgent ? uuidv4() : agent.id;
+  
   const toggleShowCreateAgent = () => setShowCreateAgent(!showCreateAgent);
 
   const formatPhone = (value: string) => {
@@ -80,6 +84,14 @@ export const useCreateListing = () => {
       .join('-');
   };
 
+  const formatPostal = (value: string) => {
+    const cleaned = value.replace(/[^a-zA-Z0-9]/g, '').toUpperCase();
+
+    if (cleaned.length <= 3) return cleaned;
+
+    return `${cleaned.slice(0, 3)} ${cleaned.slice(3)}`;
+  };
+
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     
@@ -87,9 +99,13 @@ export const useCreateListing = () => {
       // 1. upload all the images to Supabase storage (still using client-side supabase client)
       const uploadedFeaturedPhoto = await uploadFileToSupabase(featuredPhoto.file!, "featured-photos", listingId);
 
-      const uploadedAgentLogo = await uploadFileToSupabase(agentLogo.file!, "logos/agents", agentId);
+      const uploadedAgentLogo = showCreateAgent && agentLogo.file
+        ? await uploadFileToSupabase(agentLogo.file, "logos/agents", agentId)
+        : null;
 
-      const uploadedBrokerageLogo = await uploadFileToSupabase(brokerageLogo.file!, "logos/brokerages", agentId);
+      const uploadedBrokerageLogo = showCreateAgent && brokerageLogo.file
+        ? await uploadFileToSupabase(brokerageLogo.file, "logos/brokerages", agentId)
+        : null;
 
       const uploadedGallery = (await Promise.all(photoGallery.map(async (photo) => {
         if (!photo.file) return null;
@@ -147,17 +163,16 @@ export const useCreateListing = () => {
           "Content-Type": "application/json",
         },
       });
-
-      console.log("response", res);
+      
       if (!res.ok) throw new Error("Failed to create listing");
+      
+      setSuccess(true);
+      setShowModal(true);
 
-      const text = await res.text();
-      console.log("response body:", text);
-
-      alert("Listing created successfully!");
     } catch (error) {
-      console.error(error);
-      alert("Something went wrong!");
+      setSuccess(false);
+      setShowModal(true);
+      console.log(error);
     }
   };
 
@@ -236,6 +251,9 @@ export const useCreateListing = () => {
     
     phoneRef,
     formatPhone,
+
+    postalRef,
+    formatPostal,
     
     showCreateAgent,
     toggleShowCreateAgent,
@@ -275,5 +293,10 @@ export const useCreateListing = () => {
     setBrokerageLogo,
 
     handleSubmit,
+
+    showModal,
+    setShowModal,
+    
+    success,
   };
 }

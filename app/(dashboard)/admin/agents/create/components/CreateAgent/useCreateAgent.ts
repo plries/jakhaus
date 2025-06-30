@@ -75,8 +75,6 @@ export const useCreateAgent = () => {
         };
   
         console.log("creating listing with payload:", payload);
-
-        setShowModal(true);
   
         // 3. send to server
         const res = await fetch("/api/agents/", {
@@ -87,14 +85,14 @@ export const useCreateAgent = () => {
           },
         });
   
-        if (!res.ok) {
-          throw new Error("Failed to create listing");
-        }
+        if (!res.ok)  throw new Error("Failed to create listing");
   
         setSuccess(true);
+        setShowModal(true);
 
       } catch (error) {
         setSuccess(false);
+        setShowModal(true);
         console.log(error);
       }
     };

@@ -10,7 +10,6 @@ import {
 } from "@/app/components";
 import { CREATE_AGENT_CONST } from "./const";
 import { useCreateAgent } from "./useCreateAgent";
-import { CheckCircleIcon, XCircleIcon } from "@phosphor-icons/react";
 
 export const CreateAgent = () => {
   const hook = useCreateAgent();
@@ -252,8 +251,9 @@ export const CreateAgent = () => {
             <Button
               onClick={() => {
                 hook.setShowModal(false);
+                history.back();
               }}
-              additionalClasses="!text-neutral-50 !bg-neutral-950 !hover:bg-neutral-800 !border-neutral-900"
+              additionalClasses="!text-neutral-50 col-span-full !bg-neutral-950 !hover:bg-neutral-800 !border-neutral-900"
             >
               {CREATE_AGENT_CONST.MODAL.BUTTONS.CLOSE}
             </Button>

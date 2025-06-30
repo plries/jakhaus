@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { createFullListing, createAgent } from "@/lib/createListing";
+import { createClient } from "@/utils/supabase/server";
 
 export async function POST(req: Request) {
   const body = await req.json();
@@ -10,14 +11,20 @@ export async function POST(req: Request) {
   try {
     const { agent, dataToSubmit, photos, floor_plans } = body;
 
+    const supabase = await createClient()
+
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user?.id) throw new Error("User not authenticated");
+
     const agentId = await createAgent(agent);
     await createFullListing(
       { 
         ...dataToSubmit,
-        agent_id: agentId
+        agent_id: agentId,
+        user_id: user?.id
       },
       photos,
-      floor_plans
+      floor_plans,
     );
 
     return NextResponse.json({ success: true });

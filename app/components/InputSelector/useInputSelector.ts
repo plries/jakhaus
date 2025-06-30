@@ -67,7 +67,7 @@ export const useInputSelector = () => {
     useEffect(() => {
       if (inputValue === "") setSelectedOption("");
     }, [inputValue]);
-  
+
     return {
       dropdownRef,
       inputRef,

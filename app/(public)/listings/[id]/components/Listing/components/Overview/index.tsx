@@ -21,7 +21,7 @@ export const Overview = ({ CONSTANTS, FULL_ADDRESS }: SectionPropTypes) => {
           <Image
             src={CONSTANTS.FEATURED_PHOTO}
             alt={FULL_ADDRESS || ""}
-            className="aspect-video w-full"
+            className="aspect-video w-full object-cover object-center"
             width={1920}
             height={1080}
           />

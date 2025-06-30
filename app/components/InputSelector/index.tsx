@@ -20,14 +20,17 @@ export const InputSelector = ({ input, options }: InputSelectorPropTypes) => {
         placeholder={input.placeholder}
         label={input.label}
         htmlFor={input.htmlFor}
-        value={hook.inputValue}
+        value={input.disabled ? "" : hook.inputValue}
         onChange={(event) => {
           if (input.onChange) input.onChange(event);
           hook.setInputValue(event.target.value);
         }}
         required={input.required}
         error={input.error}
-        onFocus={() => hook.toggleOpen()}
+        onFocus={(event) => {
+          hook.toggleOpen();
+          event.target.select();
+        }}
         inputRef={hook.inputRef}
         onKeyDown={(event) => {
           if (!hook.isOpen) return;
@@ -60,6 +63,7 @@ export const InputSelector = ({ input, options }: InputSelectorPropTypes) => {
             hook.setIsOpen(false);
           }
         }}
+        disabled={input.disabled}
         selector
       />
       {hook.isOpen &&

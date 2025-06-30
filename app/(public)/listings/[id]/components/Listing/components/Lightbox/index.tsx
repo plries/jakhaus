@@ -52,7 +52,7 @@ export const Lightbox = ({
               alt={FULL_ADDRESS}
               width={1920}
               height={1080}
-              className="w-full rounded-2xl border border-neutral-50/10 object-cover object-center shadow-lg"
+              className="max-h-[calc(100vh-5rem)] w-full rounded-2xl border border-neutral-50/10 object-cover object-center shadow-lg"
             />
             <Image
               src={

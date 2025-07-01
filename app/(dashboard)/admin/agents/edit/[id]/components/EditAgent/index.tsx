@@ -1,27 +1,47 @@
 "use client";
+import { useEffect } from "react";
 import { CircleNotchIcon } from "@phosphor-icons/react";
+import { ADMIN_AGENT_CONST } from "@/app/(dashboard)/admin/agents/const";
 import {
-  SectionHeading,
   PageHeading,
-  Input,
+  SectionHeading,
   UploadButton,
-  Button,
   Checkbox,
   StatusModal,
+  Input,
+  Button,
 } from "@/app/components";
-import { ADMIN_AGENT_CONST } from "@/app/(dashboard)/admin/agents/const";
-import { useCreateAgent } from "./useCreateAgent";
+import { EditAgentPropTypes } from "./type";
+import { useEditAgent } from "./useEditAgent";
 
-export const CreateAgent = () => {
-  const hook = useCreateAgent();
+export const EditAgent = ({ EDITED_AGENT }: EditAgentPropTypes) => {
+  const hook = useEditAgent();
+
+  useEffect(() => {
+    if (EDITED_AGENT?.id) {
+      hook.setAgent((prev) => ({
+        ...prev,
+        id: EDITED_AGENT.id,
+        LOGO_URL: EDITED_AGENT.LOGO_URL,
+        LOGO_DARK: EDITED_AGENT.LOGO_DARK,
+        SUBTITLE: EDITED_AGENT.SUBTITLE,
+        NAME: EDITED_AGENT.NAME,
+        EMAIL: EDITED_AGENT.EMAIL,
+        PHONE: EDITED_AGENT.PHONE,
+        WEBSITE: EDITED_AGENT.WEBSITE || undefined,
+        INSTAGRAM: EDITED_AGENT.INSTAGRAM || undefined,
+        BROKERAGE_NAME: EDITED_AGENT.BROKERAGE_NAME,
+        BROKERAGE_ADDRESS: EDITED_AGENT.BROKERAGE_ADDRESS,
+        BROKERAGE_LOGO: EDITED_AGENT.BROKERAGE_LOGO,
+      }));
+    }
+  }, [EDITED_AGENT]);
 
   return (
     <>
       <form className="contents" onSubmit={hook.handleSubmit}>
-        <PageHeading>{ADMIN_AGENT_CONST.CREATE_HEADING}</PageHeading>
-        <SectionHeading>
-          {ADMIN_AGENT_CONST.SECTIONS.AGENT_INFO}
-        </SectionHeading>
+        <PageHeading>{ADMIN_AGENT_CONST.EDIT_HEADING}</PageHeading>
+        <SectionHeading>{ADMIN_AGENT_CONST.SECTIONS.AGENT_INFO}</SectionHeading>
         <div className="col-span-full grid grid-cols-1 gap-4 px-10">
           <UploadButton
             label={ADMIN_AGENT_CONST.FORM.AGENT.LOGO.LABEL}
@@ -42,6 +62,9 @@ export const CreateAgent = () => {
                 file,
                 previewUrl: URL.createObjectURL(file),
               });
+              hook.setTouchedFields((prev) =>
+                new Set(prev).add(ADMIN_AGENT_CONST.FORM.AGENT.LOGO.HTML_FOR),
+              );
             }}
             isDarkLogo={hook.agent.LOGO_DARK}
             preview={hook.agent.LOGO_URL}
@@ -56,6 +79,11 @@ export const CreateAgent = () => {
                 ...prev,
                 LOGO_DARK: event.target.checked,
               }));
+              hook.setTouchedFields((prev) =>
+                new Set(prev).add(
+                  ADMIN_AGENT_CONST.FORM.AGENT.LOGO_DARK.HTML_FOR,
+                ),
+              );
             }}
           />
           <p className="-mt-2 !text-sm text-neutral-500">
@@ -71,6 +99,9 @@ export const CreateAgent = () => {
                 ...prev,
                 NAME: event.target.value,
               }));
+              hook.setTouchedFields((prev) =>
+                new Set(prev).add(ADMIN_AGENT_CONST.FORM.AGENT.NAME.HTML_FOR),
+              );
             }}
             required
           />
@@ -84,6 +115,11 @@ export const CreateAgent = () => {
                 ...prev,
                 SUBTITLE: event.target.value,
               }));
+              hook.setTouchedFields((prev) =>
+                new Set(prev).add(
+                  ADMIN_AGENT_CONST.FORM.AGENT.SUBTITLE.HTML_FOR,
+                ),
+              );
             }}
             required
           />
@@ -97,6 +133,9 @@ export const CreateAgent = () => {
                 ...prev,
                 EMAIL: event.target.value,
               }));
+              hook.setTouchedFields((prev) =>
+                new Set(prev).add(ADMIN_AGENT_CONST.FORM.AGENT.EMAIL.HTML_FOR),
+              );
             }}
             required
           />
@@ -111,6 +150,9 @@ export const CreateAgent = () => {
                 ...prev,
                 PHONE: hook.formatPhone(event.target.value),
               }));
+              hook.setTouchedFields((prev) =>
+                new Set(prev).add(ADMIN_AGENT_CONST.FORM.AGENT.PHONE.HTML_FOR),
+              );
             }}
             maxLength={12}
             required
@@ -125,6 +167,11 @@ export const CreateAgent = () => {
                 ...prev,
                 WEBSITE: event.target.value,
               }));
+              hook.setTouchedFields((prev) =>
+                new Set(prev).add(
+                  ADMIN_AGENT_CONST.FORM.AGENT.WEBSITE.HTML_FOR,
+                ),
+              );
             }}
           />
           <Input
@@ -137,6 +184,11 @@ export const CreateAgent = () => {
                 ...prev,
                 INSTAGRAM: event.target.value,
               }));
+              hook.setTouchedFields((prev) =>
+                new Set(prev).add(
+                  ADMIN_AGENT_CONST.FORM.AGENT.INSTAGRAM.HTML_FOR,
+                ),
+              );
             }}
           />
         </div>
@@ -164,6 +216,11 @@ export const CreateAgent = () => {
                 file,
                 previewUrl: URL.createObjectURL(file),
               });
+              hook.setTouchedFields((prev) =>
+                new Set(prev).add(
+                  ADMIN_AGENT_CONST.FORM.BROKERAGE.LOGO.HTML_FOR,
+                ),
+              );
             }}
             preview={hook.agent.BROKERAGE_LOGO}
             required
@@ -181,6 +238,11 @@ export const CreateAgent = () => {
                 ...prev,
                 BROKERAGE_NAME: event.target.value,
               }));
+              hook.setTouchedFields((prev) =>
+                new Set(prev).add(
+                  ADMIN_AGENT_CONST.FORM.BROKERAGE.NAME.HTML_FOR,
+                ),
+              );
             }}
             required
           />
@@ -194,6 +256,11 @@ export const CreateAgent = () => {
                 ...prev,
                 BROKERAGE_ADDRESS: event.target.value,
               }));
+              hook.setTouchedFields((prev) =>
+                new Set(prev).add(
+                  ADMIN_AGENT_CONST.FORM.BROKERAGE.ADDRESS.HTML_FOR,
+                ),
+              );
             }}
             required
           />
@@ -210,11 +277,12 @@ export const CreateAgent = () => {
           <Button
             type="submit"
             additionalClasses="!text-neutral-50 !bg-neutral-950 !hover:bg-neutral-800 !border-neutral-900"
+            disabled={hook.touchedFields.size === 0}
           >
             {hook.isSubmitting && (
               <CircleNotchIcon className="animate-spin" size={20} />
             )}
-            {ADMIN_AGENT_CONST.BUTTONS.CREATE}
+            {ADMIN_AGENT_CONST.BUTTONS.UPDATE}
           </Button>
         </div>
       </form>
@@ -232,36 +300,15 @@ export const CreateAgent = () => {
           </p>
         </div>
         <div className="grid w-full grid-cols-2 gap-5">
-          {hook.success ? (
-            <>
-              <Button
-                onClick={() => {
-                  hook.setShowModal(false);
-                  history.back();
-                }}
-              >
-                {ADMIN_AGENT_CONST.MODAL.BUTTONS.CLOSE}
-              </Button>
-              <Button
-                onClick={() => {
-                  window.location.reload();
-                }}
-                additionalClasses="!text-neutral-50 !bg-neutral-950 !hover:bg-neutral-800 !border-neutral-900"
-              >
-                {ADMIN_AGENT_CONST.MODAL.BUTTONS.CREATE}
-              </Button>
-            </>
-          ) : (
-            <Button
-              onClick={() => {
-                hook.setShowModal(false);
-                history.back();
-              }}
-              additionalClasses="!text-neutral-50 col-span-full !bg-neutral-950 !hover:bg-neutral-800 !border-neutral-900"
-            >
-              {ADMIN_AGENT_CONST.MODAL.BUTTONS.CLOSE}
-            </Button>
-          )}
+          <Button
+            onClick={() => {
+              hook.setShowModal(false);
+              history.back();
+            }}
+            additionalClasses="!text-neutral-50 col-span-full !bg-neutral-950 !hover:bg-neutral-800 !border-neutral-900"
+          >
+            {ADMIN_AGENT_CONST.MODAL.BUTTONS.CLOSE}
+          </Button>
         </div>
       </StatusModal>
     </>

@@ -188,7 +188,7 @@ export const CreateListing = () => {
               }
               required
             />
-            <p className="-mt-2 !text-sm text-neutral-700">
+            <p className="-mt-2 !text-sm text-neutral-500">
               {CREATE_LISTING_CONST.FORM.PHOTOS.FEATURED_PHOTO.DESCRIPTION}
             </p>
             <UploadZone
@@ -212,7 +212,7 @@ export const CreateListing = () => {
               files={hook.photoGallery}
               required
             />
-            <p className="-mt-2 !text-sm text-neutral-700">
+            <p className="-mt-2 !text-sm text-neutral-500">
               {CREATE_LISTING_CONST.FORM.PHOTOS.PHOTO_GALLERY.DESCRIPTION}
             </p>
           </div>
@@ -235,7 +235,7 @@ export const CreateListing = () => {
               value={hook.videoLink}
               onChange={(event) => hook.setVideoLink(event.target.value)}
             />
-            <p className="-mt-2 !text-sm text-neutral-700">
+            <p className="-mt-2 !text-sm text-neutral-500">
               {
                 CREATE_LISTING_CONST.FORM.OTHER_ATTACHMENTS.VIDEO_LINK
                   .DESCRIPTION
@@ -255,6 +255,12 @@ export const CreateListing = () => {
               value={hook.scanLink}
               onChange={(event) => hook.setScanLink(event.target.value)}
             />
+            <p className="-mt-2 !text-sm text-neutral-500">
+              {
+                CREATE_LISTING_CONST.FORM.OTHER_ATTACHMENTS.SCAN_LINK
+                  .DESCRIPTION
+              }
+            </p>
             <UploadZone
               label={
                 CREATE_LISTING_CONST.FORM.OTHER_ATTACHMENTS.FLOOR_PLANS.LABEL
@@ -391,7 +397,7 @@ export const CreateListing = () => {
                   }));
                 }}
               />
-              <p className="-mt-2 !text-sm text-neutral-700">
+              <p className="-mt-2 !text-sm text-neutral-500">
                 {CREATE_LISTING_CONST.FORM.AGENT.LOGO_DARK.DESCRIPTION}
               </p>
               <Input
@@ -509,7 +515,7 @@ export const CreateListing = () => {
                 preview={hook.agent.BROKERAGE_LOGO}
                 required
               />
-              <p className="-mt-2 !text-sm text-neutral-700">
+              <p className="-mt-2 !text-sm text-neutral-500">
                 {CREATE_LISTING_CONST.FORM.BROKERAGE.LOGO.DESCRIPTION}
               </p>
               <Input
@@ -542,7 +548,7 @@ export const CreateListing = () => {
                 }}
                 required
               />
-              <p className="-mt-2 !text-sm text-neutral-700">
+              <p className="-mt-2 !text-sm text-neutral-500">
                 {CREATE_LISTING_CONST.FORM.AGENT.SAVE_AGENT.DESCRIPTION}
               </p>
             </div>

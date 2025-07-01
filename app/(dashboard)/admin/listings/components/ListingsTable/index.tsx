@@ -1,8 +1,11 @@
 "use client";
 import {
+  ArrowUpRightIcon,
   CircleNotchIcon,
   DotsThreeIcon,
+  NotePencilIcon,
   PlusIcon,
+  TrashIcon,
 } from "@phosphor-icons/react";
 import { Button, Input, Dropdown, Table, PageHeading } from "@/app/components";
 import { LISTINGS_TABLE_CONST } from "./const";
@@ -91,10 +94,12 @@ export const ListingsTable = () => {
                           options={[
                             {
                               label: LISTINGS_TABLE_CONST.DROPDOWNS.MANAGE.EDIT,
+                              icon: <NotePencilIcon />,
                               onClick: () => {},
                             },
                             {
                               label: LISTINGS_TABLE_CONST.DROPDOWNS.MANAGE.VIEW,
+                              icon: <ArrowUpRightIcon />,
                               href: `/listings/${listing.id}`,
                             },
                             {
@@ -109,6 +114,7 @@ export const ListingsTable = () => {
                             {
                               label:
                                 LISTINGS_TABLE_CONST.DROPDOWNS.MANAGE.DELETE,
+                              icon: <TrashIcon />,
                               onClick: () => {},
                             },
                           ]}

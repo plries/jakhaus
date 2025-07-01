@@ -1,16 +1,6 @@
 "use client";
 import ReactDOM from "react-dom";
-import {
-  ArrowDownIcon,
-  ArrowUpIcon,
-  ArrowUpRightIcon,
-  IconContext,
-  LinkIcon,
-  NotePencilIcon,
-  PowerIcon,
-  TrashIcon,
-  CheckIcon,
-} from "@phosphor-icons/react";
+import { IconContext, LinkIcon, CheckIcon } from "@phosphor-icons/react";
 import { Button, IconButton } from "@/app/components";
 import { DropdownPropTypes } from "./types";
 import { useDropdown } from "./useDropdown";
@@ -32,7 +22,7 @@ export const Dropdown = ({ options, button }: DropdownPropTypes) => {
           ReactDOM.createPortal(
             <div
               ref={hook.dropdownRef}
-              className="absolute z-50 mt-2.5 flex w-60 flex-col rounded-xl border animate-fade-in border-neutral-200 bg-neutral-50 p-3 opacity-0 shadow-lg transition-opacity"
+              className="animate-fade-in absolute z-50 mt-2.5 flex w-60 flex-col rounded-xl border border-neutral-200 bg-neutral-50 p-3 opacity-0 shadow-lg transition-opacity"
               style={{
                 left: hook.dropdownPosition.left,
                 top: hook.dropdownPosition.top,
@@ -49,20 +39,13 @@ export const Dropdown = ({ options, button }: DropdownPropTypes) => {
                       hook.setCopied(true);
                     }
                   }}
-                  additionalClasses={`!w-full font-normal !justify-start bg-transparent hover:!bg-neutral-100 !shadow-none !border-none ${option.label === "Delete" || option.label === "Deactivate" ? "!text-red-700 hover:!bg-red-50" : option.label === "Reactivate" ? "!text-sky-700 hover:!bg-sky-50" : "!text-neutral-600"}`}
+                  additionalClasses={`!w-full font-normal !justify-start bg-transparent hover:!bg-neutral-100 !shadow-none !border-none ${option.label === "Delete" ? "!text-red-700 hover:!bg-red-50 relative after:absolute mt-4 after:-top-2 after:left-0 after:w-full after:h-[1px] after:bg-neutral-200" : "!text-neutral-600"}`}
                   href={option.href}
-                  target="_blank"
+                  target={option.label === "Edit" ? "" : "_blank"}
                 >
-                  {option.label === "Edit" && <NotePencilIcon />}
-                  {option.label === "View listing" && <ArrowUpRightIcon />}
+                  {option.icon}
                   {option.label === "Copy listing URL" &&
                     (hook.copied ? <CheckIcon /> : <LinkIcon />)}
-                  {(option.label === "Deactivate" ||
-                    option.label === "Reactivate") && <PowerIcon />}
-                  {option.label === "Delete" && <TrashIcon />}
-
-                  {option.label === "Asc" && <ArrowUpIcon />}
-                  {option.label === "Desc" && <ArrowDownIcon />}
                   {option.label}
                 </Button>
               ))}

@@ -1,11 +1,13 @@
-export const CREATE_AGENT_CONST = {
-  HEADING: "Create Agent",
+export const ADMIN_AGENT_CONST = {
+  CREATE_HEADING: "Create Agent",
+  EDIT_HEADING: "Edit Agent",
   SECTIONS: {
     BROKERAGE_INFO: "Brokerage Info",
     AGENT_INFO: "Agent Info",
   },
   BUTTONS: {
     CREATE: "Confirm and create agent",
+    UPDATE: "Confirm and update agent",
     CANCEL: "Cancel"
   },
   FORM: {
@@ -18,7 +20,7 @@ export const CREATE_AGENT_CONST = {
       LOGO_DARK: {
         LABEL: "Use light background",
         HTML_FOR: "LOGO_DARK",
-        DESCRIPTION: "Use a light version of the agent's logo if possible, otherwise check this option to use a light background."
+        DESCRIPTION: "Use a light version of the agent's logo if possible!"
       },
       NAME: {
         LABEL: "Name",

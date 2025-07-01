@@ -1,10 +1,9 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
-import { v4 as uuidv4 } from 'uuid';
+import { useState, useRef, useEffect } from "react";
 import { CreateAgentPropTypes, UploadableImageTypes } from "@/app/(dashboard)/admin/types";
 import { uploadFileToSupabase } from "@/lib/uploadFileToSupabase";
 
-export const useCreateAgent = () => {
+export const useEditAgent = () => {  
   const phoneRef = useRef<HTMLInputElement>(null);
 
   const [success, setSuccess] = useState<boolean | null>(null);
@@ -35,8 +34,8 @@ export const useCreateAgent = () => {
     file: null,
     previewUrl: null,
   });
-  
-  const agentId = uuidv4();
+
+  const [touchedFields, setTouchedFields] = useState<Set<string>>(new Set());
 
   const formatPhone = (value: string) => {
     const cleaned = value.replace(/\D/g, '');
@@ -55,14 +54,14 @@ export const useCreateAgent = () => {
     setIsSubmitting(true);
     
     try {
-      const uploadedAgentLogo = await uploadFileToSupabase(agentLogo.file!, "logos/agents", agentId);
+      const uploadedAgentLogo = await uploadFileToSupabase(agentLogo.file!, "logos/agents", agent.id);
 
-      const uploadedBrokerageLogo = await uploadFileToSupabase(brokerageLogo.file!, "logos/brokerages", agentId);
+      const uploadedBrokerageLogo = await uploadFileToSupabase(brokerageLogo.file!, "logos/brokerages", agent.id);
   
       // 2. prepare final data to send to the server
       const payload = {
         agent: {
-          id: agentId, 
+          id: agent.id, 
           NAME: agent.NAME,
           LOGO_URL: uploadedAgentLogo?.publicUrl || "",
           LOGO_DARK: agent.LOGO_DARK,
@@ -75,12 +74,13 @@ export const useCreateAgent = () => {
           BROKERAGE_ADDRESS: agent.BROKERAGE_ADDRESS,
           BROKERAGE_LOGO: uploadedBrokerageLogo?.publicUrl || "",
         },
-        };
+        touchedFields: Array.from(touchedFields),
+      };
   
         console.log("creating listing with payload:", payload);
   
         // 3. send to server
-        const res = await fetch("/api/createAgent/", {
+        const res = await fetch("/api/editAgent/", {
           method: "POST",
           body: JSON.stringify(payload),
           headers: {
@@ -101,41 +101,6 @@ export const useCreateAgent = () => {
 
     setIsSubmitting(false);
   };
-  
-  useEffect(() => {
-    return () => {
-      if (agentLogo?.previewUrl) URL.revokeObjectURL(agentLogo.previewUrl);
-    };
-  }, [agentLogo]);
-
-  useEffect(() => {
-    return () => {
-      if (brokerageLogo?.previewUrl) URL.revokeObjectURL(brokerageLogo.previewUrl);
-    };
-  }, [brokerageLogo]);
-
-  useEffect(() => {
-    const phone = phoneRef.current;
-
-    if (!phone) return;
-
-    const handlePhoneInput = (event: KeyboardEvent) => {
-      const input = event.target as HTMLInputElement;
-
-      if (
-        event.key !== 'Backspace' &&
-        (input.value.length === 3 || input.value.length === 7)
-      ) {
-        input.value += '-';
-      }
-    };
-
-    phone.addEventListener('keydown', handlePhoneInput);
-
-    return () => {
-      phone.removeEventListener('keydown', handlePhoneInput);
-    };
-  }, []);
 
   return {
     phoneRef,
@@ -150,12 +115,15 @@ export const useCreateAgent = () => {
     brokerageLogo,
     setBrokerageLogo,
 
-    handleSubmit,
-
     showModal,
     setShowModal,
 
     success,
     isSubmitting,
+
+    handleSubmit,
+
+    touchedFields,
+    setTouchedFields
   }
-};
+}

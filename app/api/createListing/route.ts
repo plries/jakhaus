@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
-import { createFullListing, createAgent } from "@/lib/createListing";
+import { createFullListing } from "@/lib/createListing";
+import { createAgent } from "@/lib/createAgent";
 import { createClient } from "@/utils/supabase/server";
 
 export async function POST(req: Request) {

@@ -159,7 +159,7 @@ export const useCreateListing = () => {
       console.log("creating listing with payload:", payload);
 
       // 3. send to server
-      const res = await fetch("/api/listings/", {
+      const res = await fetch("/api/createListing/", {
         method: "POST",
         body: JSON.stringify(payload),
         headers: {
@@ -179,7 +179,6 @@ export const useCreateListing = () => {
     }
 
     setIsSubmitting(false);
-
   };
 
   useEffect(() => {

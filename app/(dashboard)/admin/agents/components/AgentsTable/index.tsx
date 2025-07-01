@@ -2,7 +2,9 @@
 import {
   CircleNotchIcon,
   DotsThreeIcon,
+  NotePencilIcon,
   PlusIcon,
+  TrashIcon,
 } from "@phosphor-icons/react";
 import { Button, Input, Dropdown, Table, PageHeading } from "@/app/components";
 import { AGENTS_TABLE_CONST } from "./const";
@@ -90,11 +92,13 @@ export const AgentsTable = () => {
                             options={[
                               {
                                 label: AGENTS_TABLE_CONST.DROPDOWNS.MANAGE.EDIT,
-                                onClick: () => {},
+                                icon: <NotePencilIcon />,
+                                href: `/admin/agents/edit/${agent.id}`,
                               },
                               {
                                 label:
                                   AGENTS_TABLE_CONST.DROPDOWNS.MANAGE.DELETE,
+                                icon: <TrashIcon />,
                                 onClick: () => {},
                               },
                             ]}

@@ -83,6 +83,7 @@ export const CREATE_LISTING_CONST = {
         LABEL: "3D scan link",
         HTML_FOR: "SCAN_LINK",
         PLACEHOLDER: "Link to 3D scan",
+        DESCRIPTION: "Ensure your link is a matterport.com/show link."
       },
       FLOOR_PLANS: {
         LABEL: "Floor plans",
@@ -107,7 +108,7 @@ export const CREATE_LISTING_CONST = {
       LOGO_DARK: {
         LABEL: "Use light background",
         HTML_FOR: "LOGO_DARK",
-        DESCRIPTION: "Use a light version of the agent's logo if possible, otherwise check this option to use a light background."
+        DESCRIPTION: "Use a light version of the agent's logo if possible!"
       },
       NAME: {
         LABEL: "Name",

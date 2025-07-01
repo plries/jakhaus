@@ -9,6 +9,7 @@ export const useCreateAgent = () => {
 
   const [success, setSuccess] = useState<boolean | null>(null);
   const [showModal, setShowModal] = useState<boolean>(false);
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
   const [agent, setAgent] = useState<CreateAgentPropTypes>({
     id: "",
@@ -50,6 +51,8 @@ export const useCreateAgent = () => {
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+
+    setIsSubmitting(true);
     
     try {
       const uploadedAgentLogo = await uploadFileToSupabase(agentLogo.file!, "logos/agents", agentId);
@@ -95,9 +98,11 @@ export const useCreateAgent = () => {
         setShowModal(true);
         console.log(error);
       }
+
+    setIsSubmitting(false);
+
     };
   
-
   useEffect(() => {
     return () => {
       if (agentLogo?.previewUrl) URL.revokeObjectURL(agentLogo.previewUrl);
@@ -152,5 +157,6 @@ export const useCreateAgent = () => {
     setShowModal,
 
     success,
+    isSubmitting,
   }
 };

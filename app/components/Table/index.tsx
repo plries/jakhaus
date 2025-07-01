@@ -1,8 +1,8 @@
 "use client";
-import { Dropdown, IconButton } from "@/app/components";
+import { CaretLeftIcon, CaretRightIcon } from "@phosphor-icons/react";
+import { IconButton } from "@/app/components";
 import { TablePropTypes } from "./types";
 import { TABLE_CONST } from "./const";
-import { CaretLeftIcon, CaretRightIcon } from "@phosphor-icons/react";
 
 export const Table = ({
   columns,

@@ -1,4 +1,5 @@
 "use client";
+import { CircleNotchIcon } from "@phosphor-icons/react";
 import {
   SectionHeading,
   PageHeading,
@@ -210,6 +211,9 @@ export const CreateAgent = () => {
             type="submit"
             additionalClasses="!text-neutral-50 !bg-neutral-950 !hover:bg-neutral-800 !border-neutral-900"
           >
+            {hook.isSubmitting && (
+              <CircleNotchIcon className="animate-spin" size={20} />
+            )}
             {CREATE_AGENT_CONST.BUTTONS.CREATE}
           </Button>
         </div>

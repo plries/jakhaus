@@ -3,6 +3,7 @@ import Image from "next/image";
 import {
   BuildingOfficeIcon,
   CameraIcon,
+  CircleNotchIcon,
   HouseIcon,
   IconContext,
   UserIcon,
@@ -611,6 +612,9 @@ export const CreateListing = () => {
             type="submit"
             additionalClasses="!text-neutral-50 !bg-neutral-950 !hover:bg-neutral-800 !border-neutral-900"
           >
+            {hook.isSubmitting && (
+              <CircleNotchIcon className="animate-spin" size={20} />
+            )}
             {CREATE_LISTING_CONST.BUTTONS.CREATE}
           </Button>
         </div>

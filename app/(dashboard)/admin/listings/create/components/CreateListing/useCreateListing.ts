@@ -15,6 +15,7 @@ export const useCreateListing = () => {
 
   const [success, setSuccess] = useState<boolean | null>(null);
   const [showModal, setShowModal] = useState<boolean>(false);
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   
   const [existingAgents, setExistingAgents] = useState<CreateAgentPropTypes[]>([]);
 
@@ -94,6 +95,8 @@ export const useCreateListing = () => {
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+
+    setIsSubmitting(true);
     
     try {
       // 1. upload all the images to Supabase storage (still using client-side supabase client)
@@ -174,6 +177,9 @@ export const useCreateListing = () => {
       setShowModal(true);
       console.log(error);
     }
+
+    setIsSubmitting(false);
+
   };
 
   useEffect(() => {
@@ -298,5 +304,6 @@ export const useCreateListing = () => {
     setShowModal,
     
     success,
+    isSubmitting,
   };
 }

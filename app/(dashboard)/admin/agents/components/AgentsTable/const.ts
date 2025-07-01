@@ -24,5 +24,14 @@ export const AGENTS_TABLE_CONST = {
       EDIT: "Edit",
       DELETE: "Delete",
     }
-  }
+  },
+  MODAL: {
+    HEADING: "Delete agent",
+    DESCRIPTION: "You're about to delete the agent ",
+    DESCRIPTION_2: "Are you sure?",
+    BUTTONS: {
+      DELETE: "Delete",
+      CANCEL: "Cancel",
+    }
+  },
 }

@@ -2,7 +2,7 @@
 import { useState, useEffect, useRef } from "react";
 import { v4 as uuidv4 } from 'uuid';
 import { CreateAgentPropTypes, UploadableImageTypes } from "@/app/(dashboard)/admin/types";
-import { uploadFileToSupabase } from "@/lib/uploadFileToSupabase";
+import { uploadFile } from "@/lib/client";
 
 export const useCreateAgent = () => {
   const phoneRef = useRef<HTMLInputElement>(null);
@@ -55,9 +55,12 @@ export const useCreateAgent = () => {
     setIsSubmitting(true);
     
     try {
-      const uploadedAgentLogo = await uploadFileToSupabase(agentLogo.file!, "logos/agents", agentId);
-
-      const uploadedBrokerageLogo = await uploadFileToSupabase(brokerageLogo.file!, "logos/brokerages", agentId);
+      
+      let uploadedAgentLogo = null;
+      if (agentLogo.file) uploadedAgentLogo = await uploadFile(agentLogo.file, "logos/agents", agentId);
+      
+      let uploadedBrokerageLogo = null;
+      if (brokerageLogo.file) uploadedBrokerageLogo = await uploadFile(brokerageLogo.file, "logos/brokerages", agentId);
   
       // 2. prepare final data to send to the server
       const payload = {
@@ -75,29 +78,29 @@ export const useCreateAgent = () => {
           BROKERAGE_ADDRESS: agent.BROKERAGE_ADDRESS,
           BROKERAGE_LOGO: uploadedBrokerageLogo?.publicUrl || "",
         },
-        };
+      };
   
-        console.log("creating listing with payload:", payload);
-  
-        // 3. send to server
-        const res = await fetch("/api/createAgent/", {
-          method: "POST",
-          body: JSON.stringify(payload),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-  
-        if (!res.ok)  throw new Error("Failed to create listing");
-  
-        setSuccess(true);
-        setShowModal(true);
+      console.log("creating agent with payload:", payload);
 
-      } catch (error) {
-        setSuccess(false);
-        setShowModal(true);
-        console.log(error);
-      }
+      // 3. send to server
+      const res = await fetch("/api/createAgent/", {
+        method: "POST",
+        body: JSON.stringify(payload),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+  
+      if (!res.ok)  throw new Error("failed to create listing");
+  
+      setSuccess(true);
+      setShowModal(true);
+
+    } catch (error) {
+      setSuccess(false);
+      setShowModal(true);
+      console.log(error);
+    }
 
     setIsSubmitting(false);
   };

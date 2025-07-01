@@ -1,7 +1,7 @@
 "use client";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { CreateAgentPropTypes, UploadableImageTypes } from "@/app/(dashboard)/admin/types";
-import { uploadFileToSupabase } from "@/lib/uploadFileToSupabase";
+import { uploadFile } from "@/lib/client";
 
 export const useEditAgent = () => {  
   const phoneRef = useRef<HTMLInputElement>(null);
@@ -54,9 +54,12 @@ export const useEditAgent = () => {
     setIsSubmitting(true);
     
     try {
-      const uploadedAgentLogo = await uploadFileToSupabase(agentLogo.file!, "logos/agents", agent.id);
 
-      const uploadedBrokerageLogo = await uploadFileToSupabase(brokerageLogo.file!, "logos/brokerages", agent.id);
+      let uploadedAgentLogo = null;
+      if (agentLogo.file) uploadedAgentLogo = await uploadFile(agentLogo.file, "logos/agents", agent.id);
+      
+      let uploadedBrokerageLogo = null;
+      if (brokerageLogo.file) uploadedBrokerageLogo = await uploadFile(brokerageLogo.file, "logos/brokerages", agent.id);
   
       // 2. prepare final data to send to the server
       const payload = {
@@ -88,7 +91,7 @@ export const useEditAgent = () => {
           },
         });
   
-        if (!res.ok)  throw new Error("Failed to create listing");
+        if (!res.ok)  throw new Error("failed to create listing");
   
         setSuccess(true);
         setShowModal(true);

@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
-import { createFullListing } from "@/lib/createListing";
-import { createAgent } from "@/lib/createAgent";
+import { createFullListing, createAgent } from "@/lib/server";
 import { createClient } from "@/utils/supabase/server";
 
 export async function POST(req: Request) {
@@ -31,12 +30,12 @@ export async function POST(req: Request) {
     return NextResponse.json({ success: true });
     
   } catch (error: any) {
-    console.error("Error creating listing:", {
+    console.error("error creating listing:", {
       message: error?.message,
       stack: error?.stack,
       cause: error?.cause,
       full: error
     });
-    return NextResponse.json({ error: "Failed to create listing" }, { status: 500 });
+    return NextResponse.json({ error: "failed to create listing" }, { status: 500 });
   }
 }

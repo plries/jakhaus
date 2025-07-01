@@ -29,7 +29,7 @@ export const ListingsTable = () => {
           onChange={(event) => hook.setInputValue(event.target.value)}
         />
         <Button
-          additionalClasses="!text-neutral-50 !bg-neutral-950 !hover:bg-neutral-800 !border-neutral-900"
+          additionalClasses="!text-neutral-50 !bg-neutral-950 hover:!bg-neutral-800 !border-neutral-900"
           href={LISTINGS_TABLE_CONST.BUTTONS.CREATE.HREF}
         >
           <PlusIcon size={20} weight="bold" />

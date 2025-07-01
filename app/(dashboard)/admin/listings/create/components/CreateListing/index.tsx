@@ -618,7 +618,7 @@ export const CreateListing = () => {
           </Button>
           <Button
             type="submit"
-            additionalClasses="!text-neutral-50 !bg-neutral-950 !hover:bg-neutral-800 !border-neutral-900"
+            additionalClasses="!text-neutral-50 !bg-neutral-950 hover:!bg-neutral-800 !border-neutral-900"
           >
             {hook.isSubmitting && (
               <CircleNotchIcon className="animate-spin" size={20} />
@@ -655,7 +655,7 @@ export const CreateListing = () => {
                 onClick={() => {
                   window.location.reload();
                 }}
-                additionalClasses="!text-neutral-50 !bg-neutral-950 !hover:bg-neutral-800 !border-neutral-900"
+                additionalClasses="!text-neutral-50 !bg-neutral-950 hover:!bg-neutral-800 !border-neutral-900"
               >
                 {CREATE_LISTING_CONST.MODAL.BUTTONS.CREATE}
               </Button>
@@ -666,7 +666,7 @@ export const CreateListing = () => {
                 hook.setShowModal(false);
                 history.back();
               }}
-              additionalClasses="!text-neutral-50 !bg-neutral-950 !hover:bg-neutral-800 !border-neutral-900 col-span-full"
+              additionalClasses="!text-neutral-50 !bg-neutral-950 hover:!bg-neutral-800 !border-neutral-900 col-span-full"
             >
               {CREATE_LISTING_CONST.MODAL.BUTTONS.CLOSE}
             </Button>

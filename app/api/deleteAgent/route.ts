@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { createAgent } from "@/lib/server";
+import { deleteAgent } from "@/lib/server";
 
 export async function POST(req: Request) {
   const body = await req.json();
@@ -8,19 +8,19 @@ export async function POST(req: Request) {
   }
 
   try {
-    const { agent } = body;
+    const { agentId } = body;
 
-    await createAgent(agent);
+    await deleteAgent(agentId);
 
     return NextResponse.json({ success: true });
     
   } catch (error: any) {
-    console.error("error creating agent:", {
+    console.error("error editing agent:", {
       message: error?.message,
       stack: error?.stack,
       cause: error?.cause,
       full: error
     });
-    return NextResponse.json({ error: "failed to create agent" }, { status: 500 });
+    return NextResponse.json({ error: "failed to delete agent" }, { status: 500 });
   }
 }

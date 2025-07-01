@@ -15,7 +15,7 @@ export const useListingsTable = () => {
         .from("listings")
         .select("*");
         if (error) {
-        console.error("Error fetching listings:", error);
+        console.error("error fetching listings:", error);
     } else {
       setExistingListings(data);
       setLoading(false);
@@ -31,7 +31,7 @@ export const useListingsTable = () => {
       .from("agents")
       .select("*");
       if (error) {
-      console.error("Error fetching agents:", error);
+      console.error("error fetching agents:", error);
     } else {
       setExistingAgents(data);
     }

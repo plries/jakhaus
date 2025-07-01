@@ -62,21 +62,21 @@ export const Input = ({
         />
         {selector && <CaretDownIcon size={20} className="text-neutral-400" />}
         {password && (
-          <IconButton
+          <button
             name={
               hook.showPassword
                 ? INPUT_CONST.HIDE_PASSWORD
                 : INPUT_CONST.HIDE_PASSWORD
             }
             onClick={hook.toggleShowPassword}
-            additionalClasses="!shadow-none !size-6 border-0 rounded-lg"
+            className="!size-6 cursor-pointer"
           >
             {hook.showPassword ? (
               <EyeSlashIcon size={20} />
             ) : (
               <EyeIcon size={20} />
             )}
-          </IconButton>
+          </button>
         )}
       </div>
     </div>

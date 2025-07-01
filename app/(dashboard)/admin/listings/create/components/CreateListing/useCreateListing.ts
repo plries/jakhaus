@@ -6,7 +6,7 @@ import {
   CreateAgentPropTypes,
   UploadableImageTypes,
 } from "@/app/(dashboard)/admin/types";
-import { uploadFileToSupabase } from "@/lib/uploadFileToSupabase";
+import { uploadFile, uploadMultipleFiles } from "@/lib/client";
 import { supabase } from "@/utils/supabase/client";
 
 export const useCreateListing = () => {
@@ -100,27 +100,30 @@ export const useCreateListing = () => {
     
     try {
       // 1. upload all the images to Supabase storage (still using client-side supabase client)
-      const uploadedFeaturedPhoto = await uploadFileToSupabase(featuredPhoto.file!, "featured-photos", listingId);
+      let uploadedFeaturedPhoto = null;
+      if (featuredPhoto.file) uploadedFeaturedPhoto = await uploadFile(featuredPhoto.file, "featured-photos", listingId);
 
-      const uploadedAgentLogo = showCreateAgent && agentLogo.file
-        ? await uploadFileToSupabase(agentLogo.file, "logos/agents", agentId)
+      let uploadedAgentLogo = null;
+      if (agentLogo.file) uploadedAgentLogo = showCreateAgent && agentLogo.file
+        ? await uploadFile(agentLogo.file, "logos/agents", agentId)
         : null;
 
-      const uploadedBrokerageLogo = showCreateAgent && brokerageLogo.file
-        ? await uploadFileToSupabase(brokerageLogo.file, "logos/brokerages", agentId)
+      let uploadedBrokerageLogo = null;
+      if (brokerageLogo.file) uploadedBrokerageLogo = showCreateAgent && brokerageLogo.file
+        ? await uploadFile(brokerageLogo.file, "logos/brokerages", agentId)
         : null;
 
-      const uploadedGallery = (await Promise.all(photoGallery.map(async (photo) => {
-        if (!photo.file) return null;
-        const result = await uploadFileToSupabase(photo.file, "photo-gallery", listingId);
-        return result?.publicUrl || null;
-      }))).filter(Boolean);
-
-      const uploadedFloorPlans = (await Promise.all(floorPlans.map(async (plan) => {
-        if (!plan.file) return null;
-        const result = await uploadFileToSupabase(plan.file, "floor-plans", listingId);
-        return result?.publicUrl || null;
-      }))).filter(Boolean);
+      const uploadedGallery = await uploadMultipleFiles(
+        photoGallery.map((image) => image.file!),
+        "photo-gallery",
+        listingId
+      );
+      
+      const uploadedFloorPlans = await uploadMultipleFiles(
+        floorPlans.map((image) => image.file!),
+        "floor-plans",
+        listingId
+      );
 
     // 2. prepare final data to send to the server
     const payload = {
@@ -167,7 +170,7 @@ export const useCreateListing = () => {
         },
       });
       
-      if (!res.ok) throw new Error("Failed to create listing");
+      if (!res.ok) throw new Error("failed to create listing");
       
       setSuccess(true);
       setShowModal(true);
@@ -187,7 +190,7 @@ export const useCreateListing = () => {
       .from("agents")
       .select("*");
       if (error) {
-      console.error("Error fetching agents:", error);
+      console.error("error fetching agents:", error);
     } else {
       setExistingAgents(data);
     }

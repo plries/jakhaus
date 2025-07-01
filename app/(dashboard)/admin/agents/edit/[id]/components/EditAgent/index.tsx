@@ -28,8 +28,8 @@ export const EditAgent = ({ EDITED_AGENT }: EditAgentPropTypes) => {
         NAME: EDITED_AGENT.NAME,
         EMAIL: EDITED_AGENT.EMAIL,
         PHONE: EDITED_AGENT.PHONE,
-        WEBSITE: EDITED_AGENT.WEBSITE || undefined,
-        INSTAGRAM: EDITED_AGENT.INSTAGRAM || undefined,
+        WEBSITE: EDITED_AGENT.WEBSITE || "",
+        INSTAGRAM: EDITED_AGENT.INSTAGRAM || "",
         BROKERAGE_NAME: EDITED_AGENT.BROKERAGE_NAME,
         BROKERAGE_ADDRESS: EDITED_AGENT.BROKERAGE_ADDRESS,
         BROKERAGE_LOGO: EDITED_AGENT.BROKERAGE_LOGO,
@@ -276,7 +276,7 @@ export const EditAgent = ({ EDITED_AGENT }: EditAgentPropTypes) => {
           </Button>
           <Button
             type="submit"
-            additionalClasses="!text-neutral-50 !bg-neutral-950 !hover:bg-neutral-800 !border-neutral-900"
+            additionalClasses="!text-neutral-50 !bg-neutral-950 hover:!bg-neutral-800 !border-neutral-900"
             disabled={hook.touchedFields.size === 0}
           >
             {hook.isSubmitting && (
@@ -305,7 +305,7 @@ export const EditAgent = ({ EDITED_AGENT }: EditAgentPropTypes) => {
               hook.setShowModal(false);
               history.back();
             }}
-            additionalClasses="!text-neutral-50 col-span-full !bg-neutral-950 !hover:bg-neutral-800 !border-neutral-900"
+            additionalClasses="!text-neutral-50 col-span-full !bg-neutral-950 hover:!bg-neutral-800 !border-neutral-900"
           >
             {ADMIN_AGENT_CONST.MODAL.BUTTONS.CLOSE}
           </Button>

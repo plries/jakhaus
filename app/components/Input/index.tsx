@@ -39,7 +39,7 @@ export const Input = ({
       )}
       <div
         ref={inputRef}
-        className={`flex w-full flex-row items-center gap-2 rounded-xl border bg-neutral-50 p-3 shadow-md outline-2 outline-transparent required:!border-red-400 focus-within:outline-2 focus-within:outline-neutral-950/10 ${error ? "border-red-400" : "border-neutral-200"}`}
+        className={`relative flex w-full flex-row items-center gap-2 rounded-xl border bg-neutral-50 p-3 shadow-md outline-2 outline-transparent required:!border-red-400 focus-within:outline-2 focus-within:outline-neutral-950/10 ${error ? "border-red-400" : "border-neutral-200"}`}
       >
         {type === "search" && (
           <MagnifyingGlassIcon size={20} className="text-neutral-400" />
@@ -69,12 +69,12 @@ export const Input = ({
                 : INPUT_CONST.HIDE_PASSWORD
             }
             onClick={hook.toggleShowPassword}
-            additionalClasses="!shadow-none min-w-11 border-0 rounded-lg"
+            additionalClasses="!shadow-none !size-6 border-0 rounded-lg"
           >
             {hook.showPassword ? (
-              <EyeSlashIcon size={24} />
+              <EyeSlashIcon size={20} />
             ) : (
-              <EyeIcon size={24} />
+              <EyeIcon size={20} />
             )}
           </IconButton>
         )}

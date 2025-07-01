@@ -6,20 +6,21 @@ export const useListingsTable = () => {
   const [loading, setLoading] = useState(true);
   const [existingListings, setExistingListings] = useState<CreateListingPropTypes[]>([]);
   const [existingAgents, setExistingAgents] = useState<{ id: string; NAME: string}[]>([]);
+  const [showingAmount, setShowingAmount] = useState({from: 0, to: 10});
   const [inputValue, setInputValue] = useState('');
   
   useEffect(() => {
-      const fetchExistingListings = async () => {
-        const {data, error} = await supabase
+    const fetchExistingListings = async () => {
+      const {data, error} = await supabase
         .from("listings")
         .select("*");
         if (error) {
         console.error("Error fetching listings:", error);
-      } else {
-        setExistingListings(data);
-        setLoading(false);
-      }
-    };
+    } else {
+      setExistingListings(data);
+      setLoading(false);
+    }
+  };
   
     fetchExistingListings();
   }, []);
@@ -45,5 +46,7 @@ export const useListingsTable = () => {
     inputValue,
     setInputValue,
     loading,
+    showingAmount,
+    setShowingAmount
   };
 }

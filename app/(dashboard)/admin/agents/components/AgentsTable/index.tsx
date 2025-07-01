@@ -4,14 +4,7 @@ import {
   DotsThreeIcon,
   PlusIcon,
 } from "@phosphor-icons/react";
-import {
-  Button,
-  Checkbox,
-  Input,
-  Dropdown,
-  Table,
-  PageHeading,
-} from "@/app/components";
+import { Button, Input, Dropdown, Table, PageHeading } from "@/app/components";
 import { AGENTS_TABLE_CONST } from "./const";
 import { useAgentsTable } from "./useAgentsTable";
 
@@ -50,7 +43,10 @@ export const AgentsTable = () => {
           })),
         ]}
         tableName={AGENTS_TABLE_CONST.TABLE.NAME}
-        tableCount={hook.existingAgents.length}
+        tableCount={filteredOptions.length}
+        showingAmountFrom={hook.showingAmount.from}
+        showingAmountTo={hook.showingAmount.to}
+        setShowingAmount={hook.setShowingAmount}
       >
         {hook.loading ? (
           <tr className="relative h-15 w-full border-b border-neutral-200 align-middle text-neutral-600 last:border-b-0 hover:bg-neutral-100/50 has-checked:bg-slate-100">
@@ -68,45 +64,45 @@ export const AgentsTable = () => {
           <>
             {filteredOptions.length ? (
               <>
-                {filteredOptions.map((agent, index) => (
-                  <tr
-                    key={index}
-                    className="h-15 border-b border-neutral-200 text-neutral-600 last:border-b-0 hover:bg-neutral-100/50 has-checked:bg-slate-100"
-                  >
-                    <td className="flex h-16 w-16 min-w-16 items-center justify-center border-r border-neutral-200">
-                      <Checkbox />
-                    </td>
-                    <td className="border-r border-neutral-200 px-4 py-2 text-nowrap">
-                      {agent.NAME}
-                    </td>
-                    <td className="border-r border-neutral-200 px-4 py-2 text-nowrap">
-                      {agent.BROKERAGE_NAME}
-                    </td>
-                    <td className="px-4 py-2">
-                      <span className="flex flex-row items-center justify-between gap-5 text-nowrap">
-                        {agent.SUBTITLE}
-                        <Dropdown
-                          button={{
-                            name: AGENTS_TABLE_CONST.BUTTONS.MANAGE,
-                            icon: <DotsThreeIcon size={24} weight="bold" />,
-                            additionalClasses:
-                              "bg-transparent hover:!bg-neutral-950/5 !rounded-xl !border-0 !shadow-none",
-                          }}
-                          options={[
-                            {
-                              label: AGENTS_TABLE_CONST.DROPDOWNS.MANAGE.EDIT,
-                              onClick: () => {},
-                            },
-                            {
-                              label: AGENTS_TABLE_CONST.DROPDOWNS.MANAGE.DELETE,
-                              onClick: () => {},
-                            },
-                          ]}
-                        />
-                      </span>
-                    </td>
-                  </tr>
-                ))}
+                {filteredOptions
+                  .slice(hook.showingAmount.from, hook.showingAmount.to)
+                  .map((agent, index) => (
+                    <tr
+                      key={index}
+                      className="h-15 border-b border-neutral-200 text-neutral-600 last:border-b-0 hover:bg-neutral-100/50 has-checked:bg-slate-100"
+                    >
+                      <td className="border-r border-neutral-200 px-4 py-2 text-nowrap">
+                        {agent.NAME}
+                      </td>
+                      <td className="border-r border-neutral-200 px-4 py-2 text-nowrap">
+                        {agent.BROKERAGE_NAME}
+                      </td>
+                      <td className="px-4 py-2">
+                        <span className="flex flex-row items-center justify-between gap-5 text-nowrap">
+                          {agent.SUBTITLE}
+                          <Dropdown
+                            button={{
+                              name: AGENTS_TABLE_CONST.BUTTONS.MANAGE,
+                              icon: <DotsThreeIcon size={24} weight="bold" />,
+                              additionalClasses:
+                                "bg-transparent hover:!bg-neutral-950/5 !rounded-xl !border-0 !shadow-none",
+                            }}
+                            options={[
+                              {
+                                label: AGENTS_TABLE_CONST.DROPDOWNS.MANAGE.EDIT,
+                                onClick: () => {},
+                              },
+                              {
+                                label:
+                                  AGENTS_TABLE_CONST.DROPDOWNS.MANAGE.DELETE,
+                                onClick: () => {},
+                              },
+                            ]}
+                          />
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
               </>
             ) : (
               <tr className="h-15 w-full border-b border-neutral-200 align-middle text-neutral-600 last:border-b-0 hover:bg-neutral-100/50 has-checked:bg-slate-100">

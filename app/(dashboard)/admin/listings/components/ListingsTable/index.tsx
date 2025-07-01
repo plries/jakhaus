@@ -4,14 +4,7 @@ import {
   DotsThreeIcon,
   PlusIcon,
 } from "@phosphor-icons/react";
-import {
-  Button,
-  Checkbox,
-  Input,
-  Dropdown,
-  Table,
-  PageHeading,
-} from "@/app/components";
+import { Button, Input, Dropdown, Table, PageHeading } from "@/app/components";
 import { LISTINGS_TABLE_CONST } from "./const";
 import { useListingsTable } from "./useListingsTable";
 
@@ -48,7 +41,10 @@ export const ListingsTable = () => {
           })),
         ]}
         tableName={LISTINGS_TABLE_CONST.TABLE.NAME}
-        tableCount={hook.existingListings.length}
+        tableCount={filteredOptions.length}
+        showingAmountFrom={hook.showingAmount.from}
+        showingAmountTo={hook.showingAmount.to}
+        setShowingAmount={hook.setShowingAmount}
       >
         {hook.loading ? (
           <tr className="relative h-15 w-full border-b border-neutral-200 align-middle text-neutral-600 last:border-b-0 hover:bg-neutral-100/50 has-checked:bg-slate-100">
@@ -71,12 +67,6 @@ export const ListingsTable = () => {
                     key={index}
                     className="h-15 border-b border-neutral-200 text-neutral-600 last:border-b-0 hover:bg-neutral-100/50 has-checked:bg-slate-100"
                   >
-                    <td className="flex h-16 w-16 min-w-16 items-center justify-center border-r border-neutral-200">
-                      <Checkbox />
-                    </td>
-                    <td className="border-r border-neutral-200 px-4 py-2 text-nowrap">
-                      {listing.id}
-                    </td>
                     <td className="border-r border-neutral-200 px-4 py-2 text-nowrap">
                       {listing.UNIT} {listing.STREET}, {listing.PROVINCE},{" "}
                       {listing.POSTAL_CODE}

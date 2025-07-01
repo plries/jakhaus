@@ -6,6 +6,7 @@ export const useAgentsTable = () => {
   const [loading, setLoading] = useState(true);
   const [existingAgents, setExistingAgents] = useState<CreateAgentPropTypes[]>([]);
   const [inputValue, setInputValue] = useState('');
+  const [showingAmount, setShowingAmount] = useState({from: 0, to: 10});
   
   useEffect(() => {
       const fetchExistingAgents = async () => {
@@ -28,5 +29,7 @@ export const useAgentsTable = () => {
     inputValue,
     setInputValue,
     loading,
+    showingAmount,
+    setShowingAmount
    };
 }

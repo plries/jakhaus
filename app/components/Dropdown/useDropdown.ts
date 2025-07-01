@@ -6,6 +6,7 @@ export const useDropdown = () => {
   const buttonRef = useRef<HTMLButtonElement>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [dropdownPosition, setDropdownPosition] = useState({ top: 0, left: 0 });
+  const [copied, setCopied] = useState(false);
 
   const toggleOpen = () => {
     setIsOpen(!isOpen);
@@ -24,39 +25,46 @@ export const useDropdown = () => {
   }, [])
 
   useEffect(() => {
-  const updatePosition = () => {
-    if (buttonRef.current && dropdownRef.current) {
-      const buttonRect = buttonRef.current.getBoundingClientRect();
-      const dropdownRect = dropdownRef.current.getBoundingClientRect();
-      const viewportWidth = window.innerWidth;
-      const viewportHeight = window.innerHeight;
+    const updatePosition = () => {
+      if (buttonRef.current && dropdownRef.current) {
+        const buttonRect = buttonRef.current.getBoundingClientRect();
+        const dropdownRect = dropdownRef.current.getBoundingClientRect();
+        const viewportWidth = window.innerWidth;
+        const viewportHeight = window.innerHeight;
 
-      let top = buttonRect.bottom + window.scrollY;
-      let left = buttonRect.left + window.scrollX;
+        let top = buttonRect.bottom + window.scrollY;
+        let left = buttonRect.left + window.scrollX;
 
-      // if dropdown goes beyond bottom edge
-      if (buttonRect.bottom + dropdownRect.height > viewportHeight) {
-        top = buttonRect.top - dropdownRect.height + window.scrollY;
+        // if dropdown goes beyond bottom edge
+        if (buttonRect.bottom + dropdownRect.height > viewportHeight) {
+          top = buttonRect.top - dropdownRect.height + window.scrollY;
+        }
+
+        // if dropdown goes beyond right edge
+        if (buttonRect.left + dropdownRect.width > viewportWidth) {
+          left = buttonRect.right - dropdownRect.width + window.scrollX;
+        }
+
+        setDropdownPosition({ top, left });
       }
+    };
 
-      // if dropdown goes beyond right edge
-      if (buttonRect.left + dropdownRect.width > viewportWidth) {
-        left = buttonRect.right - dropdownRect.width + window.scrollX;
-      }
+    requestAnimationFrame(updatePosition);
+    const handleResize = () => requestAnimationFrame(updatePosition);
 
-      setDropdownPosition({ top, left });
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [isOpen]);
+
+  useEffect(() => {
+    if (copied) {
+      setTimeout(() => {
+        setCopied(false);
+      }, 3000);
     }
-  };
-
-  requestAnimationFrame(updatePosition);
-  const handleResize = () => requestAnimationFrame(updatePosition);
-
-  window.addEventListener("resize", handleResize);
-  return () => {
-    window.removeEventListener("resize", handleResize);
-  };
-}, [isOpen]);
-
+  }, [copied]);
 
   return {
     dropdownRef,
@@ -64,5 +72,7 @@ export const useDropdown = () => {
     isOpen,
     toggleOpen,
     dropdownPosition,
+    copied,
+    setCopied
   };
 }

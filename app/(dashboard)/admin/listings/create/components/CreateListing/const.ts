@@ -69,7 +69,8 @@ export const CREATE_LISTING_CONST = {
         HTML_FOR: "PHOTO_GALLERY",
         TEXT: "Upload photos",
         CAPTION: "Click here to upload.",
-        DESCRIPTION: "Photos are ordered by name alphabetically/numerically once uploaded."
+        DESCRIPTION: "At least 4 photos are required.",
+        DESCRIPTION_2: "Photos are also ordered by name alphabetically/numerically once uploaded."
       }
     },
     OTHER_ATTACHMENTS: {

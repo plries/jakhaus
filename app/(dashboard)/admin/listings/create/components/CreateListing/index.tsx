@@ -35,7 +35,7 @@ export const CreateListing = () => {
           <SectionHeading>
             {CREATE_LISTING_CONST.SECTIONS.ADDRESS}
           </SectionHeading>
-          <div className="grid grid-cols-1 gap-4 px-10">
+          <div className="grid grid-cols-1 gap-4 px-5 md:px-10">
             <Input
               placeholder={
                 CREATE_LISTING_CONST.FORM.ADDRESS.STREET_ADDRESS.PLACEHOLDER
@@ -118,7 +118,7 @@ export const CreateListing = () => {
           <SectionHeading>
             {CREATE_LISTING_CONST.SECTIONS.OVERVIEW}
           </SectionHeading>
-          <div className="grid grid-cols-1 gap-4 px-10 md:grid lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-4 px-5 md:grid md:px-10 lg:grid-cols-3">
             <Input
               placeholder={
                 CREATE_LISTING_CONST.FORM.OVERVIEW.BEDROOMS.PLACEHOLDER
@@ -169,7 +169,7 @@ export const CreateListing = () => {
           <SectionHeading>
             {CREATE_LISTING_CONST.SECTIONS.PHOTOS}
           </SectionHeading>
-          <div className="grid grid-cols-1 gap-4 px-10">
+          <div className="grid grid-cols-1 gap-4 px-5 md:px-10">
             <UploadButton
               label={CREATE_LISTING_CONST.FORM.PHOTOS.FEATURED_PHOTO.LABEL}
               text={CREATE_LISTING_CONST.FORM.PHOTOS.FEATURED_PHOTO.TEXT}
@@ -214,13 +214,15 @@ export const CreateListing = () => {
             />
             <p className="-mt-2 !text-sm text-neutral-500">
               {CREATE_LISTING_CONST.FORM.PHOTOS.PHOTO_GALLERY.DESCRIPTION}
+              <br />
+              {CREATE_LISTING_CONST.FORM.PHOTOS.PHOTO_GALLERY.DESCRIPTION_2}
             </p>
           </div>
 
           <SectionHeading>
             {CREATE_LISTING_CONST.SECTIONS.OTHER_ATTACHMENTS}
           </SectionHeading>
-          <div className="grid grid-cols-1 gap-4 px-10">
+          <div className="grid grid-cols-1 gap-4 px-5 md:px-10">
             <Input
               placeholder={
                 CREATE_LISTING_CONST.FORM.OTHER_ATTACHMENTS.VIDEO_LINK
@@ -293,7 +295,7 @@ export const CreateListing = () => {
           <SectionHeading>
             {CREATE_LISTING_CONST.SECTIONS.AGENT_INFO}
           </SectionHeading>
-          <div className="grid grid-cols-1 gap-4 px-10">
+          <div className="grid grid-cols-1 gap-4 px-5 md:px-10">
             <InputSelector
               input={{
                 type: "text",
@@ -491,7 +493,7 @@ export const CreateListing = () => {
             <SectionHeading>
               {CREATE_LISTING_CONST.SECTIONS.BROKERAGE_INFO}
             </SectionHeading>
-            <div className="grid grid-cols-1 gap-4 px-10">
+            <div className="grid grid-cols-1 gap-4 px-5 md:px-10">
               <UploadButton
                 label={CREATE_LISTING_CONST.FORM.BROKERAGE.LOGO.LABEL}
                 text={CREATE_LISTING_CONST.FORM.BROKERAGE.LOGO.TEXT}
@@ -606,7 +608,7 @@ export const CreateListing = () => {
           </div>
         </div>
 
-        <div className="col-span-full flex flex-row flex-wrap justify-end gap-5 border-t border-t-neutral-300 px-10 pt-10 pb-5">
+        <div className="col-span-full flex flex-row flex-wrap justify-end gap-5 border-t border-t-neutral-300 px-5 pt-5 md:px-10 md:pt-10 md:pb-5">
           <Button
             onClick={() => {
               history.back();

@@ -19,10 +19,8 @@ export const CreateAgent = () => {
     <>
       <form className="contents" onSubmit={hook.handleSubmit}>
         <PageHeading>{ADMIN_AGENT_CONST.CREATE_HEADING}</PageHeading>
-        <SectionHeading>
-          {ADMIN_AGENT_CONST.SECTIONS.AGENT_INFO}
-        </SectionHeading>
-        <div className="col-span-full grid grid-cols-1 gap-4 px-10">
+        <SectionHeading>{ADMIN_AGENT_CONST.SECTIONS.AGENT_INFO}</SectionHeading>
+        <div className="col-span-full grid grid-cols-1 gap-4 px-5 md:px-10">
           <UploadButton
             label={ADMIN_AGENT_CONST.FORM.AGENT.LOGO.LABEL}
             text={ADMIN_AGENT_CONST.FORM.AGENT.LOGO.TEXT}
@@ -144,7 +142,7 @@ export const CreateAgent = () => {
         <SectionHeading>
           {ADMIN_AGENT_CONST.SECTIONS.BROKERAGE_INFO}
         </SectionHeading>
-        <div className="col-span-full grid grid-cols-1 gap-4 px-10">
+        <div className="col-span-full grid grid-cols-1 gap-4 px-5 md:px-10">
           <UploadButton
             label={ADMIN_AGENT_CONST.FORM.BROKERAGE.LOGO.LABEL}
             text={ADMIN_AGENT_CONST.FORM.BROKERAGE.LOGO.TEXT}
@@ -199,7 +197,7 @@ export const CreateAgent = () => {
           />
         </div>
 
-        <div className="col-span-full flex flex-row flex-wrap justify-end gap-5 border-t border-t-neutral-300 px-10 pt-10 pb-5">
+        <div className="col-span-full flex flex-row flex-wrap justify-end gap-5 border-t border-t-neutral-300 px-5 pt-5 md:px-10 md:pt-10 md:pb-5">
           <Button
             onClick={() => {
               history.back();

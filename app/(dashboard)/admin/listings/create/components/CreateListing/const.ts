@@ -98,7 +98,7 @@ export const CREATE_LISTING_CONST = {
         HTML_FOR: "SELECT_AGENT"
       },
       OR: "Or create a new agent",
-      HIDE: "Hide",
+      CANCEL: "Cancel",
       LOGO: {
         LABEL: "Logo",
         TEXT: "Upload file",
@@ -144,13 +144,6 @@ export const CREATE_LISTING_CONST = {
       },
     },
     BROKERAGE: {
-      SELECT_BROKERAGE: {
-        LABEL: "Select a saved brokerage",
-        TEXT: "Remax 2000 Realty",
-        HTML_FOR: "SELECT_BROKERAGE"
-      },
-      OR: "Or create a new brokerage",
-      HIDE: "Hide",
       LOGO: {
         LABEL: "Logo",
         TEXT: "Upload file",

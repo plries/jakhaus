@@ -350,7 +350,7 @@ export const CreateListing = () => {
               }}
             >
               {hook.showCreateAgent
-                ? CREATE_LISTING_CONST.FORM.AGENT.HIDE
+                ? CREATE_LISTING_CONST.FORM.AGENT.CANCEL
                 : CREATE_LISTING_CONST.FORM.AGENT.OR}
             </button>
             <div

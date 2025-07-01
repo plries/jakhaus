@@ -55,10 +55,13 @@ export const Navbar = ({ CONSTANTS, LINKS, dashboard }: NavbarPropTypes) => {
           <nav className="contents" role="navigation">
             {LINKS.filter((LINK) => {
               if (dashboard) return true;
-              if (CONSTANTS)
-                return (
-                  !LINK.KEY || CONSTANTS[LINK.KEY as keyof typeof CONSTANTS]
-                );
+              if (CONSTANTS) {
+                const value = CONSTANTS[LINK.KEY as keyof typeof CONSTANTS];
+                if (Array.isArray(value)) {
+                  return value.length > 0;
+                }
+                return !!value;
+              }
             })
 
               .map((LINK) => (
@@ -118,10 +121,13 @@ export const Navbar = ({ CONSTANTS, LINKS, dashboard }: NavbarPropTypes) => {
             <nav className="contents" role="navigation">
               {LINKS.filter((LINK) => {
                 if (dashboard) return true;
-                if (CONSTANTS)
-                  return (
-                    !LINK.KEY || CONSTANTS[LINK.KEY as keyof typeof CONSTANTS]
-                  );
+                if (CONSTANTS) {
+                  const value = CONSTANTS[LINK.KEY as keyof typeof CONSTANTS];
+                  if (Array.isArray(value)) {
+                    return value.length > 0;
+                  }
+                  return !!value;
+                }
               }).map((LINK) => (
                 <React.Fragment key={LINK.KEY}>
                   {dashboard ? (

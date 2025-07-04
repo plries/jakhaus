@@ -1,11 +1,11 @@
 import { createClient } from "@/utils/supabase/server";
 
-// 2. create the full listing with related data
-export async function createFullListing(listingData: any, photos: string[], floor_plans: string[]) {
+// 1. create the listing with related data
+export async function createListing(listingData: any, photos: string[], floor_plans: string[]) {
   const supabase = await createClient();
 
   const { data: { user } } = await supabase.auth.getUser();
-  if (!user?.id) throw new Error("User not authenticated");
+  if (!user?.id) throw new Error("user not authenticated");
 
   // 2a. create listing
   const { data, error } = await supabase

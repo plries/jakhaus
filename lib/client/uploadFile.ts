@@ -1,15 +1,18 @@
 "use client";
 import { supabase } from "@/utils/supabase/client";
+import { UUIDTypes } from "uuid";
 
 export const uploadFile = async (
   file: File | null | undefined,
   bucketPath: string,
-  id: string | undefined
+  id: UUIDTypes | undefined
 ) => {
   if (!file || !id) return null;
 
+   const timestamp = Date.now();
+  const uniqueFileName = `${timestamp}-${file.name}`;
   const folder = `${bucketPath}/${id}`;
-  const filePath = `${folder}/${file.name}`;
+  const filePath = `${folder}/${uniqueFileName}`;
 
   // 1. list existing files in the folder
   const { data: existingFiles, error: listError } = await supabase.storage

@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { editAgent } from "@/lib/server";
+import { createClient } from "@/utils/supabase/server";
 
 export async function POST(req: Request) {
   const body = await req.json();
@@ -14,9 +15,17 @@ export async function POST(req: Request) {
       ? touchedFields
       : Array.from(touchedFields);
 
-    await editAgent(agent, touchedArray);
+    const supabase = await createClient()
 
-    return NextResponse.json({ success: true });
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user?.id) throw new Error("user not authenticated");
+
+    await editAgent({
+      ...agent,
+      user_id: user?.id
+    }, touchedArray);
+
+  return NextResponse.json({ success: true });
     
   } catch (error: any) {
     console.error("error editing agent:", {

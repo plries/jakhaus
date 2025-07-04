@@ -15,10 +15,8 @@ export const UploadZone = ({
   onChange,
   files,
   onClear,
+  setDeleted,
 }: UploadZonePropTypes) => {
-  const uploadedFiles = files
-    .map((f: { file: File | null; previewUrl: string | null }) => f.file)
-    .filter((file): file is File => file !== null);
 
   const handleChange = (newFiles: File[]) => {
     const unique = newFiles.filter(
@@ -35,7 +33,7 @@ export const UploadZone = ({
     withPreviews;
   };
 
-  const hook = useUploadZone(uploadedFiles, handleChange);
+  const hook = useUploadZone(files, handleChange);
 
   return (
     <div ref={hook.dropzoneRef}>
@@ -45,7 +43,7 @@ export const UploadZone = ({
       </p>
       <label
         htmlFor={htmlFor}
-        className="flex h-fit w-full cursor-pointer flex-col items-center justify-center rounded-xl border border-neutral-300 px-5 pb-10 text-nowrap shadow-inner transition-all duration-150 ease-in-out hover:bg-neutral-100 active:scale-98"
+        className="flex h-fit w-full cursor-pointer flex-col items-center justify-center rounded-xl border border-neutral-300 px-5 pb-10 text-nowrap shadow-inner transition-all duration-150 ease-in-out hover:bg-neutral-100"
       >
         {files && (
           <span className="grid w-full grid-cols-1 gap-x-5 md:grid-cols-2 lg:grid-cols-3">
@@ -56,6 +54,7 @@ export const UploadZone = ({
                     additionalClasses="absolute -right-4 -top-4 place-self-end"
                     name={UPLOAD_BUTTON_CONST.DELETE}
                     onClick={() => {
+                      setDeleted?.((prev) => [...prev, file.previewUrl ?? ""]);
                       onClear?.(index);
                     }}
                   >
@@ -68,11 +67,13 @@ export const UploadZone = ({
                     height={1080}
                     className="mt-2 rounded-md border border-neutral-950/10 shadow-sm"
                   />
-                  <span className="flex justify-center px-2">
-                    <p className="-mt-2 w-fit overflow-hidden rounded-full border border-neutral-950/10 bg-neutral-50 px-2 py-1 text-center !text-sm text-nowrap text-ellipsis !text-neutral-600 shadow-sm">
-                      {file.file?.name ?? ""}
-                    </p>
-                  </span>
+                  {file.file?.name && (
+                    <span className="flex justify-center px-2">
+                      <p className="-mt-2 w-fit overflow-hidden rounded-full border border-neutral-950/10 bg-neutral-50 px-2 py-1 text-center !text-sm text-nowrap text-ellipsis !text-neutral-600 shadow-sm">
+                        {file.file?.name ?? ""}
+                      </p>
+                    </span>
+                  )}
                 </span>
               );
             })}

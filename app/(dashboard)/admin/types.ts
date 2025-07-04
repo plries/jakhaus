@@ -1,3 +1,5 @@
+import { UUIDTypes } from "uuid";
+
 export type CreateAddressPropTypes = {
   STREET?: string;
   UNIT?: string;
@@ -7,7 +9,7 @@ export type CreateAddressPropTypes = {
 }
 
 export type CreateAgentPropTypes ={
-  id?: string;
+  id?: UUIDTypes;
   LOGO_URL?: string;
   LOGO_DARK?: boolean;
   SUBTITLE?: string;
@@ -22,7 +24,7 @@ export type CreateAgentPropTypes ={
 }
 
 export type CreateListingPropTypes = {
-  id?: string;
+  id?: UUIDTypes;
   STREET?: string;
   UNIT?: string;
   CITY?: string;
@@ -35,6 +37,11 @@ export type CreateListingPropTypes = {
   VIDEO_LINK?: string;
   SCAN_LINK?: string;
   agent_id?: string;
+}
+
+export type CreateImagePropTypes = {
+  id?: UUIDTypes;
+  URL?: string;
 }
 
 export type UploadableImageTypes = {

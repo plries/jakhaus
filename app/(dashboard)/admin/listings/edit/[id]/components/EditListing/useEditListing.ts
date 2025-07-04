@@ -1,15 +1,11 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
-import { v4 as uuidv4 } from 'uuid';
-import {
-  CreateAddressPropTypes,
-  CreateAgentPropTypes,
-  UploadableImageTypes,
-} from "@/app/(dashboard)/admin/types";
-import { uploadFile, uploadMultipleFiles } from "@/lib/client";
+import { useRef, useState, useEffect } from "react";
 import { supabase } from "@/utils/supabase/client";
+import { UUIDTypes, v4 as uuidv4 } from "uuid";
+import { CreateAddressPropTypes, CreateAgentPropTypes, UploadableImageTypes } from "@/app/(dashboard)/admin/types";
+import { uploadFile, uploadMultipleFiles } from "@/lib/client";
 
-export const useCreateListing = () => {
+export const useEditListing = () => {
   const phoneRef = useRef<HTMLInputElement>(null);
   const postalRef = useRef<HTMLInputElement>(null);
 
@@ -20,6 +16,8 @@ export const useCreateListing = () => {
   const [existingAgents, setExistingAgents] = useState<CreateAgentPropTypes[]>([]);
 
   const [showCreateAgent, setShowCreateAgent] = useState<boolean>(false);
+
+  const [listingId, setListingId] = useState<UUIDTypes>("");
 
   const [address, setAddress] = useState<CreateAddressPropTypes>({
     STREET: "",
@@ -37,12 +35,15 @@ export const useCreateListing = () => {
     file: null,
     previewUrl: null,
   });
+  
   const [photoGallery, setPhotoGallery] = useState<UploadableImageTypes[]>([]);
+  const [deletedPhotoGallery, setDeletedPhotoGallery] = useState<string[]>([]);
 
   const [videoLink, setVideoLink] = useState<string>("");
   const [scanLink, setScanLink] = useState<string>("");
 
   const [floorPlans, setFloorPlans] = useState<UploadableImageTypes[]>([]);
+  const [deletedFloorPlans, setDeletedFloorPlans] = useState<string[]>([]);
 
   const [agent, setAgent] = useState<CreateAgentPropTypes>({
     id: "",
@@ -68,6 +69,8 @@ export const useCreateListing = () => {
     file: null,
     previewUrl: null,
   });
+
+  const [touchedFields, setTouchedFields] = useState<Set<string>>(new Set());
   
   const toggleShowCreateAgent = () => setShowCreateAgent(!showCreateAgent);
 
@@ -90,8 +93,20 @@ export const useCreateListing = () => {
     return `${cleaned.slice(0, 3)} ${cleaned.slice(3)}`;
   };
 
-  const listingId = uuidv4();
   const agentId = showCreateAgent ? uuidv4() : agent.id;
+
+  const extractFilePaths = (urls: string[]) => {
+    return urls.map(url => {
+      const parts = url.split("/media/");
+      return parts.length > 1 ? parts[1] : url;
+    });
+  }
+  
+  let deletedPhotoPaths: string[] = [];
+  if (deletedPhotoGallery.length > 0) deletedPhotoPaths = extractFilePaths(deletedPhotoGallery);
+
+  let deletedFloorPlanPaths: string[] = [];
+  if (deletedFloorPlans.length > 0) deletedFloorPlanPaths = extractFilePaths(deletedFloorPlans);
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -114,20 +129,19 @@ export const useCreateListing = () => {
         : null;
 
       const uploadedGallery = await uploadMultipleFiles(
-        photoGallery.map((image) => image.file!),
+        photoGallery.filter(img => img.file !== null).map(img => img.file!),
         "photo-gallery",
         listingId
       );
       
       const uploadedFloorPlans = await uploadMultipleFiles(
-        floorPlans.map((image) => image.file!),
+        floorPlans.filter(img => img.file !== null).map(img => img.file!),
         "floor-plans",
         listingId
       );
 
     // 2. prepare final data to send to the server
     const payload = {
-      id: listingId,
       agent: {
         id: agentId, 
         NAME: agent.NAME,
@@ -143,6 +157,7 @@ export const useCreateListing = () => {
         BROKERAGE_LOGO: uploadedBrokerageLogo?.publicUrl || "",
       },
       dataToSubmit: {
+        id: listingId,
         STREET: address.STREET,
         UNIT: address.UNIT,
         CITY: address.CITY,
@@ -154,15 +169,18 @@ export const useCreateListing = () => {
         FEATURED_PHOTO: uploadedFeaturedPhoto?.publicUrl || "",
         VIDEO_LINK: videoLink,
         SCAN_LINK: scanLink,
+        deletedPhotoPaths,
+        deletedFloorPlanPaths,
       },
       photos: uploadedGallery,
       floor_plans: uploadedFloorPlans,
-      };
+      touchedFields: Array.from(touchedFields),
+    };
 
       console.log("creating listing with payload:", payload);
 
       // 3. send to server
-      const res = await fetch("/api/createListing/", {
+      const res = await fetch("/api/editListing/", {
         method: "POST",
         body: JSON.stringify(payload),
         headers: {
@@ -266,6 +284,9 @@ export const useCreateListing = () => {
     showCreateAgent,
     toggleShowCreateAgent,
 
+    listingId,
+    setListingId,
+
     address,
     setAddress,
 
@@ -282,6 +303,9 @@ export const useCreateListing = () => {
     photoGallery,
     setPhotoGallery,
 
+    deletedPhotoGallery,
+    setDeletedPhotoGallery,
+
     videoLink,
     setVideoLink,
     
@@ -290,6 +314,9 @@ export const useCreateListing = () => {
 
     floorPlans,
     setFloorPlans,
+
+    deletedFloorPlans,
+    setDeletedFloorPlans,
 
     agent,
     setAgent,
@@ -308,6 +335,7 @@ export const useCreateListing = () => {
     success,
     isSubmitting,
 
-    listingId,
+    touchedFields,
+    setTouchedFields
   };
-}
+};

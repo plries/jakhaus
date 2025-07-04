@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { createAgent } from "@/lib/server";
+import { createClient } from "@/utils/supabase/server";
 
 export async function POST(req: Request) {
   const body = await req.json();
@@ -10,7 +11,15 @@ export async function POST(req: Request) {
   try {
     const { agent } = body;
 
-    await createAgent(agent);
+    const supabase = await createClient()
+    
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user?.id) throw new Error("user not authenticated");
+
+    await createAgent({
+      ...agent,
+      user_id: user?.id
+    });
 
     return NextResponse.json({ success: true });
     

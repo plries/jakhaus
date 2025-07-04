@@ -55,6 +55,7 @@ export const useEditAgent = () => {
     
     try {
 
+      // 1. upload all the images to supabase
       let uploadedAgentLogo = null;
       if (agentLogo.file) uploadedAgentLogo = await uploadFile(agentLogo.file, "logos/agents", agent.id);
       

@@ -6,7 +6,6 @@ import {
   MagnifyingGlassIcon,
 } from "@phosphor-icons/react";
 import { InputPropTypes } from "./types";
-import { IconButton } from "../IconButton";
 import { useInput } from "./useInput";
 import { INPUT_CONST } from "./const";
 
@@ -39,7 +38,7 @@ export const Input = ({
       )}
       <div
         ref={inputRef}
-        className={`relative flex w-full flex-row items-center gap-2 rounded-xl border bg-neutral-50 p-3 shadow-md outline-2 outline-transparent required:!border-red-400 focus-within:outline-2 focus-within:outline-neutral-950/10 ${error ? "border-red-400" : "border-neutral-200"}`}
+        className={`relative flex w-full flex-row items-center gap-2 rounded-xl border bg-neutral-50 p-3 shadow-sm focus-within:shadow-md transition-all ease-in-out duration-150 outline-2 outline-transparent required:!border-red-400 focus-within:outline-2 focus-within:outline-neutral-950/10 ${error ? "border-red-400" : "border-neutral-200"}`}
       >
         {type === "search" && (
           <MagnifyingGlassIcon size={20} className="text-neutral-400" />

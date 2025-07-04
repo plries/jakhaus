@@ -1,10 +1,11 @@
 "use client";
 import { supabase } from "@/utils/supabase/client";
+import { UUIDTypes } from "uuid";
 
 export const uploadMultipleFiles = async (
   files: File[],
   bucketPath: string,
-  id: string | undefined
+  id: UUIDTypes
 ) => {
   if (!files.length || !id) return [];
 

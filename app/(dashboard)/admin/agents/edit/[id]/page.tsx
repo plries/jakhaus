@@ -17,7 +17,7 @@ export default async function EditAgentPage({ params }: Props) {
 
   if (!AGENT || error) {
     return (
-      <div className="flex min-h-screen flex-col items-center justify-center gap-1 text-neutral-950">
+      <div className="flex col-span-full flex-col items-center justify-center gap-1 text-neutral-950">
         <JakhausLogo width={120} />
         <p className="text-neutral-950/50">Agent not found.</p>
       </div>

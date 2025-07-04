@@ -20,7 +20,11 @@ export const InputSelector = ({ input, options }: InputSelectorPropTypes) => {
         placeholder={input.placeholder}
         label={input.label}
         htmlFor={input.htmlFor}
-        value={input.disabled ? "" : hook.inputValue}
+        value={
+          input.disabled ? "" : hook.inputValue
+          ? hook.inputValue : input.value
+          ? input.value : ""
+        }
         onChange={(event) => {
           if (input.onChange) input.onChange(event);
           hook.setInputValue(event.target.value);

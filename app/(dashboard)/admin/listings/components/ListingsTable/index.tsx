@@ -95,7 +95,7 @@ export const ListingsTable = () => {
                             {
                               label: LISTINGS_TABLE_CONST.DROPDOWNS.MANAGE.EDIT,
                               icon: <NotePencilIcon />,
-                              onClick: () => {},
+                              href: `/admin/listings/edit/${listing.id}`,
                             },
                             {
                               label: LISTINGS_TABLE_CONST.DROPDOWNS.MANAGE.VIEW,

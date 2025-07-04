@@ -1,4 +1,5 @@
 "use client";
+import { useEffect } from "react";
 import Image from "next/image";
 import {
   BuildingOfficeIcon,
@@ -20,17 +21,82 @@ import {
   UploadZone,
 } from "@/app/components";
 import { ADMIN_LISTING_CONST } from "@/app/(dashboard)/admin/listings/const";
-import { useCreateListing } from "./useCreateListing";
+import { EditListingPropTypes } from "./type";
+import { useEditListing } from "./useEditListing";
+import { CreateImagePropTypes } from "@/app/(dashboard)/admin/types";
 
-export const CreateListing = () => {
-  const hook = useCreateListing();
+export const EditListing = ({
+  EDITED_LISTING,
+}: EditListingPropTypes) => {
+  const hook = useEditListing();
+
+  useEffect(() => {
+    if (EDITED_LISTING?.id && EDITED_LISTING?.agents) {
+      hook.setListingId(EDITED_LISTING.id);
+
+      hook.setAddress((prev) => ({
+        ...prev,
+        STREET: EDITED_LISTING.STREET,
+        UNIT: EDITED_LISTING.UNIT || "",
+        CITY: EDITED_LISTING.CITY,
+        PROVINCE: EDITED_LISTING.PROVINCE,
+        POSTAL_CODE: EDITED_LISTING.POSTAL_CODE,
+      }));
+
+      hook.setBedrooms(EDITED_LISTING.BEDROOMS);
+      hook.setBathrooms(EDITED_LISTING.BATHROOMS);
+      hook.setSquareFeet(EDITED_LISTING.SQUARE_FEET);
+
+      hook.setFeaturedPhoto({
+        file: null,
+        previewUrl: EDITED_LISTING.FEATURED_PHOTO,
+      });
+
+      hook.setPhotoGallery(
+        EDITED_LISTING.photos.map((photo: CreateImagePropTypes) => {
+          return {
+            file: null,
+            previewUrl: photo.URL,
+          }
+        })
+      )
+
+      hook.setVideoLink(EDITED_LISTING.VIDEO_LINK || "");
+      hook.setScanLink(EDITED_LISTING.SCAN_LINK || "");
+
+      hook.setFloorPlans(
+        EDITED_LISTING.floor_plans.map((floorPlan: CreateImagePropTypes) => {
+          return {
+            file: null,
+            previewUrl: floorPlan.URL,
+          }
+        })
+      )
+
+      hook.setAgent((prev) => ({
+        ...prev,
+        id: EDITED_LISTING.agents.id,
+        LOGO_URL: EDITED_LISTING.agents.LOGO_URL,
+        LOGO_DARK: EDITED_LISTING.agents.LOGO_DARK,
+        SUBTITLE: EDITED_LISTING.agents.SUBTITLE,
+        NAME: EDITED_LISTING.agents.NAME,
+        EMAIL: EDITED_LISTING.agents.EMAIL,
+        PHONE: EDITED_LISTING.agents.PHONE,
+        WEBSITE: EDITED_LISTING.agents.WEBSITE || "",
+        INSTAGRAM: EDITED_LISTING.agents.INSTAGRAM || "",
+        BROKERAGE_NAME: EDITED_LISTING.agents.BROKERAGE_NAME,
+        BROKERAGE_ADDRESS: EDITED_LISTING.agents.BROKERAGE_ADDRESS,
+        BROKERAGE_LOGO: EDITED_LISTING.agents.BROKERAGE_LOGO,
+      }));
+    }
+  }, [EDITED_LISTING]);
 
   return (
     <>
       <form className="contents" onSubmit={hook.handleSubmit}>
         <div className="relative col-span-full grid auto-rows-min grid-cols-1 gap-4 lg:col-span-8">
           <div className="pointer-events-none absolute -top-5 left-0 h-[calc(100%+2.5rem)] w-full lg:border-r lg:border-r-neutral-300" />
-          <PageHeading>{ADMIN_LISTING_CONST.CREATE_HEADING}</PageHeading>
+          <PageHeading>{ADMIN_LISTING_CONST.EDIT_HEADING}</PageHeading>
 
           <SectionHeading>
             {ADMIN_LISTING_CONST.SECTIONS.ADDRESS}
@@ -50,6 +116,9 @@ export const CreateListing = () => {
                   ...prev,
                   STREET: event.target.value,
                 }));
+                hook.setTouchedFields((prev) =>
+                  new Set(prev).add(ADMIN_LISTING_CONST.FORM.ADDRESS.STREET_ADDRESS.HTML_FOR),
+                );
               }}
               required
             />
@@ -63,6 +132,9 @@ export const CreateListing = () => {
                   ...prev,
                   UNIT: event.target.value,
                 }));
+                hook.setTouchedFields((prev) =>
+                  new Set(prev).add(ADMIN_LISTING_CONST.FORM.ADDRESS.UNIT.HTML_FOR),
+                );
               }}
             />
             <Input
@@ -75,6 +147,9 @@ export const CreateListing = () => {
                   ...prev,
                   CITY: event.target.value,
                 }));
+                hook.setTouchedFields((prev) =>
+                  new Set(prev).add(ADMIN_LISTING_CONST.FORM.ADDRESS.CITY.HTML_FOR),
+                );
               }}
               required
             />
@@ -91,6 +166,9 @@ export const CreateListing = () => {
                     ...prev,
                     PROVINCE: event.target.value,
                   }));
+                  hook.setTouchedFields((prev) =>
+                  new Set(prev).add(ADMIN_LISTING_CONST.FORM.ADDRESS.PROVINCE.HTML_FOR),
+                );
                 }}
                 maxLength={2}
                 required
@@ -108,6 +186,9 @@ export const CreateListing = () => {
                     ...prev,
                     POSTAL_CODE: hook.formatPostal(event.target.value),
                   }));
+                  hook.setTouchedFields((prev) =>
+                  new Set(prev).add(ADMIN_LISTING_CONST.FORM.ADDRESS.POSTAL_CODE.HTML_FOR),
+                );
                 }}
                 maxLength={7}
                 required
@@ -130,6 +211,9 @@ export const CreateListing = () => {
               onChange={(event) => {
                 const value = event.target.value.replace(/[^0-9]/g, "") || "0";
                 hook.setBedrooms(parseInt(value, 10));
+                hook.setTouchedFields((prev) =>
+                  new Set(prev).add(ADMIN_LISTING_CONST.FORM.OVERVIEW.BEDROOMS.HTML_FOR),
+                );
               }}
               onFocus={(event) => event.target.select()}
               required
@@ -145,6 +229,9 @@ export const CreateListing = () => {
               onChange={(event) => {
                 const value = event.target.value.replace(/[^0-9]/g, "") || "0";
                 hook.setBathrooms(parseInt(value, 10));
+                hook.setTouchedFields((prev) =>
+                  new Set(prev).add(ADMIN_LISTING_CONST.FORM.OVERVIEW.BATHROOMS.HTML_FOR),
+                );
               }}
               onFocus={(event) => event.target.select()}
               required
@@ -160,6 +247,9 @@ export const CreateListing = () => {
               onChange={(event) => {
                 const value = event.target.value.replace(/[^0-9]/g, "") || "0";
                 hook.setSquareFeet(parseInt(value, 10));
+                hook.setTouchedFields((prev) =>
+                  new Set(prev).add(ADMIN_LISTING_CONST.FORM.OVERVIEW.SQUARE_FEET.HTML_FOR),
+                );
               }}
               onFocus={(event) => event.target.select()}
               required
@@ -179,6 +269,9 @@ export const CreateListing = () => {
                   file,
                   previewUrl: URL.createObjectURL(file),
                 });
+                hook.setTouchedFields((prev) =>
+                  new Set(prev).add(ADMIN_LISTING_CONST.FORM.PHOTOS.FEATURED_PHOTO.HTML_FOR),
+                );
               }}
               onClear={() =>
                 hook.setFeaturedPhoto({
@@ -186,6 +279,7 @@ export const CreateListing = () => {
                   previewUrl: null,
                 })
               }
+              preview={hook.featuredPhoto.previewUrl!}
               required
             />
             <p className="-mt-2 !text-sm text-neutral-500">
@@ -197,19 +291,23 @@ export const CreateListing = () => {
               caption={ADMIN_LISTING_CONST.FORM.PHOTOS.PHOTO_GALLERY.CAPTION}
               htmlFor={ADMIN_LISTING_CONST.FORM.PHOTOS.PHOTO_GALLERY.HTML_FOR}
               onChange={(uploadedFiles) => {
-                hook.setPhotoGallery(
-                  uploadedFiles.map((file) => ({
+                hook.setPhotoGallery((prev) =>
+                  [...prev, ...uploadedFiles.map((file) => ({
                     file,
                     previewUrl: URL.createObjectURL(file),
-                  })),
+                  }))],
                 );
               }}
-              onClear={(index) =>
+              onClear={(index) => {
                 hook.setPhotoGallery((prev) =>
                   prev.filter((_, i) => i !== index),
                 )
-              }
+                hook.setTouchedFields((prev) =>
+                  new Set(prev).add(ADMIN_LISTING_CONST.FORM.PHOTOS.PHOTO_GALLERY.HTML_FOR),
+                );
+              }}
               files={hook.photoGallery}
+              setDeleted={hook.setDeletedPhotoGallery}
               required
             />
             <p className="-mt-2 !text-sm text-neutral-500">
@@ -235,7 +333,12 @@ export const CreateListing = () => {
                 ADMIN_LISTING_CONST.FORM.OTHER_ATTACHMENTS.VIDEO_LINK.HTML_FOR
               }
               value={hook.videoLink}
-              onChange={(event) => hook.setVideoLink(event.target.value)}
+              onChange={(event) => {
+                hook.setVideoLink(event.target.value)
+                hook.setTouchedFields((prev) =>
+                  new Set(prev).add(ADMIN_LISTING_CONST.FORM.OTHER_ATTACHMENTS.VIDEO_LINK.HTML_FOR),
+                );
+              }}
             />
             <p className="-mt-2 !text-sm text-neutral-500">
               {
@@ -255,7 +358,12 @@ export const CreateListing = () => {
                 ADMIN_LISTING_CONST.FORM.OTHER_ATTACHMENTS.SCAN_LINK.HTML_FOR
               }
               value={hook.scanLink}
-              onChange={(event) => hook.setScanLink(event.target.value)}
+              onChange={(event) => {
+                hook.setScanLink(event.target.value)
+                hook.setTouchedFields((prev) =>
+                  new Set(prev).add(ADMIN_LISTING_CONST.FORM.OTHER_ATTACHMENTS.SCAN_LINK.HTML_FOR),
+                );
+              }}
             />
             <p className="-mt-2 !text-sm text-neutral-500">
               {
@@ -277,16 +385,20 @@ export const CreateListing = () => {
                 ADMIN_LISTING_CONST.FORM.OTHER_ATTACHMENTS.FLOOR_PLANS.HTML_FOR
               }
               onChange={(uploadedFiles) => {
-                hook.setFloorPlans(
-                  uploadedFiles.map((file) => ({
+                hook.setFloorPlans((prev) =>
+                  [...prev, ...uploadedFiles.map((file) => ({
                     file,
                     previewUrl: URL.createObjectURL(file),
-                  })),
+                  }))],
                 );
               }}
-              onClear={(index) =>
+              onClear={(index) => {
                 hook.setFloorPlans((prev) => prev.filter((_, i) => i !== index))
-              }
+                hook.setTouchedFields((prev) =>
+                  new Set(prev).add(ADMIN_LISTING_CONST.FORM.PHOTOS.PHOTO_GALLERY.HTML_FOR),
+                );
+              }}
+              setDeleted={hook.setDeletedFloorPlans}
               files={hook.floorPlans}
               required
             />
@@ -302,6 +414,7 @@ export const CreateListing = () => {
                 htmlFor: ADMIN_LISTING_CONST.FORM.AGENT.SELECT_AGENT.HTML_FOR,
                 placeholder: ADMIN_LISTING_CONST.FORM.AGENT.SELECT_AGENT.TEXT,
                 label: ADMIN_LISTING_CONST.FORM.AGENT.SELECT_AGENT.LABEL,
+                value: hook.agent.NAME,
                 onChange: (option) => {
                   const selected = hook.existingAgents.find(
                     (agent) => agent.NAME === option.target.value,
@@ -383,6 +496,9 @@ export const CreateListing = () => {
                     file,
                     previewUrl: URL.createObjectURL(file),
                   });
+                  hook.setTouchedFields((prev) =>
+                    new Set(prev).add(ADMIN_LISTING_CONST.FORM.AGENT.LOGO.HTML_FOR),
+                  );
                 }}
                 isDarkLogo={hook.agent.LOGO_DARK}
                 preview={hook.agent.LOGO_URL}
@@ -397,6 +513,9 @@ export const CreateListing = () => {
                     ...prev,
                     LOGO_DARK: event.target.checked,
                   }));
+                  hook.setTouchedFields((prev) =>
+                    new Set(prev).add(ADMIN_LISTING_CONST.FORM.AGENT.LOGO_DARK.HTML_FOR),
+                  );
                 }}
               />
               <p className="-mt-2 !text-sm text-neutral-500">
@@ -412,6 +531,9 @@ export const CreateListing = () => {
                     ...prev,
                     NAME: event.target.value,
                   }));
+                  hook.setTouchedFields((prev) =>
+                    new Set(prev).add(ADMIN_LISTING_CONST.FORM.AGENT.NAME.HTML_FOR),
+                  );
                 }}
                 required
               />
@@ -427,6 +549,9 @@ export const CreateListing = () => {
                     ...prev,
                     SUBTITLE: event.target.value,
                   }));
+                  hook.setTouchedFields((prev) =>
+                    new Set(prev).add(ADMIN_LISTING_CONST.FORM.AGENT.SUBTITLE.HTML_FOR),
+                  );
                 }}
                 required
               />
@@ -440,6 +565,9 @@ export const CreateListing = () => {
                     ...prev,
                     EMAIL: event.target.value,
                   }));
+                  hook.setTouchedFields((prev) =>
+                    new Set(prev).add(ADMIN_LISTING_CONST.FORM.AGENT.EMAIL.HTML_FOR),
+                  );
                 }}
                 required
               />
@@ -470,6 +598,9 @@ export const CreateListing = () => {
                     ...prev,
                     WEBSITE: event.target.value,
                   }));
+                  hook.setTouchedFields((prev) =>
+                    new Set(prev).add(ADMIN_LISTING_CONST.FORM.AGENT.WEBSITE.HTML_FOR),
+                  );
                 }}
               />
               <Input
@@ -484,6 +615,9 @@ export const CreateListing = () => {
                     ...prev,
                     INSTAGRAM: event.target.value,
                   }));
+                  hook.setTouchedFields((prev) =>
+                    new Set(prev).add(ADMIN_LISTING_CONST.FORM.AGENT.INSTAGRAM.HTML_FOR),
+                  );
                 }}
               />
             </div>
@@ -513,6 +647,9 @@ export const CreateListing = () => {
                     file,
                     previewUrl: URL.createObjectURL(file),
                   });
+                  hook.setTouchedFields((prev) =>
+                    new Set(prev).add(ADMIN_LISTING_CONST.FORM.BROKERAGE.LOGO.HTML_FOR),
+                  );
                 }}
                 preview={hook.agent.BROKERAGE_LOGO}
                 required
@@ -532,6 +669,9 @@ export const CreateListing = () => {
                     ...prev,
                     BROKERAGE_NAME: event.target.value,
                   }));
+                  hook.setTouchedFields((prev) =>
+                    new Set(prev).add(ADMIN_LISTING_CONST.FORM.BROKERAGE.NAME.HTML_FOR),
+                  );
                 }}
                 required
               />
@@ -547,6 +687,9 @@ export const CreateListing = () => {
                     ...prev,
                     BROKERAGE_ADDRESS: event.target.value,
                   }));
+                  hook.setTouchedFields((prev) =>
+                    new Set(prev).add(ADMIN_LISTING_CONST.FORM.BROKERAGE.ADDRESS.HTML_FOR),
+                  );
                 }}
                 required
               />
@@ -560,10 +703,10 @@ export const CreateListing = () => {
         <div className="relative col-span-4 col-start-9 hidden h-full pr-5 lg:block">
           <div className="sticky top-1/2 grid -translate-y-1/2 auto-rows-min grid-cols-1 gap-5 rounded-2xl bg-neutral-950 p-2 shadow-lg">
             <div className="grid aspect-video w-full place-items-center overflow-hidden rounded-xl bg-neutral-100 shadow-md">
-              {hook.featuredPhoto.file && hook.featuredPhoto.previewUrl ? (
+              {hook.featuredPhoto.previewUrl ? (
                 <Image
                   src={hook.featuredPhoto.previewUrl}
-                  alt={hook.featuredPhoto.file?.name}
+                  alt={hook.featuredPhoto.file?.name || "Featured Photo Preview"}
                   width={1920}
                   height={1080}
                   className="aspect-video h-full w-full object-cover object-center"
@@ -619,6 +762,7 @@ export const CreateListing = () => {
           <Button
             type="submit"
             additionalClasses="!text-neutral-50 !bg-neutral-950 hover:!bg-neutral-800 !border-neutral-900"
+            disabled={hook.touchedFields.size === 0}
           >
             {hook.isSubmitting && (
               <CircleNotchIcon className="animate-spin" size={20} />

@@ -1,5 +1,6 @@
-export const CREATE_LISTING_CONST = {
-  HEADING: "Create listing",
+export const ADMIN_LISTING_CONST = {
+  CREATE_HEADING: "Create listing",
+  EDIT_HEADING: "Edit listing",
   SECTIONS: {
     ADDRESS: "Address",
     OVERVIEW: "Overview",
@@ -70,7 +71,7 @@ export const CREATE_LISTING_CONST = {
         TEXT: "Upload photos",
         CAPTION: "Click here to upload.",
         DESCRIPTION: "At least 4 photos are required.",
-        DESCRIPTION_2: "Photos are also ordered by name alphabetically/numerically once uploaded."
+        DESCRIPTION_2: "Photos are ordered by name alphabetically/numerically once uploaded."
       }
     },
     OTHER_ATTACHMENTS: {
@@ -175,7 +176,7 @@ export const CREATE_LISTING_CONST = {
     },
     BUTTONS: {
       CLOSE: "Home",
-      CREATE: "Create another",
+      VIEW: "View listing",
     }
   }
 }

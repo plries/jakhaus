@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { UUIDTypes } from "uuid";
 import { CreateAgentPropTypes } from "@/app/(dashboard)/admin/types";
 import { supabase } from "@/utils/supabase/client";
 
@@ -19,7 +20,7 @@ export const useAgentsTable = () => {
     setSelectedAgent(agent);
   };
 
-  const deleteAgent = async (agentId: string) => {
+  const deleteAgent = async (agentId: UUIDTypes) => {
     setIsDeleting(true);
         
     try {

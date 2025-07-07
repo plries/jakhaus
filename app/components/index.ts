@@ -13,3 +13,4 @@ export * from "./Table";
 export * from "./UploadButton";
 export * from "./UploadZone";
 export * from "./WarningModal";
+export * from "./Footer";

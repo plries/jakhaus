@@ -14,8 +14,8 @@ export const LISTINGS_TABLE_CONST = {
   TABLE: {
     NAME: "listings",
     COLUMNS: {
-      TITLES: ["Listing address", "City", "Agent"],
-      WIDTHS: ["w-1/3", "w-1/3", "w-1/3"],
+      TITLES: ["ID", "Listing address", "City", "Agent"],
+      WIDTHS: ["min-w-64 max-w-64", "w-1/3", "w-1/3", "w-1/3"],
     },
     NO_LISTINGS: "No listings found.",
   },

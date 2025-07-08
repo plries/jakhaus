@@ -14,8 +14,8 @@ export const AGENTS_TABLE_CONST = {
   TABLE: {
     NAME: "agents",
     COLUMNS: {
-      TITLES: ["Name", "Brokerage", "Subtitle"],
-      WIDTHS: ["w-1/3", "w-1/3", "w-1/3"],
+      TITLES: ["ID", "Name", "Brokerage", "Subtitle"],
+      WIDTHS: ["min-w-64 max-w-64", "w-1/3", "w-1/3", "w-1/3"],
     },
     NO_AGENTS: "No agents found.",
   },

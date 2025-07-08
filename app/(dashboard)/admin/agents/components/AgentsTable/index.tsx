@@ -81,6 +81,9 @@ export const AgentsTable = () => {
                       key={index}
                       className="h-15 border-b border-neutral-200 text-neutral-600 last:border-b-0 hover:bg-neutral-100/50 has-checked:bg-slate-100"
                     >
+                      <td className="max-w-64 overflow-hidden border-r border-neutral-200 px-4 py-2 text-nowrap text-ellipsis">
+                        {agent.id}
+                      </td>
                       <td className="border-r border-neutral-200 px-4 py-2 text-nowrap">
                         {agent.NAME}
                       </td>

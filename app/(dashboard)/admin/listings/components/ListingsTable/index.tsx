@@ -76,8 +76,11 @@ export const ListingsTable = () => {
                 {filteredOptions.map((listing, index) => (
                   <tr
                     key={index}
-                    className="h-15 border-b border-neutral-200 text-neutral-600 last:border-b-0 hover:bg-neutral-100/50 has-checked:bg-slate-100"
+                    className="group h-15 border-b border-neutral-200 text-neutral-600 last:border-b-0 hover:bg-neutral-100/50 has-checked:bg-slate-100"
                   >
+                    <td className="max-w-64 overflow-hidden border-r border-neutral-200 px-4 py-2 text-nowrap text-ellipsis">
+                      {listing.id}
+                    </td>
                     <td className="border-r border-neutral-200 px-4 py-2 text-nowrap">
                       {listing.UNIT} {listing.STREET}, {listing.PROVINCE},{" "}
                       {listing.POSTAL_CODE}
@@ -88,9 +91,17 @@ export const ListingsTable = () => {
                     <td className="px-4 py-2">
                       <span className="flex flex-row items-center justify-between gap-5 text-nowrap">
                         {hook.existingAgents.map((agent) => {
-                          if (agent.id === listing.agent_id) {
-                            return agent.NAME;
-                          }
+                          if (agent.id === listing.agent_id)
+                            return (
+                              <span className="flex w-full flex-row items-center justify-between gap-5">
+                                <span className="text-neutral-950">
+                                  {agent.NAME}
+                                </span>
+                                <span className="!text-sm text-neutral-950/50 opacity-0 transition-opacity duration-150 ease-in-out group-hover:opacity-100">
+                                  ID: {agent.id}
+                                </span>
+                              </span>
+                            );
                         })}
                         <Dropdown
                           button={{

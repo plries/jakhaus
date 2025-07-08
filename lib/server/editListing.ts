@@ -32,7 +32,7 @@ export async function editListing(
     console.log('Photos deleted from storage successfully:', storageData);
     
     // delete corresponding records from database
-    const photoUrls = listingData.deletedPhotoPaths.map((path: string) => 
+    const photoUrls: string[] = listingData.deletedPhotoPaths.map((path: string) => 
       `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/media/${path}`
     );
     
@@ -64,7 +64,6 @@ export async function editListing(
     console.log('Floor plans deleted from storage successfully:', storageData);
     
     // delete corresponding records from database
-    // convert file paths to URLs for database lookup (assuming your DB stores full URLs)
     const floorPlanUrls = listingData.deletedFloorPlanPaths.map((path: string) => 
       `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/media/${path}`
     );
@@ -101,15 +100,6 @@ export async function editListing(
   
   // 4. delete + re-insert photos
   console.log('Deleting existing photos from database...');
-  const { error: photoDeleteError } = await supabase
-    .from("photos")
-    .delete()
-    .eq("listing_id", listingId);
-  
-  if (photoDeleteError) {
-    console.error('Photo database deletion error:', photoDeleteError);
-    throw photoDeleteError;
-  }
   
   if (photos.length > 0) {
     console.log('Inserting new photos:', photos);
@@ -130,17 +120,6 @@ export async function editListing(
   }
   
   // 5. delete + re-insert floor plans
-  console.log('Deleting existing floor plans from database...');
-  const { error: floorPlanDeleteError } = await supabase
-    .from("floor_plans")
-    .delete()
-    .eq("listing_id", listingId);
-  
-  if (floorPlanDeleteError) {
-    console.error('Floor plan database deletion error:', floorPlanDeleteError);
-    throw floorPlanDeleteError;
-  }
-  
   if (floor_plans.length > 0) {
     console.log('Inserting new floor plans:', floor_plans);
     const { error: floorInsertError } = await supabase

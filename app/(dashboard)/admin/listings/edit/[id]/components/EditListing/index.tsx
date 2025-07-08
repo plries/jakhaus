@@ -297,6 +297,9 @@ export const EditListing = ({
                     previewUrl: URL.createObjectURL(file),
                   }))],
                 );
+                hook.setTouchedFields((prev) =>
+                  new Set(prev).add(ADMIN_LISTING_CONST.FORM.PHOTOS.PHOTO_GALLERY.HTML_FOR),
+                );
               }}
               onClear={(index) => {
                 hook.setPhotoGallery((prev) =>
@@ -390,6 +393,9 @@ export const EditListing = ({
                     file,
                     previewUrl: URL.createObjectURL(file),
                   }))],
+                );
+                hook.setTouchedFields((prev) =>
+                  new Set(prev).add(ADMIN_LISTING_CONST.FORM.OTHER_ATTACHMENTS.FLOOR_PLANS.HTML_FOR),
                 );
               }}
               onClear={(index) => {

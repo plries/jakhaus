@@ -1,13 +1,21 @@
 "use client";
 import {
   ArrowUpRightIcon,
+  CheckIcon,
   CircleNotchIcon,
   DotsThreeIcon,
   NotePencilIcon,
   PlusIcon,
   TrashIcon,
 } from "@phosphor-icons/react";
-import { Button, Input, Dropdown, Table, PageHeading } from "@/app/components";
+import {
+  Button,
+  Input,
+  Dropdown,
+  Table,
+  PageHeading,
+  WarningModal,
+} from "@/app/components";
 import { LISTINGS_TABLE_CONST } from "./const";
 import { useListingsTable } from "./useListingsTable";
 
@@ -115,7 +123,9 @@ export const ListingsTable = () => {
                               label:
                                 LISTINGS_TABLE_CONST.DROPDOWNS.MANAGE.DELETE,
                               icon: <TrashIcon />,
-                              onClick: () => {},
+                              onClick: () => {
+                                hook.toggleModal({ listing });
+                              },
                             },
                           ]}
                         />
@@ -137,6 +147,50 @@ export const ListingsTable = () => {
           </>
         )}
       </Table>
+      <WarningModal
+        showModal={hook.showModal}
+        toggleModal={() => {
+          hook.toggleModal({ listing: null });
+        }}
+      >
+        <div className="mt-5 mb-10 flex flex-col items-center">
+          <p className="!text-2xl font-medium">
+            {LISTINGS_TABLE_CONST.MODAL.HEADING}
+          </p>
+          <p className="text-center !text-base text-neutral-600">
+            {LISTINGS_TABLE_CONST.MODAL.DESCRIPTION}
+            <span className="font-medium">
+              {hook.selectedListing?.UNIT} {hook.selectedListing?.STREET},{" "}
+              {hook.selectedListing?.PROVINCE},{" "}
+              {hook.selectedListing?.POSTAL_CODE}
+            </span>
+            .
+            <br />
+            {LISTINGS_TABLE_CONST.MODAL.DESCRIPTION_2}
+          </p>
+        </div>
+        <div className="grid w-full grid-cols-2 gap-5">
+          <Button
+            onClick={() => {
+              hook.toggleModal({ listing: null });
+            }}
+          >
+            {LISTINGS_TABLE_CONST.MODAL.BUTTONS.CANCEL}
+          </Button>
+          <Button
+            onClick={() => {
+              hook.deleteListing(hook.selectedListing?.id!);
+            }}
+            additionalClasses="!text-neutral-50 !bg-red-600 hover:!bg-red-500 !border-red-800"
+          >
+            {hook.isDeleting && (
+              <CircleNotchIcon className="animate-spin" size={20} />
+            )}
+            {hook.success && <CheckIcon size={20} />}
+            {LISTINGS_TABLE_CONST.MODAL.BUTTONS.DELETE}
+          </Button>
+        </div>
+      </WarningModal>
     </>
   );
 };

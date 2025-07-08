@@ -26,5 +26,14 @@ export const LISTINGS_TABLE_CONST = {
       COPY: "Copy listing URL",
       DELETE: "Delete",
     }
-  }
+  },
+  MODAL: {
+    HEADING: "Delete listing",
+    DESCRIPTION: "You're about to delete the listing ",
+    DESCRIPTION_2: "Are you sure?",
+    BUTTONS: {
+      DELETE: "Delete",
+      CANCEL: "Cancel",
+    }
+  },
 }

@@ -29,7 +29,7 @@ export const useAgentsTable = () => {
         agentId: agentId, 
       };
   
-      console.log("creating agent with payload:", payload);
+      console.log("deleting agent with payload:", payload);
 
       // 2. send to server
       const res = await fetch("/api/deleteAgent/", {
@@ -40,7 +40,7 @@ export const useAgentsTable = () => {
         },
       });
 
-      if (!res.ok)  throw new Error("failed to delete listing");
+      if (!res.ok)  throw new Error("failed to delete agent");
 
       setSuccess(true);
     } catch (error) {

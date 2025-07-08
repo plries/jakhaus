@@ -14,11 +14,9 @@ export async function editListing(
   if (!listingData.id) throw new Error("listing id is missing or invalid");
   
   const listingId = listingData.id;
-  console.log('Listing data:', listingData);
   
   // 1. delete removed photos from storage AND database
   if (listingData.deletedPhotoPaths?.length > 0) {
-    console.log('Deleting photos:', listingData.deletedPhotoPaths);
     
     // delete from storage
     const { data: storageData, error: storageError } = await supabase.storage
@@ -29,7 +27,6 @@ export async function editListing(
       console.error('Photo storage deletion error:', storageError);
       throw new Error("failed to delete photo files: " + storageError.message);
     }
-    console.log('Photos deleted from storage successfully:', storageData);
     
     // delete corresponding records from database
     const photoUrls: string[] = listingData.deletedPhotoPaths.map((path: string) => 
@@ -45,7 +42,6 @@ export async function editListing(
       console.error('Photo database deletion error:', dbError);
       throw new Error("failed to delete photo records: " + dbError.message);
     }
-    console.log('Photo records deleted from database successfully');
   }
   
   // 2. delete removed floor plans from storage AND database
@@ -61,7 +57,6 @@ export async function editListing(
       console.error('Floor plan storage deletion error:', storageError);
       throw new Error("failed to delete floor plan files: " + storageError.message);
     }
-    console.log('Floor plans deleted from storage successfully:', storageData);
     
     // delete corresponding records from database
     const floorPlanUrls = listingData.deletedFloorPlanPaths.map((path: string) => 
@@ -77,7 +72,6 @@ export async function editListing(
       console.error('Floor plan database deletion error:', dbError);
       throw new Error("failed to delete floor plan records: " + dbError.message);
     }
-    console.log('Floor plan records deleted from database successfully');
   }
   
   // 3. update listing if fields were touched
@@ -99,8 +93,6 @@ export async function editListing(
   }
   
   // 4. delete + re-insert photos
-  console.log('Deleting existing photos from database...');
-  
   if (photos.length > 0) {
     console.log('Inserting new photos:', photos);
     const { error: photoInsertError } = await supabase

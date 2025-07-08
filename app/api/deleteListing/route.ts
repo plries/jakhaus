@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { deleteAgent } from "@/lib/server";
+import { deleteListing } from "@/lib/server";
 
 export async function POST(req: Request) {
   const body = await req.json();
@@ -8,14 +8,14 @@ export async function POST(req: Request) {
   }
 
   try {
-    const { agentId } = body;
+    const { listingId } = body;
 
-    await deleteAgent(agentId);
+    await deleteListing(listingId);
 
     return NextResponse.json({ success: true });
     
   } catch (error: any) {
-    console.error("error deleting agent:", {
+    console.error("error deleting listing:", {
       message: error?.message,
       stack: error?.stack,
       cause: error?.cause,

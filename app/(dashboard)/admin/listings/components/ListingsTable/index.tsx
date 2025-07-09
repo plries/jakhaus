@@ -93,7 +93,10 @@ export const ListingsTable = () => {
                         {hook.existingAgents.map((agent) => {
                           if (agent.id === listing.agent_id)
                             return (
-                              <span className="flex w-full flex-row items-center justify-between gap-5">
+                              <span
+                                key={agent.id}
+                                className="flex w-full flex-row items-center justify-between gap-5"
+                              >
                                 <span className="text-neutral-950">
                                   {agent.NAME}
                                 </span>

@@ -6,6 +6,7 @@ export type DropdownPropTypes = {
     onClick?: () => void;
     icon?: React.ReactNode;
     href?: string;
+    disabled?: boolean | undefined
   }[]
   button: {
     name: string

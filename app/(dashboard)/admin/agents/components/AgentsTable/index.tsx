@@ -17,6 +17,7 @@ import {
 } from "@/app/components";
 import { AGENTS_TABLE_CONST } from "./const";
 import { useAgentsTable } from "./useAgentsTable";
+import { UUIDTypes } from "uuid";
 
 export const AgentsTable = () => {
   const hook = useAgentsTable();
@@ -24,6 +25,11 @@ export const AgentsTable = () => {
   const filteredOptions = hook.existingAgents.filter((agent) =>
     agent.NAME?.toLowerCase().includes(hook.inputValue.toLowerCase()),
   );
+
+  const isUsed = (id?: UUIDTypes): boolean => {
+    if (id) return hook.existingAgentIds.includes(id);
+    return false;
+  };
 
   return (
     <>
@@ -113,6 +119,7 @@ export const AgentsTable = () => {
                                 onClick: () => {
                                   hook.toggleModal({ agent });
                                 },
+                                disabled: isUsed(agent.id),
                               },
                             ]}
                           />

@@ -13,6 +13,8 @@ export const useAgentsTable = () => {
 
   const [success, setSuccess] = useState<boolean | null>(null);
   const [isDeleting, setIsDeleting] = useState(false);
+  
+  const [existingAgentIds, setExistingAgentIds] = useState<UUIDTypes[]>([]);
 
   const showModal = !!selectedAgent;
 
@@ -71,10 +73,28 @@ export const useAgentsTable = () => {
     fetchExistingAgents();
   }, []);
 
+  useEffect(() => {
+    const fetchExistingListingAgentIds = async () => {
+      const {data, error} = await supabase
+        .from("listings")
+        .select("agent_id");
+        if (error) {
+        console.error("error fetching listings:", error);
+    } else {
+      setExistingAgentIds(data.map((item) => item.agent_id));
+      setLoading(false);
+    }
+  };
+  
+    fetchExistingListingAgentIds();
+  }, []);
+
   return {
     existingAgents,
     selectedAgent,
     setSelectedAgent,
+
+    existingAgentIds,
     
     inputValue,
     setInputValue,

@@ -39,6 +39,7 @@ export const Dropdown = ({ options, button }: DropdownPropTypes) => {
                       hook.setCopied(true);
                     }
                   }}
+                  disabled={option.disabled}
                   additionalClasses={`!w-full font-normal !justify-start bg-transparent hover:!bg-neutral-100 !shadow-none !border-none ${option.label === "Delete" ? "!text-red-700 hover:!bg-red-50 relative after:absolute mt-4 after:-top-2 after:left-0 after:w-full after:h-[1px] after:bg-neutral-200" : "!text-neutral-600"}`}
                   href={option.href}
                   target={option.label === "Edit" ? "" : "_blank"}

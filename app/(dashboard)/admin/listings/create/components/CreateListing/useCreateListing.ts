@@ -68,6 +68,29 @@ export const useCreateListing = () => {
     file: null,
     previewUrl: null,
   });
+
+  const [touchedFields, setTouchedFields] = useState<Set<string>>(new Set("").add("PROVINCE"));
+
+  const requiredFields = [
+    "STREET",
+    "UNIT",
+    "CITY",
+    "PROVINCE",
+    "POSTAL_CODE",
+    "BEDROOMS",
+    "BATHROOMS",
+    "SQUARE_FEET",
+    "FEATURED_PHOTO",
+    "PHOTO_GALLERY",
+    "LOGO_URL",
+    "NAME",
+    "SUBTITLE",
+    "EMAIL",
+    "PHONE",
+    "BROKERAGE_NAME",
+    "BROKERAGE_ADDRESS",
+    "BROKERAGE_LOGO"
+  ];
   
   const toggleShowCreateAgent = () => setShowCreateAgent(!showCreateAgent);
 
@@ -309,5 +332,9 @@ export const useCreateListing = () => {
     isSubmitting,
 
     listingId,
+
+    touchedFields,
+    setTouchedFields,
+    requiredFields,
   };
 }

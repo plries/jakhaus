@@ -41,15 +41,18 @@ export const CreateListing = () => {
                 ADMIN_LISTING_CONST.FORM.ADDRESS.STREET_ADDRESS.PLACEHOLDER
               }
               label={ADMIN_LISTING_CONST.FORM.ADDRESS.STREET_ADDRESS.LABEL}
-              htmlFor={
-                ADMIN_LISTING_CONST.FORM.ADDRESS.STREET_ADDRESS.HTML_FOR
-              }
+              htmlFor={ADMIN_LISTING_CONST.FORM.ADDRESS.STREET_ADDRESS.HTML_FOR}
               value={hook.address?.STREET}
               onChange={(event) => {
                 hook.setAddress((prev) => ({
                   ...prev,
                   STREET: event.target.value,
                 }));
+                hook.setTouchedFields((prev) =>
+                  new Set(prev).add(
+                    ADMIN_LISTING_CONST.FORM.ADDRESS.STREET_ADDRESS.HTML_FOR,
+                  ),
+                );
               }}
               required
             />
@@ -63,6 +66,11 @@ export const CreateListing = () => {
                   ...prev,
                   UNIT: event.target.value,
                 }));
+                hook.setTouchedFields((prev) =>
+                  new Set(prev).add(
+                    ADMIN_LISTING_CONST.FORM.ADDRESS.UNIT.HTML_FOR,
+                  ),
+                );
               }}
             />
             <Input
@@ -75,6 +83,11 @@ export const CreateListing = () => {
                   ...prev,
                   CITY: event.target.value,
                 }));
+                hook.setTouchedFields((prev) =>
+                  new Set(prev).add(
+                    ADMIN_LISTING_CONST.FORM.ADDRESS.CITY.HTML_FOR,
+                  ),
+                );
               }}
               required
             />
@@ -91,6 +104,11 @@ export const CreateListing = () => {
                     ...prev,
                     PROVINCE: event.target.value,
                   }));
+                  hook.setTouchedFields((prev) =>
+                    new Set(prev).add(
+                      ADMIN_LISTING_CONST.FORM.ADDRESS.PROVINCE.HTML_FOR,
+                    ),
+                  );
                 }}
                 maxLength={2}
                 required
@@ -108,6 +126,11 @@ export const CreateListing = () => {
                     ...prev,
                     POSTAL_CODE: hook.formatPostal(event.target.value),
                   }));
+                  hook.setTouchedFields((prev) =>
+                    new Set(prev).add(
+                      ADMIN_LISTING_CONST.FORM.ADDRESS.POSTAL_CODE.HTML_FOR,
+                    ),
+                  );
                 }}
                 maxLength={7}
                 required
@@ -130,6 +153,11 @@ export const CreateListing = () => {
               onChange={(event) => {
                 const value = event.target.value.replace(/[^0-9]/g, "") || "0";
                 hook.setBedrooms(parseInt(value, 10));
+                hook.setTouchedFields((prev) =>
+                  new Set(prev).add(
+                    ADMIN_LISTING_CONST.FORM.OVERVIEW.BEDROOMS.HTML_FOR,
+                  ),
+                );
               }}
               onFocus={(event) => event.target.select()}
               required
@@ -145,6 +173,11 @@ export const CreateListing = () => {
               onChange={(event) => {
                 const value = event.target.value.replace(/[^0-9]/g, "") || "0";
                 hook.setBathrooms(parseInt(value, 10));
+                hook.setTouchedFields((prev) =>
+                  new Set(prev).add(
+                    ADMIN_LISTING_CONST.FORM.OVERVIEW.BATHROOMS.HTML_FOR,
+                  ),
+                );
               }}
               onFocus={(event) => event.target.select()}
               required
@@ -160,15 +193,18 @@ export const CreateListing = () => {
               onChange={(event) => {
                 const value = event.target.value.replace(/[^0-9]/g, "") || "0";
                 hook.setSquareFeet(parseInt(value, 10));
+                hook.setTouchedFields((prev) =>
+                  new Set(prev).add(
+                    ADMIN_LISTING_CONST.FORM.OVERVIEW.SQUARE_FEET.HTML_FOR,
+                  ),
+                );
               }}
               onFocus={(event) => event.target.select()}
               required
             />
           </div>
 
-          <SectionHeading>
-            {ADMIN_LISTING_CONST.SECTIONS.PHOTOS}
-          </SectionHeading>
+          <SectionHeading>{ADMIN_LISTING_CONST.SECTIONS.PHOTOS}</SectionHeading>
           <div className="grid grid-cols-1 gap-4 px-5 md:px-10">
             <UploadButton
               label={ADMIN_LISTING_CONST.FORM.PHOTOS.FEATURED_PHOTO.LABEL}
@@ -179,6 +215,11 @@ export const CreateListing = () => {
                   file,
                   previewUrl: URL.createObjectURL(file),
                 });
+                hook.setTouchedFields((prev) =>
+                  new Set(prev).add(
+                    ADMIN_LISTING_CONST.FORM.PHOTOS.FEATURED_PHOTO.HTML_FOR,
+                  ),
+                );
               }}
               onClear={() =>
                 hook.setFeaturedPhoto({
@@ -202,6 +243,11 @@ export const CreateListing = () => {
                     file,
                     previewUrl: URL.createObjectURL(file),
                   })),
+                );
+                hook.setTouchedFields((prev) =>
+                  new Set(prev).add(
+                    ADMIN_LISTING_CONST.FORM.PHOTOS.PHOTO_GALLERY.HTML_FOR,
+                  ),
                 );
               }}
               onClear={(index) =>
@@ -235,7 +281,15 @@ export const CreateListing = () => {
                 ADMIN_LISTING_CONST.FORM.OTHER_ATTACHMENTS.VIDEO_LINK.HTML_FOR
               }
               value={hook.videoLink}
-              onChange={(event) => hook.setVideoLink(event.target.value)}
+              onChange={(event) => {
+                hook.setVideoLink(event.target.value);
+                hook.setTouchedFields((prev) =>
+                  new Set(prev).add(
+                    ADMIN_LISTING_CONST.FORM.OTHER_ATTACHMENTS.VIDEO_LINK
+                      .HTML_FOR,
+                  ),
+                );
+              }}
             />
             <p className="-mt-2 !text-sm text-neutral-500">
               {
@@ -245,31 +299,31 @@ export const CreateListing = () => {
             </p>
             <Input
               placeholder={
-                ADMIN_LISTING_CONST.FORM.OTHER_ATTACHMENTS.SCAN_LINK
-                  .PLACEHOLDER
+                ADMIN_LISTING_CONST.FORM.OTHER_ATTACHMENTS.SCAN_LINK.PLACEHOLDER
               }
-              label={
-                ADMIN_LISTING_CONST.FORM.OTHER_ATTACHMENTS.SCAN_LINK.LABEL
-              }
+              label={ADMIN_LISTING_CONST.FORM.OTHER_ATTACHMENTS.SCAN_LINK.LABEL}
               htmlFor={
                 ADMIN_LISTING_CONST.FORM.OTHER_ATTACHMENTS.SCAN_LINK.HTML_FOR
               }
               value={hook.scanLink}
-              onChange={(event) => hook.setScanLink(event.target.value)}
+              onChange={(event) => {
+                hook.setScanLink(event.target.value);
+                hook.setTouchedFields((prev) =>
+                  new Set(prev).add(
+                    ADMIN_LISTING_CONST.FORM.OTHER_ATTACHMENTS.SCAN_LINK
+                      .HTML_FOR,
+                  ),
+                );
+              }}
             />
             <p className="-mt-2 !text-sm text-neutral-500">
-              {
-                ADMIN_LISTING_CONST.FORM.OTHER_ATTACHMENTS.SCAN_LINK
-                  .DESCRIPTION
-              }
+              {ADMIN_LISTING_CONST.FORM.OTHER_ATTACHMENTS.SCAN_LINK.DESCRIPTION}
             </p>
             <UploadZone
               label={
                 ADMIN_LISTING_CONST.FORM.OTHER_ATTACHMENTS.FLOOR_PLANS.LABEL
               }
-              text={
-                ADMIN_LISTING_CONST.FORM.OTHER_ATTACHMENTS.FLOOR_PLANS.TEXT
-              }
+              text={ADMIN_LISTING_CONST.FORM.OTHER_ATTACHMENTS.FLOOR_PLANS.TEXT}
               caption={
                 ADMIN_LISTING_CONST.FORM.OTHER_ATTACHMENTS.FLOOR_PLANS.CAPTION
               }
@@ -282,6 +336,12 @@ export const CreateListing = () => {
                     file,
                     previewUrl: URL.createObjectURL(file),
                   })),
+                );
+                hook.setTouchedFields((prev) =>
+                  new Set(prev).add(
+                    ADMIN_LISTING_CONST.FORM.OTHER_ATTACHMENTS.FLOOR_PLANS
+                      .HTML_FOR,
+                  ),
                 );
               }}
               onClear={(index) =>
@@ -321,6 +381,25 @@ export const CreateListing = () => {
                     BROKERAGE_NAME: selected.BROKERAGE_NAME || "",
                     BROKERAGE_ADDRESS: selected.BROKERAGE_ADDRESS || "",
                   });
+                  hook.setTouchedFields(
+                    (prev) =>
+                      new Set([
+                        ...prev,
+                        ...[
+                          ADMIN_LISTING_CONST.FORM.AGENT.LOGO.HTML_FOR,
+                          ADMIN_LISTING_CONST.FORM.AGENT.LOGO_DARK.HTML_FOR,
+                          ADMIN_LISTING_CONST.FORM.AGENT.SUBTITLE.HTML_FOR,
+                          ADMIN_LISTING_CONST.FORM.AGENT.NAME.HTML_FOR,
+                          ADMIN_LISTING_CONST.FORM.AGENT.EMAIL.HTML_FOR,
+                          ADMIN_LISTING_CONST.FORM.AGENT.PHONE.HTML_FOR,
+                          ADMIN_LISTING_CONST.FORM.AGENT.WEBSITE.HTML_FOR,
+                          ADMIN_LISTING_CONST.FORM.AGENT.INSTAGRAM.HTML_FOR,
+                          ADMIN_LISTING_CONST.FORM.BROKERAGE.LOGO.HTML_FOR,
+                          ADMIN_LISTING_CONST.FORM.BROKERAGE.ADDRESS.HTML_FOR,
+                          ADMIN_LISTING_CONST.FORM.BROKERAGE.NAME.HTML_FOR,
+                        ],
+                      ]),
+                  );
                 },
                 disabled: hook.showCreateAgent || !hook.existingAgents.length,
               }}
@@ -383,6 +462,11 @@ export const CreateListing = () => {
                     file,
                     previewUrl: URL.createObjectURL(file),
                   });
+                  hook.setTouchedFields((prev) =>
+                    new Set(prev).add(
+                      ADMIN_LISTING_CONST.FORM.AGENT.LOGO.HTML_FOR,
+                    ),
+                  );
                 }}
                 isDarkLogo={hook.agent.LOGO_DARK}
                 preview={hook.agent.LOGO_URL}
@@ -397,6 +481,11 @@ export const CreateListing = () => {
                     ...prev,
                     LOGO_DARK: event.target.checked,
                   }));
+                  hook.setTouchedFields((prev) =>
+                    new Set(prev).add(
+                      ADMIN_LISTING_CONST.FORM.AGENT.LOGO_DARK.HTML_FOR,
+                    ),
+                  );
                 }}
               />
               <p className="-mt-2 !text-sm text-neutral-500">
@@ -427,6 +516,11 @@ export const CreateListing = () => {
                     ...prev,
                     SUBTITLE: event.target.value,
                   }));
+                  hook.setTouchedFields((prev) =>
+                    new Set(prev).add(
+                      ADMIN_LISTING_CONST.FORM.AGENT.SUBTITLE.HTML_FOR,
+                    ),
+                  );
                 }}
                 required
               />
@@ -440,6 +534,11 @@ export const CreateListing = () => {
                     ...prev,
                     EMAIL: event.target.value,
                   }));
+                  hook.setTouchedFields((prev) =>
+                    new Set(prev).add(
+                      ADMIN_LISTING_CONST.FORM.AGENT.EMAIL.HTML_FOR,
+                    ),
+                  );
                 }}
                 required
               />
@@ -454,14 +553,17 @@ export const CreateListing = () => {
                     ...prev,
                     PHONE: hook.formatPhone(event.target.value),
                   }));
+                  hook.setTouchedFields((prev) =>
+                    new Set(prev).add(
+                      ADMIN_LISTING_CONST.FORM.AGENT.PHONE.HTML_FOR,
+                    ),
+                  );
                 }}
                 maxLength={12}
                 required
               />
               <Input
-                placeholder={
-                  ADMIN_LISTING_CONST.FORM.AGENT.WEBSITE.PLACEHOLDER
-                }
+                placeholder={ADMIN_LISTING_CONST.FORM.AGENT.WEBSITE.PLACEHOLDER}
                 label={ADMIN_LISTING_CONST.FORM.AGENT.WEBSITE.LABEL}
                 htmlFor={ADMIN_LISTING_CONST.FORM.AGENT.WEBSITE.HTML_FOR}
                 value={hook.agent.WEBSITE}
@@ -470,6 +572,11 @@ export const CreateListing = () => {
                     ...prev,
                     WEBSITE: event.target.value,
                   }));
+                  hook.setTouchedFields((prev) =>
+                    new Set(prev).add(
+                      ADMIN_LISTING_CONST.FORM.AGENT.WEBSITE.HTML_FOR,
+                    ),
+                  );
                 }}
               />
               <Input
@@ -484,6 +591,11 @@ export const CreateListing = () => {
                     ...prev,
                     INSTAGRAM: event.target.value,
                   }));
+                  hook.setTouchedFields((prev) =>
+                    new Set(prev).add(
+                      ADMIN_LISTING_CONST.FORM.AGENT.INSTAGRAM.HTML_FOR,
+                    ),
+                  );
                 }}
               />
             </div>
@@ -513,6 +625,11 @@ export const CreateListing = () => {
                     file,
                     previewUrl: URL.createObjectURL(file),
                   });
+                  hook.setTouchedFields((prev) =>
+                    new Set(prev).add(
+                      ADMIN_LISTING_CONST.FORM.BROKERAGE.LOGO.HTML_FOR,
+                    ),
+                  );
                 }}
                 preview={hook.agent.BROKERAGE_LOGO}
                 required
@@ -532,6 +649,11 @@ export const CreateListing = () => {
                     ...prev,
                     BROKERAGE_NAME: event.target.value,
                   }));
+                  hook.setTouchedFields((prev) =>
+                    new Set(prev).add(
+                      ADMIN_LISTING_CONST.FORM.BROKERAGE.NAME.HTML_FOR,
+                    ),
+                  );
                 }}
                 required
               />
@@ -547,6 +669,11 @@ export const CreateListing = () => {
                     ...prev,
                     BROKERAGE_ADDRESS: event.target.value,
                   }));
+                  hook.setTouchedFields((prev) =>
+                    new Set(prev).add(
+                      ADMIN_LISTING_CONST.FORM.BROKERAGE.ADDRESS.HTML_FOR,
+                    ),
+                  );
                 }}
                 required
               />
@@ -619,6 +746,12 @@ export const CreateListing = () => {
           <Button
             type="submit"
             additionalClasses="!text-neutral-50 !bg-neutral-950 hover:!bg-neutral-800 !border-neutral-900"
+            disabled={
+              hook.isSubmitting ||
+              hook.requiredFields
+                .map((key: string) => !hook.touchedFields.has(key))
+                .includes(true)
+            }
           >
             {hook.isSubmitting && (
               <CircleNotchIcon className="animate-spin" size={20} />

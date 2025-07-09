@@ -35,6 +35,19 @@ export const useCreateAgent = () => {
     file: null,
     previewUrl: null,
   });
+
+  const [touchedFields, setTouchedFields] = useState<Set<string>>(new Set());
+
+  const requiredFields = [
+    "LOGO_URL",
+    "NAME",
+    "SUBTITLE",
+    "EMAIL",
+    "PHONE",
+    "BROKERAGE_NAME", 
+    "BROKERAGE_ADDRESS",
+    "BROKERAGE_LOGO"
+  ];
   
   const agentId = uuidv4();
 
@@ -160,5 +173,9 @@ export const useCreateAgent = () => {
 
     success,
     isSubmitting,
+
+    touchedFields,
+    setTouchedFields,
+    requiredFields
   }
 };

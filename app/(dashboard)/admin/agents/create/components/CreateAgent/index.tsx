@@ -40,6 +40,9 @@ export const CreateAgent = () => {
                 file,
                 previewUrl: URL.createObjectURL(file),
               });
+              hook.setTouchedFields((prev) =>
+                new Set(prev).add(ADMIN_AGENT_CONST.FORM.AGENT.LOGO.HTML_FOR),
+              );
             }}
             isDarkLogo={hook.agent.LOGO_DARK}
             preview={hook.agent.LOGO_URL}
@@ -69,6 +72,9 @@ export const CreateAgent = () => {
                 ...prev,
                 NAME: event.target.value,
               }));
+              hook.setTouchedFields((prev) =>
+                new Set(prev).add(ADMIN_AGENT_CONST.FORM.AGENT.NAME.HTML_FOR),
+              );
             }}
             required
           />
@@ -82,6 +88,11 @@ export const CreateAgent = () => {
                 ...prev,
                 SUBTITLE: event.target.value,
               }));
+              hook.setTouchedFields((prev) =>
+                new Set(prev).add(
+                  ADMIN_AGENT_CONST.FORM.AGENT.SUBTITLE.HTML_FOR,
+                ),
+              );
             }}
             required
           />
@@ -95,6 +106,9 @@ export const CreateAgent = () => {
                 ...prev,
                 EMAIL: event.target.value,
               }));
+              hook.setTouchedFields((prev) =>
+                new Set(prev).add(ADMIN_AGENT_CONST.FORM.AGENT.EMAIL.HTML_FOR),
+              );
             }}
             required
           />
@@ -109,6 +123,9 @@ export const CreateAgent = () => {
                 ...prev,
                 PHONE: hook.formatPhone(event.target.value),
               }));
+              hook.setTouchedFields((prev) =>
+                new Set(prev).add(ADMIN_AGENT_CONST.FORM.AGENT.PHONE.HTML_FOR),
+              );
             }}
             maxLength={12}
             required
@@ -123,6 +140,11 @@ export const CreateAgent = () => {
                 ...prev,
                 WEBSITE: event.target.value,
               }));
+              hook.setTouchedFields((prev) =>
+                new Set(prev).add(
+                  ADMIN_AGENT_CONST.FORM.AGENT.WEBSITE.HTML_FOR,
+                ),
+              );
             }}
           />
           <Input
@@ -135,6 +157,11 @@ export const CreateAgent = () => {
                 ...prev,
                 INSTAGRAM: event.target.value,
               }));
+              hook.setTouchedFields((prev) =>
+                new Set(prev).add(
+                  ADMIN_AGENT_CONST.FORM.AGENT.INSTAGRAM.HTML_FOR,
+                ),
+              );
             }}
           />
         </div>
@@ -162,6 +189,11 @@ export const CreateAgent = () => {
                 file,
                 previewUrl: URL.createObjectURL(file),
               });
+              hook.setTouchedFields((prev) =>
+                new Set(prev).add(
+                  ADMIN_AGENT_CONST.FORM.BROKERAGE.LOGO.HTML_FOR,
+                ),
+              );
             }}
             preview={hook.agent.BROKERAGE_LOGO}
             required
@@ -179,6 +211,11 @@ export const CreateAgent = () => {
                 ...prev,
                 BROKERAGE_NAME: event.target.value,
               }));
+              hook.setTouchedFields((prev) =>
+                new Set(prev).add(
+                  ADMIN_AGENT_CONST.FORM.BROKERAGE.NAME.HTML_FOR,
+                ),
+              );
             }}
             required
           />
@@ -192,6 +229,11 @@ export const CreateAgent = () => {
                 ...prev,
                 BROKERAGE_ADDRESS: event.target.value,
               }));
+              hook.setTouchedFields((prev) =>
+                new Set(prev).add(
+                  ADMIN_AGENT_CONST.FORM.BROKERAGE.ADDRESS.HTML_FOR,
+                ),
+              );
             }}
             required
           />
@@ -208,6 +250,12 @@ export const CreateAgent = () => {
           <Button
             type="submit"
             additionalClasses="!text-neutral-50 !bg-neutral-950 hover:!bg-neutral-800 !border-neutral-900"
+            disabled={
+              hook.isSubmitting ||
+              hook.requiredFields
+                .map((key: string) => !hook.touchedFields.has(key))
+                .includes(true)
+            }
           >
             {hook.isSubmitting && (
               <CircleNotchIcon className="animate-spin" size={20} />

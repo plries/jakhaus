@@ -16,6 +16,8 @@ export const useCreateListing = () => {
   const [success, setSuccess] = useState<boolean | null>(null);
   const [showModal, setShowModal] = useState<boolean>(false);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+
+  const [showInfoModal, setShowInfoModal] = useState<boolean>(false);
   
   const [existingAgents, setExistingAgents] = useState<CreateAgentPropTypes[]>([]);
 
@@ -112,6 +114,8 @@ export const useCreateListing = () => {
 
     return `${cleaned.slice(0, 3)} ${cleaned.slice(3)}`;
   };
+
+  const toggleInfoModal = () => setShowInfoModal(!showInfoModal);
 
   const listingId = uuidv4();
   const agentId = showCreateAgent ? uuidv4() : agent.id;
@@ -327,6 +331,9 @@ export const useCreateListing = () => {
 
     showModal,
     setShowModal,
+
+    showInfoModal,
+    toggleInfoModal,
     
     success,
     isSubmitting,

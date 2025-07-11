@@ -13,6 +13,7 @@ import {
   Checkbox,
   Input,
   InputSelector,
+  Modal,
   PageHeading,
   SectionHeading,
   StatusModal,
@@ -291,12 +292,6 @@ export const CreateListing = () => {
                 );
               }}
             />
-            <p className="-mt-2 !text-sm text-neutral-500">
-              {
-                ADMIN_LISTING_CONST.FORM.OTHER_ATTACHMENTS.VIDEO_LINK
-                  .DESCRIPTION
-              }
-            </p>
             <Input
               placeholder={
                 ADMIN_LISTING_CONST.FORM.OTHER_ATTACHMENTS.SCAN_LINK.PLACEHOLDER
@@ -316,9 +311,21 @@ export const CreateListing = () => {
                 );
               }}
             />
-            <p className="-mt-2 !text-sm text-neutral-500">
-              {ADMIN_LISTING_CONST.FORM.OTHER_ATTACHMENTS.SCAN_LINK.DESCRIPTION}
-            </p>
+            <div className="-mt-2">
+              <p className="inline !text-sm text-neutral-500">
+                {
+                  ADMIN_LISTING_CONST.FORM.OTHER_ATTACHMENTS.VIDEO_LINK
+                    .DESCRIPTION
+                }
+              </p>
+              <button
+                className="relative w-fit cursor-pointer place-self-end !text-sm font-medium !text-neutral-600 duration-150 ease-in-out after:absolute after:-bottom-0.5 after:left-0 after:h-[1px] after:w-full after:origin-left after:scale-x-0 after:bg-neutral-950 after:transition-[scale] hover:text-neutral-950 hover:after:scale-x-100"
+                type="button"
+                onClick={hook.toggleInfoModal}
+              >
+                {ADMIN_LISTING_CONST.FORM.OTHER_ATTACHMENTS.VIDEO_LINK.EMBED}.
+              </button>
+            </div>
             <UploadZone
               label={
                 ADMIN_LISTING_CONST.FORM.OTHER_ATTACHMENTS.FLOOR_PLANS.LABEL
@@ -805,6 +812,33 @@ export const CreateListing = () => {
           )}
         </div>
       </StatusModal>
+
+      <Modal showModal={hook.showInfoModal} toggleModal={hook.toggleInfoModal}>
+        <p className="w-3/4 self-start !text-base text-neutral-500">
+          {ADMIN_LISTING_CONST.INFO_MODAL.DESCRIPTION}
+          <span className="!text-base font-medium text-neutral-600">
+            {ADMIN_LISTING_CONST.INFO_MODAL.SHARE}.
+          </span>
+        </p>
+        <div className="my-5 rounded-xl border border-neutral-50/10 bg-neutral-950 p-5 shadow-sm">
+          <pre className="w-full text-wrap text-neutral-50">
+            <code>
+              {ADMIN_LISTING_CONST.INFO_MODAL.CODE}
+              <span className="!text-base font-medium text-sky-300">
+                {ADMIN_LISTING_CONST.INFO_MODAL.CODE_SRC}
+              </span>
+              {ADMIN_LISTING_CONST.INFO_MODAL.CODE_2}
+            </code>
+          </pre>
+        </div>
+        <p className="w-full !text-base text-neutral-500">
+          {ADMIN_LISTING_CONST.INFO_MODAL.DESCRIPTION_2}
+          <div className="inline rounded-sm border border-neutral-950/10 bg-neutral-100 px-1 font-mono text-neutral-600 shadow-sm">
+            {ADMIN_LISTING_CONST.INFO_MODAL.SRC}
+          </div>
+          {ADMIN_LISTING_CONST.INFO_MODAL.DESCRIPTION_3}
+        </p>
+      </Modal>
     </>
   );
 };

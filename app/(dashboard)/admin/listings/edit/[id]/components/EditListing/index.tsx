@@ -14,6 +14,7 @@ import {
   Checkbox,
   Input,
   InputSelector,
+  Modal,
   PageHeading,
   SectionHeading,
   StatusModal,
@@ -25,9 +26,7 @@ import { EditListingPropTypes } from "./type";
 import { useEditListing } from "./useEditListing";
 import { CreateImagePropTypes } from "@/app/(dashboard)/admin/types";
 
-export const EditListing = ({
-  EDITED_LISTING,
-}: EditListingPropTypes) => {
+export const EditListing = ({ EDITED_LISTING }: EditListingPropTypes) => {
   const hook = useEditListing();
 
   useEffect(() => {
@@ -57,9 +56,9 @@ export const EditListing = ({
           return {
             file: null,
             previewUrl: photo.URL,
-          }
-        })
-      )
+          };
+        }),
+      );
 
       hook.setVideoLink(EDITED_LISTING.VIDEO_LINK || "");
       hook.setScanLink(EDITED_LISTING.SCAN_LINK || "");
@@ -69,9 +68,9 @@ export const EditListing = ({
           return {
             file: null,
             previewUrl: floorPlan.URL,
-          }
-        })
-      )
+          };
+        }),
+      );
 
       hook.setAgent((prev) => ({
         ...prev,
@@ -107,9 +106,7 @@ export const EditListing = ({
                 ADMIN_LISTING_CONST.FORM.ADDRESS.STREET_ADDRESS.PLACEHOLDER
               }
               label={ADMIN_LISTING_CONST.FORM.ADDRESS.STREET_ADDRESS.LABEL}
-              htmlFor={
-                ADMIN_LISTING_CONST.FORM.ADDRESS.STREET_ADDRESS.HTML_FOR
-              }
+              htmlFor={ADMIN_LISTING_CONST.FORM.ADDRESS.STREET_ADDRESS.HTML_FOR}
               value={hook.address?.STREET}
               onChange={(event) => {
                 hook.setAddress((prev) => ({
@@ -117,7 +114,9 @@ export const EditListing = ({
                   STREET: event.target.value,
                 }));
                 hook.setTouchedFields((prev) =>
-                  new Set(prev).add(ADMIN_LISTING_CONST.FORM.ADDRESS.STREET_ADDRESS.HTML_FOR),
+                  new Set(prev).add(
+                    ADMIN_LISTING_CONST.FORM.ADDRESS.STREET_ADDRESS.HTML_FOR,
+                  ),
                 );
               }}
               required
@@ -133,7 +132,9 @@ export const EditListing = ({
                   UNIT: event.target.value,
                 }));
                 hook.setTouchedFields((prev) =>
-                  new Set(prev).add(ADMIN_LISTING_CONST.FORM.ADDRESS.UNIT.HTML_FOR),
+                  new Set(prev).add(
+                    ADMIN_LISTING_CONST.FORM.ADDRESS.UNIT.HTML_FOR,
+                  ),
                 );
               }}
             />
@@ -148,7 +149,9 @@ export const EditListing = ({
                   CITY: event.target.value,
                 }));
                 hook.setTouchedFields((prev) =>
-                  new Set(prev).add(ADMIN_LISTING_CONST.FORM.ADDRESS.CITY.HTML_FOR),
+                  new Set(prev).add(
+                    ADMIN_LISTING_CONST.FORM.ADDRESS.CITY.HTML_FOR,
+                  ),
                 );
               }}
               required
@@ -167,8 +170,10 @@ export const EditListing = ({
                     PROVINCE: event.target.value,
                   }));
                   hook.setTouchedFields((prev) =>
-                  new Set(prev).add(ADMIN_LISTING_CONST.FORM.ADDRESS.PROVINCE.HTML_FOR),
-                );
+                    new Set(prev).add(
+                      ADMIN_LISTING_CONST.FORM.ADDRESS.PROVINCE.HTML_FOR,
+                    ),
+                  );
                 }}
                 maxLength={2}
                 required
@@ -187,8 +192,10 @@ export const EditListing = ({
                     POSTAL_CODE: hook.formatPostal(event.target.value),
                   }));
                   hook.setTouchedFields((prev) =>
-                  new Set(prev).add(ADMIN_LISTING_CONST.FORM.ADDRESS.POSTAL_CODE.HTML_FOR),
-                );
+                    new Set(prev).add(
+                      ADMIN_LISTING_CONST.FORM.ADDRESS.POSTAL_CODE.HTML_FOR,
+                    ),
+                  );
                 }}
                 maxLength={7}
                 required
@@ -212,7 +219,9 @@ export const EditListing = ({
                 const value = event.target.value.replace(/[^0-9]/g, "") || "0";
                 hook.setBedrooms(parseInt(value, 10));
                 hook.setTouchedFields((prev) =>
-                  new Set(prev).add(ADMIN_LISTING_CONST.FORM.OVERVIEW.BEDROOMS.HTML_FOR),
+                  new Set(prev).add(
+                    ADMIN_LISTING_CONST.FORM.OVERVIEW.BEDROOMS.HTML_FOR,
+                  ),
                 );
               }}
               onFocus={(event) => event.target.select()}
@@ -230,7 +239,9 @@ export const EditListing = ({
                 const value = event.target.value.replace(/[^0-9]/g, "") || "0";
                 hook.setBathrooms(parseInt(value, 10));
                 hook.setTouchedFields((prev) =>
-                  new Set(prev).add(ADMIN_LISTING_CONST.FORM.OVERVIEW.BATHROOMS.HTML_FOR),
+                  new Set(prev).add(
+                    ADMIN_LISTING_CONST.FORM.OVERVIEW.BATHROOMS.HTML_FOR,
+                  ),
                 );
               }}
               onFocus={(event) => event.target.select()}
@@ -248,7 +259,9 @@ export const EditListing = ({
                 const value = event.target.value.replace(/[^0-9]/g, "") || "0";
                 hook.setSquareFeet(parseInt(value, 10));
                 hook.setTouchedFields((prev) =>
-                  new Set(prev).add(ADMIN_LISTING_CONST.FORM.OVERVIEW.SQUARE_FEET.HTML_FOR),
+                  new Set(prev).add(
+                    ADMIN_LISTING_CONST.FORM.OVERVIEW.SQUARE_FEET.HTML_FOR,
+                  ),
                 );
               }}
               onFocus={(event) => event.target.select()}
@@ -256,9 +269,7 @@ export const EditListing = ({
             />
           </div>
 
-          <SectionHeading>
-            {ADMIN_LISTING_CONST.SECTIONS.PHOTOS}
-          </SectionHeading>
+          <SectionHeading>{ADMIN_LISTING_CONST.SECTIONS.PHOTOS}</SectionHeading>
           <div className="grid grid-cols-1 gap-4 px-5 md:px-10">
             <UploadButton
               label={ADMIN_LISTING_CONST.FORM.PHOTOS.FEATURED_PHOTO.LABEL}
@@ -270,7 +281,9 @@ export const EditListing = ({
                   previewUrl: URL.createObjectURL(file),
                 });
                 hook.setTouchedFields((prev) =>
-                  new Set(prev).add(ADMIN_LISTING_CONST.FORM.PHOTOS.FEATURED_PHOTO.HTML_FOR),
+                  new Set(prev).add(
+                    ADMIN_LISTING_CONST.FORM.PHOTOS.FEATURED_PHOTO.HTML_FOR,
+                  ),
                 );
               }}
               onClear={() =>
@@ -291,22 +304,27 @@ export const EditListing = ({
               caption={ADMIN_LISTING_CONST.FORM.PHOTOS.PHOTO_GALLERY.CAPTION}
               htmlFor={ADMIN_LISTING_CONST.FORM.PHOTOS.PHOTO_GALLERY.HTML_FOR}
               onChange={(uploadedFiles) => {
-                hook.setPhotoGallery((prev) =>
-                  [...prev, ...uploadedFiles.map((file) => ({
+                hook.setPhotoGallery((prev) => [
+                  ...prev,
+                  ...uploadedFiles.map((file) => ({
                     file,
                     previewUrl: URL.createObjectURL(file),
-                  }))],
-                );
+                  })),
+                ]);
                 hook.setTouchedFields((prev) =>
-                  new Set(prev).add(ADMIN_LISTING_CONST.FORM.PHOTOS.PHOTO_GALLERY.HTML_FOR),
+                  new Set(prev).add(
+                    ADMIN_LISTING_CONST.FORM.PHOTOS.PHOTO_GALLERY.HTML_FOR,
+                  ),
                 );
               }}
               onClear={(index) => {
                 hook.setPhotoGallery((prev) =>
                   prev.filter((_, i) => i !== index),
-                )
+                );
                 hook.setTouchedFields((prev) =>
-                  new Set(prev).add(ADMIN_LISTING_CONST.FORM.PHOTOS.PHOTO_GALLERY.HTML_FOR),
+                  new Set(prev).add(
+                    ADMIN_LISTING_CONST.FORM.PHOTOS.PHOTO_GALLERY.HTML_FOR,
+                  ),
                 );
               }}
               files={hook.photoGallery}
@@ -337,50 +355,54 @@ export const EditListing = ({
               }
               value={hook.videoLink}
               onChange={(event) => {
-                hook.setVideoLink(event.target.value)
+                hook.setVideoLink(event.target.value);
                 hook.setTouchedFields((prev) =>
-                  new Set(prev).add(ADMIN_LISTING_CONST.FORM.OTHER_ATTACHMENTS.VIDEO_LINK.HTML_FOR),
+                  new Set(prev).add(
+                    ADMIN_LISTING_CONST.FORM.OTHER_ATTACHMENTS.VIDEO_LINK
+                      .HTML_FOR,
+                  ),
                 );
               }}
             />
-            <p className="-mt-2 !text-sm text-neutral-500">
-              {
-                ADMIN_LISTING_CONST.FORM.OTHER_ATTACHMENTS.VIDEO_LINK
-                  .DESCRIPTION
-              }
-            </p>
             <Input
               placeholder={
-                ADMIN_LISTING_CONST.FORM.OTHER_ATTACHMENTS.SCAN_LINK
-                  .PLACEHOLDER
+                ADMIN_LISTING_CONST.FORM.OTHER_ATTACHMENTS.SCAN_LINK.PLACEHOLDER
               }
-              label={
-                ADMIN_LISTING_CONST.FORM.OTHER_ATTACHMENTS.SCAN_LINK.LABEL
-              }
+              label={ADMIN_LISTING_CONST.FORM.OTHER_ATTACHMENTS.SCAN_LINK.LABEL}
               htmlFor={
                 ADMIN_LISTING_CONST.FORM.OTHER_ATTACHMENTS.SCAN_LINK.HTML_FOR
               }
               value={hook.scanLink}
               onChange={(event) => {
-                hook.setScanLink(event.target.value)
+                hook.setScanLink(event.target.value);
                 hook.setTouchedFields((prev) =>
-                  new Set(prev).add(ADMIN_LISTING_CONST.FORM.OTHER_ATTACHMENTS.SCAN_LINK.HTML_FOR),
+                  new Set(prev).add(
+                    ADMIN_LISTING_CONST.FORM.OTHER_ATTACHMENTS.SCAN_LINK
+                      .HTML_FOR,
+                  ),
                 );
               }}
             />
-            <p className="-mt-2 !text-sm text-neutral-500">
-              {
-                ADMIN_LISTING_CONST.FORM.OTHER_ATTACHMENTS.SCAN_LINK
-                  .DESCRIPTION
-              }
-            </p>
+            <div className="-mt-2">
+              <p className="inline !text-sm text-neutral-500">
+                {
+                  ADMIN_LISTING_CONST.FORM.OTHER_ATTACHMENTS.VIDEO_LINK
+                    .DESCRIPTION
+                }
+              </p>
+              <button
+                className="relative w-fit cursor-pointer place-self-end !text-sm font-medium !text-neutral-600 duration-150 ease-in-out after:absolute after:-bottom-0.5 after:left-0 after:h-[1px] after:w-full after:origin-left after:scale-x-0 after:bg-neutral-950 after:transition-[scale] hover:text-neutral-950 hover:after:scale-x-100"
+                type="button"
+                onClick={hook.toggleInfoModal}
+              >
+                {ADMIN_LISTING_CONST.FORM.OTHER_ATTACHMENTS.VIDEO_LINK.EMBED}.
+              </button>
+            </div>
             <UploadZone
               label={
                 ADMIN_LISTING_CONST.FORM.OTHER_ATTACHMENTS.FLOOR_PLANS.LABEL
               }
-              text={
-                ADMIN_LISTING_CONST.FORM.OTHER_ATTACHMENTS.FLOOR_PLANS.TEXT
-              }
+              text={ADMIN_LISTING_CONST.FORM.OTHER_ATTACHMENTS.FLOOR_PLANS.TEXT}
               caption={
                 ADMIN_LISTING_CONST.FORM.OTHER_ATTACHMENTS.FLOOR_PLANS.CAPTION
               }
@@ -388,20 +410,28 @@ export const EditListing = ({
                 ADMIN_LISTING_CONST.FORM.OTHER_ATTACHMENTS.FLOOR_PLANS.HTML_FOR
               }
               onChange={(uploadedFiles) => {
-                hook.setFloorPlans((prev) =>
-                  [...prev, ...uploadedFiles.map((file) => ({
+                hook.setFloorPlans((prev) => [
+                  ...prev,
+                  ...uploadedFiles.map((file) => ({
                     file,
                     previewUrl: URL.createObjectURL(file),
-                  }))],
-                );
+                  })),
+                ]);
                 hook.setTouchedFields((prev) =>
-                  new Set(prev).add(ADMIN_LISTING_CONST.FORM.OTHER_ATTACHMENTS.FLOOR_PLANS.HTML_FOR),
+                  new Set(prev).add(
+                    ADMIN_LISTING_CONST.FORM.OTHER_ATTACHMENTS.FLOOR_PLANS
+                      .HTML_FOR,
+                  ),
                 );
               }}
               onClear={(index) => {
-                hook.setFloorPlans((prev) => prev.filter((_, i) => i !== index))
+                hook.setFloorPlans((prev) =>
+                  prev.filter((_, i) => i !== index),
+                );
                 hook.setTouchedFields((prev) =>
-                  new Set(prev).add(ADMIN_LISTING_CONST.FORM.PHOTOS.PHOTO_GALLERY.HTML_FOR),
+                  new Set(prev).add(
+                    ADMIN_LISTING_CONST.FORM.PHOTOS.PHOTO_GALLERY.HTML_FOR,
+                  ),
                 );
               }}
               setDeleted={hook.setDeletedFloorPlans}
@@ -503,7 +533,9 @@ export const EditListing = ({
                     previewUrl: URL.createObjectURL(file),
                   });
                   hook.setTouchedFields((prev) =>
-                    new Set(prev).add(ADMIN_LISTING_CONST.FORM.AGENT.LOGO.HTML_FOR),
+                    new Set(prev).add(
+                      ADMIN_LISTING_CONST.FORM.AGENT.LOGO.HTML_FOR,
+                    ),
                   );
                 }}
                 isDarkLogo={hook.agent.LOGO_DARK}
@@ -520,7 +552,9 @@ export const EditListing = ({
                     LOGO_DARK: event.target.checked,
                   }));
                   hook.setTouchedFields((prev) =>
-                    new Set(prev).add(ADMIN_LISTING_CONST.FORM.AGENT.LOGO_DARK.HTML_FOR),
+                    new Set(prev).add(
+                      ADMIN_LISTING_CONST.FORM.AGENT.LOGO_DARK.HTML_FOR,
+                    ),
                   );
                 }}
               />
@@ -538,7 +572,9 @@ export const EditListing = ({
                     NAME: event.target.value,
                   }));
                   hook.setTouchedFields((prev) =>
-                    new Set(prev).add(ADMIN_LISTING_CONST.FORM.AGENT.NAME.HTML_FOR),
+                    new Set(prev).add(
+                      ADMIN_LISTING_CONST.FORM.AGENT.NAME.HTML_FOR,
+                    ),
                   );
                 }}
                 required
@@ -556,7 +592,9 @@ export const EditListing = ({
                     SUBTITLE: event.target.value,
                   }));
                   hook.setTouchedFields((prev) =>
-                    new Set(prev).add(ADMIN_LISTING_CONST.FORM.AGENT.SUBTITLE.HTML_FOR),
+                    new Set(prev).add(
+                      ADMIN_LISTING_CONST.FORM.AGENT.SUBTITLE.HTML_FOR,
+                    ),
                   );
                 }}
                 required
@@ -572,7 +610,9 @@ export const EditListing = ({
                     EMAIL: event.target.value,
                   }));
                   hook.setTouchedFields((prev) =>
-                    new Set(prev).add(ADMIN_LISTING_CONST.FORM.AGENT.EMAIL.HTML_FOR),
+                    new Set(prev).add(
+                      ADMIN_LISTING_CONST.FORM.AGENT.EMAIL.HTML_FOR,
+                    ),
                   );
                 }}
                 required
@@ -593,9 +633,7 @@ export const EditListing = ({
                 required
               />
               <Input
-                placeholder={
-                  ADMIN_LISTING_CONST.FORM.AGENT.WEBSITE.PLACEHOLDER
-                }
+                placeholder={ADMIN_LISTING_CONST.FORM.AGENT.WEBSITE.PLACEHOLDER}
                 label={ADMIN_LISTING_CONST.FORM.AGENT.WEBSITE.LABEL}
                 htmlFor={ADMIN_LISTING_CONST.FORM.AGENT.WEBSITE.HTML_FOR}
                 value={hook.agent.WEBSITE}
@@ -605,7 +643,9 @@ export const EditListing = ({
                     WEBSITE: event.target.value,
                   }));
                   hook.setTouchedFields((prev) =>
-                    new Set(prev).add(ADMIN_LISTING_CONST.FORM.AGENT.WEBSITE.HTML_FOR),
+                    new Set(prev).add(
+                      ADMIN_LISTING_CONST.FORM.AGENT.WEBSITE.HTML_FOR,
+                    ),
                   );
                 }}
               />
@@ -622,7 +662,9 @@ export const EditListing = ({
                     INSTAGRAM: event.target.value,
                   }));
                   hook.setTouchedFields((prev) =>
-                    new Set(prev).add(ADMIN_LISTING_CONST.FORM.AGENT.INSTAGRAM.HTML_FOR),
+                    new Set(prev).add(
+                      ADMIN_LISTING_CONST.FORM.AGENT.INSTAGRAM.HTML_FOR,
+                    ),
                   );
                 }}
               />
@@ -654,7 +696,9 @@ export const EditListing = ({
                     previewUrl: URL.createObjectURL(file),
                   });
                   hook.setTouchedFields((prev) =>
-                    new Set(prev).add(ADMIN_LISTING_CONST.FORM.BROKERAGE.LOGO.HTML_FOR),
+                    new Set(prev).add(
+                      ADMIN_LISTING_CONST.FORM.BROKERAGE.LOGO.HTML_FOR,
+                    ),
                   );
                 }}
                 preview={hook.agent.BROKERAGE_LOGO}
@@ -676,7 +720,9 @@ export const EditListing = ({
                     BROKERAGE_NAME: event.target.value,
                   }));
                   hook.setTouchedFields((prev) =>
-                    new Set(prev).add(ADMIN_LISTING_CONST.FORM.BROKERAGE.NAME.HTML_FOR),
+                    new Set(prev).add(
+                      ADMIN_LISTING_CONST.FORM.BROKERAGE.NAME.HTML_FOR,
+                    ),
                   );
                 }}
                 required
@@ -694,7 +740,9 @@ export const EditListing = ({
                     BROKERAGE_ADDRESS: event.target.value,
                   }));
                   hook.setTouchedFields((prev) =>
-                    new Set(prev).add(ADMIN_LISTING_CONST.FORM.BROKERAGE.ADDRESS.HTML_FOR),
+                    new Set(prev).add(
+                      ADMIN_LISTING_CONST.FORM.BROKERAGE.ADDRESS.HTML_FOR,
+                    ),
                   );
                 }}
                 required
@@ -712,7 +760,9 @@ export const EditListing = ({
               {hook.featuredPhoto.previewUrl ? (
                 <Image
                   src={hook.featuredPhoto.previewUrl}
-                  alt={hook.featuredPhoto.file?.name || "Featured Photo Preview"}
+                  alt={
+                    hook.featuredPhoto.file?.name || "Featured Photo Preview"
+                  }
                   width={1920}
                   height={1080}
                   className="aspect-video h-full w-full object-cover object-center"
@@ -777,6 +827,7 @@ export const EditListing = ({
           </Button>
         </div>
       </form>
+
       <StatusModal showModal={hook.showModal} success={hook.success}>
         <div className="mt-5 mb-10 flex flex-col items-center">
           <p className="!text-2xl font-medium">
@@ -822,6 +873,33 @@ export const EditListing = ({
           )}
         </div>
       </StatusModal>
+
+      <Modal showModal={hook.showInfoModal} toggleModal={hook.toggleInfoModal}>
+        <p className="w-3/4 self-start !text-base text-neutral-500">
+          {ADMIN_LISTING_CONST.INFO_MODAL.DESCRIPTION}
+          <span className="!text-base font-medium text-neutral-600">
+            {ADMIN_LISTING_CONST.INFO_MODAL.SHARE}.
+          </span>
+        </p>
+        <div className="my-5 rounded-xl border border-neutral-50/10 bg-neutral-950 p-5 shadow-sm">
+          <pre className="w-full text-wrap text-neutral-50">
+            <code>
+              {ADMIN_LISTING_CONST.INFO_MODAL.CODE}
+              <span className="!text-base font-medium text-sky-300">
+                {ADMIN_LISTING_CONST.INFO_MODAL.CODE_SRC}
+              </span>
+              {ADMIN_LISTING_CONST.INFO_MODAL.CODE_2}
+            </code>
+          </pre>
+        </div>
+        <p className="w-full !text-base text-neutral-500">
+          {ADMIN_LISTING_CONST.INFO_MODAL.DESCRIPTION_2}
+          <div className="inline rounded-sm border border-neutral-950/10 bg-neutral-100 px-1 font-mono text-neutral-600 shadow-sm">
+            {ADMIN_LISTING_CONST.INFO_MODAL.SRC}
+          </div>
+          {ADMIN_LISTING_CONST.INFO_MODAL.DESCRIPTION_3}
+        </p>
+      </Modal>
     </>
   );
 };

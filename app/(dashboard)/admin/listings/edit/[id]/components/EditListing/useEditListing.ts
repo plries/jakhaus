@@ -12,6 +12,8 @@ export const useEditListing = () => {
   const [success, setSuccess] = useState<boolean | null>(null);
   const [showModal, setShowModal] = useState<boolean>(false);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+
+  const [showInfoModal, setShowInfoModal] = useState<boolean>(false);
   
   const [existingAgents, setExistingAgents] = useState<CreateAgentPropTypes[]>([]);
 
@@ -101,6 +103,8 @@ export const useEditListing = () => {
       return parts.length > 1 ? parts[1] : url;
     });
   }
+
+  const toggleInfoModal = () => setShowInfoModal(!showInfoModal);
   
   let deletedPhotoPaths: string[] = [];
   if (deletedPhotoGallery.length > 0) deletedPhotoPaths = extractFilePaths(deletedPhotoGallery);
@@ -331,6 +335,9 @@ export const useEditListing = () => {
 
     showModal,
     setShowModal,
+
+    showInfoModal,
+    toggleInfoModal,
     
     success,
     isSubmitting,

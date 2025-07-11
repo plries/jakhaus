@@ -79,7 +79,8 @@ export const ADMIN_LISTING_CONST = {
         LABEL: "Video link",
         HTML_FOR: "VIDEO_LINK",
         PLACEHOLDER: "Link to video",
-        DESCRIPTION: "Ensure your link is a youtube.com/embed link."
+        DESCRIPTION: "Ensure your links are ",
+        EMBED: " embed links",
       },
       SCAN_LINK: {
         LABEL: "3D scan link",
@@ -178,5 +179,15 @@ export const ADMIN_LISTING_CONST = {
       CLOSE: "Home",
       VIEW: "View listing",
     }
+  },
+  INFO_MODAL: {
+    DESCRIPTION: "To get an embed link, you can typically find it underneath ",
+    SHARE: "Share → Embed",
+    CODE: `<iframe width="560" height="315" `,
+    CODE_SRC: `src="https://www.youtube.com/embed/7HgAN5cEmkk?si=V1P4xA2Uo_A1Hnfj" `,
+    CODE_2: ` title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`,
+    DESCRIPTION_2: "Embeds will look like a bunch of code—just copy the link within the ",
+    SRC: 'src="https://..."',
+    DESCRIPTION_3: " attribute and you're good to go!"
   }
 }

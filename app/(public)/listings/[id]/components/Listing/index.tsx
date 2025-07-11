@@ -27,7 +27,7 @@ export const Listing = ({ CONSTANTS, FULL_ADDRESS }: SectionPropTypes) => {
           {CONSTANTS.VIDEO_LINK && (
             <Video CONSTANTS={CONSTANTS} FULL_ADDRESS={FULL_ADDRESS} />
           )}
-          {CONSTANTS.FLOOR_PLANS &&CONSTANTS.FLOOR_PLANS?.length > 0 && (
+          {CONSTANTS.FLOOR_PLANS && CONSTANTS.FLOOR_PLANS?.length > 0 && (
             <FloorPlan CONSTANTS={CONSTANTS} FULL_ADDRESS={FULL_ADDRESS} />
           )}
           {CONSTANTS.SCAN_LINK && (

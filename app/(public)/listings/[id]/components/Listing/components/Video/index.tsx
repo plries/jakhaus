@@ -18,7 +18,7 @@ export const Video = ({ CONSTANTS, FULL_ADDRESS }: SectionPropTypes) => {
         className="col-span-full p-5"
       >
         <iframe
-          className="aspect-video w-full overflow-hidden rounded-2xl border border-neutral-300 shadow-lg"
+          className="aspect-video w-full overflow-hidden rounded-2xl border border-neutral-300 bg-black shadow-lg"
           src={CONSTANTS.VIDEO_LINK}
           title={VIDEO_CONST.HEADING + " of " + FULL_ADDRESS}
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"

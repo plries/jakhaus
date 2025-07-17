@@ -116,5 +116,9 @@ export default async function ListingPage({ params }: Props) {
     a.URL.localeCompare(b.URL),
   );
 
-  return <Listing CONSTANTS={LISTING} FULL_ADDRESS={FULL_ADDRESS} />;
+  return (
+    <div className="mx-auto max-w-[1440px]">
+      <Listing CONSTANTS={LISTING} FULL_ADDRESS={FULL_ADDRESS} />
+    </div>
+  );
 }

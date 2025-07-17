@@ -34,7 +34,7 @@ export default function RootLayout({
     <html lang="en">
       <Suspense fallback={<Loader />}>
         <body
-          className={`${poppins.variable} mx-auto min-h-screen max-w-[1440px] bg-neutral-50 bg-gradient-to-b to-neutral-200 antialiased`}
+          className={`${poppins.variable} mx-auto min-h-screen bg-neutral-50 bg-gradient-to-b to-neutral-200 antialiased`}
         >
           <Navbar LINKS={NAV.LINKS} dashboard={false} />
           <ReactLenis root options={{ lerp: 0.05 }}>

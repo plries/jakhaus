@@ -145,7 +145,7 @@ const ServiceCard = ({
       </div>
       <div className="mt-8 flex items-center justify-between">
         <div className="text-xl font-semibold">{serviceData.subtitle}</div>
-        <div className="text-4xl font-semibold">{serviceData.title}</div>
+        <div className="text-4xl font-semibold text-right">{serviceData.title}</div>
       </div>
       <div className="mb-4 flex items-center justify-center py-8">
         <serviceData.icon width={250} />

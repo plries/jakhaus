@@ -1,23 +1,43 @@
 "use client";
-import { DotsThreeIcon, PlusIcon } from "@phosphor-icons/react";
+import {
+  ArrowUpRightIcon,
+  CheckIcon,
+  CircleNotchIcon,
+  DotsThreeIcon,
+  NotePencilIcon,
+  PlusIcon,
+  TrashIcon,
+} from "@phosphor-icons/react";
 import {
   Button,
-  Checkbox,
   Input,
   Dropdown,
   Table,
   PageHeading,
+  WarningModal,
 } from "@/app/components";
-import { LISTINGS_TABLE_CONST, LISTINGS_TABLE_MOCK } from "./const";
+import { LISTINGS_TABLE_CONST } from "./const";
+import { useListingsTable } from "./useListingsTable";
 
 export const ListingsTable = () => {
+  const hook = useListingsTable();
+
+  const filteredOptions = hook.existingListings.filter((listing) =>
+    listing.CITY?.toLowerCase().includes(hook.inputValue.toLowerCase()),
+  );
+
   return (
     <>
       <PageHeading>{LISTINGS_TABLE_CONST.HEADING}</PageHeading>
-      <div className="col-span-full flex flex-row items-end justify-between px-5">
-        <Input type="search" placeholder={LISTINGS_TABLE_CONST.INPUTS.SEARCH} htmlFor={LISTINGS_TABLE_CONST.INPUTS.HTML_FOR} />
+      <div className="col-span-full flex flex-row items-end justify-between gap-5 px-5">
+        <Input
+          type="search"
+          placeholder={LISTINGS_TABLE_CONST.INPUTS.SEARCH}
+          htmlFor={LISTINGS_TABLE_CONST.INPUTS.HTML_FOR}
+          onChange={(event) => hook.setInputValue(event.target.value)}
+        />
         <Button
-          additionalClasses="!text-neutral-50 !bg-neutral-950 !hover:bg-neutral-800 !border-neutral-900"
+          additionalClasses="!text-neutral-50 !bg-neutral-950 hover:!bg-neutral-800 !border-neutral-900"
           href={LISTINGS_TABLE_CONST.BUTTONS.CREATE.HREF}
         >
           <PlusIcon size={20} weight="bold" />
@@ -32,76 +52,159 @@ export const ListingsTable = () => {
           })),
         ]}
         tableName={LISTINGS_TABLE_CONST.TABLE.NAME}
-        tableCount={LISTINGS_TABLE_MOCK.ROWS.length}
+        tableCount={filteredOptions.length}
+        showingAmountFrom={hook.showingAmount.from}
+        showingAmountTo={hook.showingAmount.to}
+        setShowingAmount={hook.setShowingAmount}
       >
-        {LISTINGS_TABLE_MOCK.ROWS.map((listing, index) => (
-          <tr
-            key={index}
-            className="h-15 border-b border-neutral-200 text-neutral-600 last:border-b-0 hover:bg-neutral-100/50 has-checked:bg-slate-100"
-          >
-            <td className="flex h-16 w-16 min-w-16 items-center justify-center border-r border-neutral-200">
-              <Checkbox />
-            </td>
-            <td className="border-r border-neutral-200 px-4 py-2 text-nowrap">
-              {listing.ID}
-            </td>
-            <td className="border-r border-neutral-200 px-4 py-2 text-nowrap">
-              {listing.LISTING_ADDRESS}
-            </td>
-            <td className="border-r border-neutral-200 px-4 py-2">
-              {listing.CITY}
-            </td>
-            <td className="border-r border-neutral-200 px-4 py-2">
-              <span
-                className={`rounded-full border px-3 py-1 shadow-xs ${listing.ACTIVE ? "border-sky-950/10 bg-sky-50 text-sky-700" : "border-red-950/10 bg-red-50 text-red-700"}`}
-              >
-                {listing.ACTIVE ? "Active" : "Deactivated"}
-              </span>
-            </td>
-            <td className="px-4 py-2">
-              <span className="flex flex-row items-center justify-between gap-5">
-                {new Date(listing.DATE_CREATED).toLocaleString("en-US", {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                })}
-                <Dropdown
-                  button={{
-                    name: LISTINGS_TABLE_CONST.BUTTONS.MANAGE,
-                    icon: <DotsThreeIcon size={24} weight="bold" />,
-                    additionalClasses:
-                      "bg-transparent hover:!bg-neutral-950/5 !rounded-xl !border-0 !shadow-none",
-                  }}
-                  options={[
-                    {
-                      label: LISTINGS_TABLE_CONST.DROPDOWNS.MANAGE.EDIT,
-                      onClick: () => {},
-                    },
-                    {
-                      label: LISTINGS_TABLE_CONST.DROPDOWNS.MANAGE.VIEW,
-                      href: `/listings/${listing.ID}`,
-                    },
-                    {
-                      label: LISTINGS_TABLE_CONST.DROPDOWNS.MANAGE.COPY,
-                      onClick: () => {
-                        navigator.clipboard.writeText(
-                          window.location.origin + `/listings/${listing.ID}`,
-                        );
-                      },
-                    },
-                    {
-                      label: listing.ACTIVE
-                        ? LISTINGS_TABLE_CONST.DROPDOWNS.MANAGE.DEACTIVATE
-                        : LISTINGS_TABLE_CONST.DROPDOWNS.MANAGE.REACTIVATE,
-                      onClick: () => {},
-                    },
-                  ]}
-                />
-              </span>
+        {hook.loading ? (
+          <tr className="relative h-15 w-full border-b border-neutral-200 align-middle text-neutral-600 last:border-b-0 hover:bg-neutral-100/50 has-checked:bg-slate-100">
+            <td
+              className="w-full text-center"
+              colSpan={LISTINGS_TABLE_CONST.TABLE.COLUMNS.TITLES.length + 1}
+            >
+              <CircleNotchIcon
+                className="absolute left-1/2 -translate-1/2 animate-spin"
+                size={20}
+              />
             </td>
           </tr>
-        ))}
+        ) : (
+          <>
+            {filteredOptions.length ? (
+              <>
+                {filteredOptions.map((listing, index) => (
+                  <tr
+                    key={index}
+                    className="group h-15 border-b border-neutral-200 text-neutral-600 last:border-b-0 hover:bg-neutral-100/50 has-checked:bg-slate-100"
+                  >
+                    <td className="max-w-64 overflow-hidden border-r border-neutral-200 px-4 py-2 text-nowrap text-ellipsis">
+                      {listing.id}
+                    </td>
+                    <td className="border-r border-neutral-200 px-4 py-2 text-nowrap">
+                      {listing.UNIT} {listing.STREET}, {listing.PROVINCE},{" "}
+                      {listing.POSTAL_CODE}
+                    </td>
+                    <td className="border-r border-neutral-200 px-4 py-2">
+                      {listing.CITY}
+                    </td>
+                    <td className="px-4 py-2">
+                      <span className="flex flex-row items-center justify-between gap-5 text-nowrap">
+                        {hook.existingAgents.map((agent) => {
+                          if (agent.id === listing.agent_id)
+                            return (
+                              <span
+                                key={agent.id}
+                                className="flex w-full flex-row items-center justify-between gap-5"
+                              >
+                                <span className="text-neutral-950">
+                                  {agent.NAME}
+                                </span>
+                                <span className="!text-sm text-neutral-950/50 opacity-0 transition-opacity duration-150 ease-in-out group-hover:opacity-100">
+                                  ID: {agent.id}
+                                </span>
+                              </span>
+                            );
+                        })}
+                        <Dropdown
+                          button={{
+                            name: LISTINGS_TABLE_CONST.BUTTONS.MANAGE,
+                            icon: <DotsThreeIcon size={24} weight="bold" />,
+                            additionalClasses:
+                              "bg-transparent hover:!bg-neutral-950/5 !rounded-xl !border-0 !shadow-none",
+                          }}
+                          options={[
+                            {
+                              label: LISTINGS_TABLE_CONST.DROPDOWNS.MANAGE.EDIT,
+                              icon: <NotePencilIcon />,
+                              href: `/admin/listings/edit/${listing.id}`,
+                            },
+                            {
+                              label: LISTINGS_TABLE_CONST.DROPDOWNS.MANAGE.VIEW,
+                              icon: <ArrowUpRightIcon />,
+                              href: `/listings/${listing.id}`,
+                            },
+                            {
+                              label: LISTINGS_TABLE_CONST.DROPDOWNS.MANAGE.COPY,
+                              onClick: () => {
+                                navigator.clipboard.writeText(
+                                  window.location.origin +
+                                    `/listings/${listing.id}`,
+                                );
+                              },
+                            },
+                            {
+                              label:
+                                LISTINGS_TABLE_CONST.DROPDOWNS.MANAGE.DELETE,
+                              icon: <TrashIcon />,
+                              onClick: () => {
+                                hook.toggleModal({ listing });
+                              },
+                            },
+                          ]}
+                        />
+                      </span>
+                    </td>
+                  </tr>
+                ))}
+              </>
+            ) : (
+              <tr className="h-15 w-full border-b border-neutral-200 align-middle text-neutral-600 last:border-b-0 hover:bg-neutral-100/50 has-checked:bg-slate-100">
+                <td
+                  className="text-center text-neutral-600"
+                  colSpan={LISTINGS_TABLE_CONST.TABLE.COLUMNS.TITLES.length + 1}
+                >
+                  {LISTINGS_TABLE_CONST.TABLE.NO_LISTINGS}
+                </td>
+              </tr>
+            )}
+          </>
+        )}
       </Table>
+      <WarningModal
+        showModal={hook.showModal}
+        toggleModal={() => {
+          hook.toggleModal({ listing: null });
+        }}
+      >
+        <div className="mt-5 mb-10 flex flex-col items-center">
+          <p className="!text-2xl font-medium">
+            {LISTINGS_TABLE_CONST.MODAL.HEADING}
+          </p>
+          <p className="text-center !text-base text-neutral-600">
+            {LISTINGS_TABLE_CONST.MODAL.DESCRIPTION}
+            <span className="font-medium">
+              {hook.selectedListing?.UNIT} {hook.selectedListing?.STREET},{" "}
+              {hook.selectedListing?.PROVINCE},{" "}
+              {hook.selectedListing?.POSTAL_CODE}
+            </span>
+            .
+            <br />
+            {LISTINGS_TABLE_CONST.MODAL.DESCRIPTION_2}
+          </p>
+        </div>
+        <div className="grid w-full grid-cols-2 gap-5">
+          <Button
+            onClick={() => {
+              hook.toggleModal({ listing: null });
+            }}
+          >
+            {LISTINGS_TABLE_CONST.MODAL.BUTTONS.CANCEL}
+          </Button>
+          <Button
+            onClick={() => {
+              hook.deleteListing(hook.selectedListing?.id!);
+            }}
+            additionalClasses="!text-neutral-50 !bg-red-600 hover:!bg-red-500 !border-red-800"
+          >
+            {hook.isDeleting && (
+              <CircleNotchIcon className="animate-spin" size={20} />
+            )}
+            {hook.success && <CheckIcon size={20} />}
+            {LISTINGS_TABLE_CONST.MODAL.BUTTONS.DELETE}
+          </Button>
+        </div>
+      </WarningModal>
     </>
   );
 };

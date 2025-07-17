@@ -1,10 +1,9 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { createClient } from "@/lib/supabase";
+import { supabase } from "@/utils/supabase/client";
 
 export const useLogin = () => {
-  const supabase = createClient();
   const router = useRouter();
 
   const [email, setEmail] = useState("");

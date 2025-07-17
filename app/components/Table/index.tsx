@@ -1,18 +1,17 @@
 "use client";
-import { Checkbox, Dropdown, IconButton } from "@/app/components";
+import { CaretLeftIcon, CaretRightIcon } from "@phosphor-icons/react";
+import { IconButton } from "@/app/components";
 import { TablePropTypes } from "./types";
 import { TABLE_CONST } from "./const";
-import {
-  ArrowsDownUpIcon,
-  CaretLeftIcon,
-  CaretRightIcon,
-} from "@phosphor-icons/react";
 
 export const Table = ({
   columns,
   children,
   tableName,
   tableCount,
+  showingAmountFrom,
+  showingAmountTo,
+  setShowingAmount,
 }: TablePropTypes) => {
   return (
     <>
@@ -20,9 +19,6 @@ export const Table = ({
         <table className="w-full">
           <thead>
             <tr className="h-15 border-b border-neutral-200">
-              <th className="flex h-16 w-16 min-w-16 items-center justify-center border-r border-neutral-200">
-                <Checkbox />
-              </th>
               {columns.map((column, index) => (
                 <th
                   key={index}
@@ -30,24 +26,6 @@ export const Table = ({
                 >
                   <span className="flex flex-row items-center gap-2">
                     {column.title}
-                    <Dropdown
-                      options={[
-                        {
-                          label: TABLE_CONST.DROPDOWNS.SORT.ASC,
-                          onClick: () => {},
-                        },
-                        {
-                          label: TABLE_CONST.DROPDOWNS.SORT.DESC,
-                          onClick: () => {},
-                        },
-                      ]}
-                      button={{
-                        name: TABLE_CONST.BUTTONS.SORT,
-                        icon: <ArrowsDownUpIcon />,
-                        additionalClasses:
-                          "bg-transparent hover:!bg-neutral-950/5 !rounded-xl !border-0 !shadow-none",
-                      }}
-                    />
                   </span>
                 </th>
               ))}
@@ -58,21 +36,34 @@ export const Table = ({
       </div>
       <div className="col-span-full mx-5 flex flex-row items-center justify-between">
         <p className="!text-sm text-neutral-400">
-          {TABLE_CONST.SHOWING} {tableCount < 10 ? tableCount : 10}{" "}
-          {TABLE_CONST.OF} {tableCount} {tableName}
+          {TABLE_CONST.SHOWING} {showingAmountFrom + 1}–
+          {Math.min(showingAmountTo, tableCount)} {TABLE_CONST.OF} {tableCount}{" "}
+          {tableName}
         </p>
         <div className="flex flex-row gap-2">
           <IconButton
             additionalClasses="!rounded-xl"
-            onClick={() => {}}
+            onClick={() => {
+              setShowingAmount({
+                from: showingAmountFrom - 10,
+                to: showingAmountTo - 10,
+              });
+            }}
             name={TABLE_CONST.BUTTONS.PREVIOUS}
+            disabled={showingAmountFrom <= 0}
           >
             <CaretLeftIcon />
           </IconButton>
           <IconButton
             additionalClasses="!rounded-xl"
-            onClick={() => {}}
+            onClick={() => {
+              setShowingAmount({
+                from: showingAmountFrom + 10,
+                to: showingAmountTo + 10,
+              });
+            }}
             name={TABLE_CONST.BUTTONS.NEXT}
+            disabled={showingAmountTo >= tableCount}
           >
             <CaretRightIcon />
           </IconButton>

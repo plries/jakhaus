@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { motion, easeInOut } from "motion/react";
+import { motion } from "motion/react";
 import { SectionPropTypes } from "@/app/types";
 import { SectionHeading, IconButton } from "@/app/components";
 import { PHOTOS_CONST } from "./const";
@@ -20,7 +20,7 @@ export const Photos = ({ CONSTANTS, FULL_ADDRESS }: SectionPropTypes) => {
         <SectionHeading>{PHOTOS_CONST.HEADING}</SectionHeading>
         <div className="col-span-full grid grid-cols-1 gap-5 p-5">
           <div className="flex flex-col gap-5 lg:flex-row">
-            {CONSTANTS.PHOTOS.PHOTOS_GALLERY.slice(0, 2).map((PHOTO, index) => (
+            {CONSTANTS.PHOTO_GALLERY.slice(0, 2).map((PHOTO, index) => (
               <motion.div
                 key={index}
                 initial={MOTION_CONFIG.DEFAULT.INITIAL}
@@ -30,10 +30,7 @@ export const Photos = ({ CONSTANTS, FULL_ADDRESS }: SectionPropTypes) => {
               >
                 <Image
                   className="h-full w-full object-cover object-center duration-300 ease-in-out group-hover:scale-105"
-                  style={{
-                    backgroundImage: `url(${PHOTO})`,
-                  }}
-                  src={PHOTO}
+                  src={PHOTO.URL}
                   alt={FULL_ADDRESS || ""}
                   width={1920}
                   height={1080}
@@ -48,7 +45,7 @@ export const Photos = ({ CONSTANTS, FULL_ADDRESS }: SectionPropTypes) => {
             ))}
           </div>
           <div className="flex flex-col gap-5 lg:flex-row">
-            {CONSTANTS.PHOTOS.PHOTOS_GALLERY.slice(2, 4).map((PHOTO, index) => (
+            {CONSTANTS.PHOTO_GALLERY.slice(2, 4).map((PHOTO, index) => (
               <motion.div
                 key={index}
                 initial={MOTION_CONFIG.DEFAULT.INITIAL}
@@ -58,10 +55,7 @@ export const Photos = ({ CONSTANTS, FULL_ADDRESS }: SectionPropTypes) => {
               >
                 <Image
                   className="h-full w-full object-cover object-center duration-300 ease-in-out group-hover:scale-105"
-                  style={{
-                    backgroundImage: `url(${PHOTO})`,
-                  }}
-                  src={PHOTO}
+                  src={PHOTO.URL}
                   alt={FULL_ADDRESS || ""}
                   width={1920}
                   height={1080}
@@ -85,7 +79,7 @@ export const Photos = ({ CONSTANTS, FULL_ADDRESS }: SectionPropTypes) => {
                         {PHOTOS_CONST.VIEW_ALL.NAME}
                         <span className="font-medium text-neutral-50">
                           {" "}
-                          {CONSTANTS.PHOTOS.PHOTOS_GALLERY.length}{" "}
+                          {CONSTANTS.PHOTO_GALLERY.length}{" "}
                         </span>
                         {PHOTOS_CONST.VIEW_ALL.PHOTOS}
                       </p>

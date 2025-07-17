@@ -2,10 +2,13 @@
 import { useEffect, useRef, useState } from "react";
 
 export const useInputSelector = () => {
-  const dropdownRef = useRef<HTMLDivElement>(null);
+    const dropdownRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
     const [isOpen, setIsOpen] = useState(false);
     const [dropdownPosition, setDropdownPosition] = useState({ top: 0, left: 0 });
+    const [inputValue, setInputValue] = useState("");
+    const [selectedOption, setSelectedOption] = useState("");
+    const [highlightedIndex, setHighlightedIndex] = useState(0);
   
     const toggleOpen = () => {
       setIsOpen(!isOpen);
@@ -36,7 +39,7 @@ export const useInputSelector = () => {
   
         // if dropdown goes beyond bottom edge
         if (buttonRect.bottom + dropdownRect.height > viewportHeight) {
-          top = buttonRect.top - dropdownRect.height + window.scrollY;
+          top = buttonRect.top - dropdownRect.height + window.scrollY - 20;
         }
   
         // if dropdown goes beyond right edge
@@ -56,13 +59,27 @@ export const useInputSelector = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, [isOpen]);
-  
-  
+
+    useEffect(() => {
+      if (isOpen) setHighlightedIndex(0);
+    }, [isOpen, inputValue]);
+
+    useEffect(() => {
+      if (inputValue === "") setSelectedOption("");
+    }, [inputValue]);
+
     return {
       dropdownRef,
       inputRef,
       isOpen,
+      setIsOpen,
       toggleOpen,
       dropdownPosition,
+      selectedOption,
+      setSelectedOption,
+      inputValue,
+      setInputValue,
+      highlightedIndex,
+      setHighlightedIndex,
     };
   }

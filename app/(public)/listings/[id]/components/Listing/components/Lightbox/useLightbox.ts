@@ -18,11 +18,11 @@ export const useLightbox = ({
   }
 
   const nextPhoto = () => {
-    setPhotoIndex((prevIndex) => (prevIndex + 1) % CONSTANTS.PHOTOS.PHOTOS_GALLERY.length)
+    setPhotoIndex((prevIndex) => (prevIndex + 1) % CONSTANTS.PHOTO_GALLERY.length)
   }
 
   const prevPhoto = () => {
-    setPhotoIndex((prevIndex) => (prevIndex - 1 + CONSTANTS.PHOTOS.PHOTOS_GALLERY.length) % CONSTANTS.PHOTOS.PHOTOS_GALLERY.length)
+    setPhotoIndex((prevIndex) => (prevIndex - 1 + CONSTANTS.PHOTO_GALLERY.length) % CONSTANTS.PHOTO_GALLERY.length)
   }
 
   useEffect(() => {

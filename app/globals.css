@@ -104,12 +104,25 @@ body {
 }
 
 ::selection {
-  background-color: var(--color-neutral-100);
-  color: var(--color-neutral-700);
+  background-color: var(--color-slate-200);
+  color: var(--color-slate-700);
 }
 
 .capitalize-first-letter::first-letter {
   text-transform: uppercase;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.1s ease-in-out forwards;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 p,

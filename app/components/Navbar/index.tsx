@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import { useRouter } from "next/navigation";
 import { useLenis } from "lenis/react";
 import { motion } from "motion/react";
 import {
@@ -10,7 +11,7 @@ import {
 } from "@phosphor-icons/react";
 import { JakhausLogo } from "@/public/icons";
 import { useWindowSize } from "@/app/hooks";
-import { createClient } from "@/lib/supabase";
+import { supabase } from "@/utils/supabase/client";
 import { IconButton } from "../IconButton";
 import { useMobileMenu } from "./useMobileMenu";
 import { useActiveSection } from "./useActiveSection";
@@ -21,10 +22,10 @@ import { MOTION_CONFIG } from "@/app/(public)/listings/[id]/const";
 import { usePathname } from "next/navigation";
 
 export const Navbar = ({ CONSTANTS, LINKS, dashboard }: NavbarPropTypes) => {
+  const router = useRouter();
   const pathname = usePathname();
   const mobileMenu = useMobileMenu();
   const windowSize = useWindowSize();
-  const supabase = createClient();
   const lenis = useLenis();
 
   const sectionIds = LINKS.map((link) => link.HREF.replace("#", ""));
@@ -32,6 +33,7 @@ export const Navbar = ({ CONSTANTS, LINKS, dashboard }: NavbarPropTypes) => {
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
+    router.replace("/login");
   };
 
   return (
@@ -53,40 +55,45 @@ export const Navbar = ({ CONSTANTS, LINKS, dashboard }: NavbarPropTypes) => {
           <nav className="contents" role="navigation">
             {LINKS.filter((LINK) => {
               if (dashboard) return true;
-              if (CONSTANTS)
-                return (
-                  !LINK.KEY || CONSTANTS[LINK.KEY as keyof typeof CONSTANTS]
-                );
-            }).map((LINK) => (
-              <React.Fragment key={LINK.KEY}>
-                {dashboard ? (
-                  <Button
-                    additionalClasses={`!rounded-full !border-transparent ${
-                      pathname.includes(LINK.HREF)
-                        ? "!bg-neutral-50/10 !text-neutral-50"
-                        : "bg-transparent !text-neutral-400 hover:!bg-neutral-50/10 hover:!text-neutral-50 !shadow-none"
-                    }`}
-                    href={LINK.HREF}
-                  >
-                    {LINK.NAME}
-                  </Button>
-                ) : (
-                  <Button
-                    additionalClasses={`!rounded-full !border-transparent ${
-                      activeSection === LINK.HREF.replace("#", "")
-                        ? "!bg-neutral-50/10 !text-neutral-50"
-                        : "bg-transparent !text-neutral-400 hover:!bg-neutral-50/10 hover:!text-neutral-50 !shadow-none"
-                    } ${LINK.KEY === "AGENT" ? "!bg-neutral-50 !text-neutral-950 hover:!bg-neutral-50/90 hover:!text-neutral-950" : ""} `}
-                    onClick={() => {
-                      lenis?.scrollTo(LINK.HREF);
-                    }}
-                  >
-                    {LINK.KEY === "AGENT" && <UserCircleIcon />}
-                    {LINK.NAME}
-                  </Button>
-                )}
-              </React.Fragment>
-            ))}
+              if (CONSTANTS) {
+                const value = CONSTANTS[LINK.KEY as keyof typeof CONSTANTS];
+                if (Array.isArray(value)) {
+                  return value.length > 0;
+                }
+                return !!value;
+              }
+            })
+
+              .map((LINK) => (
+                <React.Fragment key={LINK.KEY}>
+                  {dashboard ? (
+                    <Button
+                      additionalClasses={`!rounded-full !border-transparent ${
+                        pathname.includes(LINK.HREF)
+                          ? "!bg-neutral-50/10 !text-neutral-50"
+                          : "bg-transparent !text-neutral-400 hover:!bg-neutral-50/10 hover:!text-neutral-50 !shadow-none"
+                      }`}
+                      href={LINK.HREF}
+                    >
+                      {LINK.NAME}
+                    </Button>
+                  ) : (
+                    <Button
+                      additionalClasses={`!rounded-full !border-transparent ${
+                        activeSection === LINK.HREF.replace("#", "")
+                          ? "!bg-neutral-50/10 !text-neutral-50"
+                          : "bg-transparent !text-neutral-400 hover:!bg-neutral-50/10 hover:!text-neutral-50 !shadow-none"
+                      } ${LINK.KEY === "ASSIGNED_AGENT" ? "!bg-neutral-50 !text-neutral-950 hover:!bg-neutral-50/90 hover:!text-neutral-950" : ""} `}
+                      onClick={() => {
+                        lenis?.scrollTo(LINK.HREF);
+                      }}
+                    >
+                      {LINK.KEY === "ASSIGNED_AGENT" && <UserCircleIcon />}
+                      {LINK.NAME}
+                    </Button>
+                  )}
+                </React.Fragment>
+              ))}
           </nav>
           {dashboard && (
             <IconButton onClick={handleLogout} name={NAVBAR_CONST.LOGOUT}>
@@ -114,10 +121,13 @@ export const Navbar = ({ CONSTANTS, LINKS, dashboard }: NavbarPropTypes) => {
             <nav className="contents" role="navigation">
               {LINKS.filter((LINK) => {
                 if (dashboard) return true;
-                if (CONSTANTS)
-                  return (
-                    !LINK.KEY || CONSTANTS[LINK.KEY as keyof typeof CONSTANTS]
-                  );
+                if (CONSTANTS) {
+                  const value = CONSTANTS[LINK.KEY as keyof typeof CONSTANTS];
+                  if (Array.isArray(value)) {
+                    return value.length > 0;
+                  }
+                  return !!value;
+                }
               }).map((LINK) => (
                 <React.Fragment key={LINK.KEY}>
                   {dashboard ? (
@@ -128,6 +138,7 @@ export const Navbar = ({ CONSTANTS, LINKS, dashboard }: NavbarPropTypes) => {
                           : "!text-neutral-400 hover:!bg-neutral-50/10 hover:text-neutral-50 !shadow-none"
                       } `}
                       href={LINK.HREF}
+                      onClick={() => mobileMenu.toggleOpen()}
                     >
                       {LINK.NAME}
                     </Button>

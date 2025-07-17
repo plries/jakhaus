@@ -1,6 +1,6 @@
 import { JakhausLogo } from "@/public/icons";
 import LogoCarousel from "../components/LogoCarousel";
-import { title } from "process";
+import ImageCarouselScroll from "../components/ImageCarouselScroll";
 import ServiceCarousel from "../components/ServiceCarousel";
 
 export default function Home() {
@@ -9,6 +9,7 @@ export default function Home() {
       <Hero />
       <About />
       <Services />
+      <Benefit />
       <Contact />
     </>
   );
@@ -16,8 +17,11 @@ export default function Home() {
 
 const Hero = () => {
   return (
-    <section className="flex h-screen w-full items-center justify-center bg-transparent">
-      <div className="z-1 translate-y-[-48px]">
+    <section
+      className="relative flex h-screen w-full items-center justify-center bg-transparent"
+      id="hero"
+    >
+      <div className="z-1 scale-40 sm:scale-50 lg:scale-100">
         <div className="max-w-[800px] invert">
           <JakhausLogo width={800} />
         </div>
@@ -25,7 +29,7 @@ const Hero = () => {
           <span className="sr-only">Jakhaus</span>Real Estate Media
         </h2>
       </div>
-      <div className="">
+      <div>
         <HeroVideo src="/videos/hero-banner.mp4" />
       </div>
     </section>
@@ -51,8 +55,8 @@ const HeroVideo = ({ src }: { src: string }) => {
 
 const About = () => {
   return (
-    <section className="w-full bg-gray-950">
-      <div className="px-32 pt-20">
+    <section className="w-full bg-gray-950" id="about">
+      <div className="p-8 lg:px-32 lg:pt-20">
         <h2 className="text-6xl font-bold text-gray-50">About Us</h2>
         <p className="mt-4 text-base text-gray-300">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
@@ -71,13 +75,39 @@ const About = () => {
 
 const Services = () => {
   return (
-    <section className="w-full bg-gray-50">
-      <div className="px-32 pt-20">
+    <section className="w-full bg-gray-50" id="services">
+      <div className="p-8 lg:px-32 lg:pt-20">
         <h2 className="text-6xl font-bold text-gray-950">Services</h2>
         <p className="sr-only">Learn more about our mission and values.</p>
       </div>
-      <div className="py-12">
+      <div className="lg:py-12">
         <ServiceCarousel />
+      </div>
+      <div className="lg:py-12">
+        <ImageCarouselScroll />
+      </div>
+    </section>
+  );
+};
+
+const Benefit = () => {
+  return (
+    <section
+      className="relative flex min-h-[800px] w-full flex-col items-center justify-center bg-gray-950 lg:flex-row"
+      id="benefit"
+    >
+      <div className="flex w-full max-w-2xl flex-col justify-center p-8 lg:w-1/2 lg:max-w-full lg:px-32 lg:py-20">
+        <h2 className="text-6xl font-bold text-gray-50">Why choose us?</h2>
+        <p className="mt-4 text-base text-gray-300">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat. Duis aute irure dolor in
+          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+        </p>
+      </div>
+      <div className="absolute inset-0 w-full opacity-25 lg:relative lg:h-[800px] lg:w-1/2 lg:opacity-100">
+        <HeroVideo src="/videos/hero-banner.mp4" />
       </div>
     </section>
   );
@@ -85,12 +115,48 @@ const Services = () => {
 
 const Contact = () => {
   return (
-    <section className="flex h-screen w-full items-center justify-center bg-gray-400">
-      <div className="text-center">
-        <h2 className="text-3xl font-semibold text-gray-800">Contact Us</h2>
-        <p className="mt-4 text-lg text-gray-600">
-          Get in touch with us for any inquiries or support.
+    <section className="w-full bg-neutral-50 py-20" id="contact">
+      <div className="p-8 text-center lg:px-32">
+        <h2 className="text-6xl font-bold text-gray-950">
+          Ready to collaborate?
+        </h2>
+        <p className="mt-4 text-base text-gray-600">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
         </p>
+      </div>
+      <div className="mx-auto max-w-2xl p-8">
+        <form action="">
+          <div className="mb-4">
+            <label className="block text-gray-950" htmlFor="name">
+              Name
+            </label>
+            <input
+              className="w-full rounded-md border border-gray-300 bg-gray-50 p-2 text-gray-950"
+              type="text"
+              id="name"
+              name="name"
+              required
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block text-gray-950" htmlFor="email">
+              Email
+            </label>
+            <input
+              className="w-full rounded-md border border-gray-300 bg-gray-50 p-2 text-gray-950"
+              type="email"
+              id="email"
+              name="email"
+              required
+            />
+          </div>
+          <button
+            type="submit"
+            className="rounded-md bg-neutral-900 px-4 py-2 text-white hover:bg-neutral-700 cursor-pointer"
+          >
+            Submit
+          </button>
+        </form>
       </div>
     </section>
   );

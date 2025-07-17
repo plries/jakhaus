@@ -20,6 +20,7 @@ import { NAVBAR_CONST } from "./const";
 import { Button } from "../Button";
 import { MOTION_CONFIG } from "@/app/(public)/listings/[id]/const";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 export const Navbar = ({ CONSTANTS, LINKS, dashboard }: NavbarPropTypes) => {
   const router = useRouter();
@@ -42,12 +43,12 @@ export const Navbar = ({ CONSTANTS, LINKS, dashboard }: NavbarPropTypes) => {
       animate={MOTION_CONFIG.HEADER.ANIMATE}
       transition={MOTION_CONFIG.TRANSITION}
       role="banner"
-      className={`sticky top-2.5 z-50 col-span-full mx-auto flex w-fit flex-row items-center justify-center gap-3 rounded-full border border-neutral-800/50 bg-neutral-950 p-3 shadow-xl ${dashboard ? "" : "mb-5"}`}
+      className={`fixed top-2.5 right-0 left-0 z-50 col-span-full mx-auto flex w-fit flex-row items-center justify-center gap-3 rounded-full border border-neutral-800/50 bg-neutral-950 p-3 shadow-xl ${dashboard ? "" : "mb-5"}`}
     >
       <div className="ml-3 flex h-fit items-center justify-center gap-2 text-neutral-50">
-        <button className="cursor-pointer" onClick={() => lenis?.scrollTo(0)}>
+        <Link className="cursor-pointer" href={"/"}>
           <JakhausLogo />
-        </button>
+        </Link>
       </div>
       <div className="ml-3 h-8 w-[1px] bg-neutral-600" />
       {!windowSize.isTablet && (
@@ -55,45 +56,43 @@ export const Navbar = ({ CONSTANTS, LINKS, dashboard }: NavbarPropTypes) => {
           <nav className="contents" role="navigation">
             {LINKS.filter((LINK) => {
               if (dashboard) return true;
-              if (CONSTANTS) {
-                const value = CONSTANTS[LINK.KEY as keyof typeof CONSTANTS];
-                if (Array.isArray(value)) {
-                  return value.length > 0;
-                }
-                return !!value;
+              // Adds extra check for CONSTANTS if it exist. If this is removed, this causes falsey which returns no values.
+              if (!CONSTANTS) return true;
+              const value = CONSTANTS[LINK.KEY as keyof typeof CONSTANTS];
+              if (Array.isArray(value)) {
+                return value.length > 0;
               }
-            })
-
-              .map((LINK) => (
-                <React.Fragment key={LINK.KEY}>
-                  {dashboard ? (
-                    <Button
-                      additionalClasses={`!rounded-full !border-transparent ${
-                        pathname.includes(LINK.HREF)
-                          ? "!bg-neutral-50/10 !text-neutral-50"
-                          : "bg-transparent !text-neutral-400 hover:!bg-neutral-50/10 hover:!text-neutral-50 !shadow-none"
-                      }`}
-                      href={LINK.HREF}
-                    >
-                      {LINK.NAME}
-                    </Button>
-                  ) : (
-                    <Button
-                      additionalClasses={`!rounded-full !border-transparent ${
-                        activeSection === LINK.HREF.replace("#", "")
-                          ? "!bg-neutral-50/10 !text-neutral-50"
-                          : "bg-transparent !text-neutral-400 hover:!bg-neutral-50/10 hover:!text-neutral-50 !shadow-none"
-                      } ${LINK.KEY === "ASSIGNED_AGENT" ? "!bg-neutral-50 !text-neutral-950 hover:!bg-neutral-50/90 hover:!text-neutral-950" : ""} `}
-                      onClick={() => {
-                        lenis?.scrollTo(LINK.HREF);
-                      }}
-                    >
-                      {LINK.KEY === "ASSIGNED_AGENT" && <UserCircleIcon />}
-                      {LINK.NAME}
-                    </Button>
-                  )}
-                </React.Fragment>
-              ))}
+              return !!value;
+            }).map((LINK) => (
+              <React.Fragment key={LINK.KEY}>
+                {dashboard ? (
+                  <Button
+                    additionalClasses={`!rounded-full !border-transparent ${
+                      pathname.includes(LINK.HREF)
+                        ? "!bg-neutral-50/10 !text-neutral-50"
+                        : "bg-transparent !text-neutral-400 hover:!bg-neutral-50/10 hover:!text-neutral-50 !shadow-none"
+                    }`}
+                    href={LINK.HREF}
+                  >
+                    {LINK.NAME}
+                  </Button>
+                ) : (
+                  <Button
+                    additionalClasses={`!rounded-full !border-transparent ${
+                      activeSection === LINK.HREF.replace("#", "")
+                        ? "!bg-neutral-50/10 !text-neutral-50"
+                        : "bg-transparent !text-neutral-400 hover:!bg-neutral-50/10 hover:!text-neutral-50 !shadow-none"
+                    } ${LINK.KEY === "ASSIGNED_AGENT" ? "!bg-neutral-50 !text-neutral-950 hover:!bg-neutral-50/90 hover:!text-neutral-950" : ""} `}
+                    onClick={() => {
+                      lenis?.scrollTo(LINK.HREF);
+                    }}
+                  >
+                    {LINK.KEY === "ASSIGNED_AGENT" && <UserCircleIcon />}
+                    {LINK.NAME}
+                  </Button>
+                )}
+              </React.Fragment>
+            ))}
           </nav>
           {dashboard && (
             <IconButton onClick={handleLogout} name={NAVBAR_CONST.LOGOUT}>
@@ -121,15 +120,16 @@ export const Navbar = ({ CONSTANTS, LINKS, dashboard }: NavbarPropTypes) => {
             <nav className="contents" role="navigation">
               {LINKS.filter((LINK) => {
                 if (dashboard) return true;
-                if (CONSTANTS) {
-                  const value = CONSTANTS[LINK.KEY as keyof typeof CONSTANTS];
-                  if (Array.isArray(value)) {
-                    return value.length > 0;
-                  }
-                  return !!value;
+                // Adds extra check for CONSTANTS if it exist. If this is removed, this causes falsey which returns no values.
+                if (!CONSTANTS) return true;
+                const value = CONSTANTS[LINK.KEY as keyof typeof CONSTANTS];
+                if (Array.isArray(value)) {
+                  return value.length > 0;
                 }
+                return !!value;
               }).map((LINK) => (
                 <React.Fragment key={LINK.KEY}>
+  
                   {dashboard ? (
                     <Button
                       additionalClasses={`!rounded-full bg-transparent !border-transparent !justify-start ${

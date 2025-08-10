@@ -3,12 +3,27 @@
 import { useScroll, useTransform, motion } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 
-const images = [
-  "images/house-1.jpg",
-  "images/house-2.jpg",
-  "images/house-3.png",
-  "images/house-4.jpg",
-  "images/house-5.jpeg",
+const listingImages = [
+  {
+    src: "/images/listings/house-listing-1.jpg",
+    alt: "Listing Image 1",
+  },
+  {
+    src: "/images/listings/house-listing-2.jpg",
+    alt: "Listing Image 2",
+  },
+  {
+    src: "/images/listings/house-listing-3.jpg",
+    alt: "Listing Image 3",
+  },
+  {
+    src: "/images/listings/house-listing-4.jpg",
+    alt: "Listing Image 4",
+  },
+  {
+    src: "/images/listings/house-listing-5.jpg",
+    alt: "Listing Image 5",
+  },
 ];
 
 export default function ScrollImageRow() {
@@ -44,12 +59,12 @@ export default function ScrollImageRow() {
     <div className="py-10">
       <div ref={wrapperRef} className="sticky top-20 overflow-hidden">
         <motion.div ref={contentRef} style={{ x }} className="flex w-max gap-2">
-          {images.map((src, i) => (
+          {listingImages.map((image, i) => (
             <img
               key={i}
-              src={src}
+              src={image.src}
               className="aspect-video w-[200px] object-cover md:w-[300px] lg:w-[400px]"
-              alt={`img-${i}`}
+              alt={image.alt}
             />
           ))}
         </motion.div>

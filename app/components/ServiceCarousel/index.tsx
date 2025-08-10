@@ -10,31 +10,29 @@ import {
 
 const SERVICE_DATA = [
   {
-    title: "Photography",
+    title: "Listing Media",
     subtitle: "Media",
-    description:
-      "High-quality real estate photography to showcase your property.",
+    description: "We shoot to sell. Photos, Videos, Drone, Floor Plan ",
     icon: HeartIcon,
   },
   {
     title: "Videography",
     subtitle: "Media",
     description:
-      "Professional video tours to give potential buyers a virtual walkthrough.",
+      "Branded signage, feature sheets, and custom collateral to back up your first impressions.",
     icon: SpadeIcon,
   },
   {
-    title: "3D Scans",
+    title: "Cred Clipss",
     subtitle: "Media",
     description:
-      "Detailed floor plans to help buyers visualize the layout of your property.",
+      "Testimonial and tip-style videos that build trust, to position you as a credible resource.",
     icon: ClubIcon,
   },
   {
-    title: "Feature Sheets",
-    subtitle: "Consultation",
-    description:
-      "Immersive virtual tours for an interactive viewing experience.",
+    title: "The HausLink *NEW*",
+    subtitle: "Media",
+    description: "A sleek, mobile-friendly one-pager for all your media.",
     icon: DiamondIcon,
   },
 ];
@@ -111,7 +109,7 @@ const ServiceCard = ({
 }) => {
   return (
     <div
-      className={`absolute top-0 h-full min-h-[560px] min-w-[450px] cursor-pointer rounded-xl p-8 transition-all duration-500 ease-in-out ${
+      className={`absolute top-0 h-full min-h-[560px] min-w-[450px] max-w-[450px] max-h-[560px] cursor-pointer rounded-xl p-8 transition-all duration-500 ease-in-out ${
         index === 3
           ? "bg-neutral-950 text-white"
           : index === 2
@@ -144,8 +142,10 @@ const ServiceCard = ({
         <serviceData.icon width={48} />
       </div>
       <div className="mt-8 flex items-center justify-between">
-        <div className="text-xl font-semibold">{serviceData.subtitle}</div>
-        <div className="text-4xl font-semibold text-right">{serviceData.title}</div>
+        {/* <div className="text-xl font-semibold">{serviceData.subtitle}</div> */}
+        <div className="text-right text-4xl font-semibold">
+          {serviceData.title}
+        </div>
       </div>
       <div className="mb-4 flex items-center justify-center py-8">
         <serviceData.icon width={250} />

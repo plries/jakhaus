@@ -1,8 +1,8 @@
-import { JakhausLogo } from "@/public/icons";
 import LogoCarousel from "../components/LogoCarousel";
 import ImageCarouselScroll from "../components/ImageCarouselScroll";
 import ServiceCarousel from "../components/ServiceCarousel";
 import ContactSection from "../components/ContactForm";
+import Image from "next/image";
 
 export default function Home() {
   return (
@@ -23,10 +23,15 @@ const Hero = () => {
       id="hero"
     >
       <div className="z-1 scale-40 sm:scale-50 lg:scale-100">
-        <div className="max-w-[800px] invert">
-          <JakhausLogo width={800} />
+        <div className="max-w-[800px]">
+          <Image
+            src="/images/logos/JH_Real_Estate.svg"
+            alt="Jakhaus Logo"
+            width={800}
+            height={200}
+          />
         </div>
-        <h2 className="translate-y-[-52px] pr-6 text-right text-[50px] tracking-widest text-gray-50 uppercase">
+        <h2 className="sr-only translate-y-[-52px] pr-6 text-right text-[50px] tracking-widest text-gray-50 uppercase">
           <span className="sr-only">Jakhaus</span>Real Estate Media
         </h2>
       </div>
@@ -61,11 +66,10 @@ const About = () => {
         <div className="p-8 lg:px-32 lg:pt-20">
           <h2 className="text-6xl font-bold text-gray-50">About Us</h2>
           <p className="mt-4 text-base text-gray-300">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+            We're a jack-of-all-trades crew that knows how the Real Estate
+            industry moves. From video to 3D tours, photography to visual
+            branding, we cover the full spectrum of marketing with intentional
+            design and a collaborative touch.
           </p>
         </div>
       </div>
@@ -102,11 +106,10 @@ const Benefit = () => {
         <div className="order-1 flex w-full max-w-2xl flex-col justify-center py-16 lg:w-1/2 lg:max-w-full lg:px-32 lg:py-20">
           <h2 className="text-6xl font-bold text-gray-50">Why choose us?</h2>
           <p className="mt-4 text-base text-gray-300">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+            Jakhaus is a design-forward media team shaped by years of real
+            estate marketing experience. We've worked together through
+            back-to-back shoots and daily edits gaining a sharp eye for what
+            works and how to get it done right.
           </p>
         </div>
         <div className="relative order-2 h-[400px] w-full lg:right-0 lg:-mr-16 lg:h-[800px] lg:w-1/2 xl:-mr-32">

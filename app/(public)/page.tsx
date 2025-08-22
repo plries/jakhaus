@@ -1,6 +1,7 @@
 import LogoCarousel from "../components/LogoCarousel";
 import ImageCarouselScroll from "../components/ImageCarouselScroll";
 import ServiceCarousel from "../components/ServiceCarousel";
+import ContactSection from "../components/ContactForm";
 import Image from "next/image";
 
 export default function Home() {
@@ -10,7 +11,7 @@ export default function Home() {
       <About />
       <Services />
       <Benefit />
-      <Contact />
+      <ContactSection />
     </>
   );
 }
@@ -121,53 +122,3 @@ const Benefit = () => {
   );
 };
 
-const Contact = () => {
-  return (
-    <section className="w-full bg-neutral-50 py-20" id="contact">
-      <div className="mx-auto max-w-[1440px]">
-        <div className="p-8 text-center lg:px-32">
-          <h2 className="text-6xl font-bold text-gray-950">
-            Ready to collaborate?
-          </h2>
-          <p className="mt-4 text-base text-gray-600">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-          </p>
-        </div>
-        <div className="mx-auto max-w-2xl p-8">
-          <form action="">
-            <div className="mb-4">
-              <label className="block text-gray-950" htmlFor="name">
-                Name
-              </label>
-              <input
-                className="w-full rounded-md border border-gray-300 bg-gray-50 p-2 text-gray-950"
-                type="text"
-                id="name"
-                name="name"
-                required
-              />
-            </div>
-            <div className="mb-4">
-              <label className="block text-gray-950" htmlFor="email">
-                Email
-              </label>
-              <input
-                className="w-full rounded-md border border-gray-300 bg-gray-50 p-2 text-gray-950"
-                type="email"
-                id="email"
-                name="email"
-                required
-              />
-            </div>
-            <button
-              type="submit"
-              className="cursor-pointer rounded-md bg-neutral-900 px-4 py-2 text-white hover:bg-neutral-700"
-            >
-              Submit
-            </button>
-          </form>
-        </div>
-      </div>
-    </section>
-  );
-};

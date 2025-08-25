@@ -2,7 +2,6 @@
 
 import Slider from "react-infinite-logo-slider";
 import Image from "next/image";
-import { JakhausLogo } from "@/public/icons";
 
 const LOGO_IMAGES = [
   {
@@ -33,16 +32,16 @@ const LOGO_IMAGES = [
 
 export default function LogoCarousel() {
   return (
-    <Slider duration={10} pauseOnHover={true} width="250px">
+    <Slider duration={25} pauseOnHover={true} width="250px">
       {LOGO_IMAGES.map((logo, index) => (
         <Slider.Slide key={index}>
-          <div className="invert">
+          <div className="opacity-75 invert">
             <Image
               src={logo.src}
               alt={logo.alt}
               width={200}
               height={200}
-              objectFit="contain"
+              style={{ width: "150px", height: "auto" }}
             />
           </div>
         </Slider.Slide>

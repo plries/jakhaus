@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-export default function ContactSection() {
+export default function Contact() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);

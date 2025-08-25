@@ -1,7 +1,7 @@
 import LogoCarousel from "../components/LogoCarousel";
 import ImageCarouselScroll from "../components/ImageCarouselScroll";
 import ServiceCarousel from "../components/ServiceCarousel";
-import ContactSection from "../components/ContactForm";
+import Contact from "../components/ContactForm";
 import Image from "next/image";
 
 export default function Home() {
@@ -11,7 +11,7 @@ export default function Home() {
       <About />
       <Services />
       <Benefit />
-      <ContactSection />
+      <Contact />
     </>
   );
 }
@@ -29,6 +29,7 @@ const Hero = () => {
             alt="Jakhaus Logo"
             width={800}
             height={200}
+            priority
           />
         </div>
         <h2 className="sr-only translate-y-[-52px] pr-6 text-right text-[50px] tracking-widest text-gray-50 uppercase">
@@ -36,7 +37,7 @@ const Hero = () => {
         </h2>
       </div>
       <div>
-        <HeroVideo src="/videos/hero-banner.mp4" />
+        <HeroVideo src="/videos/hero-banner.mov" />
       </div>
     </section>
   );
@@ -112,9 +113,9 @@ const Benefit = () => {
             works and how to get it done right.
           </p>
         </div>
-        <div className="relative order-2 h-[400px] w-full lg:right-0 lg:-mr-16 lg:h-[800px] lg:w-1/2 xl:-mr-32">
+        <div className="relative order-2 h-[600px] w-full lg:right-0 lg:-mr-16 lg:h-[800px] lg:w-1/2 xl:-mr-32">
           <div className="absolute inset-0 h-full w-full">
-            <HeroVideo src="/videos/hero-banner.mp4" />
+            <HeroVideo src="/videos/how-we-do.mp4" />
           </div>
         </div>
       </div>

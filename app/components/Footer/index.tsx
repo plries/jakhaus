@@ -29,7 +29,7 @@ export const Footer = ({ LINKS }: NavbarPropTypes) => {
   const lenis = useLenis();
 
   return (
-    <footer className="bg-gray-950 pt-16 pb-4 text-white">
+    <footer className="relative pt-16 pb-4 text-white">
       <div className="mx-auto max-w-[1440px]">
         <div className="text container mx-auto grid grid-cols-1 gap-6 px-4 sm:grid-cols-3">
           <div>
@@ -81,6 +81,13 @@ export const Footer = ({ LINKS }: NavbarPropTypes) => {
             © {new Date().getFullYear()} Jakhaus. All rights reserved.
           </div>
         </div>
+      </div>
+      <div className="absolute inset-0 -z-10">
+        <div
+          className="absolute top-0 left-0 h-full w-full bg-cover bg-center mix-blend-multiply"
+          style={{ backgroundImage: "url('/images/overlay.jpg')" }}
+        />
+        <div className="h-full w-full bg-gradient-to-b from-neutral-700 to-neutral-950" />
       </div>
     </footer>
   );

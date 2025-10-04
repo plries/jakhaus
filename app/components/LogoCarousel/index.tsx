@@ -28,6 +28,18 @@ const LOGO_IMAGES = [
     src: "/images/logos/Client-Logos_MM-REP.svg",
     alt: "Client Logo F",
   },
+  {
+    src: "/images/logos/Client-Logos_RD-RE.svg",
+    alt: "Client Logo G",
+  },
+  {
+    src: "/images/logos/Client-Logos_MD-RE.svg",
+    alt: "Client Logo H",
+  },
+  {
+    src: "/images/logos/Client-Logos_JK-RE.svg",
+    alt: "Client Logo I",
+  },
 ];
 
 export default function LogoCarousel() {
@@ -41,7 +53,7 @@ export default function LogoCarousel() {
               alt={logo.alt}
               width={200}
               height={200}
-              style={{ width: "150px", height: "auto" }}
+              style={{ width: "200px", height: "auto" }}
             />
           </div>
         </Slider.Slide>

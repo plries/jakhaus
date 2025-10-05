@@ -62,7 +62,7 @@ export default function ServiceCarousel() {
           {SERVICE_DATA.map((service, index) => (
             <div
               key={index}
-              className={`flex flex-col rounded-xl p-6 relative ${
+              className={`relative flex flex-col overflow-hidden rounded-xl p-6 ${
                 index === 3
                   ? "bg-neutral-950 text-white"
                   : index === 2
@@ -72,6 +72,12 @@ export default function ServiceCarousel() {
                       : "bg-neutral-100 text-neutral-600"
               }`}
             >
+              <div className="absolute inset-0">
+                <div
+                  className="absolute inset-0 top-0 left-0 h-full w-full bg-cover bg-center opacity-15 mix-blend-multiply"
+                  style={{ backgroundImage: "url('/images/overlay.jpg')" }}
+                />
+              </div>
               <div className="">
                 <div className="text-2xl font-semibold">{service.title}</div>
                 <div className="text-xl font-light">{service.subtitle}</div>
@@ -79,11 +85,17 @@ export default function ServiceCarousel() {
               <div className="mt-auto pt-4 text-sm opacity-90">
                 {service.description}
               </div>
-              <div className="absolute  -z-10">
-                <div
-                  className="absolute  inset-0 top-0 left-0 h-full w-full bg-cover bg-center mix-blend-multiply"
-                  style={{ backgroundImage: "url('/images/overlay.jpg')" }}
-                />
+              <div className="absolute top-4 right-2">
+                <div className="opacity-50 invert">
+                  <Image
+                    className={`${index == 0 || index == 1 ? "invert" : ""}`}
+                    src={service.icon}
+                    alt={service.alt}
+                    width={200}
+                    height={200}
+                    style={{ width: "100px", height: "auto" }}
+                  />
+                </div>
               </div>
             </div>
           ))}
@@ -119,7 +131,7 @@ const ServiceCard = ({
 }) => {
   return (
     <div
-      className={`absolute top-0 flex h-full max-h-[620px] min-h-[620px] max-w-[450px] min-w-[450px] cursor-pointer flex-col justify-center overflow-hidden rounded-xl bg-gradient-to-b p-8 shadow-inner shadow-neutral-200/100 transition-all duration-500 ease-in-out ${
+      className={`absolute top-0 flex h-full max-h-[620px] min-h-[620px] max-w-[450px] min-w-[450px] cursor-pointer flex-col justify-center overflow-hidden rounded-[48px] bg-gradient-to-b p-8 shadow-inner shadow-neutral-200/100 transition-all duration-500 ease-in-out ${
         index === 0
           ? "from-neutral-950 to-neutral-700 text-white"
           : index === 1

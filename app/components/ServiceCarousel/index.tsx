@@ -62,23 +62,25 @@ export default function ServiceCarousel() {
           {SERVICE_DATA.map((service, index) => (
             <div
               key={index}
-              className={`relative flex flex-col overflow-hidden rounded-xl p-6 ${
-                index === 3
-                  ? "bg-neutral-950 text-white"
-                  : index === 2
-                    ? "bg-neutral-700 text-white"
-                    : index === 1
-                      ? "bg-neutral-200 text-neutral-800"
-                      : "bg-neutral-100 text-neutral-600"
+              className={`relative flex flex-col overflow-hidden rounded-xl bg-gradient-to-b p-6 ${
+                index === 0
+                  ? "from-neutral-950 to-neutral-700 text-white"
+                  : index === 1
+                    ? "from-neutral-700 to-neutral-500 text-white"
+                    : index === 2
+                      ? "from-neutral-400 to-neutral-200 text-neutral-900"
+                      : index === 3
+                        ? "from-neutral-100 to-neutral-600"
+                        : "from-neutral-950 to-neutral-700 text-white"
               }`}
             >
               <div className="absolute inset-0">
                 <div
-                  className="absolute inset-0 top-0 left-0 h-full w-full bg-cover bg-center opacity-15 mix-blend-multiply"
+                  className="absolute inset-0 top-0 left-0 h-full w-full bg-cover bg-center opacity-50 mix-blend-multiply"
                   style={{ backgroundImage: "url('/images/overlay.jpg')" }}
                 />
               </div>
-              <div className="">
+              <div className="z-10">
                 <div className="text-2xl font-semibold">{service.title}</div>
                 <div className="text-xl font-light">{service.subtitle}</div>
               </div>
@@ -86,9 +88,9 @@ export default function ServiceCarousel() {
                 {service.description}
               </div>
               <div className="absolute top-4 right-2">
-                <div className="opacity-50 invert">
+                <div className="opacity-15 invert">
                   <Image
-                    className={`${index == 0 || index == 1 ? "invert" : ""}`}
+                    className={`${index == 3 || index == 2 ? "invert" : ""}`}
                     src={service.icon}
                     alt={service.alt}
                     width={200}
@@ -137,7 +139,7 @@ const ServiceCard = ({
           : index === 1
             ? "from-neutral-700 to-neutral-500 text-white"
             : index === 2
-              ? "from-neutral-200 to-neutral-100 text-neutral-800"
+              ? "from-neutral-400 to-neutral-200 text-neutral-900"
               : index === 3
                 ? "from-neutral-100 to-neutral-600"
                 : "from-neutral-950 to-neutral-700 text-white"

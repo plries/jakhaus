@@ -106,7 +106,7 @@ const Services = () => {
           </h2>
           <p className="sr-only">Learn more about our mission and values.</p>
         </div>
-        <div className="lg:py-12">
+        <div className="md:py-12">
           <ServiceCarousel />
         </div>
       </div>

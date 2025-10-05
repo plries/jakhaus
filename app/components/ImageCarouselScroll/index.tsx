@@ -63,7 +63,7 @@ export default function ScrollImageRow() {
             <img
               key={i}
               src={image.src}
-              className="aspect-video w-[200px] object-cover md:w-[300px] lg:w-[400px]"
+              className="aspect-video w-[200px] object-cover md:w-[300px] lg:w-[400px] xl:w-[500px]"
               alt={image.alt}
             />
           ))}

@@ -7,33 +7,40 @@ import {
   DiamondIcon,
   JakhausLogo,
 } from "@/public/icons";
+import Image from "next/image";
 
 const SERVICE_DATA = [
   {
     title: "Listing Media",
-    subtitle: "Media",
-    description: "We shoot to sell. Photos, Videos, Drone, Floor Plan ",
-    icon: HeartIcon,
-  },
-  {
-    title: "Videography",
-    subtitle: "Media",
+    subtitle: "We shoot to sell.",
     description:
-      "Branded signage, feature sheets, and custom collateral to back up your first impressions.",
-    icon: SpadeIcon,
+      "Photos, Videos, Drone, Floor Plan, 3D Scan & Listing Look Books",
+    icon: "/icons/JH-Icons-01.svg",
+    alt: "Listing Media Icon",
   },
   {
-    title: "Cred Clipss",
-    subtitle: "Media",
+    title: "Print + Brand Design",
+    subtitle: "Back up your first impressions",
     description:
-      "Testimonial and tip-style videos that build trust, to position you as a credible resource.",
-    icon: ClubIcon,
+      "Signage, Business Cards, and flyers to custom crafted social media graphics",
+    icon: "/icons/JH-Icons-02.svg",
+    alt: "Print and Brand Design Icon",
   },
   {
-    title: "The HausLink *NEW*",
-    subtitle: "Media",
-    description: "A sleek, mobile-friendly one-pager for all your media.",
-    icon: DiamondIcon,
+    title: "Cred Clips",
+    subtitle: "Build Trust.",
+    description:
+      "Testimonial & tip-style videos that position you as a credible resource",
+    icon: "/icons/JH-Icons-03.svg",
+    alt: "Cred Clips Icon",
+  },
+  {
+    title: "The HausLink",
+    subtitle: "One link, All your media.",
+    description:
+      "A sleek, mobile & desktop-friendly one-pager for all your media",
+    icon: "/icons/JH-Icons-04.svg",
+    alt: "The HausLink Icon",
   },
 ];
 
@@ -41,7 +48,8 @@ type ServiceCardProps = {
   title: string;
   subtitle: string;
   description: string;
-  icon: React.ComponentType<{ width?: number }>;
+  icon: string;
+  alt: string;
 };
 
 export default function ServiceCarousel() {
@@ -54,26 +62,42 @@ export default function ServiceCarousel() {
           {SERVICE_DATA.map((service, index) => (
             <div
               key={index}
-              className={`flex flex-col rounded-xl p-6 ${
-                index === 3
-                  ? "bg-neutral-950 text-white"
-                  : index === 2
-                    ? "bg-neutral-700 text-white"
-                    : index === 1
-                      ? "bg-neutral-200 text-neutral-800"
-                      : "bg-neutral-100 text-neutral-600"
+              className={`relative flex flex-col overflow-hidden rounded-xl bg-gradient-to-b p-6 ${
+                index === 0
+                  ? "from-neutral-950 to-neutral-700 text-white"
+                  : index === 1
+                    ? "from-neutral-700 to-neutral-500 text-white"
+                    : index === 2
+                      ? "from-neutral-400 to-neutral-200 text-neutral-900"
+                      : index === 3
+                        ? "from-neutral-100 to-neutral-600"
+                        : "from-neutral-950 to-neutral-700 text-white"
               }`}
             >
-              <div className="mb-4 flex justify-between">
-                <JakhausLogo width={150} />
-                <service.icon width={36} />
+              <div className="absolute inset-0">
+                <div
+                  className="absolute inset-0 top-0 left-0 h-full w-full bg-cover bg-center opacity-50 mix-blend-multiply"
+                  style={{ backgroundImage: "url('/images/overlay.jpg')" }}
+                />
               </div>
-              <div className="mt-6 flex items-center justify-between">
-                <div className="text-lg font-semibold">{service.subtitle}</div>
+              <div className="z-10">
                 <div className="text-2xl font-semibold">{service.title}</div>
+                <div className="text-xl font-light">{service.subtitle}</div>
               </div>
               <div className="mt-auto pt-4 text-sm opacity-90">
                 {service.description}
+              </div>
+              <div className="absolute top-4 right-2">
+                <div className="opacity-15 invert">
+                  <Image
+                    className={`${index == 3 || index == 2 ? "invert" : ""}`}
+                    src={service.icon}
+                    alt={service.alt}
+                    width={200}
+                    height={200}
+                    style={{ width: "100px", height: "auto" }}
+                  />
+                </div>
               </div>
             </div>
           ))}
@@ -109,16 +133,16 @@ const ServiceCard = ({
 }) => {
   return (
     <div
-      className={`absolute top-0 h-full min-h-[560px] min-w-[450px] max-w-[450px] max-h-[560px] cursor-pointer rounded-xl p-8 transition-all duration-500 ease-in-out ${
-        index === 3
-          ? "bg-neutral-950 text-white"
-          : index === 2
-            ? "bg-neutral-700 text-white"
-            : index === 1
-              ? "bg-neutral-200 text-neutral-800"
-              : index === 0
-                ? "bg-neutral-100 text-neutral-600"
-                : "bg-neutral-950 text-white"
+      className={`absolute top-0 flex h-full max-h-[620px] min-h-[620px] max-w-[450px] min-w-[450px] cursor-pointer flex-col justify-center overflow-hidden rounded-[48px] bg-gradient-to-b p-8 shadow-inner shadow-neutral-200/100 transition-all duration-500 ease-in-out ${
+        index === 0
+          ? "from-neutral-950 to-neutral-700 text-white"
+          : index === 1
+            ? "from-neutral-700 to-neutral-500 text-white"
+            : index === 2
+              ? "from-neutral-400 to-neutral-200 text-neutral-900"
+              : index === 3
+                ? "from-neutral-100 to-neutral-600"
+                : "from-neutral-950 to-neutral-700 text-white"
       }`}
       style={{
         left:
@@ -136,22 +160,34 @@ const ServiceCard = ({
       }}
       onClick={() => setActiveIndex(index)}
     >
-      <div className="mb-4 flex justify-between">
-        <JakhausLogo width={200} />
-
-        <serviceData.icon width={48} />
-      </div>
-      <div className="mt-8 flex items-center justify-between">
-        {/* <div className="text-xl font-semibold">{serviceData.subtitle}</div> */}
-        <div className="text-right text-4xl font-semibold">
+      <div className="z-10 mt-8">
+        <div className="text-5xl font-semibold tracking-tight">
           {serviceData.title}
         </div>
+        <div className="mt-2 text-4xl font-light tracking-tight">
+          {serviceData.subtitle}
+        </div>
+        <div className="mt-2 text-lg leading-tight opacity-80">
+          {serviceData.description}
+        </div>
       </div>
-      <div className="mb-4 flex items-center justify-center py-8">
-        <serviceData.icon width={250} />
+      <div className="absolute top-5 left-[-50]">
+        <div className="opacity-75 invert">
+          <Image
+            className={`${index == 3 || index == 2 ? "invert" : ""}`}
+            src={serviceData.icon}
+            alt={serviceData.alt}
+            width={200}
+            height={200}
+            style={{ width: "150px", height: "auto" }}
+          />
+        </div>
       </div>
-      <div>
-        <div className="mt-2 opacity-90">{serviceData.description}</div>
+      <div className="absolute inset-0 -z-10">
+        <div
+          className="absolute top-0 left-0 h-full w-full bg-cover bg-center opacity-15 mix-blend-multiply"
+          style={{ backgroundImage: "url('/images/overlay.jpg')" }}
+        />
       </div>
     </div>
   );

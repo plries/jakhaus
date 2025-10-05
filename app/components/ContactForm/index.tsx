@@ -55,7 +55,7 @@ export default function Contact() {
       <div className="mx-auto max-w-[1440px]">
         {isSubmitted ? (
           <div className="p-8 text-center lg:px-32">
-            <h2 className="text-6xl font-bold text-gray-950">
+            <h2 className="text-6xl font-bold text-gray-950 tracking-tight">
               Talk to you soon!
             </h2>
             <p className="mx-auto mt-4 max-w-lg text-base text-gray-600">
@@ -66,11 +66,11 @@ export default function Contact() {
         ) : (
           <>
             <div className="p-8 text-center lg:px-32">
-              <h2 className="text-6xl font-bold text-gray-950">
+              <h2 className="text-6xl font-bold text-gray-950 tracking-tight">
                 Ready to collaborate?
               </h2>
               <p className="mt-4 text-base text-gray-600">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Big idea or quick shoot, we're in.
               </p>
             </div>
             <div className="mx-auto max-w-2xl p-8">

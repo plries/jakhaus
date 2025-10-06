@@ -20,9 +20,9 @@ const SERVICE_DATA = [
   },
   {
     title: "Print + Brand Design",
-    subtitle: "Back up your first impressions",
+    subtitle: "Back up your first impressions.",
     description:
-      "Signage, Business Cards, and flyers to custom crafted social media graphics",
+      "Signage, Business Cards, and Flyers to Custom Crafted Social Media Graphics",
     icon: "/icons/JH-Icons-02.svg",
     alt: "Print and Brand Design Icon",
   },
@@ -62,15 +62,15 @@ export default function ServiceCarousel() {
           {SERVICE_DATA.map((service, index) => (
             <div
               key={index}
-              className={`relative flex flex-col overflow-hidden rounded-xl bg-gradient-to-b p-6 ${
+              className={`relative flex flex-col overflow-hidden rounded-xl bg-gradient-to-b p-6 shadow-inner shadow-neutral-200/100 ${
                 index === 0
                   ? "from-neutral-950 to-neutral-700 text-white"
                   : index === 1
                     ? "from-neutral-700 to-neutral-500 text-white"
                     : index === 2
-                      ? "from-neutral-400 to-neutral-200 text-neutral-900"
+                      ? "from-neutral-500 to-neutral-400 text-white"
                       : index === 3
-                        ? "from-neutral-100 to-neutral-600"
+                        ? "from-neutral-400 to-neutral-300 text-white"
                         : "from-neutral-950 to-neutral-700 text-white"
               }`}
             >
@@ -139,9 +139,9 @@ const ServiceCard = ({
           : index === 1
             ? "from-neutral-700 to-neutral-500 text-white"
             : index === 2
-              ? "from-neutral-400 to-neutral-200 text-neutral-900"
+              ? "from-neutral-500 to-neutral-400 text-white"
               : index === 3
-                ? "from-neutral-100 to-neutral-600"
+                ? "from-neutral-400 to-neutral-300 text-white"
                 : "from-neutral-950 to-neutral-700 text-white"
       }`}
       style={{

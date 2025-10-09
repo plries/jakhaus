@@ -66,7 +66,7 @@ export default function Contact() {
         ) : (
           <>
             <div className="p-8 text-center lg:px-32">
-              <h2 className="text-6xl font-bold text-gray-950 tracking-tight">
+              <h2 className="text-4xl lg:text-6xl font-bold text-gray-950 tracking-tight">
                 Ready to collaborate?
               </h2>
               <p className="mt-4 text-base text-gray-600">

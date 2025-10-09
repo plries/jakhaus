@@ -65,7 +65,7 @@ const About = () => {
     <section className="relative w-full" id="about">
       <div className="mx-auto max-w-[1440px]">
         <div className="p-8 pt-24 lg:flex lg:pt-16 xl:px-32">
-          <h2 className="mr-8 text-4xl font-bold tracking-tight md:text-nowrap text-gray-50 uppercase">
+          <h2 className="mr-8 text-4xl font-bold tracking-tight text-gray-50 uppercase md:text-nowrap">
             Design Forward Media
           </h2>
           <p className="mt-4 text-base text-gray-300 md:mt-0">
@@ -75,8 +75,8 @@ const About = () => {
           </p>
         </div>
       </div>
-      <div className="pb-12">
-        <div className="flex w-full items-center justify-center px-6 py-6 md:pt-12">
+      <div className="pb-4 lg:pb-12">
+        <div className="flex w-full items-center justify-center px-6 md:pt-12 lg:py-6">
           <span className="mx-4 h-px w-full max-w-1/3 bg-neutral-200 2xl:max-w-1/5"></span>
           <h3 className="tracking-wide whitespace-nowrap text-neutral-500 uppercase md:text-2xl">
             Collaborated with
@@ -101,7 +101,7 @@ const Services = () => {
     <section className="w-full bg-gray-50" id="services">
       <div className="mx-auto max-w-[1440px]">
         <div className="p-8 lg:px-32 lg:pt-20">
-          <h2 className="text-6xl font-bold tracking-tight text-gray-950">
+          <h2 className="text-4xl font-bold tracking-tight text-gray-950 lg:text-6xl">
             Services
           </h2>
           <p className="sr-only">Learn more about our mission and values.</p>
@@ -122,7 +122,7 @@ const Benefit = () => {
     <section className="relative w-full overflow-hidden" id="benefit">
       <div className="relative mx-auto flex w-full max-w-[1440px] flex-col items-center lg:flex-row">
         <div className="order-1 flex w-full max-w-2xl flex-col justify-center px-8 py-16 lg:w-1/2 lg:max-w-full lg:px-32 lg:py-20">
-          <h2 className="text-6xl font-bold tracking-tight text-gray-50">
+          <h2 className="text-4xl font-bold tracking-tight text-gray-50 lg:text-6xl">
             Why choose us?
           </h2>
           <p className="mt-4 text-base text-gray-300">

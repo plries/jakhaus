@@ -51,11 +51,11 @@ export default function Contact() {
   };
 
   return (
-    <section className="w-full bg-neutral-50 py-20" id="contact">
+    <section className="w-full bg-neutral-50 py-8 lg:py-20" id="contact">
       <div className="mx-auto max-w-[1440px]">
         {isSubmitted ? (
           <div className="p-8 text-center lg:px-32">
-            <h2 className="text-6xl font-bold text-gray-950 tracking-tight">
+            <h2 className="text-4xl font-bold tracking-tight text-gray-950 lg:text-6xl">
               Talk to you soon!
             </h2>
             <p className="mx-auto mt-4 max-w-lg text-base text-gray-600">
@@ -66,7 +66,7 @@ export default function Contact() {
         ) : (
           <>
             <div className="p-8 text-center lg:px-32">
-              <h2 className="text-6xl font-bold text-gray-950 tracking-tight">
+              <h2 className="text-4xl font-bold tracking-tight text-gray-950 lg:text-6xl">
                 Ready to collaborate?
               </h2>
               <p className="mt-4 text-base text-gray-600">

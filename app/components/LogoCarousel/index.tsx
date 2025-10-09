@@ -2,6 +2,7 @@
 
 import Slider from "react-infinite-logo-slider";
 import Image from "next/image";
+import { useState, useEffect } from "react";
 
 const LOGO_IMAGES = [
   {
@@ -42,9 +43,29 @@ const LOGO_IMAGES = [
   },
 ];
 
+function useResponsiveWidth() {
+  const [width, setWidth] = useState("150px");
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 640)
+        setWidth("100px"); // mobile
+      else if (window.innerWidth > 640)
+        setWidth("250px"); // tablet
+      else setWidth("250px"); // desktop
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  return width;
+}
+
 export default function LogoCarousel() {
+  const width = useResponsiveWidth();
   return (
-    <Slider duration={25} pauseOnHover={true} width="250px">
+    <Slider duration={25} pauseOnHover={true} width={width}>
       {LOGO_IMAGES.map((logo, index) => (
         <Slider.Slide key={index}>
           <div className="opacity-75 invert">
@@ -53,7 +74,7 @@ export default function LogoCarousel() {
               alt={logo.alt}
               width={200}
               height={200}
-              style={{ width: "200px", height: "auto" }}
+              className="h-auto w-[75px] sm:w-[200px]"
             />
           </div>
         </Slider.Slide>

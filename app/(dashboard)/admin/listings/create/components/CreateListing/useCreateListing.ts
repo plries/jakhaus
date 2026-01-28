@@ -75,7 +75,6 @@ export const useCreateListing = () => {
 
   const requiredFields = [
     "STREET",
-    "UNIT",
     "CITY",
     "PROVINCE",
     "POSTAL_CODE",

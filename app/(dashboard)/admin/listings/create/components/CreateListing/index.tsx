@@ -767,6 +767,7 @@ export const CreateListing = () => {
           </Button>
         </div>
       </form>
+
       <StatusModal showModal={hook.showModal} success={hook.success}>
         <div className="mt-5 mb-10 flex flex-col items-center">
           <p className="!text-2xl font-medium">

@@ -43,7 +43,7 @@ export const Navbar = ({ CONSTANTS, LINKS, dashboard }: NavbarPropTypes) => {
       animate={MOTION_CONFIG.HEADER.ANIMATE}
       transition={MOTION_CONFIG.TRANSITION}
       role="banner"
-      className={`fixed top-2.5 right-0 left-0 z-50 col-span-full mx-auto flex w-fit flex-row items-center justify-center gap-3 rounded-full border border-neutral-800/50 bg-neutral-950 p-3 shadow-xl ${dashboard ? "" : "mb-5"}`}
+      className={`top-2.5 right-0 left-0 z-50 col-span-full mx-auto flex w-fit flex-row items-center justify-center gap-3 rounded-full border border-neutral-800/50 bg-neutral-950 p-3 shadow-xl ${dashboard ? "" : "mb-5"} ${!dashboard && pathname === "/" ? "fixed" : "sticky"} `}
     >
       <div className="ml-3 flex h-fit items-center justify-center gap-2 text-neutral-50">
         <Link className="cursor-pointer" href={"/"}>
@@ -129,7 +129,6 @@ export const Navbar = ({ CONSTANTS, LINKS, dashboard }: NavbarPropTypes) => {
                 return !!value;
               }).map((LINK) => (
                 <React.Fragment key={LINK.KEY}>
-  
                   {dashboard ? (
                     <Button
                       additionalClasses={`!rounded-full bg-transparent !border-transparent !justify-start ${

@@ -3,10 +3,13 @@ import ImageCarouselScroll from "../components/ImageCarouselScroll";
 import ServiceCarousel from "../components/ServiceCarousel";
 import Contact from "../components/ContactForm";
 import Image from "next/image";
+import { NAV } from "./const";
+import { Navbar } from "../components";
 
 export default function Home() {
   return (
     <>
+      <Navbar LINKS={NAV.LINKS} dashboard={false} />
       <Hero />
       <About />
       <Services />

@@ -73,80 +73,85 @@ export const ListingsTable = () => {
           <>
             {filteredOptions.length ? (
               <>
-                {filteredOptions.map((listing, index) => (
-                  <tr
-                    key={index}
-                    className="group h-15 border-b border-neutral-200 text-neutral-600 last:border-b-0 hover:bg-neutral-100/50 has-checked:bg-slate-100"
-                  >
-                    <td className="max-w-64 overflow-hidden border-r border-neutral-200 px-4 py-2 text-nowrap text-ellipsis">
-                      {listing.id}
-                    </td>
-                    <td className="border-r border-neutral-200 px-4 py-2 text-nowrap">
-                      {listing.UNIT} {listing.STREET}, {listing.PROVINCE},{" "}
-                      {listing.POSTAL_CODE}
-                    </td>
-                    <td className="border-r border-neutral-200 px-4 py-2">
-                      {listing.CITY}
-                    </td>
-                    <td className="px-4 py-2">
-                      <span className="flex flex-row items-center justify-between gap-5 text-nowrap">
-                        {hook.existingAgents.map((agent) => {
-                          if (agent.id === listing.agent_id)
-                            return (
-                              <span
-                                key={agent.id}
-                                className="flex w-full flex-row items-center justify-between gap-5"
-                              >
-                                <span className="text-neutral-950">
-                                  {agent.NAME}
+                {filteredOptions
+                  .slice(hook.showingAmount.from, hook.showingAmount.to)
+                  .map((listing, index) => (
+                    <tr
+                      key={index}
+                      className="group h-15 border-b border-neutral-200 text-neutral-600 last:border-b-0 hover:bg-neutral-100/50 has-checked:bg-slate-100"
+                    >
+                      <td className="max-w-64 overflow-hidden border-r border-neutral-200 px-4 py-2 text-nowrap text-ellipsis">
+                        {listing.id}
+                      </td>
+                      <td className="border-r border-neutral-200 px-4 py-2 text-nowrap">
+                        {listing.UNIT} {listing.STREET}, {listing.PROVINCE},{" "}
+                        {listing.POSTAL_CODE}
+                      </td>
+                      <td className="border-r border-neutral-200 px-4 py-2">
+                        {listing.CITY}
+                      </td>
+                      <td className="px-4 py-2">
+                        <span className="flex flex-row items-center justify-between gap-5 text-nowrap">
+                          {hook.existingAgents.map((agent) => {
+                            if (agent.id === listing.agent_id)
+                              return (
+                                <span
+                                  key={agent.id}
+                                  className="flex w-full flex-row items-center justify-between gap-5"
+                                >
+                                  <span className="text-neutral-950">
+                                    {agent.NAME}
+                                  </span>
+                                  <span className="!text-sm text-neutral-950/50 opacity-0 transition-opacity duration-150 ease-in-out group-hover:opacity-100">
+                                    ID: {agent.id}
+                                  </span>
                                 </span>
-                                <span className="!text-sm text-neutral-950/50 opacity-0 transition-opacity duration-150 ease-in-out group-hover:opacity-100">
-                                  ID: {agent.id}
-                                </span>
-                              </span>
-                            );
-                        })}
-                        <Dropdown
-                          button={{
-                            name: LISTINGS_TABLE_CONST.BUTTONS.MANAGE,
-                            icon: <DotsThreeIcon size={24} weight="bold" />,
-                            additionalClasses:
-                              "bg-transparent hover:!bg-neutral-950/5 !rounded-xl !border-0 !shadow-none",
-                          }}
-                          options={[
-                            {
-                              label: LISTINGS_TABLE_CONST.DROPDOWNS.MANAGE.EDIT,
-                              icon: <NotePencilIcon />,
-                              href: `/admin/listings/edit/${listing.id}`,
-                            },
-                            {
-                              label: LISTINGS_TABLE_CONST.DROPDOWNS.MANAGE.VIEW,
-                              icon: <ArrowUpRightIcon />,
-                              href: `/listings/${listing.id}`,
-                            },
-                            {
-                              label: LISTINGS_TABLE_CONST.DROPDOWNS.MANAGE.COPY,
-                              onClick: () => {
-                                navigator.clipboard.writeText(
-                                  window.location.origin +
-                                    `/listings/${listing.id}`,
-                                );
+                              );
+                          })}
+                          <Dropdown
+                            button={{
+                              name: LISTINGS_TABLE_CONST.BUTTONS.MANAGE,
+                              icon: <DotsThreeIcon size={24} weight="bold" />,
+                              additionalClasses:
+                                "bg-transparent hover:!bg-neutral-950/5 !rounded-xl !border-0 !shadow-none",
+                            }}
+                            options={[
+                              {
+                                label:
+                                  LISTINGS_TABLE_CONST.DROPDOWNS.MANAGE.EDIT,
+                                icon: <NotePencilIcon />,
+                                href: `/admin/listings/edit/${listing.id}`,
                               },
-                            },
-                            {
-                              label:
-                                LISTINGS_TABLE_CONST.DROPDOWNS.MANAGE.DELETE,
-                              icon: <TrashIcon />,
-                              onClick: () => {
-                                hook.toggleModal({ listing });
+                              {
+                                label:
+                                  LISTINGS_TABLE_CONST.DROPDOWNS.MANAGE.VIEW,
+                                icon: <ArrowUpRightIcon />,
+                                href: `/listings/${listing.id}`,
                               },
-                            },
-                          ]}
-                        />
-                      </span>
-                    </td>
-                  </tr>
-                ))}
+                              {
+                                label:
+                                  LISTINGS_TABLE_CONST.DROPDOWNS.MANAGE.COPY,
+                                onClick: () => {
+                                  navigator.clipboard.writeText(
+                                    window.location.origin +
+                                      `/listings/${listing.id}`,
+                                  );
+                                },
+                              },
+                              {
+                                label:
+                                  LISTINGS_TABLE_CONST.DROPDOWNS.MANAGE.DELETE,
+                                icon: <TrashIcon />,
+                                onClick: () => {
+                                  hook.toggleModal({ listing });
+                                },
+                              },
+                            ]}
+                          />
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
               </>
             ) : (
               <tr className="h-15 w-full border-b border-neutral-200 align-middle text-neutral-600 last:border-b-0 hover:bg-neutral-100/50 has-checked:bg-slate-100">

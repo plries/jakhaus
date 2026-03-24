@@ -4,7 +4,7 @@ import ServiceCarousel from "../components/ServiceCarousel";
 import Contact from "../components/ContactForm";
 import Image from "next/image";
 import { NAV } from "./const";
-import { Navbar } from "../components";
+import { Footer, Navbar } from "../components";
 
 export default function Home() {
   return (
@@ -15,6 +15,7 @@ export default function Home() {
       <Services />
       <Benefit />
       <Contact />
+      <Footer LINKS={NAV.LINKS} />
     </>
   );
 }

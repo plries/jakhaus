@@ -1,10 +1,13 @@
+"use client";
+import Image from "next/image";
+import { motion } from "framer-motion";
 import LogoCarousel from "../components/LogoCarousel";
 import ImageCarouselScroll from "../components/ImageCarouselScroll";
 import ServiceCarousel from "../components/ServiceCarousel";
 import Contact from "../components/ContactForm";
-import Image from "next/image";
 import { NAV } from "./const";
 import { Footer, Navbar } from "../components";
+import { MOTION_CONFIG } from "./listings/[id]/const";
 
 export default function Home() {
   return (
@@ -14,8 +17,10 @@ export default function Home() {
       <About />
       <Services />
       <Benefit />
-      <Contact />
-      <Footer LINKS={NAV.LINKS} />
+      <div className="flex w-full flex-col gap-4 rounded-t-4xl bg-neutral-50 p-4 lg:pt-20">
+        <Contact />
+        <Footer LINKS={NAV.LINKS} />
+      </div>
     </>
   );
 }
@@ -23,7 +28,7 @@ export default function Home() {
 const Hero = () => {
   return (
     <section
-      className="relative flex h-screen w-full items-center justify-center bg-transparent"
+      className="relative flex h-[95dvh] w-full items-center justify-center overflow-hidden rounded-b-4xl bg-transparent shadow-xl"
       id="hero"
     >
       <div className="z-1 scale-40 sm:scale-50 lg:scale-100">
@@ -36,9 +41,9 @@ const Hero = () => {
             priority
           />
         </div>
-        <h2 className="sr-only translate-y-[-52px] pr-6 text-right text-[50px] tracking-widest text-gray-50 uppercase">
-          <span className="sr-only">Jakhaus</span>Real Estate Media
-        </h2>
+        <h1 className="sr-only translate-y-[-52px] pr-6 text-right text-[50px] tracking-widest text-gray-50 uppercase">
+          Jakhaus Real Estate Media
+        </h1>
       </div>
       <div>
         <HeroVideo src="/videos/hero-banner.mov" />
@@ -66,35 +71,33 @@ const HeroVideo = ({ src }: { src: string }) => {
 
 const About = () => {
   return (
-    <section className="relative w-full" id="about">
-      <div className="mx-auto max-w-[1440px]">
-        <div className="p-8 pt-24 lg:flex lg:pt-16 xl:px-32">
-          <h2 className="mr-8 text-4xl font-bold tracking-tight text-gray-50 uppercase md:text-nowrap">
-            Design Forward Media
-          </h2>
-          <p className="mt-4 text-base text-gray-300 md:mt-0">
-            Jakhaus is a multi-skilled crew, shaping media with intention and
-            style. From video and photography to 3D tours, graphic design and
-            branding, we cover the full spectrum of real estate marketing.
-          </p>
-        </div>
+    <section className="relative w-full scroll-m-20 py-20" id="about">
+      <div className="mx-auto grid max-w-[1440px] grid-cols-4 gap-5 px-4 md:grid-cols-8 lg:grid-cols-12">
+        <motion.h2
+          initial={MOTION_CONFIG.LEFT.INITIAL}
+          whileInView={MOTION_CONFIG.LEFT.WHILE_IN_VIEW}
+          transition={MOTION_CONFIG.TRANSITION}
+          className="col-span-full text-2xl font-medium tracking-tighter md:col-span-4 md:text-[2rem] lg:text-4xl"
+        >
+          Design Forward Media
+        </motion.h2>
+        <motion.p
+          initial={MOTION_CONFIG.DEFAULT.INITIAL}
+          whileInView={MOTION_CONFIG.DEFAULT.WHILE_IN_VIEW}
+          transition={MOTION_CONFIG.TRANSITION}
+          className="col-span-full text-base text-neutral-600 md:col-span-4 lg:col-span-8"
+        >
+          <span className="font-medium text-neutral-950">
+            Jakhaus is a multi-skilled crew
+          </span>
+          , shaping media with intention and style.
+          <br />
+          From video and photography to 3D tours, graphic design and branding,
+          we cover the full spectrum of real estate marketing.
+        </motion.p>
       </div>
-      <div className="pb-4 lg:pb-12">
-        <div className="flex w-full items-center justify-center px-6 md:pt-12 lg:py-6">
-          <span className="mx-4 h-px w-full max-w-1/3 bg-neutral-200 2xl:max-w-1/5"></span>
-          <h3 className="tracking-wide whitespace-nowrap text-neutral-500 uppercase md:text-2xl">
-            Collaborated with
-          </h3>
-          <span className="mx-4 h-px w-full max-w-1/3 bg-neutral-200 2xl:max-w-1/5"></span>
-        </div>
-        <LogoCarousel />
-      </div>
-      <div className="absolute inset-0 -z-10">
-        <div
-          className="absolute top-0 left-0 h-full w-full bg-cover bg-center mix-blend-multiply"
-          style={{ backgroundImage: "url('/images/overlay.jpg')" }}
-        />
-        <div className="h-full w-full bg-gradient-to-b from-neutral-950 to-neutral-700" />
+      <div className="mask-gradient-x mx-auto w-full max-w-[calc(100%-4rem)] overflow-hidden pt-20 md:rotate-1 md:pt-30 md:pb-20">
+        <ImageCarouselScroll />
       </div>
     </section>
   );
@@ -102,20 +105,23 @@ const About = () => {
 
 const Services = () => {
   return (
-    <section className="w-full bg-gray-50" id="services">
-      <div className="mx-auto max-w-[1440px]">
-        <div className="p-8 lg:px-32 lg:pt-20">
-          <h2 className="text-4xl font-bold tracking-tight text-gray-950 lg:text-6xl">
-            Services
-          </h2>
-          <p className="sr-only">Learn more about our mission and values.</p>
-        </div>
-        <div className="md:py-12">
+    <section className="relative w-full scroll-m-20" id="services">
+      <div className="relative mx-auto max-w-[1440px] grid-cols-4 gap-5 px-4 md:grid-cols-8 lg:grid-cols-12">
+        <motion.h2
+          initial={MOTION_CONFIG.LEFT.INITIAL}
+          whileInView={MOTION_CONFIG.LEFT.WHILE_IN_VIEW}
+          transition={MOTION_CONFIG.TRANSITION}
+          className="col-span-full text-2xl font-medium tracking-tighter md:col-span-4 md:text-[2rem] lg:text-4xl"
+        >
+          Our Services
+        </motion.h2>
+        <p className="sr-only">Learn more about our mission and values.</p>
+        <div className="mx-auto md:py-12">
           <ServiceCarousel />
         </div>
       </div>
-      <div className="lg:py-12">
-        <ImageCarouselScroll />
+      <div className="mask-gradient-x mx-auto w-full max-w-[calc(100%-4rem)] overflow-hidden pt-20 md:-rotate-2 md:pt-50 md:pb-30">
+        <LogoCarousel />
       </div>
     </section>
   );
@@ -123,31 +129,37 @@ const Services = () => {
 
 const Benefit = () => {
   return (
-    <section className="relative w-full overflow-hidden" id="benefit">
-      <div className="relative mx-auto flex w-full max-w-[1440px] flex-col items-center lg:flex-row">
-        <div className="order-1 flex w-full max-w-2xl flex-col justify-center px-8 py-16 lg:w-1/2 lg:max-w-full lg:px-32 lg:py-20">
-          <h2 className="text-4xl font-bold tracking-tight text-gray-50 lg:text-6xl">
-            Why choose us?
-          </h2>
-          <p className="mt-4 text-base text-gray-300">
+    <section className="relative w-full scroll-m-20 py-20" id="benefit">
+      <div className="relative mx-auto grid max-w-[1440px] grid-cols-4 gap-5 px-4 md:grid-cols-8 lg:grid-cols-12">
+        <motion.h2
+          initial={MOTION_CONFIG.LEFT.INITIAL}
+          whileInView={MOTION_CONFIG.LEFT.WHILE_IN_VIEW}
+          transition={MOTION_CONFIG.TRANSITION}
+          className="col-span-full text-2xl font-medium tracking-tighter md:col-span-4 md:text-[2rem] lg:text-4xl"
+        >
+          Why choose us?
+        </motion.h2>
+        <div className="col-span-full flex flex-col gap-5 md:col-span-4 lg:col-span-8">
+          <motion.div
+            initial={MOTION_CONFIG.RIGHT.INITIAL}
+            whileInView={MOTION_CONFIG.RIGHT.WHILE_IN_VIEW}
+            transition={MOTION_CONFIG.TRANSITION}
+            className="relative aspect-video overflow-hidden rounded-2xl border border-neutral-300 shadow-lg"
+          >
+            <HeroVideo src="/videos/how-we-do.mp4" />
+          </motion.div>
+          <motion.p
+            initial={MOTION_CONFIG.DEFAULT.INITIAL}
+            whileInView={MOTION_CONFIG.DEFAULT.WHILE_IN_VIEW}
+            transition={MOTION_CONFIG.TRANSITION}
+            className="text-neutral-600"
+          >
             Jakhaus is a design-forward media team shaped by years of real
             estate marketing experience. We've worked together through
             back-to-back shoots and daily edits gaining a sharp eye for what
             works and how to get it done right.
-          </p>
+          </motion.p>
         </div>
-        <div className="relative order-2 h-[600px] w-full lg:right-0 lg:-mr-16 lg:h-[800px] lg:w-1/2 xl:-mr-32">
-          <div className="absolute inset-0 h-full w-full">
-            <HeroVideo src="/videos/how-we-do.mp4" />
-          </div>
-        </div>
-      </div>
-      <div className="absolute inset-0 -z-10">
-        <div
-          className="absolute top-0 left-0 h-full w-full bg-cover bg-center mix-blend-multiply"
-          style={{ backgroundImage: "url('/images/overlay.jpg')" }}
-        />
-        <div className="h-full w-full bg-gradient-to-b from-neutral-700 to-neutral-950" />
       </div>
     </section>
   );

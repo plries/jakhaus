@@ -65,16 +65,16 @@ function useResponsiveWidth() {
 export default function LogoCarousel() {
   const width = useResponsiveWidth();
   return (
-    <Slider duration={25} pauseOnHover={true} width={width}>
+    <Slider duration={25} width={width}>
       {LOGO_IMAGES.map((logo, index) => (
         <Slider.Slide key={index}>
-          <div className="opacity-75 invert">
+          <div className="opacity-50">
             <Image
               src={logo.src}
               alt={logo.alt}
               width={200}
               height={200}
-              className="h-auto w-[75px] sm:w-[200px]"
+              className="h-auto w-[75px] sm:w-[175px]"
             />
           </div>
         </Slider.Slide>

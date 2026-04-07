@@ -1,13 +1,8 @@
 "use client";
 import { useState } from "react";
-import {
-  ClubIcon,
-  HeartIcon,
-  SpadeIcon,
-  DiamondIcon,
-  JakhausLogo,
-} from "@/public/icons";
+import { motion } from "framer-motion";
 import Image from "next/image";
+import { MOTION_CONFIG } from "@/app/(public)/listings/[id]/const";
 
 const SERVICE_DATA = [
   {
@@ -55,39 +50,50 @@ type ServiceCardProps = {
 export default function ServiceCarousel() {
   const [activeIndex, setActiveIndex] = useState(0);
   return (
-    <div className="right-0 left-0 w-full px-4">
+    <div className="right-0 left-0 mt-3 w-full">
       <div className="relative w-full">
         {/* Mobile view: flex column */}
-        <div className="flex flex-col gap-4 md:hidden">
+        <div className="flex flex-col gap-2 md:hidden">
           {SERVICE_DATA.map((service, index) => (
-            <div
+            <motion.div
+              initial={MOTION_CONFIG.DEFAULT.INITIAL}
+              whileInView={MOTION_CONFIG.DEFAULT.WHILE_IN_VIEW}
+              transition={MOTION_CONFIG.TRANSITION}
               key={index}
-              className={`relative flex flex-col overflow-hidden rounded-xl bg-gradient-to-b p-6 shadow-inner shadow-neutral-200/100 ${
+              className={`relative flex min-h-[200px] flex-col justify-center overflow-hidden rounded-xl bg-gradient-to-b p-6 shadow-inner shadow-neutral-50/50 drop-shadow-sm ${
                 index === 0
-                  ? "from-neutral-950 to-neutral-700 text-white"
+                  ? "from-neutral-950 to-neutral-700"
                   : index === 1
-                    ? "from-neutral-700 to-neutral-500 text-white"
+                    ? "from-neutral-700 to-neutral-500"
                     : index === 2
-                      ? "from-neutral-500 to-neutral-400 text-white"
+                      ? "from-neutral-500 to-neutral-400"
                       : index === 3
-                        ? "from-neutral-400 to-neutral-300 text-white"
-                        : "from-neutral-950 to-neutral-700 text-white"
+                        ? "from-neutral-400 to-neutral-300"
+                        : "from-neutral-950 to-neutral-700"
               }`}
             >
               <div className="absolute inset-0">
                 <div
-                  className="absolute inset-0 top-0 left-0 h-full w-full bg-cover bg-center opacity-50 mix-blend-multiply"
+                  className="absolute inset-0 top-0 left-0 h-full w-full bg-cover bg-center opacity-15 mix-blend-multiply"
                   style={{ backgroundImage: "url('/images/overlay.jpg')" }}
                 />
               </div>
-              <div className="z-10">
-                <div className="text-2xl font-semibold">{service.title}</div>
-                <div className="text-xl font-light">{service.subtitle}</div>
+              <div
+                className={`z-10 mr-10 ${index == 3 || index == 2 ? "text-neutral-950" : "text-neutral-50"}`}
+              >
+                <p className="!text-2xl leading-none font-medium tracking-tighter">
+                  {service.title}
+                </p>
+                <p className="!text-md mt-1 leading-tight font-medium tracking-tight opacity-80">
+                  {service.subtitle}
+                </p>
               </div>
-              <div className="mt-auto pt-4 text-sm opacity-90">
+              <p
+                className={`mt-4 mr-16 !text-sm ${index == 3 || index == 2 ? "text-neutral-950" : "text-neutral-50"} opacity-75`}
+              >
                 {service.description}
-              </div>
-              <div className="absolute top-4 right-2">
+              </p>
+              <div className="absolute right-[-60] w-[150px]">
                 <div className="opacity-15 invert">
                   <Image
                     className={`${index == 3 || index == 2 ? "invert" : ""}`}
@@ -95,16 +101,21 @@ export default function ServiceCarousel() {
                     alt={service.alt}
                     width={200}
                     height={200}
-                    style={{ width: "100px", height: "auto" }}
+                    style={{ width: "auto", height: "150px" }}
                   />
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
 
         {/* Desktop view: stacked cards */}
-        <div className="hidden h-[560px] md:block">
+        <motion.div
+          initial={MOTION_CONFIG.HEADER.INITIAL}
+          whileInView={MOTION_CONFIG.HEADER.ANIMATE}
+          transition={MOTION_CONFIG.TRANSITION}
+          className="hidden h-[560px] md:block"
+        >
           {SERVICE_DATA.map((service, index) => (
             <ServiceCard
               key={index}
@@ -114,7 +125,7 @@ export default function ServiceCarousel() {
               activeIndex={activeIndex}
             />
           ))}
-        </div>
+        </motion.div>
       </div>
     </div>
   );
@@ -133,16 +144,16 @@ const ServiceCard = ({
 }) => {
   return (
     <div
-      className={`absolute top-0 flex h-full max-h-[620px] min-h-[620px] max-w-[450px] min-w-[450px] cursor-pointer flex-col justify-center overflow-hidden rounded-[48px] bg-gradient-to-b p-8 shadow-inner shadow-neutral-200/100 transition-all duration-500 ease-in-out ${
+      className={`absolute top-0 flex h-full max-h-[620px] min-h-[620px] max-w-[450px] min-w-[450px] cursor-pointer flex-col justify-center overflow-hidden rounded-[48px] border border-neutral-50/75 bg-gradient-to-b p-8 shadow-inner shadow-neutral-50/50 drop-shadow-sm transition-all duration-500 ease-in-out hover:rotate-4 ${index === activeIndex ? "!-rotate-2" : ""} ${
         index === 0
-          ? "from-neutral-950 to-neutral-700 text-white"
+          ? "rotate-2 from-neutral-950 to-neutral-700"
           : index === 1
-            ? "from-neutral-700 to-neutral-500 text-white"
+            ? "rotate-2 from-neutral-700 to-neutral-500"
             : index === 2
-              ? "from-neutral-500 to-neutral-400 text-white"
+              ? "rotate-2 from-neutral-500 to-neutral-400"
               : index === 3
-                ? "from-neutral-400 to-neutral-300 text-white"
-                : "from-neutral-950 to-neutral-700 text-white"
+                ? "rotate-2 from-neutral-400 to-neutral-300"
+                : "from-neutral-950 to-neutral-700"
       }`}
       style={{
         left:
@@ -160,18 +171,22 @@ const ServiceCard = ({
       }}
       onClick={() => setActiveIndex(index)}
     >
-      <div className="z-10 mt-8">
-        <div className="text-5xl font-semibold tracking-tight">
+      <div
+        className={`z-10 mt-8 ${index == 3 || index == 2 ? "text-neutral-950" : "text-neutral-50"}`}
+      >
+        <p className="!text-2xl font-medium tracking-tighter md:!text-[2rem] lg:!text-4xl">
           {serviceData.title}
-        </div>
-        <div className="mt-2 text-4xl font-light tracking-tight">
+        </p>
+        <p className="mt-1 !text-lg font-medium tracking-tight opacity-80">
           {serviceData.subtitle}
-        </div>
-        <div className="mt-2 text-lg leading-tight opacity-80">
+        </p>
+        <p
+          className={`mt-4 border-l-2 ${index == 3 || index == 2 ? "border-neutral-950/50 text-neutral-950" : "border-neutral-50/50 text-neutral-50"} pl-4 opacity-75`}
+        >
           {serviceData.description}
-        </div>
+        </p>
       </div>
-      <div className="absolute top-5 left-[-50]">
+      <div className="absolute top-5 right-[-25]">
         <div className="opacity-75 invert">
           <Image
             className={`${index == 3 || index == 2 ? "invert" : ""}`}

@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { motion } from "framer-motion";
+import { MOTION_CONFIG } from "@/app/(public)/listings/[id]/const";
 
 export default function Contact() {
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -51,37 +53,64 @@ export default function Contact() {
   };
 
   return (
-    <section className="w-full bg-neutral-50 py-8 lg:py-20" id="contact">
-      <div className="mx-auto max-w-[1440px]">
+    <section id="contact">
+      <div className="mx-auto grid min-h-[401px] max-w-[1440px] grid-cols-4 gap-5 md:grid-cols-8 lg:grid-cols-12 lg:pb-16">
         {isSubmitted ? (
-          <div className="p-8 text-center lg:px-32">
-            <h2 className="text-4xl font-bold tracking-tight text-gray-950 lg:text-6xl">
+          <div className="col-span-full m-auto flex flex-col text-center">
+            <motion.h2
+              initial={MOTION_CONFIG.DEFAULT.INITIAL}
+              whileInView={MOTION_CONFIG.DEFAULT.WHILE_IN_VIEW}
+              transition={MOTION_CONFIG.DEFAULT}
+              className="text-2xl font-medium tracking-tighter md:text-[2rem]"
+            >
               Talk to you soon!
-            </h2>
-            <p className="mx-auto mt-4 max-w-lg text-base text-gray-600">
-              Your message has been sent successfully. We appreciate your
-              interest and will get back to you as soon as possible.
-            </p>
+            </motion.h2>
+            <motion.p
+              initial={MOTION_CONFIG.DEFAULT.INITIAL}
+              whileInView={MOTION_CONFIG.DEFAULT.WHILE_IN_VIEW}
+              transition={MOTION_CONFIG.DEFAULT}
+              className="mt-4 text-neutral-600"
+            >
+              <span className="font-medium text-neutral-950">
+                Your message has been sent successfully.
+              </span>
+              <br />
+              We appreciate your interest and will get back to you as soon as
+              possible.
+            </motion.p>
           </div>
         ) : (
           <>
-            <div className="p-8 text-center lg:px-32">
-              <h2 className="text-4xl font-bold tracking-tight text-gray-950 lg:text-6xl">
+            <div className="col-span-full md:col-span-4">
+              <motion.h2
+                initial={MOTION_CONFIG.LEFT.INITIAL}
+                whileInView={MOTION_CONFIG.LEFT.WHILE_IN_VIEW}
+                transition={MOTION_CONFIG.DEFAULT}
+                className="text-2xl font-medium tracking-tighter md:col-span-4 md:text-[2rem] lg:text-4xl"
+              >
                 Ready to collaborate?
-              </h2>
-              <p className="mt-4 text-base text-gray-600">
+              </motion.h2>
+              <motion.p
+                initial={MOTION_CONFIG.DEFAULT.INITIAL}
+                whileInView={MOTION_CONFIG.DEFAULT.WHILE_IN_VIEW}
+                transition={MOTION_CONFIG.DEFAULT}
+                className="mt-1 text-neutral-600"
+              >
                 Big idea or quick shoot, we're in.
-              </p>
+              </motion.p>
             </div>
-            <div className="mx-auto max-w-2xl p-8">
+            <div className="col-span-full md:col-span-4 lg:col-span-8">
               <form action="api/send" method="POST">
                 <div className="mb-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
                   <div>
-                    <label className="block text-gray-950" htmlFor="firstName">
+                    <label
+                      className="mb-1 font-medium text-neutral-700"
+                      htmlFor="firstName"
+                    >
                       First Name
                     </label>
                     <input
-                      className="w-full rounded-md border border-gray-300 bg-gray-50 p-2 text-gray-950"
+                      className="relative flex w-full flex-row items-center gap-2 rounded-xl border border-neutral-200 bg-neutral-50 p-3 shadow-sm outline-2 outline-transparent transition-all duration-150 ease-in-out required:!border-red-400 focus-within:shadow-md focus-within:outline-2 focus-within:outline-neutral-950/10"
                       type="text"
                       id="firstName"
                       name="firstName"
@@ -90,11 +119,14 @@ export default function Contact() {
                     />
                   </div>
                   <div>
-                    <label className="block text-gray-950" htmlFor="lastName">
+                    <label
+                      className="mb-1 font-medium text-neutral-700"
+                      htmlFor="lastName"
+                    >
                       Last Name
                     </label>
                     <input
-                      className="w-full rounded-md border border-gray-300 bg-gray-50 p-2 text-gray-950"
+                      className="relative flex w-full flex-row items-center gap-2 rounded-xl border border-neutral-200 bg-neutral-50 p-3 shadow-sm outline-2 outline-transparent transition-all duration-150 ease-in-out required:!border-red-400 focus-within:shadow-md focus-within:outline-2 focus-within:outline-neutral-950/10"
                       type="text"
                       id="lastName"
                       name="lastName"
@@ -104,11 +136,14 @@ export default function Contact() {
                   </div>
                 </div>
                 <div className="mb-4">
-                  <label className="block text-gray-950" htmlFor="email">
+                  <label
+                    className="mb-1 font-medium text-neutral-700"
+                    htmlFor="email"
+                  >
                     Email <span className="text-red-600">*</span>
                   </label>
                   <input
-                    className="w-full rounded-md border border-gray-300 bg-gray-50 p-2 text-gray-950"
+                    className="relative flex w-full flex-row items-center gap-2 rounded-xl border border-neutral-200 bg-neutral-50 p-3 shadow-sm outline-2 outline-transparent transition-all duration-150 ease-in-out focus-within:shadow-md focus-within:outline-2 focus-within:outline-neutral-950/10"
                     type="email"
                     id="email"
                     name="email"
@@ -119,11 +154,14 @@ export default function Contact() {
                 </div>
 
                 <div className="mb-4">
-                  <label className="block text-gray-950" htmlFor="message">
+                  <label
+                    className="mb-1 font-medium text-neutral-700"
+                    htmlFor="message"
+                  >
                     How can we help you? <span className="text-red-600">*</span>
                   </label>
                   <textarea
-                    className="w-full rounded-md border border-gray-300 bg-gray-50 p-2 text-gray-950"
+                    className="relative flex w-full flex-row items-center gap-2 rounded-xl border border-neutral-200 bg-neutral-50 p-3 shadow-sm outline-2 outline-transparent transition-all duration-150 ease-in-out focus-within:shadow-md focus-within:outline-2 focus-within:outline-neutral-950/10"
                     id="message"
                     rows={4}
                     name="message"
@@ -132,12 +170,12 @@ export default function Contact() {
                     onChange={handleChange}
                   />
                 </div>
-                <div className="flex justify-start">
+                <div className="flex justify-end">
                   <button
                     type="submit"
                     onClick={handleSubmit}
                     disabled={isSubmitting}
-                    className="flex cursor-pointer items-center rounded-md bg-neutral-900 px-4 py-2 text-white hover:bg-neutral-700"
+                    className="flex h-11 cursor-pointer flex-row items-center justify-center gap-2 rounded-xl border border-neutral-900 bg-neutral-950 px-4 py-2 text-nowrap text-neutral-50 shadow-md transition-all duration-150 ease-in-out hover:bg-neutral-800 active:scale-98 disabled:opacity-50"
                   >
                     {isSubmitting ? (
                       <>

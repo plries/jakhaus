@@ -41,6 +41,10 @@ const LOGO_IMAGES = [
     src: "/images/logos/Client-Logos_JK-RE.svg",
     alt: "Client Logo I",
   },
+  {
+    src: "/images/logos/Client-Logos_PT.svg",
+    alt: "Client Logo J",
+  },
 ];
 
 function useResponsiveWidth() {

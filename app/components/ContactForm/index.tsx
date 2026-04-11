@@ -88,7 +88,7 @@ export default function Contact() {
                 transition={MOTION_CONFIG.DEFAULT}
                 className="text-2xl font-medium tracking-tighter md:col-span-4 md:text-[2rem] lg:text-4xl"
               >
-                Ready to collaborate?
+                Ready when you are.
               </motion.h2>
               <motion.p
                 initial={MOTION_CONFIG.DEFAULT.INITIAL}
@@ -96,7 +96,7 @@ export default function Contact() {
                 transition={MOTION_CONFIG.DEFAULT}
                 className="mt-1 text-neutral-600"
               >
-                Big idea or quick shoot, we're in.
+                Big idea or quick shoot, we're in!
               </motion.p>
             </div>
             <div className="col-span-full md:col-span-4 lg:col-span-8">

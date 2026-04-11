@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import { motion } from "framer-motion";
 import LogoCarousel from "../components/LogoCarousel";
 import ImageCarouselScroll from "../components/ImageCarouselScroll";
@@ -8,6 +7,7 @@ import Contact from "../components/ContactForm";
 import { NAV } from "./const";
 import { Footer, Navbar } from "../components";
 import { MOTION_CONFIG } from "./listings/[id]/const";
+import { JakhausLogoDFM } from "@/public/icons";
 
 export default function Home() {
   return (
@@ -32,21 +32,15 @@ const Hero = () => {
       id="hero"
     >
       <div className="z-1 scale-40 sm:scale-50 lg:scale-100">
-        <div className="max-w-[800px]">
-          <Image
-            src="/images/logos/JH_Real_Estate.svg"
-            alt="Jakhaus Logo"
-            width={800}
-            height={200}
-            priority
-          />
+        <div className="max-w-[800px] drop-shadow-lg">
+          <JakhausLogoDFM />
         </div>
         <h1 className="sr-only translate-y-[-52px] pr-6 text-right text-[50px] tracking-widest text-gray-50 uppercase">
-          Jakhaus Real Estate Media
+          Jakhaus Design Forward Media
         </h1>
       </div>
       <div>
-        <HeroVideo src="/videos/hero-banner.mov" />
+        <HeroVideo src="/videos/hero-banner.mp4" />
       </div>
     </section>
   );
@@ -79,7 +73,7 @@ const About = () => {
           transition={MOTION_CONFIG.TRANSITION}
           className="col-span-full text-2xl font-medium tracking-tighter md:col-span-4 md:text-[2rem] lg:text-4xl"
         >
-          Design Forward Media
+          Media that sells the listing, and builds your brand.
         </motion.h2>
         <motion.p
           initial={MOTION_CONFIG.DEFAULT.INITIAL}
@@ -87,13 +81,9 @@ const About = () => {
           transition={MOTION_CONFIG.TRANSITION}
           className="col-span-full text-base text-neutral-600 md:col-span-4 lg:col-span-8"
         >
-          <span className="font-medium text-neutral-950">
-            Jakhaus is a multi-skilled crew
-          </span>
-          , shaping media with intention and style.
-          <br />
-          From video and photography to 3D tours, graphic design and branding,
-          we cover the full spectrum of real estate marketing.
+          We’re a full-service media crew. From photography, video, and drone to
+          3D tours, graphic design, and branding. We cover the full spectrum of
+          real estate marketing.
         </motion.p>
       </div>
       <div className="mask-gradient-x mx-auto w-full max-w-[calc(100%-4rem)] overflow-hidden pt-20 md:rotate-1 md:pt-30 md:pb-20">
@@ -154,10 +144,12 @@ const Benefit = () => {
             transition={MOTION_CONFIG.TRANSITION}
             className="text-neutral-600"
           >
-            Jakhaus is a design-forward media team shaped by years of real
-            estate marketing experience. We've worked together through
-            back-to-back shoots and daily edits gaining a sharp eye for what
-            works and how to get it done right.
+            <span className="font-medium text-neutral-950">
+              Great media starts with the right crew.
+            </span>{" "}
+            Jakhaus brings years of real estate experience, a sharp eye for what
+            works, and the kind of team chemistry that makes shoot days feel
+            seamless. From shoot to delivery, you’re in good hands.
           </motion.p>
         </div>
       </div>

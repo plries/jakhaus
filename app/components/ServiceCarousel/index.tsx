@@ -9,7 +9,7 @@ const SERVICE_DATA = [
     title: "Listing Media",
     subtitle: "We shoot to sell.",
     description:
-      "Photos, Videos, Drone, Floor Plan, 3D Scan & Listing Look Books",
+      "Photography, video, drone, floor plans, 3D scans, and listing look books.",
     icon: "/icons/JH-Icons-01.svg",
     alt: "Listing Media Icon",
   },
@@ -17,23 +17,23 @@ const SERVICE_DATA = [
     title: "Print + Brand Design",
     subtitle: "Back up your first impressions.",
     description:
-      "Signage, Business Cards, and Flyers to Custom Crafted Social Media Graphics",
+      "Signage, business cards, flyers, and custom social graphics.",
     icon: "/icons/JH-Icons-02.svg",
     alt: "Print and Brand Design Icon",
   },
   {
     title: "Cred Clips",
-    subtitle: "Build Trust.",
+    subtitle: "Be the agent they already trust.",
     description:
-      "Testimonial & tip-style videos that position you as a credible resource",
+      "Short-form testimonial and tip videos that work for you between listings.",
     icon: "/icons/JH-Icons-03.svg",
     alt: "Cred Clips Icon",
   },
   {
     title: "The HausLink",
-    subtitle: "One link, All your media.",
+    subtitle: "One link. Every asset.",
     description:
-      "A sleek, mobile & desktop-friendly one-pager for all your media",
+      "A branded page for all your listing media — shareable anywhere, on any device.",
     icon: "/icons/JH-Icons-04.svg",
     alt: "The HausLink Icon",
   },

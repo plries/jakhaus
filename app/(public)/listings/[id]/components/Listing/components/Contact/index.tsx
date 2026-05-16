@@ -97,13 +97,13 @@ export const Contact = ({ CONSTANTS }: SectionPropTypes) => {
                   <div>
                     <LinkIcon />
                   </div>
-                  <Link
+                  <a
                     className="relative text-nowrap duration-150 ease-in-out after:absolute after:-bottom-0.5 after:left-0 after:h-[1px] after:w-full after:origin-left after:scale-x-0 after:bg-neutral-50 after:transition-[scale] hover:after:scale-x-100"
                     href={CONSTANTS.ASSIGNED_AGENT.WEBSITE}
                     target="_blank"
                   >
                     {CONSTANTS.ASSIGNED_AGENT.WEBSITE.replace("https://", "")}
-                  </Link>
+                  </a>
                 </motion.div>
               </div>
             )}
@@ -118,13 +118,13 @@ export const Contact = ({ CONSTANTS }: SectionPropTypes) => {
                   <div>
                     <InstagramLogoIcon />
                   </div>
-                  <Link
+                  <a
                     className="relative text-nowrap duration-150 ease-in-out after:absolute after:-bottom-0.5 after:left-0 after:h-[1px] after:w-full after:origin-left after:scale-x-0 after:bg-neutral-50 after:transition-[scale] hover:after:scale-x-100"
                     href={CONSTANTS.ASSIGNED_AGENT.INSTAGRAM}
                     target="_blank"
                   >
                     {CONSTANTS.ASSIGNED_AGENT.INSTAGRAM}
-                  </Link>
+                  </a>
                 </motion.div>
               </div>
             )}
@@ -160,13 +160,13 @@ export const Contact = ({ CONSTANTS }: SectionPropTypes) => {
       <div className="col-span-full flex flex-row items-center justify-end gap-1 lg:col-span-10 lg:col-start-2">
         <p className="!text-sm text-neutral-500">
           {CONTACT_CONST.POWERED_BY}
-          <Link
+          <a
             href={CONTACT_CONST.LINK.HREF}
             target="_blank"
             className="relative !text-sm duration-150 ease-in-out after:absolute after:-bottom-0.5 after:left-0 after:h-[1px] after:w-full after:origin-left after:scale-x-0 after:bg-neutral-50 after:transition-[scale] hover:text-neutral-50 hover:after:scale-x-100"
           >
             {CONTACT_CONST.LINK.TEXT}
-          </Link>
+          </a>
         </p>
       </div>
     </footer>

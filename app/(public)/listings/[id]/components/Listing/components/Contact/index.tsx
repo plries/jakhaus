@@ -97,13 +97,13 @@ export const Contact = ({ CONSTANTS }: SectionPropTypes) => {
                   <div>
                     <LinkIcon />
                   </div>
-                  <a
+                  <Link
                     className="relative text-nowrap duration-150 ease-in-out after:absolute after:-bottom-0.5 after:left-0 after:h-[1px] after:w-full after:origin-left after:scale-x-0 after:bg-neutral-50 after:transition-[scale] hover:after:scale-x-100"
-                    href={CONSTANTS.ASSIGNED_AGENT.WEBSITE}
+                    href={`${CONSTANTS.ASSIGNED_AGENT.WEBSITE.includes('https://') ? '' : 'https://')}${CONSTANTS.ASSIGNED_AGENT.WEBSITE}`}
                     target="_blank"
                   >
                     {CONSTANTS.ASSIGNED_AGENT.WEBSITE.replace("https://", "")}
-                  </a>
+                  </Link>
                 </motion.div>
               </div>
             )}
@@ -118,13 +118,13 @@ export const Contact = ({ CONSTANTS }: SectionPropTypes) => {
                   <div>
                     <InstagramLogoIcon />
                   </div>
-                  <a
+                  <Link
                     className="relative text-nowrap duration-150 ease-in-out after:absolute after:-bottom-0.5 after:left-0 after:h-[1px] after:w-full after:origin-left after:scale-x-0 after:bg-neutral-50 after:transition-[scale] hover:after:scale-x-100"
-                    href={CONSTANTS.ASSIGNED_AGENT.INSTAGRAM}
+                    href={`https://instagram.com/${CONSTANTS.ASSIGNED_AGENT.INSTAGRAM}.replace('@', '')`}
                     target="_blank"
                   >
                     {CONSTANTS.ASSIGNED_AGENT.INSTAGRAM}
-                  </a>
+                  </Link>
                 </motion.div>
               </div>
             )}
